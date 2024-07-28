@@ -59,6 +59,7 @@ cGHTempVarlist = DefTensors[
   {alpha[], PrintAs -> "\[Alpha]"},
   {beta[i], PrintAs -> "\[Beta]"},
   {invhg[i, j], Symmetric[{i, j}], PrintAs -> "\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
+  {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
   {hPinD     [-i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPi]\), \(^\)], \(n\)]\)"},
   {hPhinD[-k, -i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPhi]\), \(^\)], \(n\)]\)"},
   {hGam[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
