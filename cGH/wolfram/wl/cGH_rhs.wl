@@ -10,6 +10,26 @@
 
 (****************)
 
+SetEQN[alpha[], -(1/2) hgnn[]];
+
+SetEQN[beta[i_], hgn[i]];
+
+SetEQN[invgam[i_, j_], W[] ^ 2 invhg[i, j]];
+
+SetEQN[hPinD[i_], invhg[i, -j] hPin[j]];
+
+SetEQN[hPhinD[k_, i_], invhg[i, -j] hPhin[k, j]];
+
+SetEQN[hGam[k_, i_, j_], 1/2 (hPhi[i, j, k] + hPhi[j, k, i] - hPhi[k, i, j])];
+
+SetEQN[hGamn2[k_, i_], 1/2 (alpha[] ^ -1 (hPhin[i, k] - hPhin[k, i]) - hPi[k, i])];
+
+SetEQN[hGamn[i_, j_], 1/2 (alpha[] ^ -1 (hPhin[i, j] + hPhin[j, i]) + hPi[i, j])];
+
+SetEQN[trhGam[k_], W[] ^ 2 (alpha[] invhg[i, j] hGam[k, -i, -j] + 1/2 hPhinn[k]) + alpha[] W[] WPhi[k] + hPin[k]];
+
+SetEQN[trhGamn[], invhg[i, j] hGamn[-i, -j] + 1/2 alpha[] ^ -1 hPinn[] - 3 W[] ^ -1 WPi[]];
+
 (*******)
 
 (* EOM *)
