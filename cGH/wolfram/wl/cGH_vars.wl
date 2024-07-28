@@ -18,7 +18,9 @@ cGHEvolVarlist = DefTensors[
   {WPi           [], PrintAs -> "\!\(\*StyleBox[\"\[CapitalPi]\",\nFontSlant->\"Italic\"]\)"},
   {WPhi        [-k], PrintAs -> "\!\(\*StyleBox[\"\[CapitalPhi]\",\nFontSlant->\"Italic\"]\)"},
   {hHn           [], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {hH          [-k], PrintAs -> "\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  {hH          [-k], PrintAs -> "\!\(\*OverscriptBox[\(H\), \(^\)]\)"},
+  {hthetan       [], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[Theta]\), \(^\)], \(n\)]\)"},
+  {htheta      [-k], PrintAs -> "\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
 cGHdtEvolVarlist = DefTensors[
@@ -35,7 +37,9 @@ cGHdtEvolVarlist = DefTensors[
   {dtWPi           [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*StyleBox[\"\[CapitalPi]\",\nFontSlant->\"Italic\"]\)"},
   {dtWPhi        [-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*StyleBox[\"\[CapitalPhi]\",\nFontSlant->\"Italic\"]\)"},
   {dthHn           [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {dthH          [-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  {dthH          [-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"},
+  {dththetan       [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*SubscriptBox[OverscriptBox[\(\[Theta]\), \(^\)], \(n\)]\)"},
+  {dththeta      [-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
 cGHdEvolVarlist = DefTensors[
@@ -52,7 +56,9 @@ cGHdEvolVarlist = DefTensors[
   {dWPi             [-k], PrintAs -> "\[PartialD]\!\(\*StyleBox[\"\[CapitalPi]\",\nFontSlant->\"Italic\"]\)"},
   {dWPhi        [-k, -i], PrintAs -> "\[PartialD]\!\(\*StyleBox[\"\[CapitalPhi]\",\nFontSlant->\"Italic\"]\)"},
   {dhHn             [-k], PrintAs -> "\[PartialD]\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {dhH          [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  {dhH          [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(H\), \(^\)]\)"},
+  {dhthetan         [-k], PrintAs -> "\[PartialD]\!\(\*SubscriptBox[OverscriptBox[\(\[Theta]\), \(^\)], \(n\)]\)"},
+  {dhtheta      [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
 cGHTempVarlist = DefTensors[
