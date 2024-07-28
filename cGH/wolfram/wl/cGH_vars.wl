@@ -4,6 +4,12 @@
 
 (* (c) Liwei Ji, 01/2024 *)
 
+(***********************)
+
+(* Evolution Variables *)
+
+(***********************)
+
 cGHEvolVarlist = DefTensors[
   {hg      [-i, -j], Symmetric[{-i, -j}], PrintAs->  "\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
   {hPi     [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalPi]\), \(^\)]\)"},
@@ -42,6 +48,12 @@ cGHdtEvolVarlist = DefTensors[
   {dththeta      [-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
+(*************************)
+
+(* Other Input Variables *)
+
+(*************************)
+
 cGHdEvolVarlist = DefTensors[
   {dhg      [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
   {dhPi     [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[CapitalPi]\), \(^\)]\)"},
@@ -61,6 +73,12 @@ cGHdEvolVarlist = DefTensors[
   {dhtheta      [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
+(**************************)
+
+(* Intermediate Variables *)
+
+(**************************)
+
 cGHTempVarlist = DefTensors[
   {alpha[], PrintAs -> "\[Alpha]"},
   {beta[i], PrintAs -> "\[Beta]"},
@@ -77,3 +95,21 @@ cGHTempVarlist = DefTensors[
   {dnhHn [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
   {dnhH[-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"},
 ];
+
+(************)
+
+(* Constant *)
+
+(************)
+DefConstantSymbol[cpi, PrintAs -> "\[Pi]"];
+DefConstantSymbol[cgamma0, PrintAs -> "\!\(\*SubscriptBox[\(\[Gamma]\), \(0\)]\)"];
+DefConstantSymbol[cgamma1, PrintAs -> "\!\(\*SubscriptBox[\(\[Gamma]\), \(1\)]\)"];
+DefConstantSymbol[cgamma2, PrintAs -> "\!\(\*SubscriptBox[\(\[Gamma]\), \(2\)]\)"];
+DefConstantSymbol[cmuL, PrintAs -> "\!\(\*SubscriptBox[\(\[Mu]\), \(L\)]\)"];
+DefConstantSymbol[cmuS, PrintAs -> "\!\(\*SubscriptBox[\(\[Mu]\), \(S\)]\)"];
+DefConstantSymbol[czetaL, PrintAs -> "\!\(\*SubscriptBox[\(\[Zeta]\), \(L\)]\)"];
+DefConstantSymbol[czetaS, PrintAs -> "\!\(\*SubscriptBox[\(\[Zeta]\), \(S\)]\)"];
+DefConstantSymbol[crhoL, PrintAs -> "\!\(\*SubscriptBox[\(\[Rho]\), \(L\)]\)"];
+DefConstantSymbol[crhoS, PrintAs -> "\!\(\*SubscriptBox[\(\[Rho]\), \(S\)]\)"];
+DefConstantSymbol[ceta, PrintAs -> "\[Eta]"];
+DefConstantSymbol[cnu, PrintAs -> "\[Nu]"];
