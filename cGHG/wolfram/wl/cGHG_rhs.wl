@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* cGH_rhs.wl *)
+(* cGHG_rhs.wl *)
 
 (* (c) Liwei Ji, 07/2024 *)
 
