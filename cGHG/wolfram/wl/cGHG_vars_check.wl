@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* cGH_vars.wl *)
+(* cGHG_vars.wl *)
 
 (* (c) Liwei Ji, 01/2024 *)
 
@@ -10,7 +10,7 @@
 
 (***********************)
 
-cGHEvolVarlist = DefTensors[
+cGHGEvolVarlist = DefTensors[
   {hg      [-i, -j], Symmetric[{-i, -j}], PrintAs->  "\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
   {hPi     [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalPi]\), \(^\)]\)"},
   {hPhi[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalPhi]\), \(^\)]\)"},
@@ -29,7 +29,7 @@ cGHEvolVarlist = DefTensors[
   {htheta      [-k], PrintAs -> "\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
 ];
 
-cGHdtEvolVarlist = DefTensors[
+cGHGdtEvolVarlist = DefTensors[
   {dthg      [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
   {dthPi     [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(\[CapitalPi]\), \(^\)]\)"},
   {dthPhi[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\!\(\*OverscriptBox[\(\[CapitalPhi]\), \(^\)]\)"},
@@ -54,7 +54,7 @@ cGHdtEvolVarlist = DefTensors[
 
 (*************************)
 
-cGHdEvolVarlist = DefTensors[
+cGHGdEvolVarlist = DefTensors[
   {dhg      [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
   {dhPi     [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[CapitalPi]\), \(^\)]\)"},
   {dhPhi[-k, -l, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[CapitalPhi]\), \(^\)]\)"},
@@ -79,7 +79,7 @@ cGHdEvolVarlist = DefTensors[
 
 (**************************)
 
-cGHTempVarlist = DefTensors[
+cGHGTempVarlist = DefTensors[
   {alpha[], PrintAs -> "\[Alpha]"},
   {beta[i], PrintAs -> "\[Beta]"},
   {invhg[i, j], Symmetric[{i, j}], PrintAs -> "\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
