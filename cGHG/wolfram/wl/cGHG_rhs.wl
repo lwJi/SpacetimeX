@@ -42,7 +42,7 @@ SetEQN[trPi[], 1/3 invhg[i, j] (invhg[k, l] (W[] ^ 2 invhg[m, n] (2 hGam[-i, -k,
 
 (* WPi *)
 
-SetEQN[dtW[], -(-(1 + cgamma1) beta[k] dW[-k]) - WPi[] - cgamma1 alpha[] ^ -1 beta[k] dWPhi[-k]];
+SetEQN[dtW[], -(-(1 + cgamma1) beta[k] dW[-k]) - WPi[] - cgamma1 alpha[] ^ -1 beta[k] WPhi[-k]];
 
 SetEQN[dtWPi[], -(-beta[k] dWPi[-k] + alpha[] invgam[k, l] dWPhi[-k, -l] - cgamma1 cgamma2 beta[k] dW[-k] - 1/3 W[] invhg[i, j] dhH[-i, -j]) + invhg[k, l] WPhi[-k] (W[] WPhi[-l] - 1/2 alpha[] ^ -1 W[] ^ 2 hPhinn[-l] - alpha[] ^ -1 hH[-l]) - W[] ^ -1 WPi[] ^ 2 - WPi[] hHn[] - alpha[] ^ -1 WPhi[-k] hPin[k] + 1/2 W[] trPi[] - cgamma1 cgamma2 alpha[] ^ -1 WPhi[-k] beta[k]];
 
