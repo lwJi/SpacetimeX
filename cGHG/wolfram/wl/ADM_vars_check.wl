@@ -27,18 +27,7 @@ ADMEvolVarlist = DefTensors[
 (**************************)
 
 ADMTempVarlist = DefTensors[
-  {alpha[], PrintAs -> "\[Alpha]"},
-  {beta[i], PrintAs -> "\[Beta]"},
-  {invhg[i, j], Symmetric[{i, j}], PrintAs -> "\!\(\*OverscriptBox[\(g\), \(^\)]\)"},
-  {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
-  {hPinD     [-i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPi]\), \(^\)], \(n\)]\)"},
-  {hPhinD[-k, -i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPhi]\), \(^\)], \(n\)]\)"},
-  {hGam[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
-  {hGamn2  [-k, -i], PrintAs -> "\!\(\*SuperscriptBox[SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)], \((2)\)]\)"},
-  {hGamn   [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)]\)"},
-  {trhGamn [], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)]\)"},
-  {trhGam[-k], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
-  {trPi[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(\[CapitalPi]\), \(^\)], \(tr\)]\)"},
-  {dnhHn [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {dnhH[-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  {nvec        [a], PrintAs -> "n"},
+  {invg4    [a, b], Symmetric[{a, b}], PrintAs -> "g"},
+  {dg4[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[PartialD]g"}
 ];
