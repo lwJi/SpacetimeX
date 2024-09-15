@@ -92,8 +92,8 @@ cGHGTempVarlist = DefTensors[
   {trhGamn [], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)]\)"},
   {trhGam[-k], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
   {trPi[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(\[CapitalPi]\), \(^\)], \(tr\)]\)"},
-  {dnhHn [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {dnhH[-k], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  {adnhHn [], PrintAs -> "\[Alpha]\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
+  {adnhH[-k], PrintAs -> "\[Alpha]\!\(\*SubscriptBox[\(\[PartialD]\), \(n\)]\)\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
 ];
 
 (************)
