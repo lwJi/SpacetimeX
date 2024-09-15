@@ -81,3 +81,12 @@ SetEQN[dthgnn[], -(-(1 + cgamma1) beta[k] dhgnn[-k]) - hPinn[] - cgamma1 alpha[]
 SetEQN[dthPinn[], -(-beta[k] dhPinn[-k] + alpha[] invgam[k, l] dhPhinn[-k, -l] - cgamma1 cgamma2 beta[k] dhgnn[-k]) - 2 alpha[] invhg[k, l] invhg[i, j] hGamn[-k, -i] hGamn[-l, -j] - alpha[] ^ -1 W[] ^ 2 invhg[k, l] hPhinn[-k] hPhinn[-l] - alpha[] ^ -1 (hPin[l] + invhg[k, l] hH[-k]) hPhinn[-l] + 4 W[] ^ -1 WPi[] hPhin[-k, k] - 6 alpha[] W[] ^ -2 WPi[] ^ 2 + hPinn[] (alpha[] ^ -1 hPinn[] + hHn[]) - cgamma0 alpha[] ^ 2 (hHn[] + trhGamn[]) - cgamma1 cgamma2 alpha[] ^ -1 beta[k] hPhinn[-k] - 2 alpha[] adnhHn[]];
 
 SetEQN[dthPhinn[k_], -(-beta[l] dhPhinn[-l, k] + alpha[] dhPinn[k] - cgamma2 alpha[] dhgnn[k]) + alpha[] ^ -1 hPhin[k, l] hPhinn[-l] + 1/2 alpha[] ^ -1 hPinn[] hPhinn[k] - cgamma2 hPhinn[k]];
+
+(* hH, htheta *)
+SetEQN[dthHn[], adnhHn[] + beta[k] dhHn[-k]];
+
+SetEQN[dthH[i_], adnhH[i] + beta[k] dhH[-k, i]];
+
+SetEQN[dththetan[], -czetaL hthetan[] - czetaL beta[k] dhHn[-k]];
+
+SetEQN[dththeta[i_], -czetaS htheta[i] - czetaS beta[k] dhH[-k, i]];
