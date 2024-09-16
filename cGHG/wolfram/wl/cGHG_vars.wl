@@ -87,7 +87,7 @@ cGHGTempVarlist = TempTensors[
   {hPinD     [-i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPi]\), \(^\)], \(n\)]\)"},
   {hPhinD[-k, -i], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalPhi]\), \(^\)], \(n\)]\)"},
   {hGam[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
-  {hGamn2  [-k, -i], PrintAs -> "\!\(\*SuperscriptBox[SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)], \((2)\)]\)"},
+  {hGamnmix[-k, -i], PrintAs -> "\!\(\*SuperscriptBox[SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)], \((2)\)]\)"},
   {hGamn   [-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)]\)"},
   {trhGamn [], PrintAs -> "\!\(\*SubscriptBox[OverscriptBox[\(\[CapitalGamma]\), \(^\)], \(n\)]\)"},
   {trhGam[-k], PrintAs -> "\!\(\*OverscriptBox[\(\[CapitalGamma]\), \(^\)]\)"},
