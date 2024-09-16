@@ -141,15 +141,15 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const auto make_vec_mat_gf = [&]() { return make_vec(make_mat_gf); };
   const auto make_mat_vec_gf = [&]() { return make_mat(make_vec_gf); };
   const auto make_mat_mat_gf = [&]() { return make_mat(make_mat_gf); };
+  const auto make_vec_mat_vec_gf = [&]() { return make_vec(make_mat_vec_gf); };
+  const auto make_vec_vec_vec_gf = [&]() { return make_vec(make_vec_vec_gf); };
 
   const GF3D5<CCTK_REAL> tl_W(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
   calcderivs(tl_W, tl_dW, gf_W);
-
   const GF3D5<CCTK_REAL> tl_WPi(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dWPi(make_vec_gf());
   calcderivs(tl_WPi, tl_dWPi, gf_WPi);
-
   const vec<GF3D5<CCTK_REAL>, 3> tl_WPhi(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dWPhi(make_vec_vec_gf());
   calcderivs(tl_WPhi, tl_dWPhi, gf_WPhi);
@@ -157,15 +157,24 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const smat<GF3D5<CCTK_REAL>, 3> tl_hg(make_mat_gf());
   const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhg(make_mat_vec_gf());
   calcderivs(tl_hg, tl_dhg, gf_hg);
-
   const smat<GF3D5<CCTK_REAL>, 3> tl_hPi(make_mat_gf());
   const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPi(make_mat_vec_gf());
   calcderivs(tl_hPi, tl_dhPi, gf_hPi);
-
   const vec<smat<GF3D5<CCTK_REAL>, 3>, 3> tl_hPhi(make_vec_mat_gf());
   const vec<smat<vec<GF3D5<CCTK_REAL>, 3>, 3>, 3> tl_dhPhi(
       make_vec_mat_vec_gf());
   calcderivs(tl_hPhi, tl_dhPhi, gf_hPhi);
+
+  const vec<GF3D5<CCTK_REAL>, 3> tl_hgn(make_vec_gf());
+  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhgn(make_vec_vec_gf());
+  calcderivs(tl_hgn, tl_dhgn, gf_hgn);
+  const vec<GF3D5<CCTK_REAL>, 3> tl_hPin(make_vec_gf());
+  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPin(make_vec_vec_gf());
+  calcderivs(tl_hPin, tl_dhPin, gf_hPin);
+  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_hPhin(make_vec_vec_gf());
+  const vec<vec<vec<GF3D5<CCTK_REAL>, 3>, 3>, 3> tl_dhPhin(
+      make_vec_vec_vec_gf());
+  calcderivs(tl_hPhin, tl_dhPhin, gf_hPhin);
 
 
   const GF3D5<CCTK_REAL> tl_exKh(make_gf());
