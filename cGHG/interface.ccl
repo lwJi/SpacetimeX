@@ -57,6 +57,11 @@ CCTK_REAL hgnn TYPE=gf TAGS='rhs="hgnn_rhs" dependents="ADMBaseX::metric"' "cGHG
 CCTK_REAL hPinn TYPE=gf TAGS='rhs="hPinn_rhs"' "Time derivaive of cGHG laspe"
 CCTK_REAL hPhinn TYPE=gf TAGS='rhs="hPhinn_rhs"' { hPhixnn hPhiynn hPhiznn } "Spatial derivatives of cGHG lapse"
 
+CCTK_REAL hHn TYPE=gf TAGS='rhs="hHn_rhs"' "Time component of gauge source function"
+CCTK_REAL hH TYPE=gf TAGS='rhs="hH_rhs"' { hHx hHy hHz } "Spatial component of gauge source function"
+CCTK_REAL hthetan TYPE=gf TAGS='rhs="hthetan_rhs"' "hthetan"
+CCTK_REAL htheta TYPE=gf TAGS='rhs="htheta_rhs"' { hthetax hthetay hthetaz } "htheta"
+
 # rhs
 
 CCTK_REAL W_rhs TYPE=gf TAGS='checkpoint="no"' "Conformal factor"
@@ -91,4 +96,7 @@ CCTK_REAL hgnn_rhs TYPE=gf TAGS='checkpoint="no"' "cGHG laspe"
 CCTK_REAL hPinn_rhs TYPE=gf TAGS='checkpoint="no"' "Time derivaive of cGHG laspe"
 CCTK_REAL hPhinn_rhs TYPE=gf TAGS='checkpoint="no"' { hPhixnn_rhs hPhiynn_rhs hPhiznn_rhs } "Spatial derivatives of cGHG lapse"
 
-
+CCTK_REAL hHn_rhs TYPE=gf TAGS='checkpoint="no"' "Time component of gauge source function"
+CCTK_REAL hH_rhs TYPE=gf TAGS='checkpoint="no"' { hHx_rhs hHy_rhs hHz_rhs } "Spatial component of gauge source function"
+CCTK_REAL hthetan_rhs TYPE=gf TAGS='checkpoint="no"' "hthetan"
+CCTK_REAL htheta_rhs TYPE=gf TAGS='checkpoint="no"' { hthetax_rhs hthetay_rhs hthetaz_rhs } "htheta"
