@@ -83,7 +83,6 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
 
   const GF3D2<CCTK_REAL> &gf_hHn = hHn;
   const vec<GF3D2<CCTK_REAL>, 3> gf_hH{hHx, hHy, hHz};
-
   const GF3D2<CCTK_REAL> &gf_hthetan = hthetan;
   const vec<GF3D2<CCTK_REAL>, 3> gf_htheta{hthetax, hthetay, hthetaz};
 
@@ -120,7 +119,6 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
 
   const GF3D2<CCTK_REAL> &gf_dthHn = hHn_rhs;
   const vec<GF3D2<CCTK_REAL>, 3> gf_dthH{hHx_rhs, hHy_rhs, hHz_rhs};
-
   const GF3D2<CCTK_REAL> &gf_dththetan = hthetan_rhs;
   const vec<GF3D2<CCTK_REAL>, 3> gf_dththeta{hthetax_rhs, hthetay_rhs,
                                              hthetaz_rhs};
@@ -155,15 +153,19 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const GF3D5<CCTK_REAL> tl_W(make_gf());
   const GF3D5<CCTK_REAL> tl_WPi(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_WPhi(make_vec_gf());
+
   const smat<GF3D5<CCTK_REAL>, 3> tl_hg(make_mat_gf());
   const smat<GF3D5<CCTK_REAL>, 3> tl_hPi(make_mat_gf());
   const vec<smat<GF3D5<CCTK_REAL>, 3>, 3> tl_hPhi(make_vec_mat_gf());
+
   const vec<GF3D5<CCTK_REAL>, 3> tl_hgn(make_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_hPin(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_hPhin(make_vec_vec_gf());
+
   const GF3D5<CCTK_REAL> tl_hgnn(make_gf());
   const GF3D5<CCTK_REAL> tl_hPinn(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_hPhinn(make_vec_gf());
+
   const GF3D5<CCTK_REAL> tl_hHn(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_hH(make_vec_gf());
   const GF3D5<CCTK_REAL> tl_hthetan(make_gf());
@@ -172,17 +174,21 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const vec<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dWPi(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dWPhi(make_vec_vec_gf());
+
   const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhg(make_mat_vec_gf());
   const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPi(make_mat_vec_gf());
   const vec<smat<vec<GF3D5<CCTK_REAL>, 3>, 3>, 3> tl_dhPhi(
       make_vec_mat_vec_gf());
+
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhgn(make_vec_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPin(make_vec_vec_gf());
   const vec<vec<vec<GF3D5<CCTK_REAL>, 3>, 3>, 3> tl_dhPhin(
       make_vec_vec_vec_gf());
+
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhgnn(make_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhPinn(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPhinn(make_vec_vec_gf());
+
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhHn(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhH(make_vec_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhthetan(make_vec_gf());
@@ -191,15 +197,19 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   calcderivs(tl_W, tl_dW, gf_W);
   calcderivs(tl_WPi, tl_dWPi, gf_WPi);
   calcderivs(tl_WPhi, tl_dWPhi, gf_WPhi);
+
   calcderivs(tl_hg, tl_dhg, gf_hg);
   calcderivs(tl_hPi, tl_dhPi, gf_hPi);
   calcderivs(tl_hPhi, tl_dhPhi, gf_hPhi);
+
   calcderivs(tl_hgn, tl_dhgn, gf_hgn);
   calcderivs(tl_hPin, tl_dhPin, gf_hPin);
   calcderivs(tl_hPhin, tl_dhPhin, gf_hPhin);
+
   calcderivs(tl_hgnn, tl_dhgnn, gf_hgnn);
   calcderivs(tl_hPinn, tl_dhPinn, gf_hPinn);
   calcderivs(tl_hPhinn, tl_dhPhinn, gf_hPhinn);
+
   calcderivs(tl_hHn, tl_dhHn, gf_hHn);
   calcderivs(tl_hH, tl_dhH, gf_hH);
   calcderivs(tl_hthetan, tl_dhthetan, gf_hthetan);
@@ -290,20 +300,36 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   };
 
   apply_diss(gf_W, gf_dtW);
+  apply_diss(gf_WPi, gf_dtWPi);
+  for (int c = 0; c < 3; ++c)
+    apply_diss(gf_WPhi(c), gf_dtWPhi(c));
+
   for (int a = 0; a < 3; ++a)
-    for (int b = a; b < 3; ++b)
-      apply_diss(gf_gamt(a, b), gf_dtgamt(a, b));
-  apply_diss(gf_exKh, gf_dtexKh);
-  for (int a = 0; a < 3; ++a)
-    for (int b = a; b < 3; ++b)
-      apply_diss(gf_exAt(a, b), gf_dtexAt(a, b));
-  for (int a = 0; a < 3; ++a)
-    apply_diss(gf_trGt(a), gf_dttrGt(a));
-  if (!set_Theta_zero)
-    apply_diss(gf_Theta, gf_dtTheta);
-  apply_diss(gf_alpha, gf_dtalpha);
-  for (int a = 0; a < 3; ++a)
-    apply_diss(gf_beta(a), gf_dtbeta(a));
+    for (int b = a; b < 3; ++b) {
+      apply_diss(gf_hg(a, b), gf_dthg(a, b));
+      apply_diss(gf_hPi(a, b), gf_dthPi(a, b));
+      for (int c = 0; c < 3; ++c)
+        apply_diss(gf_hPhi(c)(a, b), gf_dthPhi(c)(a, b));
+    }
+
+  for (int a = 0; a < 3; ++a) {
+    apply_diss(gf_hgn(a), gf_dthgn(a));
+    apply_diss(gf_hPin(a), gf_dthPin(a));
+    for (int c = 0; c < 3; ++c)
+      apply_diss(gf_hPhin(c)(a), gf_dthPhin(c)(a));
+  }
+
+  apply_diss(gf_hgnn, gf_dthgnn);
+  apply_diss(gf_hPinn, gf_dthPinn);
+  for (int c = 0; c < 3; ++c)
+    apply_diss(gf_hPhinn(c), gf_dthPhinn(c));
+
+  apply_diss(gf_hHn, gf_dthHn);
+  for (int c = 0; c < 3; ++c)
+    apply_diss(gf_hH(c), gf_dthH(c));
+  apply_diss(gf_hthetan, gf_dththetan);
+  for (int c = 0; c < 3; ++c)
+    apply_diss(gf_htheta(c), gf_dththeta(c));
 }
 
 } // namespace cGHG
