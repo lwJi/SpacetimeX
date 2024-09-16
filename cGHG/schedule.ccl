@@ -10,9 +10,15 @@ STORAGE: hg_rhs hPi_rhs hPhi_rhs
 STORAGE: hgn_rhs hPin_rhs hPhin_rhs
 STORAGE: hgnn_rhs hPinn_rhs hPhinn_rhs
 
+
+
+
 ################################################################################
-
-
+# We have 4 schedule groups:
+# 1. initial: set up core cGHG variables from ADM variables
+# 2. poststep: post-process core cGHG variables and calculate other variables
+# 3. analysis: calculate constraints etc.
+# 4. rhs: calculate RHS of cGHG variables
 
 SCHEDULE GROUP cGHG_InitialGroup AT initial AFTER ADMBaseX_PostInitial
 {
@@ -26,8 +32,6 @@ SCHEDULE GROUP cGHG_PostStepGroup2 AT initial AFTER (TmunuBaseX_SetTmunuVars, cG
 {
 } "Post-process cGHG variables, part 2"
 
-
-
 SCHEDULE GROUP cGHG_PostStepGroup AT postregrid BEFORE ADMBaseX_SetADMVars
 {
 } "Post-process cGHG variables"
@@ -35,14 +39,6 @@ SCHEDULE GROUP cGHG_PostStepGroup AT postregrid BEFORE ADMBaseX_SetADMVars
 SCHEDULE GROUP cGHG_PostStepGroup2 AT postregrid AFTER (TmunuBaseX_SetTmunuVars, cGHG_PostStepGroup) BEFORE ADMBaseX_SetADMRHS
 {
 } "Post-process cGHG variables, part 2"
-
-
-
-SCHEDULE GROUP cGHG_AnalysisGroup AT analysis
-{
-} "Analyse cGHG variables"
-
-
 
 SCHEDULE GROUP cGHG_PostStepGroup IN ODESolvers_PostStep BEFORE ADMBaseX_SetADMVars
 {
@@ -52,30 +48,15 @@ SCHEDULE GROUP cGHG_PostStepGroup2 IN ODESolvers_PostStep AFTER (TmunuBaseX_SetT
 {
 } "Post-process cGHG variables, part 2"
 
+SCHEDULE GROUP cGHG_AnalysisGroup AT analysis
+{
+} "Analyse cGHG variables"
+
 SCHEDULE GROUP cGHG_RHSGroup IN ODESolvers_RHS
 {
 } "Calculate cGHG RHS"
 
-
-
 ################################################################################
-
-
-
-SCHEDULE cGHG_Test AT wragh
-{
-  LANG: C
-  OPTIONS: meta
-} "Self-test"
-
-
-
-# We have 4 schedule groups:
-# 1. initial: set up core cGHG variables from ADM variables
-# 2. poststep: post-process core cGHG variables and calculate other variables
-# 3. analysis: calculate constraints etc.
-# 4. rhs: calculate RHS of cGHG variables
-
 
 
 SCHEDULE cGHG_Initial1 IN cGHG_InitialGroup
@@ -85,20 +66,14 @@ SCHEDULE cGHG_Initial1 IN cGHG_InitialGroup
   READS: ADMBaseX::curv(interior)
   READS: ADMBaseX::lapse(interior)
   READS: ADMBaseX::shift(interior)
-  WRITES: chi(interior)
+  WRITES: W(interior)
   WRITES: gamma_tilde(interior)
   WRITES: K_hat(interior)
   WRITES: A_tilde(interior)
   WRITES: Theta(interior)
   WRITES: alphaG(interior)
   WRITES: betaG(interior)
-  # SYNC: chi
   SYNC: gamma_tilde
-  # SYNC: K_hat
-  # SYNC: A_tilde
-  # SYNC: Theta
-  # SYNC: alphaG
-  # SYNC: betaG
 } "Convert ADM to cGHG variables, part 1"
 
 SCHEDULE cGHG_Initial2 IN cGHG_InitialGroup AFTER cGHG_Initial1
@@ -106,23 +81,20 @@ SCHEDULE cGHG_Initial2 IN cGHG_InitialGroup AFTER cGHG_Initial1
   LANG: C
   READS: gamma_tilde(everywhere)
   WRITES: Gam_tilde(interior)
-  # SYNC: Gam_tilde
 } "Convert ADM to cGHG variables, part 2"
-
-
 
 SCHEDULE cGHG_Enforce IN cGHG_PostStepGroup
 {
   LANG: C
-  READS: chi(interior)
+  READS: W(interior)
   READS: gamma_tilde(interior)
   READS: A_tilde(interior)
   READS: alphaG(interior)
-  WRITES: chi(interior)
+  WRITES: W(interior)
   WRITES: gamma_tilde(interior)
   WRITES: A_tilde(interior)
   WRITES: alphaG(interior)
-  SYNC: chi
+  SYNC: W
   SYNC: gamma_tilde
   SYNC: K_hat
   SYNC: A_tilde
@@ -136,57 +108,28 @@ if (calc_ADM_vars) {
   SCHEDULE cGHG_ADM IN cGHG_PostStepGroup AFTER cGHG_Enforce
   {
     LANG: C
-    READS: chi(everywhere)
+    READS: W(everywhere)
     READS: gamma_tilde(everywhere)
     READS: K_hat(everywhere)
     READS: A_tilde(everywhere)
-    READS: Gam_tilde(everywhere)
+    #READS: Gam_tilde(everywhere)
     READS: Theta(everywhere)
     READS: alphaG(everywhere)
     READS: betaG(everywhere)
-    # READS: TmunuBaseX::eTtt(interior)
-    # READS: TmunuBaseX::eTti(interior)
-    # READS: TmunuBaseX::eTij(interior)
     WRITES: ADMBaseX::metric(everywhere)
     WRITES: ADMBaseX::curv(everywhere)
     WRITES: ADMBaseX::lapse(everywhere)
-    WRITES: ADMBaseX::dtlapse(everywhere)
     WRITES: ADMBaseX::shift(everywhere)
-    WRITES: ADMBaseX::dtshift(everywhere)
+    #WRITES: ADMBaseX::dtlapse(everywhere)
+    #WRITES: ADMBaseX::dtshift(everywhere)
   } "Convert cGHG to ADM variables"
 }
-
-if (calc_ADMRHS_vars) {
-  SCHEDULE cGHG_ADM2 IN cGHG_PostStepGroup2
-  {
-    LANG: C
-    READS: chi(everywhere)
-    READS: gamma_tilde(everywhere)
-    READS: K_hat(everywhere)
-    READS: A_tilde(everywhere)
-    READS: Gam_tilde(everywhere)
-    READS: Theta(everywhere)
-    READS: alphaG(everywhere)
-    READS: betaG(everywhere)
-    READS: TmunuBaseX::eTtt(interior)
-    READS: TmunuBaseX::eTti(interior)
-    READS: TmunuBaseX::eTij(interior)
-    WRITES: ADMBaseX::dtcurv(interior)
-    WRITES: ADMBaseX::dt2lapse(interior)
-    WRITES: ADMBaseX::dt2shift(interior)
-    SYNC: ADMBaseX::dtcurv
-    SYNC: ADMBaseX::dt2lapse
-    SYNC: ADMBaseX::dt2shift
-  } "Calculate second time derivatives of ADM variables"
-}
-
-
 
 if (calc_constraints) {
   SCHEDULE cGHG_Constraints IN cGHG_AnalysisGroup
   {
     LANG: C
-    READS: chi(everywhere)
+    READS: W(everywhere)
     READS: gamma_tilde(everywhere)
     READS: K_hat(everywhere)
     READS: A_tilde(everywhere)
@@ -200,20 +143,14 @@ if (calc_constraints) {
     WRITES: ZtC(interior)
     WRITES: HC(interior)
     WRITES: MtC(interior)
-    WRITES: allC(interior)
-    # SYNC: ZtC
-    # SYNC: HC
-    # SYNC: MtC
-    # SYNC: allC
-  } "Calculate cGHG constraints"
+    #WRITES: allC(interior)
+  } "Calculate cGHG Constraints"
 }
-
-
 
 SCHEDULE cGHG_RHS IN cGHG_RHSGroup
 {
   LANG: C
-  READS: chi(everywhere)
+  READS: W(everywhere)
   READS: gamma_tilde(everywhere)
   READS: K_hat(everywhere)
   READS: A_tilde(everywhere)
@@ -224,7 +161,7 @@ SCHEDULE cGHG_RHS IN cGHG_RHSGroup
   READS: TmunuBaseX::eTtt(interior)
   READS: TmunuBaseX::eTti(interior)
   READS: TmunuBaseX::eTij(interior)
-  WRITES: chi_rhs(interior)
+  WRITES: W_rhs(interior)
   WRITES: gamma_tilde_rhs(interior)
   WRITES: K_hat_rhs(interior)
   WRITES: A_tilde_rhs(interior)
@@ -235,10 +172,10 @@ SCHEDULE cGHG_RHS IN cGHG_RHSGroup
 } "Calculate cGHG RHS"
 
 if (CCTK_Equals(boundary_conditions, "NewRadX")) {
-  SCHEDULE cGHG_apply_newradx_boundary_conditions IN cGHG_RHSGroup AFTER cGHG_RHS
+  SCHEDULE cGHG_Apply_NewRadX_BC IN cGHG_RHSGroup AFTER cGHG_RHS
   {
     LANG: C
-    READS: chi(everywhere)
+    READS: W(everywhere)
     READS: gamma_tilde(everywhere)
     READS: K_hat(everywhere)
     READS: A_tilde(everywhere)
@@ -246,7 +183,7 @@ if (CCTK_Equals(boundary_conditions, "NewRadX")) {
     READS: Theta(everywhere)
     READS: alphaG(everywhere)
     READS: betaG(everywhere)
-    READS: chi_rhs(interior)
+    READS: W_rhs(interior)
     READS: gamma_tilde_rhs(interior)
     READS: K_hat_rhs(interior)
     READS: A_tilde_rhs(interior)
@@ -254,7 +191,7 @@ if (CCTK_Equals(boundary_conditions, "NewRadX")) {
     READS: Theta_rhs(interior)
     READS: alphaG_rhs(interior)
     READS: betaG_rhs(interior)
-    WRITES: chi_rhs(interior)
+    WRITES: W_rhs(interior)
     WRITES: gamma_tilde_rhs(interior)
     WRITES: K_hat_rhs(interior)
     WRITES: A_tilde_rhs(interior)
