@@ -22,11 +22,11 @@ SetEQN[hPhinD[k_, i_], hg[i, -j] hPhin[k, j]];
 
 SetEQN[hGam[k_, i_, j_], 1/2 (hPhi[i, j, k] + hPhi[j, k, i] - hPhi[k, i, j])];
 
-SetEQN[hGamnmix[k_, i_], 1/2 (alpha[] ^ -1 (hPhin[i, k] - hPhin[k, i]) - hPi[k, i])];
+SetEQN[hGamnmix[k_, i_], 1/2 (alpha[] ^ -1 (hPhinD[i, k] - hPhinD[k, i]) - hPi[k, i])];
 
-SetEQN[hGamn[i_, j_], 1/2 (alpha[] ^ -1 (hPhin[i, j] + hPhin[j, i]) + hPi[i, j])];
+SetEQN[hGamn[i_, j_], 1/2 (alpha[] ^ -1 (hPhinD[i, j] + hPhinD[j, i]) + hPi[i, j])];
 
-SetEQN[trhGam[k_], W[] ^ 2 (alpha[] invhg[i, j] hGam[k, -i, -j] + 1/2 hPhinn[k]) + alpha[] W[] WPhi[k] + hPin[k]];
+SetEQN[trhGam[k_], W[] ^ 2 (alpha[] invhg[i, j] hGam[k, -i, -j] + 1/2 hPhinn[k]) + alpha[] W[] WPhi[k] + hPinD[k]];
 
 SetEQN[trhGamn[], invhg[i, j] hGamn[-i, -j] + 1/2 alpha[] ^ -1 hPinn[] - 3 W[] ^ -1 WPi[]];
 
@@ -34,7 +34,7 @@ SetEQN[trPi[], 1/3 invhg[i, j] (invhg[k, l] (W[] ^ 2 invhg[m, n] (2 hGam[-i, -k,
 
 SetEQN[hGn[], 1/2 hPinn[] + 2 alpha[]^-1 hPhin[-k, k] - 6 W[]^-1 WPi[]];
 
-SetEQN[hG[i_], -hPin[i] - cnu alpha[]^-1 hg[m, n] hPhi[-m, -n, i] + ceta hg[i, -j] hgn[j]];
+SetEQN[hG[i_], -hPinD[i] - cnu alpha[]^-1 invhg[m, n] hPhi[-m, -n, i] + ceta hg[i, -j] hgn[j]];
 
 SetEQN[hFn[], -trhGamn[] - crhoL hGn[]];
 
