@@ -130,14 +130,9 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
                               const auto &gf0) {
     Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
   };
-  const auto calcderivs2 = [&](const auto &gf, const auto &dgf,
-                               const auto &ddgf, const auto &gf0) {
-    Derivs::calc_derivs2<0, 0, 0>(gf, dgf, ddgf, layout5, grid, gf0, dx,
-                                  deriv_order);
-  };
 
   // Tile variables for derivatives and so on
-  const int ntmps = 154;
+  const int ntmps = 252;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
   int itmp = 0;
 
@@ -222,11 +217,17 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
 
   // parameters
   const CCTK_REAL cpi = M_PI;
-  const CCTK_REAL ckappa1 = kappa1;
-  const CCTK_REAL ckappa2 = kappa2;
-  const CCTK_REAL cmuL = f_mu_L;
-  const CCTK_REAL cmuS = f_mu_S;
+  const CCTK_REAL cgamma0 = gamma0;
+  const CCTK_REAL cgamma1 = gamma1;
+  const CCTK_REAL cgamma2 = gamma2;
+  const CCTK_REAL cmuL = mu_L;
+  const CCTK_REAL cmuS = mu_S;
+  const CCTK_REAL czetaL = zeta_L;
+  const CCTK_REAL czetaS = zeta_S;
+  const CCTK_REAL crhoL = rho_L;
+  const CCTK_REAL crhoS = rho_S;
   // const CCTK_REAL ceta = eta;
+  const CCTK_REAL cnu = nu;
   const auto calceta = [=] CCTK_DEVICE(
                            const vreal x, const CCTK_REAL y,
                            const CCTK_REAL z) CCTK_ATTRIBUTE_ALWAYS_INLINE {
