@@ -33,28 +33,28 @@ CCTK_REAL hg TYPE=gf TAGS='parities={+1 +1 +1   -1 -1 +1   -1 +1 -1   +1 +1 +1  
 {
   hgxx hgxy hgxz hgyy hgyz hgzz
 } "Conformal 3-metric"
-CCTK_REAL hgn TYPE=gf TAGS='rhs="hgn_rhs" dependents="ADMBaseX::metric"' { hgnx hgny hgnz } "cGHG shift"
-CCTK_REAL hgnn TYPE=gf TAGS='rhs="hgnn_rhs" dependents="ADMBaseX::metric"' "cGHG laspe"
-
 CCTK_REAL hPi TYPE=gf TAGS='rhs="hPi_rhs"'
 {
   hPixx hPixy hPixz hPiyy hPiyz hPizz
 } "Time derivatives of conformal 3-metric"
-CCTK_REAL hPin TYPE=gf TAGS='rhs="hPin_rhs"' { hPinx hPiny hPinz } "Time derivatives of cGHG shift"
-CCTK_REAL hPinn TYPE=gf TAGS='rhs="hPinn_rhs"' "Time derivaive of cGHG laspe"
-
 CCTK_REAL hPhi TYPE=gf TAGS='rhs="hPhi_rhs"'
 {
   hPhixxx hPhixxy hPhixxz hPhixyy hPhixyz hPhixzz
   hPhiyxx hPhiyxy hPhiyxz hPhiyyy hPhiyyz hPhiyzz
   hPhizxx hPhizxy hPhizxz hPhizyy hPhizyz hPhizzz
 } "Spatial derivatives of conformal 3-metric"
+
+CCTK_REAL hgn TYPE=gf TAGS='rhs="hgn_rhs" dependents="ADMBaseX::metric"' { hgnx hgny hgnz } "cGHG shift"
+CCTK_REAL hPin TYPE=gf TAGS='rhs="hPin_rhs"' { hPinx hPiny hPinz } "Time derivatives of cGHG shift"
 CCTK_REAL hPhin TYPE=gf TAGS='rhs="hPhin_rhs"'
 {
   hPhixnx hPhixny hPhixnz
   hPhiynx hPhiyny hPhiynz
   hPhiznx hPhizny hPhiznz
 } "Spatial derivatives of cGHG shift"
+
+CCTK_REAL hgnn TYPE=gf TAGS='rhs="hgnn_rhs" dependents="ADMBaseX::metric"' "cGHG laspe"
+CCTK_REAL hPinn TYPE=gf TAGS='rhs="hPinn_rhs"' "Time derivaive of cGHG laspe"
 CCTK_REAL hPhinn TYPE=gf TAGS='rhs="hPhinn_rhs"' { hPhixnn hPhiynn hPhiznn } "Spatial derivatives of cGHG lapse"
 
 # rhs
@@ -67,28 +67,28 @@ CCTK_REAL hg_rhs TYPE=gf TAGS='checkpoint="no"'
 {
   hgxx_rhs hgxy_rhs hgxz_rhs hgyy_rhs hgyz_rhs hgzz_rhs
 } "Conformal 3-metric"
-CCTK_REAL hgn_rhs TYPE=gf TAGS='checkpoint="no"' { hgnx_rhs hgny_rhs hgnz_rhs } "cGHG shift"
-CCTK_REAL hgnn_rhs TYPE=gf TAGS='checkpoint="no"' "cGHG laspe"
-
 CCTK_REAL hPi_rhs TYPE=gf TAGS='checkpoint="no"'
 {
   hPixx_rhs hPixy_rhs hPixz_rhs hPiyy_rhs hPiyz_rhs hPizz_rhs
 } "Time derivatives of conformal 3-metric"
-CCTK_REAL hPin_rhs TYPE=gf TAGS='checkpoint="no"' { hPinx_rhs hPiny_rhs hPinz_rhs } "Time derivatives of cGHG shift"
-CCTK_REAL hPinn_rhs TYPE=gf TAGS='checkpoint="no"' "Time derivaive of cGHG laspe"
-
 CCTK_REAL hPhi_rhs TYPE=gf TAGS='checkpoint="no"'
 {
   hPhixxx_rhs hPhixxy_rhs hPhixxz_rhs hPhixyy_rhs hPhixyz_rhs hPhixzz_rhs
   hPhiyxx_rhs hPhiyxy_rhs hPhiyxz_rhs hPhiyyy_rhs hPhiyyz_rhs hPhiyzz_rhs
   hPhizxx_rhs hPhizxy_rhs hPhizxz_rhs hPhizyy_rhs hPhizyz_rhs hPhizzz_rhs
 } "Spatial derivatives of conformal 3-metric"
+
+CCTK_REAL hgn_rhs TYPE=gf TAGS='checkpoint="no"' { hgnx_rhs hgny_rhs hgnz_rhs } "cGHG shift"
+CCTK_REAL hPin_rhs TYPE=gf TAGS='checkpoint="no"' { hPinx_rhs hPiny_rhs hPinz_rhs } "Time derivatives of cGHG shift"
 CCTK_REAL hPhin_rhs TYPE=gf TAGS='checkpoint="no"'
 {
   hPhixnx_rhs hPhixny_rhs hPhixnz_rhs
   hPhiynx_rhs hPhiyny_rhs hPhiynz_rhs
   hPhiznx_rhs hPhizny_rhs hPhiznz_rhs
 } "Spatial derivatives of cGHG shift"
+
+CCTK_REAL hgnn_rhs TYPE=gf TAGS='checkpoint="no"' "cGHG laspe"
+CCTK_REAL hPinn_rhs TYPE=gf TAGS='checkpoint="no"' "Time derivaive of cGHG laspe"
 CCTK_REAL hPhinn_rhs TYPE=gf TAGS='checkpoint="no"' { hPhixnn_rhs hPhiynn_rhs hPhiznn_rhs } "Spatial derivatives of cGHG lapse"
 
 
