@@ -1,29 +1,14 @@
 # Schedule definitions for thorn cGHG
 
-STORAGE: chi
-STORAGE: gamma_tilde
-STORAGE: K_hat
-STORAGE: A_tilde
-STORAGE: Gam_tilde
-STORAGE: Theta
-STORAGE: alphaG
-STORAGE: betaG
+STORAGE: W WPi WPhi
+STORAGE: hg hPi hPhi
+STORAGE: hgn hPin hPhin
+STORAGE: hgnn hPinn hPhinn
 
-STORAGE: ZtC
-STORAGE: HC
-STORAGE: MtC
-STORAGE: allC
-
-STORAGE: chi_rhs
-STORAGE: gamma_tilde_rhs
-STORAGE: K_hat_rhs
-STORAGE: A_tilde_rhs
-STORAGE: Gam_tilde_rhs
-STORAGE: Theta_rhs
-STORAGE: alphaG_rhs
-STORAGE: betaG_rhs
-
-
+STORAGE: W_rhs WPi_rhs WPhi_rhs
+STORAGE: hg_rhs hPi_rhs hPhi_rhs
+STORAGE: hgn_rhs hPin_rhs hPhin_rhs
+STORAGE: hgnn_rhs hPinn_rhs hPhinn_rhs
 
 ################################################################################
 
