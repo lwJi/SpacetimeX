@@ -81,6 +81,12 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const GF3D2<CCTK_REAL> &gf_hPinn = hPinn;
   const vec<GF3D2<CCTK_REAL>, 3> gf_hPhinn{hPhixnn, hPhiynn, hPhiznn};
 
+  const GF3D2<CCTK_REAL> &gf_hHn = hHn;
+  const vec<GF3D2<CCTK_REAL>, 3> gf_hH{hHx, hHy, hHz};
+
+  const GF3D2<CCTK_REAL> &gf_hthetan = hthetan;
+  const vec<GF3D2<CCTK_REAL>, 3> gf_htheta{hthetax, hthetay, hthetaz};
+
   // More input grid functions
 
   // Output grid functions
@@ -111,6 +117,13 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const GF3D2<CCTK_REAL> &gf_dthPinn = hPinn_rhs;
   const vec<GF3D2<CCTK_REAL>, 3> gf_dthPhinn{hPhixnn_rhs, hPhiynn_rhs,
                                              hPhiznn_rhs};
+
+  const GF3D2<CCTK_REAL> &gf_dthHn = hHn_rhs;
+  const vec<GF3D2<CCTK_REAL>, 3> gf_dthH{hHx_rhs, hHy_rhs, hHz_rhs};
+
+  const GF3D2<CCTK_REAL> &gf_dththetan = hthetan_rhs;
+  const vec<GF3D2<CCTK_REAL>, 3> gf_dththeta{hthetax_rhs, hthetay_rhs,
+                                             hthetaz_rhs};
 
   // Define derivs lambdas
   const auto calcderivs = [&](const auto &gf, const auto &dgf,
@@ -156,6 +169,10 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const GF3D5<CCTK_REAL> tl_hgnn(make_gf());
   const GF3D5<CCTK_REAL> tl_hPinn(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_hPhinn(make_vec_gf());
+  const GF3D5<CCTK_REAL> tl_hHn(make_gf());
+  const vec<GF3D5<CCTK_REAL>, 3> tl_hH(make_vec_gf());
+  const GF3D5<CCTK_REAL> tl_hthetan(make_gf());
+  const vec<GF3D5<CCTK_REAL>, 3> tl_htheta(make_vec_gf());
 
   const vec<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dWPi(make_vec_gf());
@@ -171,6 +188,10 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhgnn(make_vec_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhPinn(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhPhinn(make_vec_vec_gf());
+  const vec<GF3D5<CCTK_REAL>, 3> tl_dhHn(make_vec_gf());
+  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhH(make_vec_vec_gf());
+  const vec<GF3D5<CCTK_REAL>, 3> tl_dhthetan(make_vec_gf());
+  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhtheta(make_vec_vec_gf());
 
   calcderivs(tl_W, tl_dW, gf_W);
   calcderivs(tl_WPi, tl_dWPi, gf_WPi);
@@ -184,6 +205,10 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   calcderivs(tl_hgnn, tl_dhgnn, gf_hgnn);
   calcderivs(tl_hPinn, tl_dhPinn, gf_hPinn);
   calcderivs(tl_hPhinn, tl_dhPhinn, gf_hPhinn);
+  calcderivs(tl_hHn, tl_dhHn, gf_hHn);
+  calcderivs(tl_hH, tl_dhH, gf_hH);
+  calcderivs(tl_hthetan, tl_dhthetan, gf_hthetan);
+  calcderivs(tl_htheta, tl_dhtheta, gf_htheta);
 
   if (itmp != ntmps)
     CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
