@@ -14,7 +14,10 @@ ADMEvolVarlist = DefTensors[
   {ADMalpha      [], PrintAs -> "\[Alpha]"},
   {ADMbeta      [i], PrintAs -> "\[Beta]"},
   {ADMgamma[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},
-  {ADMexK  [-i, -j], Symmetric[{-i, -j}], PrintAs -> "K"},
+  {ADMexK  [-i, -j], Symmetric[{-i, -j}], PrintAs -> "K"}
+];
+
+ADMdtEvolVarlist = DefTensors[
   {ADMdtalpha      [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Alpha]"},
   {ADMdtbeta      [i], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Beta]"},
   {ADMdtgamma[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Gamma]"}
