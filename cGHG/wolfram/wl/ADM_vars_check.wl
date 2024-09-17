@@ -23,6 +23,18 @@ ADMdtEvolVarlist = DefTensors[
   {ADMdtgamma[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Gamma]"}
 ];
 
+(*************************)
+
+(* Other Input Variables *)
+
+(*************************)
+
+ADMdEvolVarlist = DefTensors[
+  {ADMdalpha        [-k], PrintAs -> "d\[Alpha]"},
+  {ADMdbeta      [-k, i], PrintAs -> "d\[Beta]"},
+  {ADMdgamma[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "d\[Gamma]"}
+];
+
 (**************************)
 
 (* Intermediate Variables *)
