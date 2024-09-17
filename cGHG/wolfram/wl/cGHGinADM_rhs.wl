@@ -26,6 +26,8 @@ SetEQNDelayed[
   ]
 ];
 
+SetEQN[invg4[a_, b_], invgamma[a, b] - nvec[a] nvec[b]];
+
 SetEQNDelayed[
   dg4[c_, a_, b_]
   ,
@@ -76,7 +78,7 @@ SetEQN[trGam4[c_], invg4[a, b] Gam4[c, -a, -b]];
 
 (* WPi *)
 
-SetEQN[W[], detgamma[] ^ (1/6)];
+SetEQN[W[], detgamma[] ^ (-1/6)];
 
 SetEQN[WPi[], 1/6 ADMalpha[] W[] invgamma[k, l] nvec[c] ADMdgamma[-c, -k, -l]];
 
@@ -104,7 +106,7 @@ SetEQN[hgnn[], -2 ADMalpha[]];
 
 SetEQN[hPinn[], -ADMalpha[] ^ 2 nvec[c] nvec[a] nvec[b] dg4[-c, -a, -b]];
 
-SetEQN[hPhi[k_], ADMalpha[] ^ 2 nvec[a] nvec[b] dg4[k, -a, -b]];
+SetEQN[hPhinn[k_], ADMalpha[] ^ 2 nvec[a] nvec[b] dg4[k, -a, -b]];
 
 (* hH, htheta *)
 
