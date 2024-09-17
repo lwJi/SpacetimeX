@@ -78,7 +78,7 @@ SetEQN[trGam4[c_], invg4[a, b] Gam4[c, -a, -b]];
 
 (* WPi *)
 
-SetEQN[W[], detgamma[] ^ (-1/6)];
+SetEQN[W[], invdetgamma[] ^ (1/6)];
 
 SetEQN[WPi[], 1/6 ADMalpha[] W[] invgamma[k, l] nvec[c] ADMdgamma[-c, -k, -l]];
 

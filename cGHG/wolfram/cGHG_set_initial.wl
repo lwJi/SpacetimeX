@@ -26,11 +26,18 @@ DefChart[cart, M4, {0, 1, 2, 3}, {T[], X[], Y[], Z[]}, ChartColor -> Blue];
 
 <<wl/cGHGinADM_rhs.wl
 
+Module[{Mat, invMat},
+  Mat = Table[ADMgamma[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
+  invMat = Inverse[Mat] /. {1 / Det[Mat] -> invdetgamma[]//ToValues};
+  SetEQNDelayed[invdetgamma[], 1 / Det[Mat] // Simplify];
+  SetEQNDelayed[invgamma[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify]
+];
+
 SetOutputFile[FileNameJoin[{Directory[], "cGHG_set_initial.hxx"}]];
 
 $MainPrint[] :=
   Module[{},
-    PrintInitializations[{Mode -> "MainOut"}, ADMVarlist];
+    PrintInitializations[{Mode -> "MainOut"}, cGHGEvolVarlist];
     pr[];
 
     pr["grid.loop_all_device<0, 0, 0, vsize>("];
@@ -39,12 +46,17 @@ $MainPrint[] :=
     pr["  const GF3D2index index2(layout2, p.I);"];
     pr[];
 
-    PrintListInitializations[Drop[EvolVarlist, {5}], "gf_", "index2"];
+    PrintListInitializations[Drop[cGHGEvolVarlist, {5}], "gf_", "index2"];
     pr[];
 
-    PrintInitializations[{Mode -> "MainIn"}, Drop[EvolVarlist, {5}]];
+    PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile"},
+                         ADMEvolVarlist];
+    PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile", TensorType -> "Vect"},
+                         ADMdEvolVarlist];
     pr[];
-    PrintEquations[{Mode -> "Main"}, ADMVarlist];
+    PrintEquations[{Mode -> "Temp"}, ADMTempVarlist];
+    pr[];
+    PrintEquations[{Mode -> "Main"}, cGHGEvolVarlist];
     pr[];
     pr["});"];
   ];
