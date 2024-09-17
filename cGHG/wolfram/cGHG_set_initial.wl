@@ -40,13 +40,15 @@ $MainPrint[] :=
     PrintInitializations[{Mode -> "MainOut"}, cGHGEvolVarlist];
     pr[];
 
-    pr["grid.loop_all_device<0, 0, 0, vsize>("];
+    pr["grid.loop_int_device<0, 0, 0, vsize>("];
     pr["  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
     pr["  const vbool mask = mask_for_loop_tail<vbool>(p.i, p.imax);"];
     pr["  const GF3D2index index2(layout2, p.I);"];
+    pr["  const GF3D5index index5(layout5, p.I);"];
     pr[];
 
-    PrintListInitializations[Drop[cGHGEvolVarlist, {5}], "gf_", "index2"];
+    PrintListInitializations[ADMEvolVarlist, "tl_", "index5"];
+    PrintListInitializations[ADMdEvolVarlist, "tl_", "index5"];
     pr[];
 
     PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile"},

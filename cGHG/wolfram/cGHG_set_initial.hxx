@@ -68,26 +68,19 @@ const GF3D2<CCTK_REAL> &local_htheta1 = gf_htheta(0);
 const GF3D2<CCTK_REAL> &local_htheta2 = gf_htheta(1);
 const GF3D2<CCTK_REAL> &local_htheta3 = gf_htheta(2);
 
-grid.loop_all_device<0, 0, 0, vsize>(
+grid.loop_int_device<0, 0, 0, vsize>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
   const vbool mask = mask_for_loop_tail<vbool>(p.i, p.imax);
   const GF3D2index index2(layout2, p.I);
+  const GF3D5index index5(layout5, p.I);
 
-const auto &tmp_hg = gf_hg(mask, index2);
-const auto &tmp_hPi = gf_hPi(mask, index2);
-const auto &tmp_hPhi = gf_hPhi(mask, index2);
-const auto &tmp_hgn = gf_hgn(mask, index2);
-const auto &tmp_hPhin = gf_hPhin(mask, index2);
-const auto &tmp_hgnn = gf_hgnn(mask, index2);
-const auto &tmp_hPinn = gf_hPinn(mask, index2);
-const auto &tmp_hPhinn = gf_hPhinn(mask, index2);
-const auto &tmp_W = gf_W(mask, index2);
-const auto &tmp_WPi = gf_WPi(mask, index2);
-const auto &tmp_WPhi = gf_WPhi(mask, index2);
-const auto &tmp_hHn = gf_hHn(mask, index2);
-const auto &tmp_hH = gf_hH(mask, index2);
-const auto &tmp_hthetan = gf_hthetan(mask, index2);
-const auto &tmp_htheta = gf_htheta(mask, index2);
+const auto &tmp_ADMalpha = tl_ADMalpha(mask, index5);
+const auto &tmp_ADMbeta = tl_ADMbeta(mask, index5);
+const auto &tmp_ADMgamma = tl_ADMgamma(mask, index5);
+const auto &tmp_ADMexK = tl_ADMexK(mask, index5);
+const auto &tmp_ADMdalpha = tl_ADMdalpha(mask, index5);
+const auto &tmp_ADMdbeta = tl_ADMdbeta(mask, index5);
+const auto &tmp_ADMdgamma = tl_ADMdgamma(mask, index5);
 
 const vreal ADMalpha = tmp_ADMalpha;
 const vreal ADMbeta1 = tmp_ADMbeta(0);
