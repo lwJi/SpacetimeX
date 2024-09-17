@@ -10,14 +10,14 @@
 
 (***********************)
 
-ADMEvolVarlist = DefTensors[
+ADMEvolVarlist = GridTensors[
   {ADMalpha      [], PrintAs -> "\[Alpha]"},
   {ADMbeta      [i], PrintAs -> "\[Beta]"},
   {ADMgamma[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},
   {ADMexK  [-i, -j], Symmetric[{-i, -j}], PrintAs -> "K"}
 ];
 
-ADMdtEvolVarlist = DefTensors[
+ADMdtEvolVarlist = GridTensors[
   {ADMdtalpha      [], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Alpha]"},
   {ADMdtbeta      [i], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Beta]"},
   {ADMdtgamma[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SubscriptBox[\(\[PartialD]\), \(t\)]\)\[Gamma]"}
@@ -29,7 +29,7 @@ ADMdtEvolVarlist = DefTensors[
 
 (*************************)
 
-ADMdEvolVarlist = DefTensors[
+ADMdEvolVarlist = GridTensors[
   {ADMdalpha        [-k], PrintAs -> "\[PartialD]\[Alpha]"},
   {ADMdbeta      [-k, i], PrintAs -> "\[PartialD]\[Beta]"},
   {ADMdgamma[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"}
@@ -41,7 +41,7 @@ ADMdEvolVarlist = DefTensors[
 
 (**************************)
 
-ADMTempVarlist = DefTensors[
+ADMTempVarlist = TempTensors[
   {invdetgamma   [], PrintAs->"1/\[Gamma]"},
   {invgamma  [i, j], Symmetric[{i, j}], PrintAs->"\[Gamma]"},
   {trexK         [], PrintAs -> "K"},
