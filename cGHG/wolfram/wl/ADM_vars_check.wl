@@ -30,9 +30,9 @@ ADMdtEvolVarlist = DefTensors[
 (*************************)
 
 ADMdEvolVarlist = DefTensors[
-  {ADMdalpha        [-k], PrintAs -> "d\[Alpha]"},
-  {ADMdbeta      [-k, i], PrintAs -> "d\[Beta]"},
-  {ADMdgamma[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "d\[Gamma]"}
+  {ADMdalpha        [-k], PrintAs -> "\[PartialD]\[Alpha]"},
+  {ADMdbeta      [-k, i], PrintAs -> "\[PartialD]\[Beta]"},
+  {ADMdgamma[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"}
 ];
 
 (**************************)
