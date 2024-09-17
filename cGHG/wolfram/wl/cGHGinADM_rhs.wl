@@ -26,6 +26,48 @@ SetEQNDelayed[
   ]
 ];
 
+SetEQNDelayed[
+  dg4[c_, a_, b_]
+  ,
+  If[IndexType[c, DownIndexQ] && IndexType[a, DownIndexQ] && IndexType[b, DownIndexQ],
+    If[c[[1]] == 0,
+      If[a[[1]] == 0 && b[[1]] == 0,
+        -2 ADMalpha[] ADMdtalpha[] + 2 ADMgamma[-k, -l] ADMbeta[k] ADMdtbeta[l] + ADMbeta[i] ADMbeta[j] ADMdtgamma[-i, -j]
+        ,
+        If[a[[1]] == 0,
+          ADMbeta[l] ADMdtgamma[b, -l] + ADMgamma[b, -l] ADMdtbeta[l]
+          ,
+          If[b[[1]] == 0,
+            ADMbeta[l] ADMdtgamma[a, -l] + ADMgamma[a, -l] ADMdtbeta[l]
+            ,
+            ADMdtgamma[a, b]
+          ]
+        ]
+      ]
+      ,
+      If[a[[1]] == 0 && b[[1]] == 0,
+        -2 ADMalpha[] ADMdalpha[c] + 2 ADMgamma[-k, -l] ADMbeta[k] ADMdbeta[c, l] + ADMbeta[i] ADMbeta[j] ADMdgamma[c, -i, -j]
+        ,
+        If[a[[1]] == 0,
+          ADMbeta[l] ADMdgamma[c, b, -l] + ADMgamma[b, -l] ADMdbeta[c, l]
+          ,
+          If[b[[1]] == 0,
+            ADMbeta[l] ADMdgamma[c, a, -l] + ADMgamma[a, -l] ADMdbeta[c, l]
+            ,
+            ADMdgamma[c, a, b]
+          ]
+        ]
+      ]
+    ]
+    ,
+    dg4[c, a, b]
+  ]
+];
+
+SetEQN[Gam4[c_, a_, b_], 1/2 (dg4[a, b, c] + dg4[b, c, a] - dg4[c, a, b])];
+
+SetEQN[trGam4[c_], invg4[a, b] Gam4[c, -a, -b]];
+
 (*******)
 
 (* EOM *)
