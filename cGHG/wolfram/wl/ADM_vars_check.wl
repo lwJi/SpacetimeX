@@ -46,8 +46,8 @@ ADMTempVarlist = DefTensors[
   {invgamma  [i, j], Symmetric[{i, j}], PrintAs->"\[Gamma]"},
   {trexK         [], PrintAs -> "K"},
   {nvec         [a], PrintAs -> "n"},
-  {dg4 [-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[PartialD]g"},
-  {invg4     [a, b], Symmetric[{a, b}], PrintAs -> "g"},
+  {dg4d[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[PartialD]g"},
+  {invg4d    [a, b], Symmetric[{a, b}], PrintAs -> "g"},
   {Gam4[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[CapitalGamma]"},
   {trGam4      [-c], PrintAs -> "\[CapitalGamma]"}
 ];
