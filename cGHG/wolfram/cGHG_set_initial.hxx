@@ -715,130 +715,132 @@ Gam4d300*invg4d00 + 2*Gam4d301*invg4d01 + 2*Gam4d302*invg4d02 +
 ;
 
 
+vreal tempW = cbrt(sqrt(invdetgamma));
+
 local_hg11.store(mask, index2, 
-ADMgamma11*Power(W,2)
+ADMgamma11*Power(tempW,2)
 );
 
 local_hg12.store(mask, index2, 
-ADMgamma12*Power(W,2)
+ADMgamma12*Power(tempW,2)
 );
 
 local_hg13.store(mask, index2, 
-ADMgamma13*Power(W,2)
+ADMgamma13*Power(tempW,2)
 );
 
 local_hg22.store(mask, index2, 
-ADMgamma22*Power(W,2)
+ADMgamma22*Power(tempW,2)
 );
 
 local_hg23.store(mask, index2, 
-ADMgamma23*Power(W,2)
+ADMgamma23*Power(tempW,2)
 );
 
 local_hg33.store(mask, index2, 
-ADMgamma33*Power(W,2)
+ADMgamma33*Power(tempW,2)
 );
 
 local_hPi11.store(mask, index2, 
--(W*(ADMalpha*(dg4d011*nvec0 + dg4d111*nvec1 + dg4d211*nvec2 + 
-         dg4d311*nvec3)*W - 2*ADMgamma11*WPi))
+-(tempW*(ADMalpha*(dg4d011*nvec0 + dg4d111*nvec1 + dg4d211*nvec2 + 
+         dg4d311*nvec3)*tempW - 2*ADMgamma11*WPi))
 );
 
 local_hPi12.store(mask, index2, 
--(W*(ADMalpha*(dg4d012*nvec0 + dg4d112*nvec1 + dg4d212*nvec2 + 
-         dg4d312*nvec3)*W - 2*ADMgamma12*WPi))
+-(tempW*(ADMalpha*(dg4d012*nvec0 + dg4d112*nvec1 + dg4d212*nvec2 + 
+         dg4d312*nvec3)*tempW - 2*ADMgamma12*WPi))
 );
 
 local_hPi13.store(mask, index2, 
--(W*(ADMalpha*(dg4d013*nvec0 + dg4d113*nvec1 + dg4d213*nvec2 + 
-         dg4d313*nvec3)*W - 2*ADMgamma13*WPi))
+-(tempW*(ADMalpha*(dg4d013*nvec0 + dg4d113*nvec1 + dg4d213*nvec2 + 
+         dg4d313*nvec3)*tempW - 2*ADMgamma13*WPi))
 );
 
 local_hPi22.store(mask, index2, 
--(W*(ADMalpha*(dg4d022*nvec0 + dg4d122*nvec1 + dg4d222*nvec2 + 
-         dg4d322*nvec3)*W - 2*ADMgamma22*WPi))
+-(tempW*(ADMalpha*(dg4d022*nvec0 + dg4d122*nvec1 + dg4d222*nvec2 + 
+         dg4d322*nvec3)*tempW - 2*ADMgamma22*WPi))
 );
 
 local_hPi23.store(mask, index2, 
--(W*(ADMalpha*(dg4d023*nvec0 + dg4d123*nvec1 + dg4d223*nvec2 + 
-         dg4d323*nvec3)*W - 2*ADMgamma23*WPi))
+-(tempW*(ADMalpha*(dg4d023*nvec0 + dg4d123*nvec1 + dg4d223*nvec2 + 
+         dg4d323*nvec3)*tempW - 2*ADMgamma23*WPi))
 );
 
 local_hPi33.store(mask, index2, 
--(W*(ADMalpha*(dg4d033*nvec0 + dg4d133*nvec1 + dg4d233*nvec2 + 
-         dg4d333*nvec3)*W - 2*ADMgamma33*WPi))
+-(tempW*(ADMalpha*(dg4d033*nvec0 + dg4d133*nvec1 + dg4d233*nvec2 + 
+         dg4d333*nvec3)*tempW - 2*ADMgamma33*WPi))
 );
 
 local_hPhi111.store(mask, index2, 
-W*(ADMalpha*dg4d111*W + 2*ADMgamma11*WPhi1)
+tempW*(ADMalpha*dg4d111*tempW + 2*ADMgamma11*WPhi1)
 );
 
 local_hPhi112.store(mask, index2, 
-W*(ADMalpha*dg4d112*W + 2*ADMgamma12*WPhi1)
+tempW*(ADMalpha*dg4d112*tempW + 2*ADMgamma12*WPhi1)
 );
 
 local_hPhi113.store(mask, index2, 
-W*(ADMalpha*dg4d113*W + 2*ADMgamma13*WPhi1)
+tempW*(ADMalpha*dg4d113*tempW + 2*ADMgamma13*WPhi1)
 );
 
 local_hPhi122.store(mask, index2, 
-W*(ADMalpha*dg4d122*W + 2*ADMgamma22*WPhi1)
+tempW*(ADMalpha*dg4d122*tempW + 2*ADMgamma22*WPhi1)
 );
 
 local_hPhi123.store(mask, index2, 
-W*(ADMalpha*dg4d123*W + 2*ADMgamma23*WPhi1)
+tempW*(ADMalpha*dg4d123*tempW + 2*ADMgamma23*WPhi1)
 );
 
 local_hPhi133.store(mask, index2, 
-W*(ADMalpha*dg4d133*W + 2*ADMgamma33*WPhi1)
+tempW*(ADMalpha*dg4d133*tempW + 2*ADMgamma33*WPhi1)
 );
 
 local_hPhi211.store(mask, index2, 
-W*(ADMalpha*dg4d211*W + 2*ADMgamma11*WPhi2)
+tempW*(ADMalpha*dg4d211*tempW + 2*ADMgamma11*WPhi2)
 );
 
 local_hPhi212.store(mask, index2, 
-W*(ADMalpha*dg4d212*W + 2*ADMgamma12*WPhi2)
+tempW*(ADMalpha*dg4d212*tempW + 2*ADMgamma12*WPhi2)
 );
 
 local_hPhi213.store(mask, index2, 
-W*(ADMalpha*dg4d213*W + 2*ADMgamma13*WPhi2)
+tempW*(ADMalpha*dg4d213*tempW + 2*ADMgamma13*WPhi2)
 );
 
 local_hPhi222.store(mask, index2, 
-W*(ADMalpha*dg4d222*W + 2*ADMgamma22*WPhi2)
+tempW*(ADMalpha*dg4d222*tempW + 2*ADMgamma22*WPhi2)
 );
 
 local_hPhi223.store(mask, index2, 
-W*(ADMalpha*dg4d223*W + 2*ADMgamma23*WPhi2)
+tempW*(ADMalpha*dg4d223*tempW + 2*ADMgamma23*WPhi2)
 );
 
 local_hPhi233.store(mask, index2, 
-W*(ADMalpha*dg4d233*W + 2*ADMgamma33*WPhi2)
+tempW*(ADMalpha*dg4d233*tempW + 2*ADMgamma33*WPhi2)
 );
 
 local_hPhi311.store(mask, index2, 
-W*(ADMalpha*dg4d311*W + 2*ADMgamma11*WPhi3)
+tempW*(ADMalpha*dg4d311*tempW + 2*ADMgamma11*WPhi3)
 );
 
 local_hPhi312.store(mask, index2, 
-W*(ADMalpha*dg4d312*W + 2*ADMgamma12*WPhi3)
+tempW*(ADMalpha*dg4d312*tempW + 2*ADMgamma12*WPhi3)
 );
 
 local_hPhi313.store(mask, index2, 
-W*(ADMalpha*dg4d313*W + 2*ADMgamma13*WPhi3)
+tempW*(ADMalpha*dg4d313*tempW + 2*ADMgamma13*WPhi3)
 );
 
 local_hPhi322.store(mask, index2, 
-W*(ADMalpha*dg4d322*W + 2*ADMgamma22*WPhi3)
+tempW*(ADMalpha*dg4d322*tempW + 2*ADMgamma22*WPhi3)
 );
 
 local_hPhi323.store(mask, index2, 
-W*(ADMalpha*dg4d323*W + 2*ADMgamma23*WPhi3)
+tempW*(ADMalpha*dg4d323*tempW + 2*ADMgamma23*WPhi3)
 );
 
 local_hPhi333.store(mask, index2, 
-W*(ADMalpha*dg4d333*W + 2*ADMgamma33*WPhi3)
+tempW*(ADMalpha*dg4d333*tempW + 2*ADMgamma33*WPhi3)
 );
 
 local_hgn1.store(mask, index2, 
@@ -1071,7 +1073,7 @@ Power(ADMalpha,2)*(dg4d300*Power(nvec0,2) + 2*dg4d301*nvec0*nvec1 +
 );
 
 local_W.store(mask, index2, 
-Power(invdetgamma,0.16666666666666666)
+tempW
 );
 
 local_WPi.store(mask, index2, 
@@ -1086,25 +1088,25 @@ local_WPi.store(mask, index2,
       2*dg4d223*invgamma23*nvec2 + dg4d233*invgamma33*nvec2 + 
       dg4d311*invgamma11*nvec3 + 2*dg4d312*invgamma12*nvec3 + 
       2*dg4d313*invgamma13*nvec3 + dg4d322*invgamma22*nvec3 + 
-      2*dg4d323*invgamma23*nvec3 + dg4d333*invgamma33*nvec3)*W)/6.
+      2*dg4d323*invgamma23*nvec3 + dg4d333*invgamma33*nvec3)*tempW)/6.
 );
 
 local_WPhi1.store(mask, index2, 
 -0.16666666666666666*(ADMalpha*
     (dg4d111*invgamma11 + 2*dg4d112*invgamma12 + 2*dg4d113*invgamma13 + 
-      dg4d122*invgamma22 + 2*dg4d123*invgamma23 + dg4d133*invgamma33)*W)
+      dg4d122*invgamma22 + 2*dg4d123*invgamma23 + dg4d133*invgamma33)*tempW)
 );
 
 local_WPhi2.store(mask, index2, 
 -0.16666666666666666*(ADMalpha*
     (dg4d211*invgamma11 + 2*dg4d212*invgamma12 + 2*dg4d213*invgamma13 + 
-      dg4d222*invgamma22 + 2*dg4d223*invgamma23 + dg4d233*invgamma33)*W)
+      dg4d222*invgamma22 + 2*dg4d223*invgamma23 + dg4d233*invgamma33)*tempW)
 );
 
 local_WPhi3.store(mask, index2, 
 -0.16666666666666666*(ADMalpha*
     (dg4d311*invgamma11 + 2*dg4d312*invgamma12 + 2*dg4d313*invgamma13 + 
-      dg4d322*invgamma22 + 2*dg4d323*invgamma23 + dg4d333*invgamma33)*W)
+      dg4d322*invgamma22 + 2*dg4d323*invgamma23 + dg4d333*invgamma33)*tempW)
 );
 
 local_hHn.store(mask, index2, 
@@ -1113,15 +1115,15 @@ local_hHn.store(mask, index2,
 );
 
 local_hH1.store(mask, index2, 
--(Power(ADMalpha,2)*trGam4d1*Power(W,2))
+-(Power(ADMalpha,2)*Power(tempW,2)*trGam4d1)
 );
 
 local_hH2.store(mask, index2, 
--(Power(ADMalpha,2)*trGam4d2*Power(W,2))
+-(Power(ADMalpha,2)*Power(tempW,2)*trGam4d2)
 );
 
 local_hH3.store(mask, index2, 
--(Power(ADMalpha,2)*trGam4d3*Power(W,2))
+-(Power(ADMalpha,2)*Power(tempW,2)*trGam4d3)
 );
 
 local_hthetan.store(mask, index2, 

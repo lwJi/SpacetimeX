@@ -56,7 +56,9 @@ $MainPrint[] :=
     PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile", TensorType -> "Vect"},
                          ADMdEvolVarlist];
     pr[];
-    PrintEquations[{Mode -> "Temp"}, ADMTempVarlist];
+    PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, {-1}]];
+    pr[];
+    pr["vreal tempW = cbrt(sqrt(invdetgamma));"];
     pr[];
     PrintEquations[{Mode -> "Main"}, cGHGEvolVarlist];
     pr[];
