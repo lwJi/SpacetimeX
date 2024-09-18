@@ -482,236 +482,236 @@ vreal invg4d33
 invgamma33 - Power(nvec3,2)
 ;
 
-vreal Gam4000
+vreal Gam4d000
 =
 dg4d000/2.
 ;
 
-vreal Gam4001
+vreal Gam4d001
 =
 dg4d100/2.
 ;
 
-vreal Gam4002
+vreal Gam4d002
 =
 dg4d200/2.
 ;
 
-vreal Gam4003
+vreal Gam4d003
 =
 dg4d300/2.
 ;
 
-vreal Gam4011
+vreal Gam4d011
 =
 -0.5*dg4d011 + dg4d101
 ;
 
-vreal Gam4012
+vreal Gam4d012
 =
 (-dg4d012 + dg4d102 + dg4d201)/2.
 ;
 
-vreal Gam4013
+vreal Gam4d013
 =
 (-dg4d013 + dg4d103 + dg4d301)/2.
 ;
 
-vreal Gam4022
+vreal Gam4d022
 =
 -0.5*dg4d022 + dg4d202
 ;
 
-vreal Gam4023
+vreal Gam4d023
 =
 (-dg4d023 + dg4d203 + dg4d302)/2.
 ;
 
-vreal Gam4033
+vreal Gam4d033
 =
 -0.5*dg4d033 + dg4d303
 ;
 
-vreal Gam4100
+vreal Gam4d100
 =
 dg4d001 - dg4d100/2.
 ;
 
-vreal Gam4101
+vreal Gam4d101
 =
 dg4d011/2.
 ;
 
-vreal Gam4102
+vreal Gam4d102
 =
 (dg4d012 - dg4d102 + dg4d201)/2.
 ;
 
-vreal Gam4103
+vreal Gam4d103
 =
 (dg4d013 - dg4d103 + dg4d301)/2.
 ;
 
-vreal Gam4111
+vreal Gam4d111
 =
 dg4d111/2.
 ;
 
-vreal Gam4112
+vreal Gam4d112
 =
 dg4d211/2.
 ;
 
-vreal Gam4113
+vreal Gam4d113
 =
 dg4d311/2.
 ;
 
-vreal Gam4122
+vreal Gam4d122
 =
 -0.5*dg4d122 + dg4d212
 ;
 
-vreal Gam4123
+vreal Gam4d123
 =
 (-dg4d123 + dg4d213 + dg4d312)/2.
 ;
 
-vreal Gam4133
+vreal Gam4d133
 =
 -0.5*dg4d133 + dg4d313
 ;
 
-vreal Gam4200
+vreal Gam4d200
 =
 dg4d002 - dg4d200/2.
 ;
 
-vreal Gam4201
+vreal Gam4d201
 =
 (dg4d012 + dg4d102 - dg4d201)/2.
 ;
 
-vreal Gam4202
+vreal Gam4d202
 =
 dg4d022/2.
 ;
 
-vreal Gam4203
+vreal Gam4d203
 =
 (dg4d023 - dg4d203 + dg4d302)/2.
 ;
 
-vreal Gam4211
+vreal Gam4d211
 =
 dg4d112 - dg4d211/2.
 ;
 
-vreal Gam4212
+vreal Gam4d212
 =
 dg4d122/2.
 ;
 
-vreal Gam4213
+vreal Gam4d213
 =
 (dg4d123 - dg4d213 + dg4d312)/2.
 ;
 
-vreal Gam4222
+vreal Gam4d222
 =
 dg4d222/2.
 ;
 
-vreal Gam4223
+vreal Gam4d223
 =
 dg4d322/2.
 ;
 
-vreal Gam4233
+vreal Gam4d233
 =
 -0.5*dg4d233 + dg4d323
 ;
 
-vreal Gam4300
+vreal Gam4d300
 =
 dg4d003 - dg4d300/2.
 ;
 
-vreal Gam4301
+vreal Gam4d301
 =
 (dg4d013 + dg4d103 - dg4d301)/2.
 ;
 
-vreal Gam4302
+vreal Gam4d302
 =
 (dg4d023 + dg4d203 - dg4d302)/2.
 ;
 
-vreal Gam4303
+vreal Gam4d303
 =
 dg4d033/2.
 ;
 
-vreal Gam4311
+vreal Gam4d311
 =
 dg4d113 - dg4d311/2.
 ;
 
-vreal Gam4312
+vreal Gam4d312
 =
 (dg4d123 + dg4d213 - dg4d312)/2.
 ;
 
-vreal Gam4313
+vreal Gam4d313
 =
 dg4d133/2.
 ;
 
-vreal Gam4322
+vreal Gam4d322
 =
 dg4d223 - dg4d322/2.
 ;
 
-vreal Gam4323
+vreal Gam4d323
 =
 dg4d233/2.
 ;
 
-vreal Gam4333
+vreal Gam4d333
 =
 dg4d333/2.
 ;
 
-vreal trGam40
+vreal trGam4d0
 =
-Gam4000*invg4d00 + 2*Gam4001*invg4d01 + 2*Gam4002*invg4d02 + 
-  2*Gam4003*invg4d03 + Gam4011*invg4d11 + 2*Gam4012*invg4d12 + 
-  2*Gam4013*invg4d13 + Gam4022*invg4d22 + 2*Gam4023*invg4d23 + 
-  Gam4033*invg4d33
+Gam4d000*invg4d00 + 2*Gam4d001*invg4d01 + 2*Gam4d002*invg4d02 + 
+  2*Gam4d003*invg4d03 + Gam4d011*invg4d11 + 2*Gam4d012*invg4d12 + 
+  2*Gam4d013*invg4d13 + Gam4d022*invg4d22 + 2*Gam4d023*invg4d23 + 
+  Gam4d033*invg4d33
 ;
 
-vreal trGam41
+vreal trGam4d1
 =
-Gam4100*invg4d00 + 2*Gam4101*invg4d01 + 2*Gam4102*invg4d02 + 
-  2*Gam4103*invg4d03 + Gam4111*invg4d11 + 2*Gam4112*invg4d12 + 
-  2*Gam4113*invg4d13 + Gam4122*invg4d22 + 2*Gam4123*invg4d23 + 
-  Gam4133*invg4d33
+Gam4d100*invg4d00 + 2*Gam4d101*invg4d01 + 2*Gam4d102*invg4d02 + 
+  2*Gam4d103*invg4d03 + Gam4d111*invg4d11 + 2*Gam4d112*invg4d12 + 
+  2*Gam4d113*invg4d13 + Gam4d122*invg4d22 + 2*Gam4d123*invg4d23 + 
+  Gam4d133*invg4d33
 ;
 
-vreal trGam42
+vreal trGam4d2
 =
-Gam4200*invg4d00 + 2*Gam4201*invg4d01 + 2*Gam4202*invg4d02 + 
-  2*Gam4203*invg4d03 + Gam4211*invg4d11 + 2*Gam4212*invg4d12 + 
-  2*Gam4213*invg4d13 + Gam4222*invg4d22 + 2*Gam4223*invg4d23 + 
-  Gam4233*invg4d33
+Gam4d200*invg4d00 + 2*Gam4d201*invg4d01 + 2*Gam4d202*invg4d02 + 
+  2*Gam4d203*invg4d03 + Gam4d211*invg4d11 + 2*Gam4d212*invg4d12 + 
+  2*Gam4d213*invg4d13 + Gam4d222*invg4d22 + 2*Gam4d223*invg4d23 + 
+  Gam4d233*invg4d33
 ;
 
-vreal trGam43
+vreal trGam4d3
 =
-Gam4300*invg4d00 + 2*Gam4301*invg4d01 + 2*Gam4302*invg4d02 + 
-  2*Gam4303*invg4d03 + Gam4311*invg4d11 + 2*Gam4312*invg4d12 + 
-  2*Gam4313*invg4d13 + Gam4322*invg4d22 + 2*Gam4323*invg4d23 + 
-  Gam4333*invg4d33
+Gam4d300*invg4d00 + 2*Gam4d301*invg4d01 + 2*Gam4d302*invg4d02 + 
+  2*Gam4d303*invg4d03 + Gam4d311*invg4d11 + 2*Gam4d312*invg4d12 + 
+  2*Gam4d313*invg4d13 + Gam4d322*invg4d22 + 2*Gam4d323*invg4d23 + 
+  Gam4d333*invg4d33
 ;
 
 
@@ -1108,19 +1108,20 @@ local_WPhi3.store(mask, index2,
 );
 
 local_hHn.store(mask, index2, 
--(ADMalpha*(nvec0*trGam40 + nvec1*trGam41 + nvec2*trGam42 + nvec3*trGam43))
+-(ADMalpha*(nvec0*trGam4d0 + nvec1*trGam4d1 + nvec2*trGam4d2 + 
+      nvec3*trGam4d3))
 );
 
 local_hH1.store(mask, index2, 
--(Power(ADMalpha,2)*trGam41*Power(W,2))
+-(Power(ADMalpha,2)*trGam4d1*Power(W,2))
 );
 
 local_hH2.store(mask, index2, 
--(Power(ADMalpha,2)*trGam42*Power(W,2))
+-(Power(ADMalpha,2)*trGam4d2*Power(W,2))
 );
 
 local_hH3.store(mask, index2, 
--(Power(ADMalpha,2)*trGam43*Power(W,2))
+-(Power(ADMalpha,2)*trGam4d3*Power(W,2))
 );
 
 local_hthetan.store(mask, index2, 
