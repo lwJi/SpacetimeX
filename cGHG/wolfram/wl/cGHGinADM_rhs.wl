@@ -26,10 +26,10 @@ SetEQNDelayed[
   ]
 ];
 
-SetEQN[invg4[a_, b_], invgamma[a, b] - nvec[a] nvec[b]];
+SetEQN[invg4d[a_, b_], invgamma[a, b] - nvec[a] nvec[b]];
 
 SetEQNDelayed[
-  dg4[c_, a_, b_]
+  dg4d[c_, a_, b_]
   ,
   If[IndexType[c, DownIndexQ] && IndexType[a, DownIndexQ] && IndexType[b, DownIndexQ],
     If[c[[1]] == 0,
@@ -62,13 +62,13 @@ SetEQNDelayed[
       ]
     ]
     ,
-    dg4[c, a, b]
+    dg4d[c, a, b]
   ]
 ];
 
-SetEQN[Gam4[c_, a_, b_], 1/2 (dg4[a, b, c] + dg4[b, c, a] - dg4[c, a, b])];
+SetEQN[Gam4[c_, a_, b_], 1/2 (dg4d[a, b, c] + dg4d[b, c, a] - dg4d[c, a, b])];
 
-SetEQN[trGam4[c_], invg4[a, b] Gam4[c, -a, -b]];
+SetEQN[trGam4[c_], invg4d[a, b] Gam4[c, -a, -b]];
 
 (*******)
 
@@ -88,25 +88,25 @@ SetEQN[WPhi[i_], -(1/6) ADMalpha[] W[] invgamma[k, l] ADMdgamma[i, -k, -l]];
 
 SetEQN[hg[i_, j_], W[] ^ 2 ADMgamma[i, j]];
 
-SetEQN[hPi[i_, j_], -ADMalpha[] W[] ^ 2 nvec[c] dg4[-c, i, j] + 2 W[] WPi[] ADMgamma[i, j]];
+SetEQN[hPi[i_, j_], -ADMalpha[] W[] ^ 2 nvec[c] dg4d[-c, i, j] + 2 W[] WPi[] ADMgamma[i, j]];
 
-SetEQN[hPhi[k_, i_, j_], ADMalpha[] W[] ^ 2 dg4[k, i, j] + 2 W[] WPhi[k] ADMgamma[i, j]];
+SetEQN[hPhi[k_, i_, j_], ADMalpha[] W[] ^ 2 dg4d[k, i, j] + 2 W[] WPhi[k] ADMgamma[i, j]];
 
 (* hPi_{ni} *)
 
 SetEQN[hgn[i_], ADMbeta[i]];
 
-SetEQN[hPin[i_], -ADMalpha[] ^ 2 invgamma[i, j] nvec[c] nvec[a] dg4[-c, -a, -j]];
+SetEQN[hPin[i_], -ADMalpha[] ^ 2 invgamma[i, j] nvec[c] nvec[a] dg4d[-c, -a, -j]];
 
-SetEQN[hPhin[k_, i_], ADMalpha[] ^ 2 invgamma[i, j] nvec[a] dg4[k, -a, -j]];
+SetEQN[hPhin[k_, i_], ADMalpha[] ^ 2 invgamma[i, j] nvec[a] dg4d[k, -a, -j]];
 
 (* hPi_{nn} *)
 
 SetEQN[hgnn[], -2 ADMalpha[]];
 
-SetEQN[hPinn[], -ADMalpha[] ^ 2 nvec[c] nvec[a] nvec[b] dg4[-c, -a, -b]];
+SetEQN[hPinn[], -ADMalpha[] ^ 2 nvec[c] nvec[a] nvec[b] dg4d[-c, -a, -b]];
 
-SetEQN[hPhinn[k_], ADMalpha[] ^ 2 nvec[a] nvec[b] dg4[k, -a, -b]];
+SetEQN[hPhinn[k_], ADMalpha[] ^ 2 nvec[a] nvec[b] dg4d[k, -a, -b]];
 
 (* hH, htheta *)
 
