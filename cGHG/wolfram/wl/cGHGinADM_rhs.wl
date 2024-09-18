@@ -66,9 +66,9 @@ SetEQNDelayed[
   ]
 ];
 
-SetEQN[Gam4[c_, a_, b_], 1/2 (dg4d[a, b, c] + dg4d[b, c, a] - dg4d[c, a, b])];
+SetEQN[Gam4d[c_, a_, b_], 1/2 (dg4d[a, b, c] + dg4d[b, c, a] - dg4d[c, a, b])];
 
-SetEQN[trGam4[c_], invg4d[a, b] Gam4[c, -a, -b]];
+SetEQN[trGam4d[c_], invg4d[a, b] Gam4d[c, -a, -b]];
 
 (*******)
 
@@ -110,9 +110,9 @@ SetEQN[hPhinn[k_], ADMalpha[] ^ 2 nvec[a] nvec[b] dg4d[k, -a, -b]];
 
 (* hH, htheta *)
 
-SetEQN[hHn[], -ADMalpha[] nvec[c] trGam4[-c]];
+SetEQN[hHn[], -ADMalpha[] nvec[c] trGam4d[-c]];
 
-SetEQN[hH[i_], -ADMalpha[] ^ 2 W[] ^ 2 trGam4[i]];
+SetEQN[hH[i_], -ADMalpha[] ^ 2 W[] ^ 2 trGam4d[i]];
 
 SetEQN[hthetan[], -ADMbeta[k] dhHn[-k]];
 

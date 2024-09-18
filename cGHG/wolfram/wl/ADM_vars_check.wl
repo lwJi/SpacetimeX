@@ -42,12 +42,12 @@ ADMdEvolVarlist = DefTensors[
 (**************************)
 
 ADMTempVarlist = DefTensors[
-  {invdetgamma   [], PrintAs->"1/\[Gamma]"},
-  {invgamma  [i, j], Symmetric[{i, j}], PrintAs->"\[Gamma]"},
-  {trexK         [], PrintAs -> "K"},
-  {nvec         [a], PrintAs -> "n"},
-  {dg4d[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[PartialD]g"},
-  {invg4d    [a, b], Symmetric[{a, b}], PrintAs -> "g"},
-  {Gam4[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[CapitalGamma]"},
-  {trGam4      [-c], PrintAs -> "\[CapitalGamma]"}
+  {invdetgamma [], PrintAs->"1/\[Gamma]"},
+  {invgamma[i, j], Symmetric[{i, j}], PrintAs->"\[Gamma]"},
+  {trexK       [], PrintAs -> "K"},
+  {nvec       [a], PrintAs -> "n"},
+  {dg4d [-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[PartialD]g"},
+  {invg4d     [a, b], Symmetric[{a, b}], PrintAs -> "g"},
+  {Gam4d[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[CapitalGamma]"},
+  {trGam4d      [-c], PrintAs -> "\[CapitalGamma]"}
 ];
