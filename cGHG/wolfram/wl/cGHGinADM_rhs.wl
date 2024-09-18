@@ -80,9 +80,9 @@ SetEQN[trGam4[c_], invg4d[a, b] Gam4[c, -a, -b]];
 
 SetEQN[W[], invdetgamma[] ^ (1/6)];
 
-SetEQN[WPi[], 1/6 ADMalpha[] W[] invgamma[k, l] nvec[c] ADMdgamma[-c, -k, -l]];
+SetEQN[WPi[], 1/6 ADMalpha[] W[] invgamma[k, l] nvec[c] dg4d[-c, -k, -l]];
 
-SetEQN[WPhi[i_], -(1/6) ADMalpha[] W[] invgamma[k, l] ADMdgamma[i, -k, -l]];
+SetEQN[WPhi[i_], -(1/6) ADMalpha[] W[] invgamma[k, l] dg4d[i, -k, -l]];
 
 (* hPi_{ij} *)
 
