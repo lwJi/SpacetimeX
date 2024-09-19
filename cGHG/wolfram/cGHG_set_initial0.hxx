@@ -8,12 +8,6 @@ const GF3D2<CCTK_REAL> &local_ADMdtalpha = gf_ADMdtalpha;
 const GF3D2<CCTK_REAL> &local_ADMdtbeta1 = gf_ADMdtbeta(0);
 const GF3D2<CCTK_REAL> &local_ADMdtbeta2 = gf_ADMdtbeta(1);
 const GF3D2<CCTK_REAL> &local_ADMdtbeta3 = gf_ADMdtbeta(2);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma11 = gf_ADMdtgamma(0,0);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma12 = gf_ADMdtgamma(0,1);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma13 = gf_ADMdtgamma(0,2);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma22 = gf_ADMdtgamma(1,1);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma23 = gf_ADMdtgamma(1,2);
-const GF3D2<CCTK_REAL> &local_ADMdtgamma33 = gf_ADMdtgamma(2,2);
 
 grid.loop_int_device<0, 0, 0, vsize>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
@@ -240,45 +234,6 @@ ADMbeta1*ADMdbeta12 + ADMbeta3*ADMdbeta32 + ADMbeta2*(ADMdbeta22 - ceta) +
 local_ADMdtbeta3.store(mask, index2, 
 ADMbeta1*ADMdbeta13 + ADMbeta2*ADMdbeta23 + ADMbeta3*ADMdbeta33 - 
   ADMbeta3*ceta + cnu*trGam3d3
-);
-
-local_ADMdtgamma11.store(mask, index2, 
-ADMbeta1*ADMdgamma111 + ADMbeta2*ADMdgamma211 + ADMbeta3*ADMdgamma311 - 
-  2*ADMalpha*ADMexK11 + 2*ADMdbeta11*ADMgamma11 + 2*ADMdbeta12*ADMgamma12 + 
-  2*ADMdbeta13*ADMgamma13
-);
-
-local_ADMdtgamma12.store(mask, index2, 
-ADMbeta1*ADMdgamma112 + ADMbeta2*ADMdgamma212 + ADMbeta3*ADMdgamma312 - 
-  2*ADMalpha*ADMexK12 + ADMdbeta21*ADMgamma11 + ADMdbeta11*ADMgamma12 + 
-  ADMdbeta22*ADMgamma12 + ADMdbeta23*ADMgamma13 + ADMdbeta12*ADMgamma22 + 
-  ADMdbeta13*ADMgamma23
-);
-
-local_ADMdtgamma13.store(mask, index2, 
-ADMbeta1*ADMdgamma113 + ADMbeta2*ADMdgamma213 + ADMbeta3*ADMdgamma313 - 
-  2*ADMalpha*ADMexK13 + ADMdbeta31*ADMgamma11 + ADMdbeta32*ADMgamma12 + 
-  ADMdbeta11*ADMgamma13 + ADMdbeta33*ADMgamma13 + ADMdbeta12*ADMgamma23 + 
-  ADMdbeta13*ADMgamma33
-);
-
-local_ADMdtgamma22.store(mask, index2, 
-ADMbeta1*ADMdgamma122 + ADMbeta2*ADMdgamma222 + ADMbeta3*ADMdgamma322 - 
-  2*ADMalpha*ADMexK22 + 2*ADMdbeta21*ADMgamma12 + 2*ADMdbeta22*ADMgamma22 + 
-  2*ADMdbeta23*ADMgamma23
-);
-
-local_ADMdtgamma23.store(mask, index2, 
-ADMbeta1*ADMdgamma123 + ADMbeta2*ADMdgamma223 + ADMbeta3*ADMdgamma323 - 
-  2*ADMalpha*ADMexK23 + ADMdbeta31*ADMgamma12 + ADMdbeta21*ADMgamma13 + 
-  ADMdbeta32*ADMgamma22 + ADMdbeta22*ADMgamma23 + ADMdbeta33*ADMgamma23 + 
-  ADMdbeta23*ADMgamma33
-);
-
-local_ADMdtgamma33.store(mask, index2, 
-ADMbeta1*ADMdgamma133 + ADMbeta2*ADMdgamma233 + ADMbeta3*ADMdgamma333 - 
-  2*ADMalpha*ADMexK33 + 2*ADMdbeta31*ADMgamma13 + 2*ADMdbeta32*ADMgamma23 + 
-  2*ADMdbeta33*ADMgamma33
 );
 
 

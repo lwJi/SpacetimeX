@@ -37,7 +37,7 @@ SetOutputFile[FileNameJoin[{Directory[], "cGHG_set_initial0.hxx"}]];
 
 $MainPrint[] :=
   Module[{},
-    PrintInitializations[{Mode -> "MainOut"}, ADMdtEvolVarlist];
+    PrintInitializations[{Mode -> "MainOut"}, ADMdtEvolVarlist[[1;;2]]];
     pr[];
 
     pr["grid.loop_int_device<0, 0, 0, vsize>("];
@@ -62,7 +62,7 @@ $MainPrint[] :=
     pr[];
     PrintEquations[{Mode -> "Temp"}, Drop[GaugePunctureTempVarlist, {1}]];
     pr[];
-    PrintEquations[{Mode -> "Main"}, ADMdtEvolVarlist];
+    PrintEquations[{Mode -> "Main"}, ADMdtEvolVarlist[[1;;2]]];
     pr[];
     pr["});"];
   ];
