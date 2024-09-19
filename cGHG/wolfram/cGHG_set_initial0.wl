@@ -14,9 +14,9 @@ SetGridPointIndex[""];
 
 SetTempVariableType["vreal"];
 
-DefManifold[M4, 4, IndexRange[a, z]];
+DefManifold[M3, 3, IndexRange[a, z]];
 
-DefChart[cart, M4, {0, 1, 2, 3}, {T[], X[], Y[], Z[]}, ChartColor -> Blue];
+DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 
 (* Define Variables *)
 
