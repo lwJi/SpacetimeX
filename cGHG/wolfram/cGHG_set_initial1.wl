@@ -47,14 +47,18 @@ $MainPrint[] :=
     pr["  const GF3D5index index5(layout5, p.I);"];
     pr[];
 
+    PrintListInitializations[ADMdtEvolVarlist[[1;;2]], "gf_", "index2"];
     PrintListInitializations[ADMEvolVarlist, "tl_", "index5"];
     PrintListInitializations[ADMdEvolVarlist, "tl_", "index5"];
     pr[];
 
+    PrintInitializations[{Mode -> "MainIn"}, ADMdtEvolVarlist[[1;;2]]];
     PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile"},
                          ADMEvolVarlist];
     PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile", TensorType -> "Vect"},
                          ADMdEvolVarlist];
+    pr[];
+    PrintEquations[{Mode -> "Temp"}, ADMdtEvolVarlist[[-1;;-1]]];
     pr[];
     PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, {-1}]];
     pr[];

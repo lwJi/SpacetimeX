@@ -11,5 +11,6 @@
 (**************************)
 
 GaugePunctureTempVarlist = DefTensors[
-  {trGam3d[i], PrintAs -> "\[CapitalGamma]3"}
+  {cbrtdetgamma[], PrintAs -> "\!\(\*SuperscriptBox[\(\[Gamma]\), \(1/3\)]\)"},
+  {trGam3d    [i], PrintAs -> "\[CapitalGamma]3"}
 ];

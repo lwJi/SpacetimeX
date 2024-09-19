@@ -70,6 +70,8 @@ grid.loop_int_device<0, 0, 0, vsize>(
   const GF3D2index index2(layout2, p.I);
   const GF3D5index index5(layout5, p.I);
 
+const auto &tmp_ADMdtalpha = gf_ADMdtalpha(mask, index2);
+const auto &tmp_ADMdtbeta = gf_ADMdtbeta(mask, index2);
 const auto &tmp_ADMalpha = tl_ADMalpha(mask, index5);
 const auto &tmp_ADMbeta = tl_ADMbeta(mask, index5);
 const auto &tmp_ADMgamma = tl_ADMgamma(mask, index5);
@@ -78,6 +80,10 @@ const auto &tmp_ADMdalpha = tl_ADMdalpha(mask, index5);
 const auto &tmp_ADMdbeta = tl_ADMdbeta(mask, index5);
 const auto &tmp_ADMdgamma = tl_ADMdgamma(mask, index5);
 
+const vreal ADMdtalpha = tmp_ADMdtalpha;
+const vreal ADMdtbeta1 = tmp_ADMdtbeta(0);
+const vreal ADMdtbeta2 = tmp_ADMdtbeta(1);
+const vreal ADMdtbeta3 = tmp_ADMdtbeta(2);
 const vreal ADMalpha = tmp_ADMalpha;
 const vreal ADMbeta1 = tmp_ADMbeta(0);
 const vreal ADMbeta2 = tmp_ADMbeta(1);
@@ -124,6 +130,52 @@ const vreal ADMdgamma313 = tmp_ADMdgamma(0,2)(2);
 const vreal ADMdgamma322 = tmp_ADMdgamma(1,1)(2);
 const vreal ADMdgamma323 = tmp_ADMdgamma(1,2)(2);
 const vreal ADMdgamma333 = tmp_ADMdgamma(2,2)(2);
+
+vreal ADMdtgamma11
+=
+ADMbeta1*ADMdgamma111 + ADMbeta2*ADMdgamma211 + ADMbeta3*ADMdgamma311 - 
+  2*ADMalpha*ADMexK11 + 2*ADMdbeta11*ADMgamma11 + 2*ADMdbeta12*ADMgamma12 + 
+  2*ADMdbeta13*ADMgamma13
+;
+
+vreal ADMdtgamma12
+=
+ADMbeta1*ADMdgamma112 + ADMbeta2*ADMdgamma212 + ADMbeta3*ADMdgamma312 - 
+  2*ADMalpha*ADMexK12 + ADMdbeta21*ADMgamma11 + ADMdbeta11*ADMgamma12 + 
+  ADMdbeta22*ADMgamma12 + ADMdbeta23*ADMgamma13 + ADMdbeta12*ADMgamma22 + 
+  ADMdbeta13*ADMgamma23
+;
+
+vreal ADMdtgamma13
+=
+ADMbeta1*ADMdgamma113 + ADMbeta2*ADMdgamma213 + ADMbeta3*ADMdgamma313 - 
+  2*ADMalpha*ADMexK13 + ADMdbeta31*ADMgamma11 + ADMdbeta32*ADMgamma12 + 
+  ADMdbeta11*ADMgamma13 + ADMdbeta33*ADMgamma13 + ADMdbeta12*ADMgamma23 + 
+  ADMdbeta13*ADMgamma33
+;
+
+vreal ADMdtgamma22
+=
+ADMbeta1*ADMdgamma122 + ADMbeta2*ADMdgamma222 + ADMbeta3*ADMdgamma322 - 
+  2*ADMalpha*ADMexK22 + 2*ADMdbeta21*ADMgamma12 + 2*ADMdbeta22*ADMgamma22 + 
+  2*ADMdbeta23*ADMgamma23
+;
+
+vreal ADMdtgamma23
+=
+ADMbeta1*ADMdgamma123 + ADMbeta2*ADMdgamma223 + ADMbeta3*ADMdgamma323 - 
+  2*ADMalpha*ADMexK23 + ADMdbeta31*ADMgamma12 + ADMdbeta21*ADMgamma13 + 
+  ADMdbeta32*ADMgamma22 + ADMdbeta22*ADMgamma23 + ADMdbeta33*ADMgamma23 + 
+  ADMdbeta23*ADMgamma33
+;
+
+vreal ADMdtgamma33
+=
+ADMbeta1*ADMdgamma133 + ADMbeta2*ADMdgamma233 + ADMbeta3*ADMdgamma333 - 
+  2*ADMalpha*ADMexK33 + 2*ADMdbeta31*ADMgamma13 + 2*ADMdbeta32*ADMgamma23 + 
+  2*ADMdbeta33*ADMgamma33
+;
+
 
 vreal invdetgamma
 =
