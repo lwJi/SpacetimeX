@@ -15,7 +15,7 @@ grid.loop_int_device<0, 0, 0, vsize>(
   const GF3D2index index2(layout2, p.I);
   const GF3D5index index5(layout5, p.I);
 
-const auto &tmp_ADMbeta = tl_ADMbeta(mask, index5);
+const auto &tmp_ADMbeta = gf_ADMbeta(mask, index2);
 const auto &tmp_dhHn = tl_dhHn(mask, index5);
 const auto &tmp_dhH = tl_dhH(mask, index5);
 
