@@ -1,8 +1,8 @@
-/* cGHG_set_initial.hxx */
+/* cGHG_set_initial1.hxx */
 /* Produced with Mathematica */
 
-#ifndef CGHG_SET_INITIAL_HXX
-#define CGHG_SET_INITIAL_HXX
+#ifndef CGHG_SET_INITIAL1_HXX
+#define CGHG_SET_INITIAL1_HXX
 
 const GF3D2<CCTK_REAL> &local_hg11 = gf_hg(0,0);
 const GF3D2<CCTK_REAL> &local_hg12 = gf_hg(0,1);
@@ -1145,6 +1145,6 @@ local_htheta3.store(mask, index2,
 
 });
 
-#endif // #ifndef CGHG_SET_INITIAL_HXX
+#endif // #ifndef CGHG_SET_INITIAL1_HXX
 
-/* cGHG_set_initial.hxx */
+/* cGHG_set_initial1.hxx */

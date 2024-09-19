@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* cGHG_set_rhs.wl *)
+(* cGHG_set_initial1.wl *)
 
 (* (c) Liwei Ji, 09/2024 *)
 
@@ -33,7 +33,7 @@ Module[{Mat, invMat},
   SetEQNDelayed[invgamma[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify]
 ];
 
-SetOutputFile[FileNameJoin[{Directory[], "cGHG_set_initial.hxx"}]];
+SetOutputFile[FileNameJoin[{Directory[], "cGHG_set_initial1.hxx"}]];
 
 $MainPrint[] :=
   Module[{},
