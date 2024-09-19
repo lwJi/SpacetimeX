@@ -10,7 +10,7 @@
 
 (****************)
 
-SetEQN[trGam3d[i_], (1 / invdetgamma[]) ^ (1/3) (invgamma[i, k] invgamma[j, l] - 1/3 invgamma[i, j] invgamma[k, l]) ADMdgamma[-j, -k, -l]];
+SetEQN[trGam3d[i_], cbrtdetgamma[] (invgamma[i, k] invgamma[j, l] - 1/3 invgamma[i, j] invgamma[k, l]) ADMdgamma[-j, -k, -l]];
 
 (*******)
 
