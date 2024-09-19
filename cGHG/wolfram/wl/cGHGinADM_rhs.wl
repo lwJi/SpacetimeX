@@ -12,6 +12,8 @@
 
 SetEQN[trexK[], invgamma[i, j] ADMexK[-i, -j]];
 
+SetEQN[ADMdtgamma[i_, j_], -2 ADMalpha[] ADMexK[i, j] + (ADMdgamma[i, j, -k] ADMbeta[k] + ADMgamma[j, -k] ADMdbeta[i, k]) + (ADMdgamma[j, i, -k] ADMbeta[k] + ADMgamma[i, -k] ADMdbeta[j, k]) - ADMbeta[k] (ADMdgamma[i, j, -k] + ADMdgamma[j, i, -k] - ADMdgamma[-k, i, j])];
+
 SetEQNDelayed[
   nvec[c_]
   ,
