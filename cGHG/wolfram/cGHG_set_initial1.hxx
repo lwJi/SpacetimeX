@@ -63,10 +63,6 @@ const GF3D2<CCTK_REAL> &local_hHn = gf_hHn;
 const GF3D2<CCTK_REAL> &local_hH1 = gf_hH(0);
 const GF3D2<CCTK_REAL> &local_hH2 = gf_hH(1);
 const GF3D2<CCTK_REAL> &local_hH3 = gf_hH(2);
-const GF3D2<CCTK_REAL> &local_hthetan = gf_hthetan;
-const GF3D2<CCTK_REAL> &local_htheta1 = gf_htheta(0);
-const GF3D2<CCTK_REAL> &local_htheta2 = gf_htheta(1);
-const GF3D2<CCTK_REAL> &local_htheta3 = gf_htheta(2);
 
 grid.loop_int_device<0, 0, 0, vsize>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
@@ -1124,22 +1120,6 @@ local_hH2.store(mask, index2,
 
 local_hH3.store(mask, index2, 
 -(Power(ADMalpha,2)*Power(tempW,2)*trGam4d3)
-);
-
-local_hthetan.store(mask, index2, 
--(ADMbeta1*dhHn1) - ADMbeta2*dhHn2 - ADMbeta3*dhHn3
-);
-
-local_htheta1.store(mask, index2, 
--(ADMbeta1*dhH11) - ADMbeta2*dhH21 - ADMbeta3*dhH31
-);
-
-local_htheta2.store(mask, index2, 
--(ADMbeta1*dhH12) - ADMbeta2*dhH22 - ADMbeta3*dhH32
-);
-
-local_htheta3.store(mask, index2, 
--(ADMbeta1*dhH13) - ADMbeta2*dhH23 - ADMbeta3*dhH33
 );
 
 

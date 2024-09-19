@@ -37,7 +37,7 @@ SetOutputFile[FileNameJoin[{Directory[], "cGHG_set_initial1.hxx"}]];
 
 $MainPrint[] :=
   Module[{},
-    PrintInitializations[{Mode -> "MainOut"}, cGHGEvolVarlist];
+    PrintInitializations[{Mode -> "MainOut"}, cGHGEvolVarlist[[1;;-3]]];
     pr[];
 
     pr["grid.loop_int_device<0, 0, 0, vsize>("];
@@ -60,7 +60,7 @@ $MainPrint[] :=
     pr[];
     pr["vreal tempW = cbrt(sqrt(invdetgamma));"];
     pr[];
-    PrintEquations[{Mode -> "Main"}, cGHGEvolVarlist];
+    PrintEquations[{Mode -> "Main"}, cGHGEvolVarlist[[1;;-3]]];
     pr[];
     pr["});"];
   ];
