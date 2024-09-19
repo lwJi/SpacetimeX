@@ -40,7 +40,7 @@ $MainPrint[] :=
     pr["  const GF3D5index index5(layout5, p.I);"];
     pr[];
 
-    PrintListInitializations[ADMEvolVarlist[[2;;2]], "tl_", "index5"];
+    PrintListInitializations[ADMEvolVarlist[[2;;2]], "gf_", "index2"];
     PrintListInitializations[cGHGdEvolVarlist[[-4;;-3]], "tl_", "index5"];
     pr[];
 
