@@ -59,6 +59,16 @@ SCHEDULE GROUP cGHG_RHSGroup IN ODESolvers_RHS
 ################################################################################
 
 
+SCHEDULE cGHG_Initial0 IN cGHG_InitialGroup
+{
+  LANG: C
+  READS: ADMBaseX::metric(interior)
+  READS: ADMBaseX::lapse(interior)
+  READS: ADMBaseX::shift(interior)
+  WRITES: ADMBaseX::dtlapse(interior)
+  WRITES: ADMBaseX::dtshift(interior)
+} "Convert ADM to cGHG variables, part 1"
+
 SCHEDULE cGHG_Initial1 IN cGHG_InitialGroup
 {
   LANG: C
