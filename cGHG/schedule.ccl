@@ -76,21 +76,21 @@ SCHEDULE cGHG_Initial1 IN cGHG_InitialGroup
   READS: ADMBaseX::curv(interior)
   READS: ADMBaseX::lapse(interior)
   READS: ADMBaseX::shift(interior)
-  WRITES: W(interior)
-  WRITES: gamma_tilde(interior)
-  WRITES: K_hat(interior)
-  WRITES: A_tilde(interior)
-  WRITES: Theta(interior)
-  WRITES: alphaG(interior)
-  WRITES: betaG(interior)
-  SYNC: gamma_tilde
+  READS: ADMBaseX::dtlapse(interior)
+  READS: ADMBaseX::dtshift(interior)
+  WRITES: W(interior) WPi(interior) WPhi(interior)
+  WRITES: hg(interior) hPi(interior) hPhi(interior)
+  WRITES: hgn(interior) hPin(interior) hPhin(interior)
+  WRITES: hgnn(interior) hPinn(interior) hPhinn(interior)
+  WRITES: hHn(interior) hH(interior)
+  SYNC: hHn hH
 } "Convert ADM to cGHG variables, part 1"
 
 SCHEDULE cGHG_Initial2 IN cGHG_InitialGroup AFTER cGHG_Initial1
 {
   LANG: C
-  READS: gamma_tilde(everywhere)
-  WRITES: Gam_tilde(interior)
+  READS: hHn(interior) hH(interior)
+  WRITES: hthetan(interior) htheta(interior)
 } "Convert ADM to cGHG variables, part 2"
 
 SCHEDULE cGHG_Enforce IN cGHG_PostStepGroup
