@@ -89,6 +89,7 @@ SCHEDULE cGHG_Initial1 IN cGHG_InitialGroup
 SCHEDULE cGHG_Initial2 IN cGHG_InitialGroup AFTER cGHG_Initial1
 {
   LANG: C
+  READS: ADMBaseX::shift(interior)
   READS: hHn(interior) hH(interior)
   WRITES: hthetan(interior) htheta(interior)
 } "Convert ADM to cGHG variables, part 2"

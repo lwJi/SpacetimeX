@@ -70,6 +70,9 @@ extern "C" void cGHG_Initial2(CCTK_ARGUMENTS) {
                               const auto &gf0) {
     Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
   };
+  const auto calccopy = [&](const auto &gf, const auto &gf0) {
+    Derivs::calc_copy<0, 0, 0>(gf, layout5, grid, gf0);
+  };
 
   // Tile variables for derivatives and so on
   const int ntmps = 16;
@@ -91,6 +94,8 @@ extern "C" void cGHG_Initial2(CCTK_ARGUMENTS) {
 
   calcderivs(tl_hHn, tl_dhHn, gf_hHn);
   calcderivs(tl_hH, tl_dhH, gf_hH);
+
+  calccopy(tl_ADMbeta, gf_ADMbeta);
 
   if (itmp != ntmps)
     CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
