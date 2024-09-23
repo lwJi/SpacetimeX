@@ -57,7 +57,9 @@ extern "C" void cGHG_Initial1(CCTK_ARGUMENTS) {
   // Input grid functions
   const GF3D2<const CCTK_REAL> &gf_ADMalpha = alp;
   const vec<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgamma{gxx, gxy, gxz, gyy, gyz, gzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgamma{gxx, gxy, gxz,
+                                                    gyy, gyz, gzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMexK{kxx, kxy, kxz, kyy, kyz, kzz};
 
   // More input grid functions
   const GF3D2<const CCTK_REAL> &gf_ADMdtalpha = dtalp;
@@ -98,9 +100,12 @@ extern "C" void cGHG_Initial1(CCTK_ARGUMENTS) {
                               const auto &gf0) {
     Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
   };
+  const auto calccopy = [&](const auto &gf, const auto &gf0) {
+    Derivs::calc_copy<0, 0, 0>(gf, layout5, grid, gf0);
+  };
 
   // Tile variables for derivatives and so on
-  const int ntmps = 40;
+  const int ntmps = 50;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
   int itmp = 0;
 
@@ -119,14 +124,22 @@ extern "C" void cGHG_Initial1(CCTK_ARGUMENTS) {
   const GF3D5<CCTK_REAL> tl_ADMalpha(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_ADMbeta(make_vec_gf());
   const smat<GF3D5<CCTK_REAL>, 3> tl_ADMgamma(make_mat_gf());
+  const smat<GF3D5<CCTK_REAL>, 3> tl_ADMexK(make_mat_gf());
 
   const vec<GF3D5<CCTK_REAL>, 3> tl_ADMdalpha(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_ADMdbeta(make_vec_vec_gf());
   const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_ADMdgamma(make_mat_vec_gf());
 
+  const GF3D5<CCTK_REAL> tl_ADMdtalpha(make_gf());
+  const vec<GF3D5<CCTK_REAL>, 3> tl_ADMdtbeta(make_vec_gf());
+
   calcderivs(tl_ADMalpha, tl_ADMdalpha, gf_ADMalpha);
   calcderivs(tl_ADMbeta, tl_ADMdbeta, gf_ADMbeta);
   calcderivs(tl_ADMgamma, tl_ADMdgamma, gf_ADMgamma);
+
+  calccopy(tl_ADMdtalpha, gf_ADMdtalpha);
+  calccopy(tl_ADMdtbeta, gf_ADMdtbeta);
+  calccopy(tl_ADMexK, gf_ADMexK);
 
   if (itmp != ntmps)
     CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
@@ -150,7 +163,6 @@ extern "C" void cGHG_Initial1(CCTK_ARGUMENTS) {
 #ifdef __CUDACC__
   nvtxRangeEnd(range);
 #endif
-
 }
 
 } // namespace cGHG
