@@ -70,8 +70,8 @@ grid.loop_int_device<0, 0, 0, vsize>(
   const GF3D2index index2(layout2, p.I);
   const GF3D5index index5(layout5, p.I);
 
-const auto &tmp_ADMdtalpha = gf_ADMdtalpha(mask, index2);
-const auto &tmp_ADMdtbeta = gf_ADMdtbeta(mask, index2);
+const auto &tmp_ADMdtalpha = tl_ADMdtalpha(mask, index5);
+const auto &tmp_ADMdtbeta = tl_ADMdtbeta(mask, index5);
 const auto &tmp_ADMalpha = tl_ADMalpha(mask, index5);
 const auto &tmp_ADMbeta = tl_ADMbeta(mask, index5);
 const auto &tmp_ADMgamma = tl_ADMgamma(mask, index5);
