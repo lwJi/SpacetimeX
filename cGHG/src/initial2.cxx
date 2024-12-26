@@ -75,7 +75,7 @@ extern "C" void cGHG_Initial2(CCTK_ARGUMENTS) {
   };
 
   // Tile variables for derivatives and so on
-  const int ntmps = 16;
+  const int ntmps = 19;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
   int itmp = 0;
 
@@ -91,6 +91,8 @@ extern "C" void cGHG_Initial2(CCTK_ARGUMENTS) {
 
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhHn(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhH(make_vec_vec_gf());
+
+  const vec<GF3D5<CCTK_REAL>, 3> tl_ADMbeta(make_vec_gf());
 
   calcderivs(tl_hHn, tl_dhHn, gf_hHn);
   calcderivs(tl_hH, tl_dhH, gf_hH);
