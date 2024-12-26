@@ -50,5 +50,7 @@ ADMTempVarlist = TempTensors[
   {invg4d     [a, b], Symmetric[{a, b}], PrintAs -> "g"},
   {Gam4d[-c, -a, -b], Symmetric[{-a, -b}], PrintAs -> "\[CapitalGamma]"},
   {trGam4d      [-c], PrintAs -> "\[CapitalGamma]"},
-  {tempW          [], PrintAs -> "W"}
+  {tempW          [], PrintAs -> "W"},
+  {tempWPi        [], PrintAs -> "\!\(\*StyleBox[\"\[CapitalPi]\",\nFontSlant->\"Italic\"]\)"},
+  {tempWPhi     [-k], PrintAs -> "\!\(\*StyleBox[\"\[CapitalPhi]\",\nFontSlant->\"Italic\"]\)"}
 ];

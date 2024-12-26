@@ -765,6 +765,44 @@ Gam4d300*invg4d00 + 2*Gam4d301*invg4d01 + 2*Gam4d302*invg4d02 +
 
 vreal tempW = cbrt(sqrt(invdetgamma));
 
+vreal tempWPi
+=
+(ADMalpha*(dg4d011*invgamma11*nvec0 + 2*dg4d012*invgamma12*nvec0 + 
+      2*dg4d013*invgamma13*nvec0 + dg4d022*invgamma22*nvec0 + 
+      2*dg4d023*invgamma23*nvec0 + dg4d033*invgamma33*nvec0 + 
+      dg4d111*invgamma11*nvec1 + 2*dg4d112*invgamma12*nvec1 + 
+      2*dg4d113*invgamma13*nvec1 + dg4d122*invgamma22*nvec1 + 
+      2*dg4d123*invgamma23*nvec1 + dg4d133*invgamma33*nvec1 + 
+      dg4d211*invgamma11*nvec2 + 2*dg4d212*invgamma12*nvec2 + 
+      2*dg4d213*invgamma13*nvec2 + dg4d222*invgamma22*nvec2 + 
+      2*dg4d223*invgamma23*nvec2 + dg4d233*invgamma33*nvec2 + 
+      dg4d311*invgamma11*nvec3 + 2*dg4d312*invgamma12*nvec3 + 
+      2*dg4d313*invgamma13*nvec3 + dg4d322*invgamma22*nvec3 + 
+      2*dg4d323*invgamma23*nvec3 + dg4d333*invgamma33*nvec3)*tempW)/6.
+;
+
+vreal tempWPhi1
+=
+-0.16666666666666666*(ADMalpha*
+    (dg4d111*invgamma11 + 2*dg4d112*invgamma12 + 2*dg4d113*invgamma13 + 
+      dg4d122*invgamma22 + 2*dg4d123*invgamma23 + dg4d133*invgamma33)*tempW)
+;
+
+vreal tempWPhi2
+=
+-0.16666666666666666*(ADMalpha*
+    (dg4d211*invgamma11 + 2*dg4d212*invgamma12 + 2*dg4d213*invgamma13 + 
+      dg4d222*invgamma22 + 2*dg4d223*invgamma23 + dg4d233*invgamma33)*tempW)
+;
+
+vreal tempWPhi3
+=
+-0.16666666666666666*(ADMalpha*
+    (dg4d311*invgamma11 + 2*dg4d312*invgamma12 + 2*dg4d313*invgamma13 + 
+      dg4d322*invgamma22 + 2*dg4d323*invgamma23 + dg4d333*invgamma33)*tempW)
+;
+
+
 local_hg11.store(mask, index2, 
 ADMgamma11*Power(tempW,2)
 );
@@ -791,104 +829,104 @@ ADMgamma33*Power(tempW,2)
 
 local_hPi11.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d011*nvec0 + dg4d111*nvec1 + dg4d211*nvec2 + 
-         dg4d311*nvec3)*tempW - 2*ADMgamma11*WPi))
+         dg4d311*nvec3)*tempW - 2*ADMgamma11*tempWPi))
 );
 
 local_hPi12.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d012*nvec0 + dg4d112*nvec1 + dg4d212*nvec2 + 
-         dg4d312*nvec3)*tempW - 2*ADMgamma12*WPi))
+         dg4d312*nvec3)*tempW - 2*ADMgamma12*tempWPi))
 );
 
 local_hPi13.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d013*nvec0 + dg4d113*nvec1 + dg4d213*nvec2 + 
-         dg4d313*nvec3)*tempW - 2*ADMgamma13*WPi))
+         dg4d313*nvec3)*tempW - 2*ADMgamma13*tempWPi))
 );
 
 local_hPi22.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d022*nvec0 + dg4d122*nvec1 + dg4d222*nvec2 + 
-         dg4d322*nvec3)*tempW - 2*ADMgamma22*WPi))
+         dg4d322*nvec3)*tempW - 2*ADMgamma22*tempWPi))
 );
 
 local_hPi23.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d023*nvec0 + dg4d123*nvec1 + dg4d223*nvec2 + 
-         dg4d323*nvec3)*tempW - 2*ADMgamma23*WPi))
+         dg4d323*nvec3)*tempW - 2*ADMgamma23*tempWPi))
 );
 
 local_hPi33.store(mask, index2, 
 -(tempW*(ADMalpha*(dg4d033*nvec0 + dg4d133*nvec1 + dg4d233*nvec2 + 
-         dg4d333*nvec3)*tempW - 2*ADMgamma33*WPi))
+         dg4d333*nvec3)*tempW - 2*ADMgamma33*tempWPi))
 );
 
 local_hPhi111.store(mask, index2, 
-tempW*(ADMalpha*dg4d111*tempW + 2*ADMgamma11*WPhi1)
+tempW*(ADMalpha*dg4d111*tempW + 2*ADMgamma11*tempWPhi1)
 );
 
 local_hPhi112.store(mask, index2, 
-tempW*(ADMalpha*dg4d112*tempW + 2*ADMgamma12*WPhi1)
+tempW*(ADMalpha*dg4d112*tempW + 2*ADMgamma12*tempWPhi1)
 );
 
 local_hPhi113.store(mask, index2, 
-tempW*(ADMalpha*dg4d113*tempW + 2*ADMgamma13*WPhi1)
+tempW*(ADMalpha*dg4d113*tempW + 2*ADMgamma13*tempWPhi1)
 );
 
 local_hPhi122.store(mask, index2, 
-tempW*(ADMalpha*dg4d122*tempW + 2*ADMgamma22*WPhi1)
+tempW*(ADMalpha*dg4d122*tempW + 2*ADMgamma22*tempWPhi1)
 );
 
 local_hPhi123.store(mask, index2, 
-tempW*(ADMalpha*dg4d123*tempW + 2*ADMgamma23*WPhi1)
+tempW*(ADMalpha*dg4d123*tempW + 2*ADMgamma23*tempWPhi1)
 );
 
 local_hPhi133.store(mask, index2, 
-tempW*(ADMalpha*dg4d133*tempW + 2*ADMgamma33*WPhi1)
+tempW*(ADMalpha*dg4d133*tempW + 2*ADMgamma33*tempWPhi1)
 );
 
 local_hPhi211.store(mask, index2, 
-tempW*(ADMalpha*dg4d211*tempW + 2*ADMgamma11*WPhi2)
+tempW*(ADMalpha*dg4d211*tempW + 2*ADMgamma11*tempWPhi2)
 );
 
 local_hPhi212.store(mask, index2, 
-tempW*(ADMalpha*dg4d212*tempW + 2*ADMgamma12*WPhi2)
+tempW*(ADMalpha*dg4d212*tempW + 2*ADMgamma12*tempWPhi2)
 );
 
 local_hPhi213.store(mask, index2, 
-tempW*(ADMalpha*dg4d213*tempW + 2*ADMgamma13*WPhi2)
+tempW*(ADMalpha*dg4d213*tempW + 2*ADMgamma13*tempWPhi2)
 );
 
 local_hPhi222.store(mask, index2, 
-tempW*(ADMalpha*dg4d222*tempW + 2*ADMgamma22*WPhi2)
+tempW*(ADMalpha*dg4d222*tempW + 2*ADMgamma22*tempWPhi2)
 );
 
 local_hPhi223.store(mask, index2, 
-tempW*(ADMalpha*dg4d223*tempW + 2*ADMgamma23*WPhi2)
+tempW*(ADMalpha*dg4d223*tempW + 2*ADMgamma23*tempWPhi2)
 );
 
 local_hPhi233.store(mask, index2, 
-tempW*(ADMalpha*dg4d233*tempW + 2*ADMgamma33*WPhi2)
+tempW*(ADMalpha*dg4d233*tempW + 2*ADMgamma33*tempWPhi2)
 );
 
 local_hPhi311.store(mask, index2, 
-tempW*(ADMalpha*dg4d311*tempW + 2*ADMgamma11*WPhi3)
+tempW*(ADMalpha*dg4d311*tempW + 2*ADMgamma11*tempWPhi3)
 );
 
 local_hPhi312.store(mask, index2, 
-tempW*(ADMalpha*dg4d312*tempW + 2*ADMgamma12*WPhi3)
+tempW*(ADMalpha*dg4d312*tempW + 2*ADMgamma12*tempWPhi3)
 );
 
 local_hPhi313.store(mask, index2, 
-tempW*(ADMalpha*dg4d313*tempW + 2*ADMgamma13*WPhi3)
+tempW*(ADMalpha*dg4d313*tempW + 2*ADMgamma13*tempWPhi3)
 );
 
 local_hPhi322.store(mask, index2, 
-tempW*(ADMalpha*dg4d322*tempW + 2*ADMgamma22*WPhi3)
+tempW*(ADMalpha*dg4d322*tempW + 2*ADMgamma22*tempWPhi3)
 );
 
 local_hPhi323.store(mask, index2, 
-tempW*(ADMalpha*dg4d323*tempW + 2*ADMgamma23*WPhi3)
+tempW*(ADMalpha*dg4d323*tempW + 2*ADMgamma23*tempWPhi3)
 );
 
 local_hPhi333.store(mask, index2, 
-tempW*(ADMalpha*dg4d333*tempW + 2*ADMgamma33*WPhi3)
+tempW*(ADMalpha*dg4d333*tempW + 2*ADMgamma33*tempWPhi3)
 );
 
 local_hgn1.store(mask, index2, 
@@ -1125,36 +1163,19 @@ tempW
 );
 
 local_WPi.store(mask, index2, 
-(ADMalpha*(dg4d011*invgamma11*nvec0 + 2*dg4d012*invgamma12*nvec0 + 
-      2*dg4d013*invgamma13*nvec0 + dg4d022*invgamma22*nvec0 + 
-      2*dg4d023*invgamma23*nvec0 + dg4d033*invgamma33*nvec0 + 
-      dg4d111*invgamma11*nvec1 + 2*dg4d112*invgamma12*nvec1 + 
-      2*dg4d113*invgamma13*nvec1 + dg4d122*invgamma22*nvec1 + 
-      2*dg4d123*invgamma23*nvec1 + dg4d133*invgamma33*nvec1 + 
-      dg4d211*invgamma11*nvec2 + 2*dg4d212*invgamma12*nvec2 + 
-      2*dg4d213*invgamma13*nvec2 + dg4d222*invgamma22*nvec2 + 
-      2*dg4d223*invgamma23*nvec2 + dg4d233*invgamma33*nvec2 + 
-      dg4d311*invgamma11*nvec3 + 2*dg4d312*invgamma12*nvec3 + 
-      2*dg4d313*invgamma13*nvec3 + dg4d322*invgamma22*nvec3 + 
-      2*dg4d323*invgamma23*nvec3 + dg4d333*invgamma33*nvec3)*tempW)/6.
+tempWPi
 );
 
 local_WPhi1.store(mask, index2, 
--0.16666666666666666*(ADMalpha*
-    (dg4d111*invgamma11 + 2*dg4d112*invgamma12 + 2*dg4d113*invgamma13 + 
-      dg4d122*invgamma22 + 2*dg4d123*invgamma23 + dg4d133*invgamma33)*tempW)
+tempWPhi1
 );
 
 local_WPhi2.store(mask, index2, 
--0.16666666666666666*(ADMalpha*
-    (dg4d211*invgamma11 + 2*dg4d212*invgamma12 + 2*dg4d213*invgamma13 + 
-      dg4d222*invgamma22 + 2*dg4d223*invgamma23 + dg4d233*invgamma33)*tempW)
+tempWPhi2
 );
 
 local_WPhi3.store(mask, index2, 
--0.16666666666666666*(ADMalpha*
-    (dg4d311*invgamma11 + 2*dg4d312*invgamma12 + 2*dg4d313*invgamma13 + 
-      dg4d322*invgamma22 + 2*dg4d323*invgamma23 + dg4d333*invgamma33)*tempW)
+tempWPhi3
 );
 
 local_hHn.store(mask, index2, 

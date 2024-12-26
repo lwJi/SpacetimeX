@@ -74,6 +74,10 @@ SetEQN[trGam4d[c_], invg4d[a, b] Gam4d[c, -a, -b]];
 
 SetEQN[tempW[], invdetgamma[] ^ (1/6)];
 
+SetEQN[tempWPi[], 1/6 ADMalpha[] tempW[] invgamma[k, l] nvec[c] dg4d[-c, -k, -l]];
+
+SetEQN[tempWPhi[i_], -(1/6) ADMalpha[] tempW[] invgamma[k, l] dg4d[i, -k, -l]];
+
 (*******)
 
 (* EOM *)
@@ -84,17 +88,17 @@ SetEQN[tempW[], invdetgamma[] ^ (1/6)];
 
 SetEQN[W[], tempW[]];
 
-SetEQN[WPi[], 1/6 ADMalpha[] tempW[] invgamma[k, l] nvec[c] dg4d[-c, -k, -l]];
+SetEQN[WPi[], tempWPi[]];
 
-SetEQN[WPhi[i_], -(1/6) ADMalpha[] tempW[] invgamma[k, l] dg4d[i, -k, -l]];
+SetEQN[WPhi[i_], tempWPhi[i]];
 
 (* hPi_{ij} *)
 
 SetEQN[hg[i_, j_], tempW[] ^ 2 ADMgamma[i, j]];
 
-SetEQN[hPi[i_, j_], -ADMalpha[] tempW[] ^ 2 nvec[c] dg4d[-c, i, j] + 2 tempW[] WPi[] ADMgamma[i, j]];
+SetEQN[hPi[i_, j_], -ADMalpha[] tempW[] ^ 2 nvec[c] dg4d[-c, i, j] + 2 tempW[] tempWPi[] ADMgamma[i, j]];
 
-SetEQN[hPhi[k_, i_, j_], ADMalpha[] tempW[] ^ 2 dg4d[k, i, j] + 2 tempW[] WPhi[k] ADMgamma[i, j]];
+SetEQN[hPhi[k_, i_, j_], ADMalpha[] tempW[] ^ 2 dg4d[k, i, j] + 2 tempW[] tempWPhi[k] ADMgamma[i, j]];
 
 (* hPi_{ni} *)
 
