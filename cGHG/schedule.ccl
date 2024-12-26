@@ -139,33 +139,33 @@ SCHEDULE cGHG_RHS IN cGHG_RHSGroup
   WRITES: betaG_rhs(interior)
 } "Calculate cGHG RHS"
 
-if (CCTK_Equals(boundary_conditions, "NewRadX")) {
-  SCHEDULE cGHG_Apply_NewRadX_BC IN cGHG_RHSGroup AFTER cGHG_RHS
-  {
-    LANG: C
-    READS: W(everywhere)
-    READS: gamma_tilde(everywhere)
-    READS: K_hat(everywhere)
-    READS: A_tilde(everywhere)
-    READS: Gam_tilde(everywhere)
-    READS: Theta(everywhere)
-    READS: alphaG(everywhere)
-    READS: betaG(everywhere)
-    READS: W_rhs(interior)
-    READS: gamma_tilde_rhs(interior)
-    READS: K_hat_rhs(interior)
-    READS: A_tilde_rhs(interior)
-    READS: Gam_tilde_rhs(interior)
-    READS: Theta_rhs(interior)
-    READS: alphaG_rhs(interior)
-    READS: betaG_rhs(interior)
-    WRITES: W_rhs(interior)
-    WRITES: gamma_tilde_rhs(interior)
-    WRITES: K_hat_rhs(interior)
-    WRITES: A_tilde_rhs(interior)
-    WRITES: Gam_tilde_rhs(interior)
-    WRITES: Theta_rhs(interior)
-    WRITES: alphaG_rhs(interior)
-    WRITES: betaG_rhs(interior)
-  } "Apply radiative boundary conditions to cGHG RHS variables using NewRadX"
-}
+#if (CCTK_Equals(boundary_conditions, "NewRadX")) {
+#  SCHEDULE cGHG_Apply_NewRadX_BC IN cGHG_RHSGroup AFTER cGHG_RHS
+#  {
+#    LANG: C
+#    READS: W(everywhere)
+#    READS: gamma_tilde(everywhere)
+#    READS: K_hat(everywhere)
+#    READS: A_tilde(everywhere)
+#    READS: Gam_tilde(everywhere)
+#    READS: Theta(everywhere)
+#    READS: alphaG(everywhere)
+#    READS: betaG(everywhere)
+#    READS: W_rhs(interior)
+#    READS: gamma_tilde_rhs(interior)
+#    READS: K_hat_rhs(interior)
+#    READS: A_tilde_rhs(interior)
+#    READS: Gam_tilde_rhs(interior)
+#    READS: Theta_rhs(interior)
+#    READS: alphaG_rhs(interior)
+#    READS: betaG_rhs(interior)
+#    WRITES: W_rhs(interior)
+#    WRITES: gamma_tilde_rhs(interior)
+#    WRITES: K_hat_rhs(interior)
+#    WRITES: A_tilde_rhs(interior)
+#    WRITES: Gam_tilde_rhs(interior)
+#    WRITES: Theta_rhs(interior)
+#    WRITES: alphaG_rhs(interior)
+#    WRITES: betaG_rhs(interior)
+#  } "Apply radiative boundary conditions to cGHG RHS variables using NewRadX"
+#}
