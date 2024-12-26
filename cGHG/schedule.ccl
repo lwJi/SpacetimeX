@@ -97,46 +97,29 @@ SCHEDULE cGHG_Initial2 IN cGHG_InitialGroup AFTER cGHG_Initial1
 SCHEDULE cGHG_Enforce IN cGHG_PostStepGroup
 {
   LANG: C
-  READS: W(interior)
-  READS: gamma_tilde(interior)
-  READS: A_tilde(interior)
-  READS: alphaG(interior)
-  WRITES: W(interior)
-  WRITES: gamma_tilde(interior)
-  WRITES: A_tilde(interior)
-  WRITES: alphaG(interior)
-  SYNC: W
-  SYNC: gamma_tilde
-  SYNC: K_hat
-  SYNC: A_tilde
-  SYNC: Gam_tilde
-  SYNC: Theta
-  SYNC: alphaG
-  SYNC: betaG
+  READS: W(interior) hg(interior) hgnn(interior)
+  WRITES: W(interior) hg(interior) hgnn(interior)
+  SYNC: W hg hgnn
 } "Enforce algebraic cGHG constraints"
 
 SCHEDULE cGHG_RHS IN cGHG_RHSGroup
 {
   LANG: C
-  READS: W(everywhere)
-  READS: gamma_tilde(everywhere)
-  READS: K_hat(everywhere)
-  READS: A_tilde(everywhere)
-  READS: Gam_tilde(everywhere)
-  READS: Theta(everywhere)
-  READS: alphaG(everywhere)
-  READS: betaG(everywhere)
+  READS: W(everywhere) WPi(everywhere) WPhi(everywhere)
+  READS: hg(everywhere) hPi(everywhere) hPhi(everywhere)
+  READS: hgn(everywhere) hPin(everywhere) hPhin(everywhere)
+  READS: hgnn(everywhere) hPinn(everywhere) hPhinn(everywhere)
+  READS: hHn(everywhere) hH(everywhere)
+  READS: hthetan(everywhere) htheta(everywhere)
   READS: TmunuBaseX::eTtt(interior)
   READS: TmunuBaseX::eTti(interior)
   READS: TmunuBaseX::eTij(interior)
-  WRITES: W_rhs(interior)
-  WRITES: gamma_tilde_rhs(interior)
-  WRITES: K_hat_rhs(interior)
-  WRITES: A_tilde_rhs(interior)
-  WRITES: Gam_tilde_rhs(interior)
-  WRITES: Theta_rhs(interior)
-  WRITES: alphaG_rhs(interior)
-  WRITES: betaG_rhs(interior)
+  WRITES: W_rhs(interior) WPi_rhs(interior) WPhi_rhs(interior)
+  WRITES: hg_rhs(interior) hPi_rhs(interior) hPhi_rhs(interior)
+  WRITES: hgn_rhs(interior) hPin_rhs(interior) hPhin_rhs(interior)
+  WRITES: hgnn_rhs(interior) hPinn_rhs(interior) hPhinn_rhs(interior)
+  WRITES: hHn_rhs(interior) hH_rhs(interior)
+  WRITES: hthetan_rhs(interior) htheta_rhs(interior)
 } "Calculate cGHG RHS"
 
 #if (CCTK_Equals(boundary_conditions, "NewRadX")) {
