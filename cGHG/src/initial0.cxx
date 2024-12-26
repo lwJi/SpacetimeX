@@ -72,6 +72,10 @@ extern "C" void cGHG_Initial0(CCTK_ARGUMENTS) {
     Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
   };
 
+  const auto calccopy = [&](const auto &gf, const auto &gf0) {
+    Derivs::calc_copy<0, 0, 0>(gf, layout5, grid, gf0);
+  };
+
   // Tile variables for derivatives and so on
   const int ntmps = 46;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
