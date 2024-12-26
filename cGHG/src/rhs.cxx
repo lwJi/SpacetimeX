@@ -55,36 +55,36 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const GF3D5layout layout5(imin, imax);
 
   // Input grid functions
-  const GF3D2<CCTK_REAL> &gf_W = W;
-  const GF3D2<CCTK_REAL> &gf_WPi = WPi;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_WPhi{WPhix, WPhiy, WPhiz};
+  const GF3D2<const CCTK_REAL> &gf_W = W;
+  const GF3D2<const CCTK_REAL> &gf_WPi = WPi;
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_WPhi{WPhix, WPhiy, WPhiz};
 
-  const smat<GF3D2<CCTK_REAL>, 3> gf_hg{hgxx, hgxy, hgxz, hgyy, hgyz, hgzz};
-  const smat<GF3D2<CCTK_REAL>, 3> gf_hPi{hPixx, hPixy, hPixz,
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_hg{hgxx, hgxy, hgxz, hgyy, hgyz, hgzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_hPi{hPixx, hPixy, hPixz,
                                          hPiyy, hPiyz, hPizz};
-  const vec<smat<GF3D2<CCTK_REAL>, 3>, 3> gf_hPhi{
-      smat<GF3D2<CCTK_REAL>, 3>{hPhixxx, hPhixxy, hPhixxz, hPhixyy, hPhixyz,
+  const vec<smat<GF3D2<const CCTK_REAL>, 3>, 3> gf_hPhi{
+      smat<GF3D2<const CCTK_REAL>, 3>{hPhixxx, hPhixxy, hPhixxz, hPhixyy, hPhixyz,
                                 hPhixzz},
-      smat<GF3D2<CCTK_REAL>, 3>{hPhiyxx, hPhiyxy, hPhiyxz, hPhiyyy, hPhiyyz,
+      smat<GF3D2<const CCTK_REAL>, 3>{hPhiyxx, hPhiyxy, hPhiyxz, hPhiyyy, hPhiyyz,
                                 hPhiyzz},
-      smat<GF3D2<CCTK_REAL>, 3>{hPhizxx, hPhizxy, hPhizxz, hPhizyy, hPhizyz,
+      smat<GF3D2<const CCTK_REAL>, 3>{hPhizxx, hPhizxy, hPhizxz, hPhizyy, hPhizyz,
                                 hPhizzz}};
 
-  const vec<GF3D2<CCTK_REAL>, 3> gf_hgn{hgnx, hgny, hgnz};
-  const vec<GF3D2<CCTK_REAL>, 3> gf_hPin{hPinx, hPiny, hPinz};
-  const vec<vec<GF3D2<CCTK_REAL>, 3>, 3> gf_hPhin{
-      vec<GF3D2<CCTK_REAL>, 3>{hPhixnx, hPhixny, hPhixnz},
-      vec<GF3D2<CCTK_REAL>, 3>{hPhiynx, hPhiyny, hPhiynz},
-      vec<GF3D2<CCTK_REAL>, 3>{hPhiznx, hPhizny, hPhiznz}};
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_hgn{hgnx, hgny, hgnz};
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_hPin{hPinx, hPiny, hPinz};
+  const vec<vec<GF3D2<const CCTK_REAL>, 3>, 3> gf_hPhin{
+      vec<GF3D2<const CCTK_REAL>, 3>{hPhixnx, hPhixny, hPhixnz},
+      vec<GF3D2<const CCTK_REAL>, 3>{hPhiynx, hPhiyny, hPhiynz},
+      vec<GF3D2<const CCTK_REAL>, 3>{hPhiznx, hPhizny, hPhiznz}};
 
-  const GF3D2<CCTK_REAL> &gf_hgnn = hgnn;
-  const GF3D2<CCTK_REAL> &gf_hPinn = hPinn;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_hPhinn{hPhixnn, hPhiynn, hPhiznn};
+  const GF3D2<const CCTK_REAL> &gf_hgnn = hgnn;
+  const GF3D2<const CCTK_REAL> &gf_hPinn = hPinn;
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_hPhinn{hPhixnn, hPhiynn, hPhiznn};
 
-  const GF3D2<CCTK_REAL> &gf_hHn = hHn;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_hH{hHx, hHy, hHz};
-  const GF3D2<CCTK_REAL> &gf_hthetan = hthetan;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_htheta{hthetax, hthetay, hthetaz};
+  const GF3D2<const CCTK_REAL> &gf_hHn = hHn;
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_hH{hHx, hHy, hHz};
+  const GF3D2<const CCTK_REAL> &gf_hthetan = hthetan;
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_htheta{hthetax, hthetay, hthetaz};
 
   // More input grid functions
 
