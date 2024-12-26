@@ -107,11 +107,6 @@ vreal invgamma33
 (-Power(ADMgamma12,2) + ADMgamma11*ADMgamma22)*invdetgamma
 ;
 
-vreal trexK
-=
-trexK$RHS()
-;
-
 
 vreal cbrtdetgamma = 1 / cbrt(invdetgamma);
 

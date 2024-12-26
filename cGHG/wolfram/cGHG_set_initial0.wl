@@ -56,7 +56,7 @@ $MainPrint[] :=
     PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile", TensorType -> "Vect"},
                          ADMdEvolVarlist];
     pr[];
-    PrintEquations[{Mode -> "Temp"}, ADMTempVarlist[[1;;3]]];
+    PrintEquations[{Mode -> "Temp"}, ADMTempVarlist[[1;;2]]];
     pr[];
     pr["vreal cbrtdetgamma = 1 / cbrt(invdetgamma);"];
     pr[];
