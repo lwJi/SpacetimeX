@@ -58,6 +58,7 @@ extern "C" void cGHG_Initial0(CCTK_ARGUMENTS) {
   const GF3D2<const CCTK_REAL> &gf_ADMalpha = alp;
   const vec<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
   const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgamma{gxx, gxy, gxz, gyy, gyz, gzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMexK{kxx, kxy, kxz, kyy, kyz, kzz};
 
   // More input grid functions
 
@@ -72,7 +73,7 @@ extern "C" void cGHG_Initial0(CCTK_ARGUMENTS) {
   };
 
   // Tile variables for derivatives and so on
-  const int ntmps = 40;
+  const int ntmps = 46;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
   int itmp = 0;
 
@@ -91,6 +92,7 @@ extern "C" void cGHG_Initial0(CCTK_ARGUMENTS) {
   const GF3D5<CCTK_REAL> tl_ADMalpha(make_gf());
   const vec<GF3D5<CCTK_REAL>, 3> tl_ADMbeta(make_vec_gf());
   const smat<GF3D5<CCTK_REAL>, 3> tl_ADMgamma(make_mat_gf());
+  const smat<GF3D5<CCTK_REAL>, 3> tl_ADMexK(make_mat_gf());
 
   const vec<GF3D5<CCTK_REAL>, 3> tl_ADMdalpha(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_ADMdbeta(make_vec_vec_gf());
@@ -99,6 +101,8 @@ extern "C" void cGHG_Initial0(CCTK_ARGUMENTS) {
   calcderivs(tl_ADMalpha, tl_ADMdalpha, gf_ADMalpha);
   calcderivs(tl_ADMbeta, tl_ADMdbeta, gf_ADMbeta);
   calcderivs(tl_ADMgamma, tl_ADMdgamma, gf_ADMgamma);
+
+  calccopy(tl_ADMexK, gf_ADMexK);
 
   if (itmp != ntmps)
     CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
