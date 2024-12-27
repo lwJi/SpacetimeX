@@ -60,7 +60,7 @@ $MainPrint[] :=
     pr[];
     PrintEquations[{Mode -> "Temp"}, ADMdtEvolVarlist[[-1;;-1]]];
     pr[];
-    PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, -3]];
+    PrintEquations[{Mode -> "Temp"}, Drop[Drop[ADMTempVarlist, -3], {3}]];
     pr[];
     pr["vreal tempW = cbrt(sqrt(invdetgamma));"];
     pr[];

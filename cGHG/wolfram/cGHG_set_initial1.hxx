@@ -214,12 +214,6 @@ vreal invgamma33
 (-Power(ADMgamma12,2) + ADMgamma11*ADMgamma22)*invdetgamma
 ;
 
-vreal trexK
-=
-ADMexK11*invgamma11 + 2*ADMexK12*invgamma12 + 2*ADMexK13*invgamma13 + 
-  ADMexK22*invgamma22 + 2*ADMexK23*invgamma23 + ADMexK33*invgamma33
-;
-
 vreal nvec0
 =
 1/ADMalpha
