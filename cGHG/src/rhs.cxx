@@ -129,8 +129,12 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
     Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
   };
 
+  const auto calccopy = [&](const auto &gf, const auto &gf0) {
+    Derivs::calc_copy<0, 0, 0>(gf, layout5, grid, gf0);
+  };
+
   // Tile variables for derivatives and so on
-  const int ntmps = 252;
+  const int ntmps = 240;
   GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
   int itmp = 0;
 
@@ -146,7 +150,7 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   const auto make_vec_vec_gf = [&]() { return make_vec(make_vec_gf); };
   const auto make_vec_mat_gf = [&]() { return make_vec(make_mat_gf); };
   const auto make_mat_vec_gf = [&]() { return make_mat(make_vec_gf); };
-  const auto make_mat_mat_gf = [&]() { return make_mat(make_mat_gf); };
+  // const auto make_mat_mat_gf = [&]() { return make_mat(make_mat_gf); };
   const auto make_vec_mat_vec_gf = [&]() { return make_vec(make_mat_vec_gf); };
   const auto make_vec_vec_vec_gf = [&]() { return make_vec(make_vec_vec_gf); };
 
@@ -191,8 +195,6 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
 
   const vec<GF3D5<CCTK_REAL>, 3> tl_dhHn(make_vec_gf());
   const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhH(make_vec_vec_gf());
-  const vec<GF3D5<CCTK_REAL>, 3> tl_dhthetan(make_vec_gf());
-  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dhtheta(make_vec_vec_gf());
 
   calcderivs(tl_W, tl_dW, gf_W);
   calcderivs(tl_WPi, tl_dWPi, gf_WPi);
@@ -212,8 +214,8 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
 
   calcderivs(tl_hHn, tl_dhHn, gf_hHn);
   calcderivs(tl_hH, tl_dhH, gf_hH);
-  calcderivs(tl_hthetan, tl_dhthetan, gf_hthetan);
-  calcderivs(tl_htheta, tl_dhtheta, gf_htheta);
+  calccopy(tl_hthetan, gf_hthetan);
+  calccopy(tl_htheta, gf_htheta);
 
   if (itmp != ntmps)
     CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
@@ -226,7 +228,7 @@ extern "C" void cGHG_RHS(CCTK_ARGUMENTS) {
   constexpr size_t vsize = tuple_size_v<vreal>;
 
   // parameters
-  const CCTK_REAL cpi = M_PI;
+  // const CCTK_REAL cpi = M_PI;
   const CCTK_REAL cgamma0 = gamma0;
   const CCTK_REAL cgamma1 = gamma1;
   const CCTK_REAL cgamma2 = gamma2;

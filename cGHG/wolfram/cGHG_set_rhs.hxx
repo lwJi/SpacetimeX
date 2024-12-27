@@ -108,8 +108,6 @@ const auto &tmp_dWPi = tl_dWPi(mask, index5);
 const auto &tmp_dWPhi = tl_dWPhi(mask, index5);
 const auto &tmp_dhHn = tl_dhHn(mask, index5);
 const auto &tmp_dhH = tl_dhH(mask, index5);
-const auto &tmp_dhthetan = tl_dhthetan(mask, index5);
-const auto &tmp_dhtheta = tl_dhtheta(mask, index5);
 
 const vreal hg11 = tmp_hg(0,0);
 const vreal hg12 = tmp_hg(0,1);
@@ -351,18 +349,6 @@ const vreal dhH23 = tmp_dhH(2)(1);
 const vreal dhH31 = tmp_dhH(0)(2);
 const vreal dhH32 = tmp_dhH(1)(2);
 const vreal dhH33 = tmp_dhH(2)(2);
-const vreal dhthetan1 = tmp_dhthetan(0);
-const vreal dhthetan2 = tmp_dhthetan(1);
-const vreal dhthetan3 = tmp_dhthetan(2);
-const vreal dhtheta11 = tmp_dhtheta(0)(0);
-const vreal dhtheta12 = tmp_dhtheta(1)(0);
-const vreal dhtheta13 = tmp_dhtheta(2)(0);
-const vreal dhtheta21 = tmp_dhtheta(0)(1);
-const vreal dhtheta22 = tmp_dhtheta(1)(1);
-const vreal dhtheta23 = tmp_dhtheta(2)(1);
-const vreal dhtheta31 = tmp_dhtheta(0)(2);
-const vreal dhtheta32 = tmp_dhtheta(1)(2);
-const vreal dhtheta33 = tmp_dhtheta(2)(2);
 
 vreal alpha
 =

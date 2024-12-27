@@ -68,9 +68,11 @@ cGHGdEvolVarlist = GridTensors[
   {dWPi             [-k], PrintAs -> "\[PartialD]\!\(\*StyleBox[\"\[CapitalPi]\",\nFontSlant->\"Italic\"]\)"},
   {dWPhi        [-k, -i], PrintAs -> "\[PartialD]\!\(\*StyleBox[\"\[CapitalPhi]\",\nFontSlant->\"Italic\"]\)"},
   {dhHn             [-k], PrintAs -> "\[PartialD]\!\(\*SubscriptBox[OverscriptBox[\(H\), \(^\)], \(n\)]\)"},
-  {dhH          [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(H\), \(^\)]\)"},
+  {dhH          [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(H\), \(^\)]\)"}
+  (*
   {dhthetan         [-k], PrintAs -> "\[PartialD]\!\(\*SubscriptBox[OverscriptBox[\(\[Theta]\), \(^\)], \(n\)]\)"},
   {dhtheta      [-k, -i], PrintAs -> "\[PartialD]\!\(\*OverscriptBox[\(\[Theta]\), \(^\)]\)"}
+  *)
 ];
 
 (**************************)
