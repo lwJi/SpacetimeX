@@ -103,6 +103,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   nvtxRangeEnd(range);
 #endif
 
+#if 0
   // Upwind and dissipation terms
 
   const auto apply_diss = [&](const GF3D2<const CCTK_REAL> &gf_,
@@ -176,6 +177,8 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   apply_diss(gf_alpha, gf_dtalpha);
   for (int a = 0; a < 3; ++a)
     apply_diss(gf_beta(a), gf_dtbeta(a));
+#endif
+
 }
 
 } // namespace Z4cowGPU
