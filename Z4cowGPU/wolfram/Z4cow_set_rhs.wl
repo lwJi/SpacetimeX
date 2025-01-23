@@ -13,7 +13,7 @@ SetPrintDate[False];
 
 SetGridPointIndex["[[pI]]"];
 
-SetUseLetterForTensorComponet[True];
+(*SetUseLetterForTensorComponet[True];*)
 
 SetTempVariableType["auto"];
 
@@ -39,20 +39,19 @@ Module[{Mat, invMat},
 SetOutputFile[FileNameJoin[{Directory[], "Z4cow_set_rhs.hxx"}]];
 
 SetMainPrint[
+  (* initail grid function names *)
+  PrintInitializations[{Mode -> "MainIn"}, TmunuVarlist];
+  PrintInitializations[{Mode -> "MainIn"}, EvolVarlist];
+  pr[];
+
   (* Loops *)
   pr["noinline([&]() __attribute__((__flatten__, __hot__)) {"];
   pr["  grid.loop_int_device<0, 0, 0>("];
   pr["    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr[];
 
-  (*
-  PrintInitializations[{Mode -> "MainIn"}, TmunuVarlist];
-  PrintInitializations[{Mode -> "MainIn"}, EvolVarlist];
-  pr[];
-  *)
-
-  PrintInitializations[{Mode -> "Derivs1st"}, dEvolVarlist];
-  PrintInitializations[{Mode -> "Derivs2nd"}, ddEvolVarlist];
+  PrintInitializations[{Mode -> "Derivs1st", TensorType -> "Vect"}, dEvolVarlist];
+  PrintInitializations[{Mode -> "Derivs2nd", TensorType -> "Smat"}, ddEvolVarlist];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, IntermediateVarlist];
