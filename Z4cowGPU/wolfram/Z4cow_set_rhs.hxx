@@ -144,127 +144,127 @@ const auto ddbetazzz = fd_2nd<3><3>(betaz, p);
 const auto
 dlnWx
 =
-dWx/W[pI]
+dWx/W(p.I)
 ;
 
 const auto
 dlnWy
 =
-dWy/W[pI]
+dWy/W(p.I)
 ;
 
 const auto
 dlnWz
 =
-dWz/W[pI]
+dWz/W(p.I)
 ;
 
 const auto
 invgamtxx
 =
--Power(gamtyz[pI],2) + gamtyy[pI]*gamtzz[pI]
+-Power(gamtyz(p.I),2) + gamtyy(p.I)*gamtzz(p.I)
 ;
 
 const auto
 invgamtxy
 =
-gamtxz[pI]*gamtyz[pI] - gamtxy[pI]*gamtzz[pI]
+gamtxz(p.I)*gamtyz(p.I) - gamtxy(p.I)*gamtzz(p.I)
 ;
 
 const auto
 invgamtxz
 =
--(gamtxz[pI]*gamtyy[pI]) + gamtxy[pI]*gamtyz[pI]
+-(gamtxz(p.I)*gamtyy(p.I)) + gamtxy(p.I)*gamtyz(p.I)
 ;
 
 const auto
 invgamtyy
 =
--Power(gamtxz[pI],2) + gamtxx[pI]*gamtzz[pI]
+-Power(gamtxz(p.I),2) + gamtxx(p.I)*gamtzz(p.I)
 ;
 
 const auto
 invgamtyz
 =
-gamtxy[pI]*gamtxz[pI] - gamtxx[pI]*gamtyz[pI]
+gamtxy(p.I)*gamtxz(p.I) - gamtxx(p.I)*gamtyz(p.I)
 ;
 
 const auto
 invgamtzz
 =
--Power(gamtxy[pI],2) + gamtxx[pI]*gamtyy[pI]
+-Power(gamtxy(p.I),2) + gamtxx(p.I)*gamtyy(p.I)
 ;
 
 const auto
 invgamxx
 =
-invgamtxx*Power(W[pI],2)
+invgamtxx*Power(W(p.I),2)
 ;
 
 const auto
 invgamxy
 =
-invgamtxy*Power(W[pI],2)
+invgamtxy*Power(W(p.I),2)
 ;
 
 const auto
 invgamxz
 =
-invgamtxz*Power(W[pI],2)
+invgamtxz*Power(W(p.I),2)
 ;
 
 const auto
 invgamyy
 =
-invgamtyy*Power(W[pI],2)
+invgamtyy*Power(W(p.I),2)
 ;
 
 const auto
 invgamyz
 =
-invgamtyz*Power(W[pI],2)
+invgamtyz*Power(W(p.I),2)
 ;
 
 const auto
 invgamzz
 =
-invgamtzz*Power(W[pI],2)
+invgamtzz*Power(W(p.I),2)
 ;
 
 const auto
 gamxx
 =
-gamtxx[pI]/Power(W[pI],2)
+gamtxx(p.I)/Power(W(p.I),2)
 ;
 
 const auto
 gamxy
 =
-gamtxy[pI]/Power(W[pI],2)
+gamtxy(p.I)/Power(W(p.I),2)
 ;
 
 const auto
 gamxz
 =
-gamtxz[pI]/Power(W[pI],2)
+gamtxz(p.I)/Power(W(p.I),2)
 ;
 
 const auto
 gamyy
 =
-gamtyy[pI]/Power(W[pI],2)
+gamtyy(p.I)/Power(W(p.I),2)
 ;
 
 const auto
 gamyz
 =
-gamtyz[pI]/Power(W[pI],2)
+gamtyz(p.I)/Power(W(p.I),2)
 ;
 
 const auto
 gamzz
 =
-gamtzz[pI]/Power(W[pI],2)
+gamtzz(p.I)/Power(W(p.I),2)
 ;
 
 const auto
@@ -669,109 +669,109 @@ Gtzxx*invgamtxx + 2*Gtzxy*invgamtxy + 2*Gtzxz*invgamtxz + Gtzyy*invgamtyy +
 const auto
 dgamxxx
 =
-(dgamtxxx - 2*dlnWx*gamtxx[pI])/Power(W[pI],2)
+(dgamtxxx - 2*dlnWx*gamtxx(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamxxy
 =
-(dgamtxxy - 2*dlnWx*gamtxy[pI])/Power(W[pI],2)
+(dgamtxxy - 2*dlnWx*gamtxy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamxxz
 =
-(dgamtxxz - 2*dlnWx*gamtxz[pI])/Power(W[pI],2)
+(dgamtxxz - 2*dlnWx*gamtxz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamxyy
 =
-(dgamtxyy - 2*dlnWx*gamtyy[pI])/Power(W[pI],2)
+(dgamtxyy - 2*dlnWx*gamtyy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamxyz
 =
-(dgamtxyz - 2*dlnWx*gamtyz[pI])/Power(W[pI],2)
+(dgamtxyz - 2*dlnWx*gamtyz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamxzz
 =
-(dgamtxzz - 2*dlnWx*gamtzz[pI])/Power(W[pI],2)
+(dgamtxzz - 2*dlnWx*gamtzz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyxx
 =
-(dgamtyxx - 2*dlnWy*gamtxx[pI])/Power(W[pI],2)
+(dgamtyxx - 2*dlnWy*gamtxx(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyxy
 =
-(dgamtyxy - 2*dlnWy*gamtxy[pI])/Power(W[pI],2)
+(dgamtyxy - 2*dlnWy*gamtxy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyxz
 =
-(dgamtyxz - 2*dlnWy*gamtxz[pI])/Power(W[pI],2)
+(dgamtyxz - 2*dlnWy*gamtxz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyyy
 =
-(dgamtyyy - 2*dlnWy*gamtyy[pI])/Power(W[pI],2)
+(dgamtyyy - 2*dlnWy*gamtyy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyyz
 =
-(dgamtyyz - 2*dlnWy*gamtyz[pI])/Power(W[pI],2)
+(dgamtyyz - 2*dlnWy*gamtyz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamyzz
 =
-(dgamtyzz - 2*dlnWy*gamtzz[pI])/Power(W[pI],2)
+(dgamtyzz - 2*dlnWy*gamtzz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzxx
 =
-(dgamtzxx - 2*dlnWz*gamtxx[pI])/Power(W[pI],2)
+(dgamtzxx - 2*dlnWz*gamtxx(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzxy
 =
-(dgamtzxy - 2*dlnWz*gamtxy[pI])/Power(W[pI],2)
+(dgamtzxy - 2*dlnWz*gamtxy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzxz
 =
-(dgamtzxz - 2*dlnWz*gamtxz[pI])/Power(W[pI],2)
+(dgamtzxz - 2*dlnWz*gamtxz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzyy
 =
-(dgamtzyy - 2*dlnWz*gamtyy[pI])/Power(W[pI],2)
+(dgamtzyy - 2*dlnWz*gamtyy(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzyz
 =
-(dgamtzyz - 2*dlnWz*gamtyz[pI])/Power(W[pI],2)
+(dgamtzyz - 2*dlnWz*gamtyz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
 dgamzzz
 =
-(dgamtzzz - 2*dlnWz*gamtzz[pI])/Power(W[pI],2)
+(dgamtzzz - 2*dlnWz*gamtzz(p.I))/Power(W(p.I),2)
 ;
 
 const auto
@@ -993,55 +993,55 @@ GamDDDxzz*invgamxz + GamDDDyzz*invgamyz + GamDDDzzz*invgamzz
 const auto
 exAtUUxx
 =
-Power(invgamtxx,2)*exAtxx[pI] + 2*invgamtxx*invgamtxy*exAtxy[pI] +
-  2*invgamtxx*invgamtxz*exAtxz[pI] + Power(invgamtxy,2)*exAtyy[pI] +
-  2*invgamtxy*invgamtxz*exAtyz[pI] + Power(invgamtxz,2)*exAtzz[pI]
+Power(invgamtxx,2)*exAtxx(p.I) + 2*invgamtxx*invgamtxy*exAtxy(p.I) +
+  2*invgamtxx*invgamtxz*exAtxz(p.I) + Power(invgamtxy,2)*exAtyy(p.I) +
+  2*invgamtxy*invgamtxz*exAtyz(p.I) + Power(invgamtxz,2)*exAtzz(p.I)
 ;
 
 const auto
 exAtUUxy
 =
-invgamtxx*invgamtxy*exAtxx[pI] +
-  (Power(invgamtxy,2) + invgamtxx*invgamtyy)*exAtxy[pI] +
-  invgamtxy*invgamtxz*exAtxz[pI] + invgamtxx*invgamtyz*exAtxz[pI] +
-  invgamtxy*invgamtyy*exAtyy[pI] + invgamtxz*invgamtyy*exAtyz[pI] +
-  invgamtxy*invgamtyz*exAtyz[pI] + invgamtxz*invgamtyz*exAtzz[pI]
+invgamtxx*invgamtxy*exAtxx(p.I) +
+  (Power(invgamtxy,2) + invgamtxx*invgamtyy)*exAtxy(p.I) +
+  invgamtxy*invgamtxz*exAtxz(p.I) + invgamtxx*invgamtyz*exAtxz(p.I) +
+  invgamtxy*invgamtyy*exAtyy(p.I) + invgamtxz*invgamtyy*exAtyz(p.I) +
+  invgamtxy*invgamtyz*exAtyz(p.I) + invgamtxz*invgamtyz*exAtzz(p.I)
 ;
 
 const auto
 exAtUUxz
 =
-invgamtxx*invgamtxz*exAtxx[pI] +
-  (invgamtxy*invgamtxz + invgamtxx*invgamtyz)*exAtxy[pI] +
-  Power(invgamtxz,2)*exAtxz[pI] + invgamtxx*invgamtzz*exAtxz[pI] +
-  invgamtxy*invgamtyz*exAtyy[pI] + invgamtxz*invgamtyz*exAtyz[pI] +
-  invgamtxy*invgamtzz*exAtyz[pI] + invgamtxz*invgamtzz*exAtzz[pI]
+invgamtxx*invgamtxz*exAtxx(p.I) +
+  (invgamtxy*invgamtxz + invgamtxx*invgamtyz)*exAtxy(p.I) +
+  Power(invgamtxz,2)*exAtxz(p.I) + invgamtxx*invgamtzz*exAtxz(p.I) +
+  invgamtxy*invgamtyz*exAtyy(p.I) + invgamtxz*invgamtyz*exAtyz(p.I) +
+  invgamtxy*invgamtzz*exAtyz(p.I) + invgamtxz*invgamtzz*exAtzz(p.I)
 ;
 
 const auto
 exAtUUyy
 =
-Power(invgamtxy,2)*exAtxx[pI] + 2*invgamtxy*invgamtyy*exAtxy[pI] +
-  2*invgamtxy*invgamtyz*exAtxz[pI] + Power(invgamtyy,2)*exAtyy[pI] +
-  2*invgamtyy*invgamtyz*exAtyz[pI] + Power(invgamtyz,2)*exAtzz[pI]
+Power(invgamtxy,2)*exAtxx(p.I) + 2*invgamtxy*invgamtyy*exAtxy(p.I) +
+  2*invgamtxy*invgamtyz*exAtxz(p.I) + Power(invgamtyy,2)*exAtyy(p.I) +
+  2*invgamtyy*invgamtyz*exAtyz(p.I) + Power(invgamtyz,2)*exAtzz(p.I)
 ;
 
 const auto
 exAtUUyz
 =
-invgamtxy*invgamtxz*exAtxx[pI] +
-  (invgamtxz*invgamtyy + invgamtxy*invgamtyz)*exAtxy[pI] +
-  invgamtxz*invgamtyz*exAtxz[pI] + invgamtxy*invgamtzz*exAtxz[pI] +
-  invgamtyy*invgamtyz*exAtyy[pI] + Power(invgamtyz,2)*exAtyz[pI] +
-  invgamtyy*invgamtzz*exAtyz[pI] + invgamtyz*invgamtzz*exAtzz[pI]
+invgamtxy*invgamtxz*exAtxx(p.I) +
+  (invgamtxz*invgamtyy + invgamtxy*invgamtyz)*exAtxy(p.I) +
+  invgamtxz*invgamtyz*exAtxz(p.I) + invgamtxy*invgamtzz*exAtxz(p.I) +
+  invgamtyy*invgamtyz*exAtyy(p.I) + Power(invgamtyz,2)*exAtyz(p.I) +
+  invgamtyy*invgamtzz*exAtyz(p.I) + invgamtyz*invgamtzz*exAtzz(p.I)
 ;
 
 const auto
 exAtUUzz
 =
-Power(invgamtxz,2)*exAtxx[pI] + 2*invgamtxz*invgamtyz*exAtxy[pI] +
-  2*invgamtxz*invgamtzz*exAtxz[pI] + Power(invgamtyz,2)*exAtyy[pI] +
-  2*invgamtyz*invgamtzz*exAtyz[pI] + Power(invgamtzz,2)*exAtzz[pI]
+Power(invgamtxz,2)*exAtxx(p.I) + 2*invgamtxz*invgamtyz*exAtxy(p.I) +
+  2*invgamtxz*invgamtzz*exAtxz(p.I) + Power(invgamtyz,2)*exAtyy(p.I) +
+  2*invgamtyz*invgamtzz*exAtyz(p.I) + Power(invgamtzz,2)*exAtzz(p.I)
 ;
 
 const auto
@@ -1119,67 +1119,67 @@ ddalphazz - dalphax*Gamxzz - dalphay*Gamyzz - dalphaz*Gamzzz
 const auto
 RtWxx
 =
-(tDtDWxx + gamtxx[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWxx + gamtxx(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
 RtWxy
 =
-(tDtDWxy + gamtxy[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWxy + gamtxy(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
 RtWxz
 =
-(tDtDWxz + gamtxz[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWxz + gamtxz(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
 RtWyy
 =
-(tDtDWyy + gamtyy[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWyy + gamtyy(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
 RtWyz
 =
-(tDtDWyz + gamtyz[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWyz + gamtyz(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
 RtWzz
 =
-(tDtDWzz + gamtzz[pI]*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
+(tDtDWzz + gamtzz(p.I)*(invgamtxx*tDtDWxx + 2*invgamtxy*tDtDWxy +
        2*invgamtxz*tDtDWxz + invgamtyy*tDtDWyy + 2*invgamtyz*tDtDWyz +
        invgamtzz*tDtDWzz - 2*(Power(dlnWx,2)*invgamtxx +
           2*dlnWx*dlnWy*invgamtxy + 2*dlnWx*dlnWz*invgamtxz +
           Power(dlnWy,2)*invgamtyy + 2*dlnWy*dlnWz*invgamtyz +
-          Power(dlnWz,2)*invgamtzz)*W[pI]))/W[pI]
+          Power(dlnWz,2)*invgamtzz)*W(p.I)))/W(p.I)
 ;
 
 const auto
@@ -1192,8 +1192,8 @@ Rtxx
   (ddgamtxxxx*invgamtxx)/2. - ddgamtxyxx*invgamtxy - ddgamtxzxx*invgamtxz -
   (ddgamtyyxx*invgamtyy)/2. - ddgamtyzxx*invgamtyz -
   (ddgamtzzxx*invgamtzz)/2. + GtDDDxxx*trGtdx + GtDDDxxy*trGtdy +
-  GtDDDxxz*trGtdz + dtrGtxx*gamtxx[pI] + dtrGtxy*gamtxy[pI] +
-  dtrGtxz*gamtxz[pI]
+  GtDDDxxz*trGtdz + dtrGtxx*gamtxx(p.I) + dtrGtxy*gamtxy(p.I) +
+  dtrGtxz*gamtxz(p.I)
 ;
 
 const auto
@@ -1211,8 +1211,8 @@ Rtxy
     2*ddgamtxzxy*invgamtxz - ddgamtyyxy*invgamtyy -
     2*ddgamtyzxy*invgamtyz - ddgamtzzxy*invgamtzz + GtDDDxxy*trGtdx +
     GtDDDyxx*trGtdx + GtDDDxyy*trGtdy + GtDDDyxy*trGtdy + GtDDDxyz*trGtdz +
-    GtDDDyxz*trGtdz + dtrGtyx*gamtxx[pI] + (dtrGtxx + dtrGtyy)*gamtxy[pI] +
-    dtrGtyz*gamtxz[pI] + dtrGtxy*gamtyy[pI] + dtrGtxz*gamtyz[pI])/2.
+    GtDDDyxz*trGtdz + dtrGtyx*gamtxx(p.I) + (dtrGtxx + dtrGtyy)*gamtxy(p.I) +
+    dtrGtyz*gamtxz(p.I) + dtrGtxy*gamtyy(p.I) + dtrGtxz*gamtyz(p.I))/2.
 ;
 
 const auto
@@ -1230,9 +1230,9 @@ Rtxz
     2*ddgamtxzxz*invgamtxz - ddgamtyyxz*invgamtyy -
     2*ddgamtyzxz*invgamtyz - ddgamtzzxz*invgamtzz + GtDDDxxz*trGtdx +
     GtDDDzxx*trGtdx + GtDDDxyz*trGtdy + GtDDDzxy*trGtdy + GtDDDxzz*trGtdz +
-    GtDDDzxz*trGtdz + dtrGtzx*gamtxx[pI] + dtrGtzy*gamtxy[pI] +
-    dtrGtxx*gamtxz[pI] + dtrGtzz*gamtxz[pI] + dtrGtxy*gamtyz[pI] +
-    dtrGtxz*gamtzz[pI])/2.
+    GtDDDzxz*trGtdz + dtrGtzx*gamtxx(p.I) + dtrGtzy*gamtxy(p.I) +
+    dtrGtxx*gamtxz(p.I) + dtrGtzz*gamtxz(p.I) + dtrGtxy*gamtyz(p.I) +
+    dtrGtxz*gamtzz(p.I))/2.
 ;
 
 const auto
@@ -1245,8 +1245,8 @@ GtDDUxyx*Gtxxy + 2*GtDDUyxx*Gtxxy + GtDDUxyy*Gtxyy + 2*GtDDUyxy*Gtxyy +
   (ddgamtxxyy*invgamtxx)/2. - ddgamtxyyy*invgamtxy - ddgamtxzyy*invgamtxz -
   (ddgamtyyyy*invgamtyy)/2. - ddgamtyzyy*invgamtyz -
   (ddgamtzzyy*invgamtzz)/2. + GtDDDyxy*trGtdx + GtDDDyyy*trGtdy +
-  GtDDDyyz*trGtdz + dtrGtyx*gamtxy[pI] + dtrGtyy*gamtyy[pI] +
-  dtrGtyz*gamtyz[pI]
+  GtDDDyyz*trGtdz + dtrGtyx*gamtxy(p.I) + dtrGtyy*gamtyy(p.I) +
+  dtrGtyz*gamtyz(p.I)
 ;
 
 const auto
@@ -1264,9 +1264,9 @@ Rtyz
     2*ddgamtxzyz*invgamtxz - ddgamtyyyz*invgamtyy -
     2*ddgamtyzyz*invgamtyz - ddgamtzzyz*invgamtzz + GtDDDyxz*trGtdx +
     GtDDDzxy*trGtdx + GtDDDyyz*trGtdy + GtDDDzyy*trGtdy + GtDDDyzz*trGtdz +
-    GtDDDzyz*trGtdz + dtrGtzx*gamtxy[pI] + dtrGtyx*gamtxz[pI] +
-    dtrGtzy*gamtyy[pI] + dtrGtyy*gamtyz[pI] + dtrGtzz*gamtyz[pI] +
-    dtrGtyz*gamtzz[pI])/2.
+    GtDDDzyz*trGtdz + dtrGtzx*gamtxy(p.I) + dtrGtyx*gamtxz(p.I) +
+    dtrGtzy*gamtyy(p.I) + dtrGtyy*gamtyz(p.I) + dtrGtzz*gamtyz(p.I) +
+    dtrGtyz*gamtzz(p.I))/2.
 ;
 
 const auto
@@ -1279,8 +1279,8 @@ GtDDUxzx*Gtxxz + 2*GtDDUzxx*Gtxxz + GtDDUxzy*Gtxyz + 2*GtDDUzxy*Gtxyz +
   (ddgamtxxzz*invgamtxx)/2. - ddgamtxyzz*invgamtxy - ddgamtxzzz*invgamtxz -
   (ddgamtyyzz*invgamtyy)/2. - ddgamtyzzz*invgamtyz -
   (ddgamtzzzz*invgamtzz)/2. + GtDDDzxz*trGtdx + GtDDDzyz*trGtdy +
-  GtDDDzzz*trGtdz + dtrGtzx*gamtxz[pI] + dtrGtzy*gamtyz[pI] +
-  dtrGtzz*gamtzz[pI]
+  GtDDDzzz*trGtdz + dtrGtzx*gamtxz(p.I) + dtrGtzy*gamtyz(p.I) +
+  dtrGtzz*gamtzz(p.I)
 ;
 
 const auto
@@ -1329,68 +1329,68 @@ invgamxx*Rxx + 2*invgamxy*Rxy + 2*invgamxz*Rxz + invgamyy*Ryy +
 const auto
 rho
 =
-(eTtt[pI] - 2*betay[pI]*eTty[pI] - 2*betaz[pI]*eTtz[pI] +
-    Power(betax[pI],2)*eTxx[pI] +
-    2*betax[pI]*(-eTtx[pI] + betay[pI]*eTxy[pI] + betaz[pI]*eTxz[pI]) +
-    Power(betay[pI],2)*eTyy[pI] + 2*betay[pI]*betaz[pI]*eTyz[pI] +
-    Power(betaz[pI],2)*eTzz[pI])/Power(alpha[pI],2)
+(eTtt(p.I) - 2*betay(p.I)*eTty(p.I) - 2*betaz(p.I)*eTtz(p.I) +
+    Power(betax(p.I),2)*eTxx(p.I) +
+    2*betax(p.I)*(-eTtx(p.I) + betay(p.I)*eTxy(p.I) + betaz(p.I)*eTxz(p.I)) +
+    Power(betay(p.I),2)*eTyy(p.I) + 2*betay(p.I)*betaz(p.I)*eTyz(p.I) +
+    Power(betaz(p.I),2)*eTzz(p.I))/Power(alpha(p.I),2)
 ;
 
 const auto
 Smx
 =
-(-eTtx[pI] + betax[pI]*eTxx[pI] + betay[pI]*eTxy[pI] + betaz[pI]*eTxz[pI])/
-  alpha[pI]
+(-eTtx(p.I) + betax(p.I)*eTxx(p.I) + betay(p.I)*eTxy(p.I) + betaz(p.I)*eTxz(p.I))/
+  alpha(p.I)
 ;
 
 const auto
 Smy
 =
-(-eTty[pI] + betax[pI]*eTxy[pI] + betay[pI]*eTyy[pI] + betaz[pI]*eTyz[pI])/
-  alpha[pI]
+(-eTty(p.I) + betax(p.I)*eTxy(p.I) + betay(p.I)*eTyy(p.I) + betaz(p.I)*eTyz(p.I))/
+  alpha(p.I)
 ;
 
 const auto
 Smz
 =
-(-eTtz[pI] + betax[pI]*eTxz[pI] + betay[pI]*eTyz[pI] + betaz[pI]*eTzz[pI])/
-  alpha[pI]
+(-eTtz(p.I) + betax(p.I)*eTxz(p.I) + betay(p.I)*eTyz(p.I) + betaz(p.I)*eTzz(p.I))/
+  alpha(p.I)
 ;
 
 const auto
 Ssxx
 =
-eTxx[pI]
+eTxx(p.I)
 ;
 
 const auto
 Ssxy
 =
-eTxy[pI]
+eTxy(p.I)
 ;
 
 const auto
 Ssxz
 =
-eTxz[pI]
+eTxz(p.I)
 ;
 
 const auto
 Ssyy
 =
-eTyy[pI]
+eTyy(p.I)
 ;
 
 const auto
 Ssyz
 =
-eTyz[pI]
+eTyz(p.I)
 ;
 
 const auto
 Sszz
 =
-eTzz[pI]
+eTzz(p.I)
 ;
 
 const auto
@@ -1401,282 +1401,282 @@ invgamxx*Ssxx + 2*invgamxy*Ssxy + 2*invgamxz*Ssxz + invgamyy*Ssyy +
 ;
 
 
-dtW[pI]
+dtW(p.I)
 =
-dWx*betax[pI] + dWy*betay[pI] + dWz*betaz[pI] -
-  ((dbetaxx + dbetayy + dbetazz)*W[pI])/3. + (alpha[pI]*exKh[pI]*W[pI])/3. +
-  (2*alpha[pI]*Theta[pI]*W[pI])/3.
+dWx*betax(p.I) + dWy*betay(p.I) + dWz*betaz(p.I) -
+  ((dbetaxx + dbetayy + dbetazz)*W(p.I))/3. + (alpha(p.I)*exKh(p.I)*W(p.I))/3. +
+  (2*alpha(p.I)*Theta(p.I)*W(p.I))/3.
 ;
 
-dtgamtxx[pI]
+dtgamtxx(p.I)
 =
-dgamtxxx*betax[pI] + dgamtyxx*betay[pI] + dgamtzxx*betaz[pI] -
-  2*alpha[pI]*exAtxx[pI] + 2*dbetaxx*gamtxx[pI] -
-  (2*(dbetaxx + dbetayy + dbetazz)*gamtxx[pI])/3. + 2*dbetaxy*gamtxy[pI] +
-  2*dbetaxz*gamtxz[pI]
+dgamtxxx*betax(p.I) + dgamtyxx*betay(p.I) + dgamtzxx*betaz(p.I) -
+  2*alpha(p.I)*exAtxx(p.I) + 2*dbetaxx*gamtxx(p.I) -
+  (2*(dbetaxx + dbetayy + dbetazz)*gamtxx(p.I))/3. + 2*dbetaxy*gamtxy(p.I) +
+  2*dbetaxz*gamtxz(p.I)
 ;
 
-dtgamtxy[pI]
+dtgamtxy(p.I)
 =
-dgamtxxy*betax[pI] + dgamtyxy*betay[pI] + dgamtzxy*betaz[pI] -
-  2*alpha[pI]*exAtxy[pI] + dbetayx*gamtxx[pI] + dbetaxx*gamtxy[pI] +
-  dbetayy*gamtxy[pI] - (2*(dbetaxx + dbetayy + dbetazz)*gamtxy[pI])/3. +
-  dbetayz*gamtxz[pI] + dbetaxy*gamtyy[pI] + dbetaxz*gamtyz[pI]
+dgamtxxy*betax(p.I) + dgamtyxy*betay(p.I) + dgamtzxy*betaz(p.I) -
+  2*alpha(p.I)*exAtxy(p.I) + dbetayx*gamtxx(p.I) + dbetaxx*gamtxy(p.I) +
+  dbetayy*gamtxy(p.I) - (2*(dbetaxx + dbetayy + dbetazz)*gamtxy(p.I))/3. +
+  dbetayz*gamtxz(p.I) + dbetaxy*gamtyy(p.I) + dbetaxz*gamtyz(p.I)
 ;
 
-dtgamtxz[pI]
+dtgamtxz(p.I)
 =
-dgamtxxz*betax[pI] + dgamtyxz*betay[pI] + dgamtzxz*betaz[pI] -
-  2*alpha[pI]*exAtxz[pI] + dbetazx*gamtxx[pI] + dbetazy*gamtxy[pI] +
-  dbetaxx*gamtxz[pI] + dbetazz*gamtxz[pI] -
-  (2*(dbetaxx + dbetayy + dbetazz)*gamtxz[pI])/3. + dbetaxy*gamtyz[pI] +
-  dbetaxz*gamtzz[pI]
+dgamtxxz*betax(p.I) + dgamtyxz*betay(p.I) + dgamtzxz*betaz(p.I) -
+  2*alpha(p.I)*exAtxz(p.I) + dbetazx*gamtxx(p.I) + dbetazy*gamtxy(p.I) +
+  dbetaxx*gamtxz(p.I) + dbetazz*gamtxz(p.I) -
+  (2*(dbetaxx + dbetayy + dbetazz)*gamtxz(p.I))/3. + dbetaxy*gamtyz(p.I) +
+  dbetaxz*gamtzz(p.I)
 ;
 
-dtgamtyy[pI]
+dtgamtyy(p.I)
 =
-dgamtxyy*betax[pI] + dgamtyyy*betay[pI] + dgamtzyy*betaz[pI] -
-  2*alpha[pI]*exAtyy[pI] + 2*dbetayx*gamtxy[pI] + 2*dbetayy*gamtyy[pI] -
-  (2*(dbetaxx + dbetayy + dbetazz)*gamtyy[pI])/3. + 2*dbetayz*gamtyz[pI]
+dgamtxyy*betax(p.I) + dgamtyyy*betay(p.I) + dgamtzyy*betaz(p.I) -
+  2*alpha(p.I)*exAtyy(p.I) + 2*dbetayx*gamtxy(p.I) + 2*dbetayy*gamtyy(p.I) -
+  (2*(dbetaxx + dbetayy + dbetazz)*gamtyy(p.I))/3. + 2*dbetayz*gamtyz(p.I)
 ;
 
-dtgamtyz[pI]
+dtgamtyz(p.I)
 =
-dgamtxyz*betax[pI] + dgamtyyz*betay[pI] + dgamtzyz*betaz[pI] -
-  2*alpha[pI]*exAtyz[pI] + dbetazx*gamtxy[pI] + dbetayx*gamtxz[pI] +
-  dbetazy*gamtyy[pI] + dbetayy*gamtyz[pI] + dbetazz*gamtyz[pI] -
-  (2*(dbetaxx + dbetayy + dbetazz)*gamtyz[pI])/3. + dbetayz*gamtzz[pI]
+dgamtxyz*betax(p.I) + dgamtyyz*betay(p.I) + dgamtzyz*betaz(p.I) -
+  2*alpha(p.I)*exAtyz(p.I) + dbetazx*gamtxy(p.I) + dbetayx*gamtxz(p.I) +
+  dbetazy*gamtyy(p.I) + dbetayy*gamtyz(p.I) + dbetazz*gamtyz(p.I) -
+  (2*(dbetaxx + dbetayy + dbetazz)*gamtyz(p.I))/3. + dbetayz*gamtzz(p.I)
 ;
 
-dtgamtzz[pI]
+dtgamtzz(p.I)
 =
-dgamtxzz*betax[pI] + dgamtyzz*betay[pI] + dgamtzzz*betaz[pI] -
-  2*alpha[pI]*exAtzz[pI] + 2*dbetazx*gamtxz[pI] + 2*dbetazy*gamtyz[pI] +
-  2*dbetazz*gamtzz[pI] - (2*(dbetaxx + dbetayy + dbetazz)*gamtzz[pI])/3.
+dgamtxzz*betax(p.I) + dgamtyzz*betay(p.I) + dgamtzzz*betaz(p.I) -
+  2*alpha(p.I)*exAtzz(p.I) + 2*dbetazx*gamtxz(p.I) + 2*dbetazy*gamtyz(p.I) +
+  2*dbetazz*gamtzz(p.I) - (2*(dbetaxx + dbetayy + dbetazz)*gamtzz(p.I))/3.
 ;
 
-dtexKh[pI]
+dtexKh(p.I)
 =
 -(DDalphaxx*invgamxx) - 2*DDalphaxy*invgamxy - 2*DDalphaxz*invgamxz -
   DDalphayy*invgamyy - 2*DDalphayz*invgamyz - DDalphazz*invgamzz +
-  dexKhx*betax[pI] + dexKhy*betay[pI] + dexKhz*betaz[pI] +
-  alpha[pI]*(4*cpi*rho + 4*cpi*trSs + exAtUUxx*exAtxx[pI] +
-     2*exAtUUxy*exAtxy[pI] + 2*exAtUUxz*exAtxz[pI] + exAtUUyy*exAtyy[pI] +
-     2*exAtUUyz*exAtyz[pI] + exAtUUzz*exAtzz[pI] + Power(exKh[pI],2)/3. +
-     ckappa1*Theta[pI] - ckappa1*ckappa2*Theta[pI] +
-     (4*exKh[pI]*Theta[pI])/3. + (4*Power(Theta[pI],2))/3.)
+  dexKhx*betax(p.I) + dexKhy*betay(p.I) + dexKhz*betaz(p.I) +
+  alpha(p.I)*(4*cpi*rho + 4*cpi*trSs + exAtUUxx*exAtxx(p.I) +
+     2*exAtUUxy*exAtxy(p.I) + 2*exAtUUxz*exAtxz(p.I) + exAtUUyy*exAtyy(p.I) +
+     2*exAtUUyz*exAtyz(p.I) + exAtUUzz*exAtzz(p.I) + Power(exKh(p.I),2)/3. +
+     ckappa1*Theta(p.I) - ckappa1*ckappa2*Theta(p.I) +
+     (4*exKh(p.I)*Theta(p.I))/3. + (4*Power(Theta(p.I),2))/3.)
 ;
 
-dtexAtxx[pI]
+dtexAtxx(p.I)
 =
-(3*dexAtxxx*betax[pI] + 3*dexAtyxx*betay[pI] + 3*dexAtzxx*betaz[pI] +
-    4*dbetaxx*exAtxx[pI] - 2*dbetayy*exAtxx[pI] - 2*dbetazz*exAtxx[pI] -
-    6*invgamtxx*alpha[pI]*Power(exAtxx[pI],2) + 6*dbetaxy*exAtxy[pI] -
-    12*invgamtxy*alpha[pI]*exAtxx[pI]*exAtxy[pI] -
-    6*invgamtyy*alpha[pI]*Power(exAtxy[pI],2) + 6*dbetaxz*exAtxz[pI] -
-    12*invgamtxz*alpha[pI]*exAtxx[pI]*exAtxz[pI] -
-    12*invgamtyz*alpha[pI]*exAtxy[pI]*exAtxz[pI] -
-    6*invgamtzz*alpha[pI]*Power(exAtxz[pI],2) +
-    3*alpha[pI]*exAtxx[pI]*exKh[pI] + 6*alpha[pI]*exAtxx[pI]*Theta[pI] -
-    3*DDalphaxx*Power(W[pI],2) + DDalphaxx*gamxx*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamxx*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamxx*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamxx*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamxx*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamxx*invgamzz*Power(W[pI],2) +
-    3*Rxx*alpha[pI]*Power(W[pI],2) -
-    gamxx*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) -
-    2*gamxx*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamxx*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) -
-    gamxx*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) -
-    2*gamxx*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) -
-    gamxx*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Ssxx*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxx*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxx*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxx*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxx*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxx*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxx*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxxx*betax(p.I) + 3*dexAtyxx*betay(p.I) + 3*dexAtzxx*betaz(p.I) +
+    4*dbetaxx*exAtxx(p.I) - 2*dbetayy*exAtxx(p.I) - 2*dbetazz*exAtxx(p.I) -
+    6*invgamtxx*alpha(p.I)*Power(exAtxx(p.I),2) + 6*dbetaxy*exAtxy(p.I) -
+    12*invgamtxy*alpha(p.I)*exAtxx(p.I)*exAtxy(p.I) -
+    6*invgamtyy*alpha(p.I)*Power(exAtxy(p.I),2) + 6*dbetaxz*exAtxz(p.I) -
+    12*invgamtxz*alpha(p.I)*exAtxx(p.I)*exAtxz(p.I) -
+    12*invgamtyz*alpha(p.I)*exAtxy(p.I)*exAtxz(p.I) -
+    6*invgamtzz*alpha(p.I)*Power(exAtxz(p.I),2) +
+    3*alpha(p.I)*exAtxx(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtxx(p.I)*Theta(p.I) -
+    3*DDalphaxx*Power(W(p.I),2) + DDalphaxx*gamxx*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamxx*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamxx*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamxx*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamxx*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamxx*invgamzz*Power(W(p.I),2) +
+    3*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    gamxx*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxx*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxx*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    gamxx*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxx*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    gamxx*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxx*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxx*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxx*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxx*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxx*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxx*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dtexAtxy[pI]
+dtexAtxy(p.I)
 =
-(3*dexAtxxy*betax[pI] + 3*dexAtyxy*betay[pI] + 3*dexAtzxy*betaz[pI] +
-    3*dbetayx*exAtxx[pI] + dbetaxx*exAtxy[pI] + dbetayy*exAtxy[pI] -
-    2*dbetazz*exAtxy[pI] - 6*invgamtxx*alpha[pI]*exAtxx[pI]*exAtxy[pI] -
-    6*invgamtxy*alpha[pI]*Power(exAtxy[pI],2) + 3*dbetayz*exAtxz[pI] -
-    6*invgamtxz*alpha[pI]*exAtxy[pI]*exAtxz[pI] + 3*dbetaxy*exAtyy[pI] -
-    6*invgamtxy*alpha[pI]*exAtxx[pI]*exAtyy[pI] -
-    6*invgamtyy*alpha[pI]*exAtxy[pI]*exAtyy[pI] -
-    6*invgamtyz*alpha[pI]*exAtxz[pI]*exAtyy[pI] + 3*dbetaxz*exAtyz[pI] -
-    6*invgamtxz*alpha[pI]*exAtxx[pI]*exAtyz[pI] -
-    6*invgamtyz*alpha[pI]*exAtxy[pI]*exAtyz[pI] -
-    6*invgamtzz*alpha[pI]*exAtxz[pI]*exAtyz[pI] +
-    3*alpha[pI]*exAtxy[pI]*exKh[pI] + 6*alpha[pI]*exAtxy[pI]*Theta[pI] -
-    3*DDalphaxy*Power(W[pI],2) + DDalphaxx*gamxy*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamxy*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamxy*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamxy*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamxy*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamxy*invgamzz*Power(W[pI],2) -
-    gamxy*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) +
-    3*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamxy*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamxy*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) -
-    gamxy*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) -
-    2*gamxy*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) -
-    gamxy*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxy*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxy*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxy*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxy*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxy*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxy*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxxy*betax(p.I) + 3*dexAtyxy*betay(p.I) + 3*dexAtzxy*betaz(p.I) +
+    3*dbetayx*exAtxx(p.I) + dbetaxx*exAtxy(p.I) + dbetayy*exAtxy(p.I) -
+    2*dbetazz*exAtxy(p.I) - 6*invgamtxx*alpha(p.I)*exAtxx(p.I)*exAtxy(p.I) -
+    6*invgamtxy*alpha(p.I)*Power(exAtxy(p.I),2) + 3*dbetayz*exAtxz(p.I) -
+    6*invgamtxz*alpha(p.I)*exAtxy(p.I)*exAtxz(p.I) + 3*dbetaxy*exAtyy(p.I) -
+    6*invgamtxy*alpha(p.I)*exAtxx(p.I)*exAtyy(p.I) -
+    6*invgamtyy*alpha(p.I)*exAtxy(p.I)*exAtyy(p.I) -
+    6*invgamtyz*alpha(p.I)*exAtxz(p.I)*exAtyy(p.I) + 3*dbetaxz*exAtyz(p.I) -
+    6*invgamtxz*alpha(p.I)*exAtxx(p.I)*exAtyz(p.I) -
+    6*invgamtyz*alpha(p.I)*exAtxy(p.I)*exAtyz(p.I) -
+    6*invgamtzz*alpha(p.I)*exAtxz(p.I)*exAtyz(p.I) +
+    3*alpha(p.I)*exAtxy(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtxy(p.I)*Theta(p.I) -
+    3*DDalphaxy*Power(W(p.I),2) + DDalphaxx*gamxy*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamxy*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamxy*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamxy*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamxy*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamxy*invgamzz*Power(W(p.I),2) -
+    gamxy*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) +
+    3*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxy*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxy*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    gamxy*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxy*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    gamxy*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxy*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxy*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxy*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxy*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxy*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxy*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dtexAtxz[pI]
+dtexAtxz(p.I)
 =
-(3*dexAtxxz*betax[pI] + 3*dexAtyxz*betay[pI] + 3*dexAtzxz*betaz[pI] +
-    3*dbetazx*exAtxx[pI] + 3*dbetazy*exAtxy[pI] + dbetaxx*exAtxz[pI] -
-    2*dbetayy*exAtxz[pI] + dbetazz*exAtxz[pI] -
-    6*invgamtxx*alpha[pI]*exAtxx[pI]*exAtxz[pI] -
-    6*invgamtxy*alpha[pI]*exAtxy[pI]*exAtxz[pI] -
-    6*invgamtxz*alpha[pI]*Power(exAtxz[pI],2) + 3*dbetaxy*exAtyz[pI] -
-    6*invgamtxy*alpha[pI]*exAtxx[pI]*exAtyz[pI] -
-    6*invgamtyy*alpha[pI]*exAtxy[pI]*exAtyz[pI] -
-    6*invgamtyz*alpha[pI]*exAtxz[pI]*exAtyz[pI] + 3*dbetaxz*exAtzz[pI] -
-    6*invgamtxz*alpha[pI]*exAtxx[pI]*exAtzz[pI] -
-    6*invgamtyz*alpha[pI]*exAtxy[pI]*exAtzz[pI] -
-    6*invgamtzz*alpha[pI]*exAtxz[pI]*exAtzz[pI] +
-    3*alpha[pI]*exAtxz[pI]*exKh[pI] + 6*alpha[pI]*exAtxz[pI]*Theta[pI] -
-    3*DDalphaxz*Power(W[pI],2) + DDalphaxx*gamxz*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamxz*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamxz*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamxz*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamxz*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamxz*invgamzz*Power(W[pI],2) -
-    gamxz*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) -
-    2*gamxz*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) +
-    3*Rxz*alpha[pI]*Power(W[pI],2) -
-    2*gamxz*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) -
-    gamxz*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) -
-    2*gamxz*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) -
-    gamxz*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxz*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxz*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Ssxz*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxz*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxz*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamxz*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamxz*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxxz*betax(p.I) + 3*dexAtyxz*betay(p.I) + 3*dexAtzxz*betaz(p.I) +
+    3*dbetazx*exAtxx(p.I) + 3*dbetazy*exAtxy(p.I) + dbetaxx*exAtxz(p.I) -
+    2*dbetayy*exAtxz(p.I) + dbetazz*exAtxz(p.I) -
+    6*invgamtxx*alpha(p.I)*exAtxx(p.I)*exAtxz(p.I) -
+    6*invgamtxy*alpha(p.I)*exAtxy(p.I)*exAtxz(p.I) -
+    6*invgamtxz*alpha(p.I)*Power(exAtxz(p.I),2) + 3*dbetaxy*exAtyz(p.I) -
+    6*invgamtxy*alpha(p.I)*exAtxx(p.I)*exAtyz(p.I) -
+    6*invgamtyy*alpha(p.I)*exAtxy(p.I)*exAtyz(p.I) -
+    6*invgamtyz*alpha(p.I)*exAtxz(p.I)*exAtyz(p.I) + 3*dbetaxz*exAtzz(p.I) -
+    6*invgamtxz*alpha(p.I)*exAtxx(p.I)*exAtzz(p.I) -
+    6*invgamtyz*alpha(p.I)*exAtxy(p.I)*exAtzz(p.I) -
+    6*invgamtzz*alpha(p.I)*exAtxz(p.I)*exAtzz(p.I) +
+    3*alpha(p.I)*exAtxz(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtxz(p.I)*Theta(p.I) -
+    3*DDalphaxz*Power(W(p.I),2) + DDalphaxx*gamxz*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamxz*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamxz*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamxz*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamxz*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamxz*invgamzz*Power(W(p.I),2) -
+    gamxz*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxz*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) +
+    3*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxz*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    gamxz*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamxz*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    gamxz*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxz*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxz*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxz*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxz*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamxz*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamxz*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dtexAtyy[pI]
+dtexAtyy(p.I)
 =
-(3*dexAtxyy*betax[pI] + 3*dexAtyyy*betay[pI] + 3*dexAtzyy*betaz[pI] +
-    6*dbetayx*exAtxy[pI] - 6*invgamtxx*alpha[pI]*Power(exAtxy[pI],2) -
-    2*dbetaxx*exAtyy[pI] + 4*dbetayy*exAtyy[pI] - 2*dbetazz*exAtyy[pI] -
-    12*invgamtxy*alpha[pI]*exAtxy[pI]*exAtyy[pI] -
-    6*invgamtyy*alpha[pI]*Power(exAtyy[pI],2) + 6*dbetayz*exAtyz[pI] -
-    12*invgamtxz*alpha[pI]*exAtxy[pI]*exAtyz[pI] -
-    12*invgamtyz*alpha[pI]*exAtyy[pI]*exAtyz[pI] -
-    6*invgamtzz*alpha[pI]*Power(exAtyz[pI],2) +
-    3*alpha[pI]*exAtyy[pI]*exKh[pI] + 6*alpha[pI]*exAtyy[pI]*Theta[pI] -
-    3*DDalphayy*Power(W[pI],2) + DDalphaxx*gamyy*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamyy*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamyy*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamyy*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamyy*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamyy*invgamzz*Power(W[pI],2) -
-    gamyy*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) -
-    2*gamyy*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamyy*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) +
-    3*Ryy*alpha[pI]*Power(W[pI],2) -
-    gamyy*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) -
-    2*gamyy*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) -
-    gamyy*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyy*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyy*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyy*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Ssyy*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyy*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyy*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyy*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxyy*betax(p.I) + 3*dexAtyyy*betay(p.I) + 3*dexAtzyy*betaz(p.I) +
+    6*dbetayx*exAtxy(p.I) - 6*invgamtxx*alpha(p.I)*Power(exAtxy(p.I),2) -
+    2*dbetaxx*exAtyy(p.I) + 4*dbetayy*exAtyy(p.I) - 2*dbetazz*exAtyy(p.I) -
+    12*invgamtxy*alpha(p.I)*exAtxy(p.I)*exAtyy(p.I) -
+    6*invgamtyy*alpha(p.I)*Power(exAtyy(p.I),2) + 6*dbetayz*exAtyz(p.I) -
+    12*invgamtxz*alpha(p.I)*exAtxy(p.I)*exAtyz(p.I) -
+    12*invgamtyz*alpha(p.I)*exAtyy(p.I)*exAtyz(p.I) -
+    6*invgamtzz*alpha(p.I)*Power(exAtyz(p.I),2) +
+    3*alpha(p.I)*exAtyy(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtyy(p.I)*Theta(p.I) -
+    3*DDalphayy*Power(W(p.I),2) + DDalphaxx*gamyy*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamyy*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamyy*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamyy*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamyy*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamyy*invgamzz*Power(W(p.I),2) -
+    gamyy*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyy*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyy*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) +
+    3*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    gamyy*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyy*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    gamyy*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyy*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyy*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyy*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyy*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyy*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyy*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dtexAtyz[pI]
+dtexAtyz(p.I)
 =
-(3*dexAtxyz*betax[pI] + 3*dexAtyyz*betay[pI] + 3*dexAtzyz*betaz[pI] +
-    3*dbetazx*exAtxy[pI] + 3*dbetayx*exAtxz[pI] -
-    6*invgamtxx*alpha[pI]*exAtxy[pI]*exAtxz[pI] + 3*dbetazy*exAtyy[pI] -
-    6*invgamtxy*alpha[pI]*exAtxz[pI]*exAtyy[pI] - 2*dbetaxx*exAtyz[pI] +
-    dbetayy*exAtyz[pI] + dbetazz*exAtyz[pI] -
-    6*invgamtxy*alpha[pI]*exAtxy[pI]*exAtyz[pI] -
-    6*invgamtxz*alpha[pI]*exAtxz[pI]*exAtyz[pI] -
-    6*invgamtyy*alpha[pI]*exAtyy[pI]*exAtyz[pI] -
-    6*invgamtyz*alpha[pI]*Power(exAtyz[pI],2) + 3*dbetayz*exAtzz[pI] -
-    6*invgamtxz*alpha[pI]*exAtxy[pI]*exAtzz[pI] -
-    6*invgamtyz*alpha[pI]*exAtyy[pI]*exAtzz[pI] -
-    6*invgamtzz*alpha[pI]*exAtyz[pI]*exAtzz[pI] +
-    3*alpha[pI]*exAtyz[pI]*exKh[pI] + 6*alpha[pI]*exAtyz[pI]*Theta[pI] -
-    3*DDalphayz*Power(W[pI],2) + DDalphaxx*gamyz*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamyz*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamyz*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamyz*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamyz*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamyz*invgamzz*Power(W[pI],2) -
-    gamyz*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) -
-    2*gamyz*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamyz*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) -
-    gamyz*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) +
-    3*Ryz*alpha[pI]*Power(W[pI],2) -
-    2*gamyz*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) -
-    gamyz*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyz*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyz*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyz*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyz*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Ssyz*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamyz*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamyz*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxyz*betax(p.I) + 3*dexAtyyz*betay(p.I) + 3*dexAtzyz*betaz(p.I) +
+    3*dbetazx*exAtxy(p.I) + 3*dbetayx*exAtxz(p.I) -
+    6*invgamtxx*alpha(p.I)*exAtxy(p.I)*exAtxz(p.I) + 3*dbetazy*exAtyy(p.I) -
+    6*invgamtxy*alpha(p.I)*exAtxz(p.I)*exAtyy(p.I) - 2*dbetaxx*exAtyz(p.I) +
+    dbetayy*exAtyz(p.I) + dbetazz*exAtyz(p.I) -
+    6*invgamtxy*alpha(p.I)*exAtxy(p.I)*exAtyz(p.I) -
+    6*invgamtxz*alpha(p.I)*exAtxz(p.I)*exAtyz(p.I) -
+    6*invgamtyy*alpha(p.I)*exAtyy(p.I)*exAtyz(p.I) -
+    6*invgamtyz*alpha(p.I)*Power(exAtyz(p.I),2) + 3*dbetayz*exAtzz(p.I) -
+    6*invgamtxz*alpha(p.I)*exAtxy(p.I)*exAtzz(p.I) -
+    6*invgamtyz*alpha(p.I)*exAtyy(p.I)*exAtzz(p.I) -
+    6*invgamtzz*alpha(p.I)*exAtyz(p.I)*exAtzz(p.I) +
+    3*alpha(p.I)*exAtyz(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtyz(p.I)*Theta(p.I) -
+    3*DDalphayz*Power(W(p.I),2) + DDalphaxx*gamyz*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamyz*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamyz*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamyz*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamyz*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamyz*invgamzz*Power(W(p.I),2) -
+    gamyz*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyz*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyz*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    gamyz*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) +
+    3*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    2*gamyz*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) -
+    gamyz*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyz*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyz*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyz*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyz*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamyz*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamyz*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dtexAtzz[pI]
+dtexAtzz(p.I)
 =
-(3*dexAtxzz*betax[pI] + 3*dexAtyzz*betay[pI] + 3*dexAtzzz*betaz[pI] +
-    6*dbetazx*exAtxz[pI] - 6*invgamtxx*alpha[pI]*Power(exAtxz[pI],2) +
-    6*dbetazy*exAtyz[pI] - 12*invgamtxy*alpha[pI]*exAtxz[pI]*exAtyz[pI] -
-    6*invgamtyy*alpha[pI]*Power(exAtyz[pI],2) - 2*dbetaxx*exAtzz[pI] -
-    2*dbetayy*exAtzz[pI] + 4*dbetazz*exAtzz[pI] -
-    12*invgamtxz*alpha[pI]*exAtxz[pI]*exAtzz[pI] -
-    12*invgamtyz*alpha[pI]*exAtyz[pI]*exAtzz[pI] -
-    6*invgamtzz*alpha[pI]*Power(exAtzz[pI],2) +
-    3*alpha[pI]*exAtzz[pI]*exKh[pI] + 6*alpha[pI]*exAtzz[pI]*Theta[pI] -
-    3*DDalphazz*Power(W[pI],2) + DDalphaxx*gamzz*invgamxx*Power(W[pI],2) +
-    2*DDalphaxy*gamzz*invgamxy*Power(W[pI],2) +
-    2*DDalphaxz*gamzz*invgamxz*Power(W[pI],2) +
-    DDalphayy*gamzz*invgamyy*Power(W[pI],2) +
-    2*DDalphayz*gamzz*invgamyz*Power(W[pI],2) +
-    DDalphazz*gamzz*invgamzz*Power(W[pI],2) -
-    gamzz*invgamxx*Rxx*alpha[pI]*Power(W[pI],2) -
-    2*gamzz*invgamxy*Rxy*alpha[pI]*Power(W[pI],2) -
-    2*gamzz*invgamxz*Rxz*alpha[pI]*Power(W[pI],2) -
-    gamzz*invgamyy*Ryy*alpha[pI]*Power(W[pI],2) -
-    2*gamzz*invgamyz*Ryz*alpha[pI]*Power(W[pI],2) +
-    3*Rzz*alpha[pI]*Power(W[pI],2) -
-    gamzz*invgamzz*Rzz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamzz*invgamxx*Ssxx*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamzz*invgamxy*Ssxy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamzz*invgamxz*Ssxz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamzz*invgamyy*Ssyy*alpha[pI]*Power(W[pI],2) +
-    16*cpi*gamzz*invgamyz*Ssyz*alpha[pI]*Power(W[pI],2) -
-    24*cpi*Sszz*alpha[pI]*Power(W[pI],2) +
-    8*cpi*gamzz*invgamzz*Sszz*alpha[pI]*Power(W[pI],2))/3.
+(3*dexAtxzz*betax(p.I) + 3*dexAtyzz*betay(p.I) + 3*dexAtzzz*betaz(p.I) +
+    6*dbetazx*exAtxz(p.I) - 6*invgamtxx*alpha(p.I)*Power(exAtxz(p.I),2) +
+    6*dbetazy*exAtyz(p.I) - 12*invgamtxy*alpha(p.I)*exAtxz(p.I)*exAtyz(p.I) -
+    6*invgamtyy*alpha(p.I)*Power(exAtyz(p.I),2) - 2*dbetaxx*exAtzz(p.I) -
+    2*dbetayy*exAtzz(p.I) + 4*dbetazz*exAtzz(p.I) -
+    12*invgamtxz*alpha(p.I)*exAtxz(p.I)*exAtzz(p.I) -
+    12*invgamtyz*alpha(p.I)*exAtyz(p.I)*exAtzz(p.I) -
+    6*invgamtzz*alpha(p.I)*Power(exAtzz(p.I),2) +
+    3*alpha(p.I)*exAtzz(p.I)*exKh(p.I) + 6*alpha(p.I)*exAtzz(p.I)*Theta(p.I) -
+    3*DDalphazz*Power(W(p.I),2) + DDalphaxx*gamzz*invgamxx*Power(W(p.I),2) +
+    2*DDalphaxy*gamzz*invgamxy*Power(W(p.I),2) +
+    2*DDalphaxz*gamzz*invgamxz*Power(W(p.I),2) +
+    DDalphayy*gamzz*invgamyy*Power(W(p.I),2) +
+    2*DDalphayz*gamzz*invgamyz*Power(W(p.I),2) +
+    DDalphazz*gamzz*invgamzz*Power(W(p.I),2) -
+    gamzz*invgamxx*Rxx*alpha(p.I)*Power(W(p.I),2) -
+    2*gamzz*invgamxy*Rxy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamzz*invgamxz*Rxz*alpha(p.I)*Power(W(p.I),2) -
+    gamzz*invgamyy*Ryy*alpha(p.I)*Power(W(p.I),2) -
+    2*gamzz*invgamyz*Ryz*alpha(p.I)*Power(W(p.I),2) +
+    3*Rzz*alpha(p.I)*Power(W(p.I),2) -
+    gamzz*invgamzz*Rzz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamzz*invgamxx*Ssxx*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamzz*invgamxy*Ssxy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamzz*invgamxz*Ssxz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamzz*invgamyy*Ssyy*alpha(p.I)*Power(W(p.I),2) +
+    16*cpi*gamzz*invgamyz*Ssyz*alpha(p.I)*Power(W(p.I),2) -
+    24*cpi*Sszz*alpha(p.I)*Power(W(p.I),2) +
+    8*cpi*gamzz*invgamzz*Sszz*alpha(p.I)*Power(W(p.I),2))/3.
 ;
 
-dttrGtx[pI]
+dttrGtx(p.I)
 =
 (-6*dalphax*exAtUUxx - 6*dalphay*exAtUUxy - 6*dalphaz*exAtUUxz +
     4*ddbetaxxx*invgamtxx + ddbetaxyy*invgamtxx + ddbetaxzz*invgamtxx +
@@ -1684,18 +1684,18 @@ dttrGtx[pI]
     7*ddbetaxzx*invgamtxz + ddbetayzy*invgamtxz + ddbetazzz*invgamtxz +
     3*ddbetayyx*invgamtyy + 6*ddbetayzx*invgamtyz + 3*ddbetazzx*invgamtzz -
     dbetaxx*trGtdx + 2*dbetayy*trGtdx + 2*dbetazz*trGtdx -
-    3*dbetayx*trGtdy - 3*dbetazx*trGtdz + 3*dtrGtxx*betax[pI] +
-    3*dtrGtyx*betay[pI] + 3*dtrGtzx*betaz[pI] -
-    2*alpha[pI]*(9*dlnWx*exAtUUxx + 9*dlnWy*exAtUUxy + 9*dlnWz*exAtUUxz -
+    3*dbetayx*trGtdy - 3*dbetazx*trGtdz + 3*dtrGtxx*betax(p.I) +
+    3*dtrGtyx*betay(p.I) + 3*dtrGtzx*betaz(p.I) -
+    2*alpha(p.I)*(9*dlnWx*exAtUUxx + 9*dlnWy*exAtUUxy + 9*dlnWz*exAtUUxz -
        3*exAtUUxx*Gtxxx - 6*exAtUUxy*Gtxxy - 6*exAtUUxz*Gtxxz -
        3*exAtUUyy*Gtxyy - 6*exAtUUyz*Gtxyz - 3*exAtUUzz*Gtxzz +
        2*dexKhx*invgamtxx + dThetax*invgamtxx + 2*dexKhy*invgamtxy +
        dThetay*invgamtxy + 2*dexKhz*invgamtxz + dThetaz*invgamtxz +
        24*cpi*invgamtxx*Smx + 24*cpi*invgamtxy*Smy + 24*cpi*invgamtxz*Smz -
-       3*ckappa1*trGtdx + 3*ckappa1*trGtx[pI]))/3.
+       3*ckappa1*trGtdx + 3*ckappa1*trGtx(p.I)))/3.
 ;
 
-dttrGty[pI]
+dttrGty(p.I)
 =
 (-6*dalphax*exAtUUxy - 6*dalphay*exAtUUyy - 6*dalphaz*exAtUUyz +
     3*ddbetaxxy*invgamtxx + ddbetaxxx*invgamtxy + 7*ddbetaxyy*invgamtxy +
@@ -1703,18 +1703,18 @@ dttrGty[pI]
     4*ddbetayyy*invgamtyy + ddbetayzz*invgamtyy + ddbetaxzx*invgamtyz +
     7*ddbetayzy*invgamtyz + ddbetazzz*invgamtyz + 3*ddbetazzy*invgamtzz -
     3*dbetaxy*trGtdx + 2*dbetaxx*trGtdy - dbetayy*trGtdy +
-    2*dbetazz*trGtdy - 3*dbetazy*trGtdz + 3*dtrGtxy*betax[pI] +
-    3*dtrGtyy*betay[pI] + 3*dtrGtzy*betaz[pI] -
-    2*alpha[pI]*(9*dlnWx*exAtUUxy + 9*dlnWy*exAtUUyy + 9*dlnWz*exAtUUyz -
+    2*dbetazz*trGtdy - 3*dbetazy*trGtdz + 3*dtrGtxy*betax(p.I) +
+    3*dtrGtyy*betay(p.I) + 3*dtrGtzy*betaz(p.I) -
+    2*alpha(p.I)*(9*dlnWx*exAtUUxy + 9*dlnWy*exAtUUyy + 9*dlnWz*exAtUUyz -
        3*exAtUUxx*Gtyxx - 6*exAtUUxy*Gtyxy - 6*exAtUUxz*Gtyxz -
        3*exAtUUyy*Gtyyy - 6*exAtUUyz*Gtyyz - 3*exAtUUzz*Gtyzz +
        2*dexKhx*invgamtxy + dThetax*invgamtxy + 2*dexKhy*invgamtyy +
        dThetay*invgamtyy + 2*dexKhz*invgamtyz + dThetaz*invgamtyz +
        24*cpi*invgamtxy*Smx + 24*cpi*invgamtyy*Smy + 24*cpi*invgamtyz*Smz -
-       3*ckappa1*trGtdy + 3*ckappa1*trGty[pI]))/3.
+       3*ckappa1*trGtdy + 3*ckappa1*trGty(p.I)))/3.
 ;
 
-dttrGtz[pI]
+dttrGtz(p.I)
 =
 (-6*dalphax*exAtUUxz - 6*dalphay*exAtUUyz - 6*dalphaz*exAtUUzz +
     3*ddbetaxxz*invgamtxx + 6*ddbetaxyz*invgamtxy + ddbetaxxx*invgamtxz +
@@ -1722,50 +1722,50 @@ dttrGtz[pI]
     ddbetaxyx*invgamtyz + ddbetayyy*invgamtyz + 7*ddbetayzz*invgamtyz +
     ddbetaxzx*invgamtzz + ddbetayzy*invgamtzz + 4*ddbetazzz*invgamtzz -
     3*dbetaxz*trGtdx - 3*dbetayz*trGtdy + 2*dbetaxx*trGtdz +
-    2*dbetayy*trGtdz - dbetazz*trGtdz + 3*dtrGtxz*betax[pI] +
-    3*dtrGtyz*betay[pI] + 3*dtrGtzz*betaz[pI] -
-    2*alpha[pI]*(9*dlnWx*exAtUUxz + 9*dlnWy*exAtUUyz + 9*dlnWz*exAtUUzz -
+    2*dbetayy*trGtdz - dbetazz*trGtdz + 3*dtrGtxz*betax(p.I) +
+    3*dtrGtyz*betay(p.I) + 3*dtrGtzz*betaz(p.I) -
+    2*alpha(p.I)*(9*dlnWx*exAtUUxz + 9*dlnWy*exAtUUyz + 9*dlnWz*exAtUUzz -
        3*exAtUUxx*Gtzxx - 6*exAtUUxy*Gtzxy - 6*exAtUUxz*Gtzxz -
        3*exAtUUyy*Gtzyy - 6*exAtUUyz*Gtzyz - 3*exAtUUzz*Gtzzz +
        2*dexKhx*invgamtxz + dThetax*invgamtxz + 2*dexKhy*invgamtyz +
        dThetay*invgamtyz + 2*dexKhz*invgamtzz + dThetaz*invgamtzz +
        24*cpi*invgamtxz*Smx + 24*cpi*invgamtyz*Smy + 24*cpi*invgamtzz*Smz -
-       3*ckappa1*trGtdz + 3*ckappa1*trGtz[pI]))/3.
+       3*ckappa1*trGtdz + 3*ckappa1*trGtz(p.I)))/3.
 ;
 
-dtTheta[pI]
+dtTheta(p.I)
 =
-dThetax*betax[pI] + dThetay*betay[pI] + dThetaz*betaz[pI] -
-  (alpha[pI]*(48*cpi*rho - 3*trR + 3*exAtUUxx*exAtxx[pI] +
-       6*exAtUUxy*exAtxy[pI] + 6*exAtUUxz*exAtxz[pI] +
-       3*exAtUUyy*exAtyy[pI] + 6*exAtUUyz*exAtyz[pI] +
-       3*exAtUUzz*exAtzz[pI] - 2*Power(exKh[pI],2) + 12*ckappa1*Theta[pI] +
-       6*ckappa1*ckappa2*Theta[pI] - 8*exKh[pI]*Theta[pI] -
-       8*Power(Theta[pI],2)))/6.
+dThetax*betax(p.I) + dThetay*betay(p.I) + dThetaz*betaz(p.I) -
+  (alpha(p.I)*(48*cpi*rho - 3*trR + 3*exAtUUxx*exAtxx(p.I) +
+       6*exAtUUxy*exAtxy(p.I) + 6*exAtUUxz*exAtxz(p.I) +
+       3*exAtUUyy*exAtyy(p.I) + 6*exAtUUyz*exAtyz(p.I) +
+       3*exAtUUzz*exAtzz(p.I) - 2*Power(exKh(p.I),2) + 12*ckappa1*Theta(p.I) +
+       6*ckappa1*ckappa2*Theta(p.I) - 8*exKh(p.I)*Theta(p.I) -
+       8*Power(Theta(p.I),2)))/6.
 ;
 
-dtalpha[pI]
+dtalpha(p.I)
 =
-dalphax*betax[pI] + dalphay*betay[pI] + dalphaz*betaz[pI] -
-  cmuL*alpha[pI]*exKh[pI]
+dalphax*betax(p.I) + dalphay*betay(p.I) + dalphaz*betaz(p.I) -
+  cmuL*alpha(p.I)*exKh(p.I)
 ;
 
-dtbetax[pI]
+dtbetax(p.I)
 =
-(-ceta + dbetaxx)*betax[pI] + dbetayx*betay[pI] + dbetazx*betaz[pI] +
-  cmuS*trGtx[pI]
+(-ceta + dbetaxx)*betax(p.I) + dbetayx*betay(p.I) + dbetazx*betaz(p.I) +
+  cmuS*trGtx(p.I)
 ;
 
-dtbetay[pI]
+dtbetay(p.I)
 =
-dbetaxy*betax[pI] + (-ceta + dbetayy)*betay[pI] + dbetazy*betaz[pI] +
-  cmuS*trGty[pI]
+dbetaxy*betax(p.I) + (-ceta + dbetayy)*betay(p.I) + dbetazy*betaz(p.I) +
+  cmuS*trGty(p.I)
 ;
 
-dtbetaz[pI]
+dtbetaz(p.I)
 =
-dbetaxz*betax[pI] + dbetayz*betay[pI] - ceta*betaz[pI] + dbetazz*betaz[pI] +
-  cmuS*trGtz[pI]
+dbetaxz*betax(p.I) + dbetayz*betay(p.I) - ceta*betaz(p.I) + dbetazz*betaz(p.I) +
+  cmuS*trGtz(p.I)
 ;
 
 
