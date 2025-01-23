@@ -19,67 +19,67 @@ using namespace Loop;
 extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial1;
 
-  const array<int, dim> indextype = {0, 0, 0};
-  const GF3D2layout layout1(cctkGH, indextype);
-
   // Input grid functions
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_g1{gxx, gxy, gxz, gyy, gyz, gzz};
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_K1{kxx, kxy, kxz, kyy, kyz, kzz};
-  const GF3D2<const CCTK_REAL> &gf_alp1 = alp;
-  const vec<GF3D2<const CCTK_REAL>, 3> gf_beta1{betax, betay, betaz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgamma{gxx, gxy, gxz,
+                                                    gyy, gyz, gzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMexK{kxx, kxy, kxz, kyy, kyz, kzz};
+  const GF3D2<const CCTK_REAL> &gf_ADMalpha = alp;
+  const vec<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
 
   // Output grid functions
-  const GF3D2<CCTK_REAL> &gf_W1 = W;
-  const smat<GF3D2<CCTK_REAL>, 3> gf_gammat1{gammatxx, gammatxy, gammatxz,
-                                             gammatyy, gammatyz, gammatzz};
-  const GF3D2<CCTK_REAL> &gf_Kh1 = Kh;
-  const smat<GF3D2<CCTK_REAL>, 3> gf_At1{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
-  const GF3D2<CCTK_REAL> &gf_Theta1 = Theta;
-  const GF3D2<CCTK_REAL> &gf_alphaG1 = alphaG;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_betaG1{betaGx, betaGy, betaGz};
-
-  typedef simd<CCTK_REAL> vreal;
-  typedef simdl<CCTK_REAL> vbool;
-  constexpr size_t vsize = tuple_size_v<vreal>;
+  const GF3D2<CCTK_REAL> &gf_W = W;
+  const smat<GF3D2<CCTK_REAL>, 3> gf_gammat{gammatxx, gammatxy, gammatxz,
+                                            gammatyy, gammatyz, gammatzz};
+  const GF3D2<CCTK_REAL> &gf_Kh = Kh;
+  const smat<GF3D2<CCTK_REAL>, 3> gf_At{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
+  const GF3D2<CCTK_REAL> &gf_Theta = Theta;
+  const GF3D2<CCTK_REAL> &gf_alphaG = alphaG;
+  const vec<GF3D2<CCTK_REAL>, 3> gf_betaG{betaGx, betaGy, betaGz};
 
 #ifdef __CUDACC__
   const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial1::initial1");
 #endif
-  grid.loop_int_device<0, 0, 0, vsize>(
-      grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-        const vbool mask = mask_for_loop_tail<vbool>(p.i, p.imax);
-        const GF3D2index index1(layout1, p.I);
 
-        // Load (initilize those masked grid with more reasonable value)
-        const smat<vreal, 3> g = gf_g1(mask, index1, one<smat<int, 3>>()());
-        const smat<vreal, 3> K = gf_K1(mask, index1);
-        const vreal alphaG = gf_alp1(mask, index1, 1);
-        const vec<vreal, 3> betaG = gf_beta1(mask, index1);
+  grid.loop_int_device<0, 0, 0>(
+      grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
+        // ADM variables
+        const smat<CCTK_REAL, 3> g(
+            [&](int i, int j) ARITH_INLINE { return gf_ADMgamma(i, j)(p.I); });
+        const smat<CCTK_REAL, 3> K(
+            [&](int i, int j) ARITH_INLINE { return gf_ADMexK(i, j)(p.I); });
+        const CCTK_REAL alpha = gf_ADMalpha(p.I);
+        const vec<CCTK_REAL, 3> beta(
+            [&](int i) ARITH_INLINE { return gf_ADMbeta(i)(p.I); });
 
         // Calculate Z4c variables (all except Gammat)
-        const vreal detg = calc_det(g);
-        const smat<vreal, 3> gu = calc_inv(g, detg);
+        const CCTK_REAL detg = calc_det(g);
+        const smat<CCTK_REAL, 3> gu = calc_inv(g, detg);
 
-        const vreal W = 1 / cbrt(sqrt(detg));
-        const smat<vreal, 3> gammat(
-            [&](int a, int b) ARITH_INLINE { return W * W * g(a, b); });
-        const vreal trK = sum_symm<3>(
-            [&](int x, int y) ARITH_INLINE { return gu(x, y) * K(x, y); });
-        const vreal Theta = 0;
-        const vreal Kh = trK - 2 * Theta;
-        const smat<vreal, 3> At([&](int a, int b) ARITH_INLINE {
-          return W * W * (K(a, b) - trK / 3 * g(a, b));
+        const CCTK_REAL W = 1 / cbrt(sqrt(detg));
+        const smat<CCTK_REAL, 3> gammat(
+            [&](int i, int j) ARITH_INLINE { return W * W * g(i, j); });
+        const CCTK_REAL trK = sum_symm<3>(
+            [&](int i, int j) ARITH_INLINE { return gu(i, j) * K(i, j); });
+        const CCTK_REAL Theta = 0;
+        const CCTK_REAL Kh = trK - 2 * Theta;
+        const smat<CCTK_REAL, 3> At([&](int i, int j) ARITH_INLINE {
+          return W * W * (K(i, j) - trK / 3 * g(i, j));
         });
 
         // Store
-        gf_W1.store(mask, index1, W);
-        gf_gammat1.store(mask, index1, gammat);
-        gf_Kh1.store(mask, index1, Kh);
-        gf_At1.store(mask, index1, At);
-        gf_Theta1.store(mask, index1, Theta);
-        gf_alphaG1.store(mask, index1, alphaG);
-        gf_betaG1.store(mask, index1, betaG);
+        gf_W(p.I) = W;
+        gf_Theta(p.I) = Theta;
+        gf_Kh(p.I) = Kh;
+        gf_alphaG(p.I) = alpha;
+        for (int i = 0; i < 3; ++i) {
+          for (int j = i; j < 3; ++j) {
+            gf_gammat(i, j)(p.I) = gammat(i, j);
+            gf_At(i, j)(p.I) = At(i, j);
+          }
+          gf_betaG(i)(p.I) = beta(i);
+        }
       });
+
 #ifdef __CUDACC__
   nvtxRangeEnd(range);
 #endif
