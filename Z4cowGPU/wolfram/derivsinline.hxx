@@ -5,13 +5,15 @@
 #define DERIVSINLINE_HXX
 
 template <int D, typename T>
-inline T fd_1st(const cGH *restrict const cctkGH, T *gf, int i, int j, int k) inline {
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+fd_1st(const GF3D2<const T> &gf, const PointDesc &p) {
   return
     (-8*gf(p.I-p.DI[D]) + gf(p.I-2*p.DI[D]) + 8*gf(p.I+p.DI[D]) - gf(p.I+2*p.DI[D]))/(12.*p.DX[D]);
 };
 
 template <int D1, int D2, typename T>
-inline T fd_2nd(const cGH *restrict const cctkGH, T *gf, int i, int j, int k) inline {
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+fd_2nd(const GF3D2<const T> &gf, const PointDesc &p) {
   if constexpr (D1 == D2) {
   constexpr int D = D1;
     return
