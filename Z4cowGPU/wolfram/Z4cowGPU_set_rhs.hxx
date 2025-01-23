@@ -1,8 +1,8 @@
-/* Z4cow_set_rhs.hxx */
+/* Z4cowGPU_set_rhs.hxx */
 /* Produced with Generato */
 
-#ifndef Z4COW_SET_RHS_HXX
-#define Z4COW_SET_RHS_HXX
+#ifndef Z4COWGPU_SET_RHS_HXX
+#define Z4COWGPU_SET_RHS_HXX
 
 const auto &eTtt = gf_eTtt;
 const auto &eTt1 = gf_eTt(0);
@@ -1805,6 +1805,6 @@ dbeta13*beta1(p.I) + dbeta23*beta2(p.I) - ceta*beta3(p.I) + dbeta33*beta3(p.I) +
   });
 });
 
-#endif // #ifndef Z4COW_SET_RHS_HXX
+#endif // #ifndef Z4COWGPU_SET_RHS_HXX
 
-/* Z4cow_set_rhs.hxx */
+/* Z4cowGPU_set_rhs.hxx */
