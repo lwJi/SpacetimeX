@@ -45,15 +45,6 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
       CCTK_DELTA_SPACE(2),
   };
 
-  const array<int, dim> indextype = {0, 0, 0};
-  const array<int, dim> nghostzones = {cctk_nghostzones[0], cctk_nghostzones[1],
-                                       cctk_nghostzones[2]};
-  vect<int, dim> imin, imax;
-  GridDescBase(cctkGH).box_int<0, 0, 0>(nghostzones, imin, imax);
-  // suffix 2: with ghost zones, suffix 5: without ghost zones
-  const GF3D2layout layout2(cctkGH, indextype);
-  const GF3D5layout layout5(imin, imax);
-
   // Input grid functions
   const GF3D2<const CCTK_REAL> &gf_W = W;
   const smat<GF3D2<const CCTK_REAL>, 3> gf_gamt{gammatxx, gammatxy, gammatxz,
@@ -84,82 +75,6 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const GF3D2<CCTK_REAL> &gf_dtTheta = Theta_rhs;
   const GF3D2<CCTK_REAL> &gf_dtalpha = alphaG_rhs;
   const vec<GF3D2<CCTK_REAL>, 3> gf_dtbeta{betaGx_rhs, betaGy_rhs, betaGz_rhs};
-
-  // Define derivs lambdas
-  const auto calcderivs = [&](const auto &gf, const auto &dgf,
-                              const auto &gf0) {
-    Derivs::calc_derivs<0, 0, 0>(gf, dgf, layout5, grid, gf0, dx, deriv_order);
-  };
-  const auto calcderivs2 = [&](const auto &gf, const auto &dgf,
-                               const auto &ddgf, const auto &gf0) {
-    Derivs::calc_derivs2<0, 0, 0>(gf, dgf, ddgf, layout5, grid, gf0, dx,
-                                  deriv_order);
-  };
-
-  // Tile variables for derivatives and so on
-  const int ntmps = 154;
-  GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
-  int itmp = 0;
-
-  const auto make_gf = [&]() { return GF3D5<CCTK_REAL>(tmps(itmp++)); };
-  const auto make_vec = [&](const auto &f) {
-    return vec<result_of_t<decltype(f)()>, 3>([&](int) { return f(); });
-  };
-  const auto make_mat = [&](const auto &f) {
-    return smat<result_of_t<decltype(f)()>, 3>([&](int, int) { return f(); });
-  };
-  const auto make_vec_gf = [&]() { return make_vec(make_gf); };
-  const auto make_mat_gf = [&]() { return make_mat(make_gf); };
-  const auto make_vec_vec_gf = [&]() { return make_vec(make_vec_gf); };
-  const auto make_vec_mat_gf = [&]() { return make_vec(make_mat_gf); };
-  const auto make_mat_vec_gf = [&]() { return make_mat(make_vec_gf); };
-  const auto make_mat_mat_gf = [&]() { return make_mat(make_mat_gf); };
-
-  const GF3D5<CCTK_REAL> tl_W(make_gf());
-  const vec<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
-  const smat<GF3D5<CCTK_REAL>, 3> tl_ddW(make_mat_gf());
-  calcderivs2(tl_W, tl_dW, tl_ddW, gf_W);
-
-  const smat<GF3D5<CCTK_REAL>, 3> tl_gamt(make_mat_gf());
-  const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dgamt(make_mat_vec_gf());
-  const smat<smat<GF3D5<CCTK_REAL>, 3>, 3> tl_ddgamt(make_mat_mat_gf());
-  calcderivs2(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
-
-  const GF3D5<CCTK_REAL> tl_exKh(make_gf());
-  const vec<GF3D5<CCTK_REAL>, 3> tl_dexKh(make_vec_gf());
-  calcderivs(tl_exKh, tl_dexKh, gf_exKh);
-
-  const smat<GF3D5<CCTK_REAL>, 3> tl_exAt(make_mat_gf());
-  const smat<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dexAt(make_mat_vec_gf());
-  calcderivs(tl_exAt, tl_dexAt, gf_exAt);
-
-  const vec<GF3D5<CCTK_REAL>, 3> tl_trGt(make_vec_gf());
-  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(make_vec_vec_gf());
-  calcderivs(tl_trGt, tl_dtrGt, gf_trGt);
-
-  const GF3D5<CCTK_REAL> tl_Theta(make_gf());
-  const vec<GF3D5<CCTK_REAL>, 3> tl_dTheta(make_vec_gf());
-  calcderivs(tl_Theta, tl_dTheta, gf_Theta);
-
-  const GF3D5<CCTK_REAL> tl_alpha(make_gf());
-  const vec<GF3D5<CCTK_REAL>, 3> tl_dalpha(make_vec_gf());
-  const smat<GF3D5<CCTK_REAL>, 3> tl_ddalpha(make_mat_gf());
-  calcderivs2(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
-
-  const vec<GF3D5<CCTK_REAL>, 3> tl_beta(make_vec_gf());
-  const vec<vec<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(make_vec_vec_gf());
-  const vec<smat<GF3D5<CCTK_REAL>, 3>, 3> tl_ddbeta(make_vec_mat_gf());
-  calcderivs2(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
-
-  if (itmp != ntmps)
-    CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d", ntmps,
-                itmp);
-  itmp = -1;
-
-  // simd types
-  typedef simd<CCTK_REAL> vreal;
-  typedef simdl<CCTK_REAL> vbool;
-  constexpr size_t vsize = tuple_size_v<vreal>;
 
   // parameters
   const CCTK_REAL cpi = M_PI;
