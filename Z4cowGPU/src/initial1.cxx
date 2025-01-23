@@ -12,12 +12,12 @@
 
 #include <cmath>
 
-namespace Z4cow {
+namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-extern "C" void Z4cow_Initial1(CCTK_ARGUMENTS) {
-  DECLARE_CCTK_ARGUMENTSX_Z4cow_Initial1;
+extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
+  DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial1;
 
   const array<int, dim> indextype = {0, 0, 0};
   const GF3D2layout layout1(cctkGH, indextype);
@@ -43,7 +43,7 @@ extern "C" void Z4cow_Initial1(CCTK_ARGUMENTS) {
   constexpr size_t vsize = tuple_size_v<vreal>;
 
 #ifdef __CUDACC__
-  const nvtxRangeId_t range = nvtxRangeStartA("Z4cow_Initial1::initial1");
+  const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial1::initial1");
 #endif
   grid.loop_int_device<0, 0, 0, vsize>(
       grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
@@ -85,4 +85,4 @@ extern "C" void Z4cow_Initial1(CCTK_ARGUMENTS) {
 #endif
 }
 
-} // namespace Z4cow
+} // namespace Z4cowGPU

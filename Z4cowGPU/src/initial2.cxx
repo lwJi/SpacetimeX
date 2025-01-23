@@ -9,7 +9,7 @@
 #include <nvtx3/nvToolsExt.h>
 #endif
 
-namespace Z4cow {
+namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
@@ -36,8 +36,8 @@ calc_gamma(const smat<T, D> &gu, const vec<smat<T, D>, D> &Gammal) {
   });
 }
 
-extern "C" void Z4cow_Initial2(CCTK_ARGUMENTS) {
-  DECLARE_CCTK_ARGUMENTSX_Z4cow_Initial2;
+extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
+  DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial2;
   DECLARE_CCTK_PARAMETERS;
 
   const vect<CCTK_REAL, 3> dx{
@@ -82,7 +82,7 @@ extern "C" void Z4cow_Initial2(CCTK_ARGUMENTS) {
   }
 
 #ifdef __CUDACC__
-  const nvtxRangeId_t range = nvtxRangeStartA("Z4cow_Initial2::initial2");
+  const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial2::initial2");
 #endif
   grid.loop_int_device<0, 0, 0, vsize>(
       grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
@@ -115,4 +115,4 @@ extern "C" void Z4cow_Initial2(CCTK_ARGUMENTS) {
 #endif
 }
 
-} // namespace Z4cow
+} // namespace Z4cowGPU

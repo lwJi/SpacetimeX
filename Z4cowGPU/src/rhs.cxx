@@ -22,7 +22,7 @@
 
 #include <cmath>
 
-namespace Z4cow {
+namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
@@ -31,8 +31,8 @@ CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
   return (y == 2) ? Arith::pow2(x) : Arith::pown(x, y);
 }
 
-extern "C" void Z4cow_RHS(CCTK_ARGUMENTS) {
-  DECLARE_CCTK_ARGUMENTSX_Z4cow_RHS;
+extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
+  DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
 
   for (int d = 0; d < 3; ++d)
@@ -179,14 +179,10 @@ extern "C" void Z4cow_RHS(CCTK_ARGUMENTS) {
 
   // Loop
 #ifdef __CUDACC__
-  const nvtxRangeId_t range = nvtxRangeStartA("Z4cow_RHS::rhs");
+  const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_RHS::rhs");
 #endif
 
-  if (set_Theta_zero) {
-#include "../wolfram/Z4cow_set_rhs_freezeTheta.hxx"
-  } else {
-#include "../wolfram/Z4cow_set_rhs.hxx"
-  }
+#include "../wolfram/Z4cowGPU_set_rhs.hxx"
 
 #ifdef __CUDACC__
   nvtxRangeEnd(range);
@@ -267,4 +263,4 @@ extern "C" void Z4cow_RHS(CCTK_ARGUMENTS) {
     apply_diss(gf_beta(a), gf_dtbeta(a));
 }
 
-} // namespace Z4cow
+} // namespace Z4cowGPU
