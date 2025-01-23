@@ -40,75 +40,43 @@ extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial2;
   DECLARE_CCTK_PARAMETERS;
 
-  const vect<CCTK_REAL, 3> dx{
-      CCTK_DELTA_SPACE(0),
-      CCTK_DELTA_SPACE(1),
-      CCTK_DELTA_SPACE(2),
-  };
-
-  const array<int, dim> indextype = {0, 0, 0};
-  const GF3D2layout layout1(cctkGH, indextype);
-
   // Input grid functions
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_gammat1{
-      gammatxx, gammatxy, gammatxz, gammatyy, gammatyz, gammatzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_gammat{gammatxx, gammatxy, gammatxz,
+                                                  gammatyy, gammatyz, gammatzz};
 
   // Output grid functions
-  const vec<GF3D2<CCTK_REAL>, 3> gf_Gamt1{Gamtx, Gamty, Gamtz};
-
-  typedef simd<CCTK_REAL> vreal;
-  typedef simdl<CCTK_REAL> vbool;
-  constexpr size_t vsize = tuple_size_v<vreal>;
-
-  // Define derivs function
-  vec<vreal, dim> (*calc_deriv)(const GF3D2<const CCTK_REAL> &, const vbool &,
-                                const vect<int, dim> &,
-                                const vect<CCTK_REAL, dim> &);
-  switch (deriv_order) {
-  case 2:
-    calc_deriv = &Derivs::calc_deriv<2>;
-    break;
-  case 4:
-    calc_deriv = &Derivs::calc_deriv<4>;
-    break;
-  case 6:
-    calc_deriv = &Derivs::calc_deriv<6>;
-    break;
-  case 8:
-    calc_deriv = &Derivs::calc_deriv<8>;
-    break;
-  default:
-    assert(0);
-  }
+  const vec<GF3D2<CCTK_REAL>, 3> gf_Gamt{Gamtx, Gamty, Gamtz};
 
 #ifdef __CUDACC__
   const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial2::initial2");
 #endif
-  grid.loop_int_device<0, 0, 0, vsize>(
+  grid.loop_int_device<0, 0, 0>(
       grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-        const vbool mask = mask_for_loop_tail<vbool>(p.i, p.imax);
-        const GF3D2index index1(layout1, p.I);
-
         // Load
-        const smat<vreal, 3> gammat = gf_gammat1(mask, index1);
+        const smat<CCTK_REAL, 3> gammat(
+            [&](int i, int j) ARITH_INLINE { return gf_gammat(i, j)(p.I); });
 
         // Calculate Z4c variables (only Gamt)
-        const smat<vreal, 3> gammatu = calc_inv(gammat, vreal(1));
+        const smat<CCTK_REAL, 3> gammatu = calc_inv(gammat, CCTK_REAL(1));
 
-        const smat<vec<vreal, 3>, 3> dgammat([&](int a, int b) {
-          return calc_deriv(gf_gammat1(a, b), mask, p.I, dx);
+        const smat<vec<CCTK_REAL, 3>, 3> dgammat([&](int i, int j) {
+          return vec<CCTK_REAL, 3>{fd_1st<1>(gf_gammat(i, j), p),
+                                   fd_1st<2>(gf_gammat(i, j), p),
+                                   fd_1st<3>(gf_gammat(i, j), p)};
         });
 
-        const vec<smat<vreal, 3>, 3> Gammatl = calc_gammal(dgammat);
-        const vec<smat<vreal, 3>, 3> Gammat = calc_gamma(gammatu, Gammatl);
-        const vec<vreal, 3> Gamt([&](int a) ARITH_INLINE {
+        const vec<smat<CCTK_REAL, 3>, 3> Gammatl = calc_gammal(dgammat);
+        const vec<smat<CCTK_REAL, 3>, 3> Gammat = calc_gamma(gammatu, Gammatl);
+        const vec<CCTK_REAL, 3> Gamt([&](int a) ARITH_INLINE {
           return sum_symm<3>([&](int x, int y) ARITH_INLINE {
             return gammatu(x, y) * Gammat(a)(x, y);
           });
         });
 
         // Store
-        gf_Gamt1.store(mask, index1, Gamt);
+        for (int i; i < 3; ++i) {
+          gf_Gamt(i)(p.I) = Gamt(i);
+        }
       });
 #ifdef __CUDACC__
   nvtxRangeEnd(range);
