@@ -4,16 +4,16 @@
 #ifndef DERIVSINLINE_HXX
 #define DERIVSINLINE_HXX
 
-template <int D, typename T>
-CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st(const GF3D2<const T> &gf, const PointDesc &p) {
+template <int D>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline CCTK_REAL
+fd_1st(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {
   return
     (-8*gf(p.I-p.DI[D]) + gf(p.I-2*p.DI[D]) + 8*gf(p.I+p.DI[D]) - gf(p.I+2*p.DI[D]))/(12.*p.DX[D]);
 };
 
-template <int D1, int D2, typename T>
-CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd(const GF3D2<const T> &gf, const PointDesc &p) {
+template <int D1, int D2>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline CCTK_REAL
+fd_2nd(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {
   if constexpr (D1 == D2) {
   constexpr int D = D1;
     return
