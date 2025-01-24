@@ -27,7 +27,6 @@ SetOutputFile[FileNameJoin[{Directory[], "derivsinline.hxx"}]];
 
 SetMainPrint[
   pr["#include <loop_device.hxx>"];
-  pr["#include <cctk.h>"];
   pr[];
 
   pr["namespace Z4cowGPU {"];
@@ -41,17 +40,17 @@ SetMainPrint[
   pr[];
 
 
-  pr["template <int D>"];
-  pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline CCTK_REAL"];
-  pr["fd_1st(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {"];
+  pr["template <int D, typename T>"];
+  pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
+  pr["fd_1st(const GF3D2<const T> &gf, const PointDesc &p) {"];
   pr["  return"];
   PrintFDExpression[4, 1];
   pr["};"];
   pr[];
 
-  pr["template <int D1, int D2>"];
-  pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline CCTK_REAL"];
-  pr["fd_2nd(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {"];
+  pr["template <int D1, int D2, typename T>"];
+  pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
+  pr["fd_2nd(const GF3D2<const T> &gf, const PointDesc &p) {"];
   pr["  if constexpr (D1 == D2) {"];
   pr["  constexpr int D = D1;"];
   pr["    return"];
