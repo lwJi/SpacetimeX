@@ -169,4 +169,8 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
 #endif
 }
 
+extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
+  // do nothing
+}
+
 } // namespace Z4cowGPU
