@@ -22,6 +22,8 @@
 
 #include <cmath>
 
+#include "../wolfram/derivsinline.hxx"
+
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
@@ -82,15 +84,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL ckappa2 = kappa2;
   const CCTK_REAL cmuL = f_mu_L;
   const CCTK_REAL cmuS = f_mu_S;
-  // const CCTK_REAL ceta = eta;
-  const auto calceta = [=] CCTK_DEVICE(
-                           const vreal x, const CCTK_REAL y,
-                           const CCTK_REAL z) CCTK_ATTRIBUTE_ALWAYS_INLINE {
-    const vreal r = sqrt(x * x + y * y + z * z);
-    const CCTK_REAL is4 =
-        1.0 / (veta_width * veta_width * veta_width * veta_width);
-    return (veta_central - veta_outer) * exp(-r * r * r * r * is4) + veta_outer;
-  };
+  const CCTK_REAL ceta = eta;
 
   // Loop
 #ifdef __CUDACC__
