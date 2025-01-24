@@ -28,11 +28,6 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-template <typename T>
-CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
-  return (y == 2) ? Arith::pow2(x) : Arith::pown(x, y);
-}
-
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
@@ -48,19 +43,19 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   };
 
   // Input grid functions
-  const GF3D2<const CCTK_REAL> &gf_W = W;
+  // const GF3D2<const CCTK_REAL> &gf_W = W;
   const smat<GF3D2<const CCTK_REAL>, 3> gf_gamt{gammatxx, gammatxy, gammatxz,
                                                 gammatyy, gammatyz, gammatzz};
   const GF3D2<const CCTK_REAL> &gf_exKh = Kh;
   const smat<GF3D2<const CCTK_REAL>, 3> gf_exAt{Atxx, Atxy, Atxz,
                                                 Atyy, Atyz, Atzz};
   const vec<GF3D2<const CCTK_REAL>, 3> gf_trGt{Gamtx, Gamty, Gamtz};
-  const GF3D2<const CCTK_REAL> &gf_Theta = Theta;
+  // const GF3D2<const CCTK_REAL> &gf_Theta = Theta;
   const GF3D2<const CCTK_REAL> &gf_alpha = alphaG;
   const vec<GF3D2<const CCTK_REAL>, 3> gf_beta{betaGx, betaGy, betaGz};
 
   // More input grid functions
-  const GF3D2<const CCTK_REAL> &gf_eTtt = eTtt;
+  // const GF3D2<const CCTK_REAL> &gf_eTtt = eTtt;
   const vec<GF3D2<const CCTK_REAL>, 3> gf_eTt{eTtx, eTty, eTtz};
   const smat<GF3D2<const CCTK_REAL>, 3> gf_eT{eTxx, eTxy, eTxz,
                                               eTyy, eTyz, eTzz};
@@ -172,7 +167,6 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   for (int a = 0; a < 3; ++a)
     apply_diss(gf_beta(a), gf_dtbeta(a));
 #endif
-
 }
 
 } // namespace Z4cowGPU

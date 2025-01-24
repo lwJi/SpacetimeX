@@ -4,6 +4,17 @@
 #ifndef DERIVSINLINE_HXX
 #define DERIVSINLINE_HXX
 
+#include <loop_device.hxx>
+#include <cctk.h>
+
+namespace Z4cowGPU {
+using namespace Loop;
+
+template <typename T>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
+  return (y == 2) ? Arith::pow2(x) : Arith::pown(x, y);
+}
+
 template <int D>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline CCTK_REAL
 fd_1st(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {
@@ -23,6 +34,8 @@ fd_2nd(const GF3D2<const CCTK_REAL> &gf, const PointDesc &p) {
     (64*gf(p.I-p.DI[D1]-p.DI[D2]) - 8*gf(p.I-p.DI[D1]-2*p.DI[D2]) - 64*gf(p.I-p.DI[D1]+p.DI[D2]) + 8*gf(p.I-p.DI[D1]+2*p.DI[D2]) - 8*gf(p.I-2*p.DI[D1]-p.DI[D2]) + gf(p.I-2*p.DI[D1]-2*p.DI[D2]) + 8*gf(p.I-2*p.DI[D1]+p.DI[D2]) - gf(p.I-2*p.DI[D1]+2*p.DI[D2]) - 64*gf(p.I+p.DI[D1]-p.DI[D2]) + 8*gf(p.I+p.DI[D1]-2*p.DI[D2]) + 64*gf(p.I+p.DI[D1]+p.DI[D2]) - 8*gf(p.I+p.DI[D1]+2*p.DI[D2]) + 8*gf(p.I+2*p.DI[D1]-p.DI[D2]) - gf(p.I+2*p.DI[D1]-2*p.DI[D2]) - 8*gf(p.I+2*p.DI[D1]+p.DI[D2]) + gf(p.I+2*p.DI[D1]+2*p.DI[D2]))/(144.*p.DX[D1]*p.DX[D2]);
   }
 };
+
+} // namespace Z4cowGPU
 
 #endif // #ifndef DERIVSINLINE_HXX
 

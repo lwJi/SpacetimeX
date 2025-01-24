@@ -9,6 +9,8 @@
 #include <nvtx3/nvToolsExt.h>
 #endif
 
+#include "../wolfram/derivsinline.hxx"
+
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
