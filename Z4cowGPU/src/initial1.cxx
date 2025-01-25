@@ -22,8 +22,7 @@ extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial1;
 
   // Input grid functions
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgam{gxx, gxy, gxz,
-                                                    gyy, gyz, gzz};
+  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgam{gxx, gxy, gxz, gyy, gyz, gzz};
   const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMK{kxx, kxy, kxz, kyy, kyz, kzz};
   const GF3D2<const CCTK_REAL> &gf_ADMalpha = alp;
   const vec<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
