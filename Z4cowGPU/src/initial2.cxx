@@ -15,29 +15,6 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-// Gammal_abc
-template <typename T, int D>
-ARITH_INLINE ARITH_DEVICE ARITH_HOST constexpr vec<smat<T, D>, D>
-calc_gammal(const smat<vec<T, D>, D> &dg) {
-  return vec<smat<T, D>, D>([&](int a) ARITH_INLINE {
-    return smat<T, D>([&](int b, int c) ARITH_INLINE {
-      return (dg(a, b)(c) + dg(a, c)(b) - dg(b, c)(a)) / 2;
-    });
-  });
-}
-
-// Gamma^a_bc
-template <typename T, int D>
-ARITH_INLINE ARITH_DEVICE ARITH_HOST constexpr vec<smat<T, D>, D>
-calc_gamma(const smat<T, D> &gu, const vec<smat<T, D>, D> &Gammal) {
-  return vec<smat<T, D>, D>([&](int a) ARITH_INLINE {
-    return smat<T, D>([&](int b, int c) ARITH_INLINE {
-      return sum<D>([&](int x)
-                        ARITH_INLINE { return gu(a, x) * Gammal(x)(b, c); });
-    });
-  });
-}
-
 extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial2;
   DECLARE_CCTK_PARAMETERS;

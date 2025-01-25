@@ -40,24 +40,26 @@ SetMainPrint[
   pr[];
 
 
-  pr["template <int D, typename T>"];
+  pr["template <int DIR, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
   pr["fd_1st(const GF3D2<const T> &gf, const PointDesc &p) {"];
+  pr["  constexpr int D = DIR - 1;"];
   pr["  return"];
-  PrintFDExpression[4, 1];
+  PrintFDExpression[4, 1, "D"];
   pr["};"];
   pr[];
 
-  pr["template <int D1, int D2, typename T>"];
+  pr["template <int DIR1, int DIR2, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
   pr["fd_2nd(const GF3D2<const T> &gf, const PointDesc &p) {"];
+  pr["  constexpr int D1 = DIR1 - 1;"];
+  pr["  constexpr int D2 = DIR2 - 1;"];
   pr["  if constexpr (D1 == D2) {"];
-  pr["  constexpr int D = D1;"];
   pr["    return"];
-  PrintFDExpression[4, 2];
+  PrintFDExpression[4, 2, "D1"];
   pr["  } else {"];
   pr["    return"];
-  PrintFDExpressionMix2nd[4];
+  PrintFDExpressionMix2nd[4, "D1", "D2"];
   pr["  }"];
   pr["};"];
   pr[];
