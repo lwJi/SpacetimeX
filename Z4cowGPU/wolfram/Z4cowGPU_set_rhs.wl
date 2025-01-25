@@ -53,8 +53,8 @@ SetMainPrint[
   pr["    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr[];
 
-  PrintInitializations[{Mode -> "Derivs1st", TensorType -> "Vect"}, dEvolVarlist];
-  PrintInitializations[{Mode -> "Derivs2nd", TensorType -> "Smat"}, ddEvolVarlist];
+  PrintInitializations[{Mode -> "Derivs1st"}, dEvolVarlist];
+  PrintInitializations[{Mode -> "Derivs2nd"}, ddEvolVarlist];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, IntermediateVarlist];
