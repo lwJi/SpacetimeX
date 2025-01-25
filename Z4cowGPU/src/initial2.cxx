@@ -20,11 +20,11 @@ extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
   DECLARE_CCTK_PARAMETERS;
 
   // Input grid functions
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_gamt{gammatxx, gammatxy, gammatxz,
-                                                gammatyy, gammatyz, gammatzz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_gamt{gammatxx, gammatxy, gammatxz,
+                                                 gammatyy, gammatyz, gammatzz};
 
   // Output grid functions
-  const vec<GF3D2<CCTK_REAL>, 3> gf_trGt{Gamtx, Gamty, Gamtz};
+  const array<GF3D2<CCTK_REAL>, 3> gf_trGt{Gamtx, Gamty, Gamtz};
 
 #ifdef __CUDACC__
   const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial2::initial2");

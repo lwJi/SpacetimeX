@@ -22,18 +22,19 @@ extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial1;
 
   // Input grid functions
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMgam{gxx, gxy, gxz, gyy, gyz, gzz};
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_ADMK{kxx, kxy, kxz, kyy, kyz, kzz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_ADMgam{gxx, gxy, gxz,
+                                                   gyy, gyz, gzz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_ADMK{kxx, kxy, kxz, kyy, kyz, kzz};
   const GF3D2<const CCTK_REAL> &gf_ADMalpha = alp;
-  const vec<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
+  const array<GF3D2<const CCTK_REAL>, 3> gf_ADMbeta{betax, betay, betaz};
 
   // Output grid functions
-  const smat<GF3D2<CCTK_REAL>, 3> gf_gamt{gammatxx, gammatxy, gammatxz,
-                                          gammatyy, gammatyz, gammatzz};
+  const array<GF3D2<CCTK_REAL>, 6> gf_gamt{gammatxx, gammatxy, gammatxz,
+                                           gammatyy, gammatyz, gammatzz};
   const GF3D2<CCTK_REAL> &gf_exKh = Kh;
-  const smat<GF3D2<CCTK_REAL>, 3> gf_exAt{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
+  const array<GF3D2<CCTK_REAL>, 6> gf_exAt{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
   const GF3D2<CCTK_REAL> &gf_alpha = alphaG;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_beta{betaGx, betaGy, betaGz};
+  const array<GF3D2<CCTK_REAL>, 3> gf_beta{betaGx, betaGy, betaGz};
 
 #ifdef __CUDACC__
   const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_Initial1::initial1");

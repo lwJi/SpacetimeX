@@ -44,34 +44,35 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
 
   // Input grid functions
   // const GF3D2<const CCTK_REAL> &gf_W = W;
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_gamt{gammatxx, gammatxy, gammatxz,
-                                                gammatyy, gammatyz, gammatzz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_gamt{gammatxx, gammatxy, gammatxz,
+                                                 gammatyy, gammatyz, gammatzz};
   const GF3D2<const CCTK_REAL> &gf_exKh = Kh;
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_exAt{Atxx, Atxy, Atxz,
-                                                Atyy, Atyz, Atzz};
-  const vec<GF3D2<const CCTK_REAL>, 3> gf_trGt{Gamtx, Gamty, Gamtz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_exAt{Atxx, Atxy, Atxz,
+                                                 Atyy, Atyz, Atzz};
+  const array<GF3D2<const CCTK_REAL>, 3> gf_trGt{Gamtx, Gamty, Gamtz};
   // const GF3D2<const CCTK_REAL> &gf_Theta = Theta;
   const GF3D2<const CCTK_REAL> &gf_alpha = alphaG;
-  const vec<GF3D2<const CCTK_REAL>, 3> gf_beta{betaGx, betaGy, betaGz};
+  const array<GF3D2<const CCTK_REAL>, 3> gf_beta{betaGx, betaGy, betaGz};
 
   // More input grid functions
   // const GF3D2<const CCTK_REAL> &gf_eTtt = eTtt;
-  const vec<GF3D2<const CCTK_REAL>, 3> gf_eTt{eTtx, eTty, eTtz};
-  const smat<GF3D2<const CCTK_REAL>, 3> gf_eT{eTxx, eTxy, eTxz,
-                                              eTyy, eTyz, eTzz};
+  const array<GF3D2<const CCTK_REAL>, 3> gf_eTt{eTtx, eTty, eTtz};
+  const array<GF3D2<const CCTK_REAL>, 6> gf_eT{eTxx, eTxy, eTxz,
+                                               eTyy, eTyz, eTzz};
 
   // Output grid functions
   const GF3D2<CCTK_REAL> &gf_dtW = W_rhs;
-  const smat<GF3D2<CCTK_REAL>, 3> gf_dtgamt{gammatxx_rhs, gammatxy_rhs,
-                                            gammatxz_rhs, gammatyy_rhs,
-                                            gammatyz_rhs, gammatzz_rhs};
+  const array<GF3D2<CCTK_REAL>, 6> gf_dtgamt{gammatxx_rhs, gammatxy_rhs,
+                                             gammatxz_rhs, gammatyy_rhs,
+                                             gammatyz_rhs, gammatzz_rhs};
   const GF3D2<CCTK_REAL> &gf_dtexKh = Kh_rhs;
-  const smat<GF3D2<CCTK_REAL>, 3> gf_dtexAt{Atxx_rhs, Atxy_rhs, Atxz_rhs,
-                                            Atyy_rhs, Atyz_rhs, Atzz_rhs};
-  const vec<GF3D2<CCTK_REAL>, 3> gf_dttrGt{Gamtx_rhs, Gamty_rhs, Gamtz_rhs};
+  const array<GF3D2<CCTK_REAL>, 6> gf_dtexAt{Atxx_rhs, Atxy_rhs, Atxz_rhs,
+                                             Atyy_rhs, Atyz_rhs, Atzz_rhs};
+  const array<GF3D2<CCTK_REAL>, 3> gf_dttrGt{Gamtx_rhs, Gamty_rhs, Gamtz_rhs};
   const GF3D2<CCTK_REAL> &gf_dtTheta = Theta_rhs;
   const GF3D2<CCTK_REAL> &gf_dtalpha = alphaG_rhs;
-  const vec<GF3D2<CCTK_REAL>, 3> gf_dtbeta{betaGx_rhs, betaGy_rhs, betaGz_rhs};
+  const array<GF3D2<CCTK_REAL>, 3> gf_dtbeta{betaGx_rhs, betaGy_rhs,
+                                             betaGz_rhs};
 
   // parameters
   const CCTK_REAL cpi = M_PI;
