@@ -21,6 +21,7 @@
 #endif
 
 #include <cmath>
+#include <sys/time.h>
 
 #include "../wolfram/derivsinline.hxx"
 
@@ -28,7 +29,20 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
+double gettime() {
+  timeval tv;
+  gettimeofday(&tv, nullptr);
+  return static_cast<double>(tv.tv_sec) +
+         static_cast<double>(tv.tv_usec) / 1.0e6;
+}
+
+double total_rhs_time = 0;
+double total_rhs_loop_time = 0;
+
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
+
+  const double start_time = gettime();
+
   DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
 
@@ -87,7 +101,11 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const nvtxRangeId_t range = nvtxRangeStartA("Z4cowGPU_RHS::rhs");
 #endif
 
+  const double start_loop_time = gettime();
+
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
+
+  const double finish_loop_time = gettime();
 
 #ifdef __CUDACC__
   nvtxRangeEnd(range);
@@ -168,6 +186,13 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   for (int a = 0; a < 3; ++a)
     apply_diss(gf_beta(a), gf_dtbeta(a));
 #endif
+
+  const double finish_time = gettime();
+
+  total_rhs_time += finish_time - start_time;
+  total_rhs_loop_time += finish_loop_time - start_loop_time;
+  CCTK_VINFO("Total RHS and loop time: %g sec, %g sec", total_rhs_time,
+             total_rhs_loop_time);
 }
 
 extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
