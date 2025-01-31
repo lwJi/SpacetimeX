@@ -46,7 +46,7 @@ SetMainPrint[
   pr["  constexpr int D = DIR - 1;"];
   pr["  return"];
   PrintFDExpression[4, 1, "D"];
-  pr["};"];
+  pr["}"];
   pr[];
 
   pr["template <int DIR1, int DIR2, typename T>"];
@@ -61,7 +61,7 @@ SetMainPrint[
   pr["    return"];
   PrintFDExpressionMix2nd[4, "D1", "D2"];
   pr["  }"];
-  pr["};"];
+  pr["}"];
   pr[];
 
   pr["} // namespace Z4cowGPU"];
