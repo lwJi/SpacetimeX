@@ -25,9 +25,9 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 
 (* Define Variables *)
 
-<<wl/Z4c_vars.wl
+<<../wl/Z4c_vars.wl
 
-<<wl/Z4c_rhs.wl
+<<../wl/Z4c_rhs.wl
 
 Module[{Mat, invMat},
   Mat = Table[gamt[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
@@ -68,4 +68,4 @@ SetMainPrint[
   pr["});"];
 ];
 
-Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXGPU.wl"}]];
+Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXPointDesc.wl"}]];

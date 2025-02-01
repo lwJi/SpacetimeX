@@ -67,4 +67,4 @@ SetMainPrint[
   pr["} // namespace Z4cowGPU"];
 ];
 
-Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXGPU.wl"}]];
+Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXPointDesc.wl"}]];
