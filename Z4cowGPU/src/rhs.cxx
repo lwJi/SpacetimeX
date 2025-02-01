@@ -79,7 +79,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL cmuS = f_mu_S;
   const CCTK_REAL ceta = eta;
 
-#include "../wolfram/Z4cowCarpet_set_rhs.hxx"
+#include "../wolfram/Z4cowGPU_set_rhs.hxx"
 
   const double finish_time = gettime();
 
