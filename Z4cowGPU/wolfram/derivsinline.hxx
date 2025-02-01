@@ -10,6 +10,7 @@
 #include <cmath>
 
 namespace Z4cowGPU {
+using namespace Loop;
 
 template <typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
@@ -18,7 +19,7 @@ CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st(const T *gf, int i, int j, int k, const GF3D2layout &layout, const std::array<T, 3> &invDx) {
+fd_1st(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
   const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
@@ -30,7 +31,7 @@ fd_1st(const T *gf, int i, int j, int k, const GF3D2layout &layout, const std::a
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd(const T *gf, int i, int j, int k, const GF3D2layout &layout, const std::array<T, 3> &invDx) {
+fd_2nd(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
