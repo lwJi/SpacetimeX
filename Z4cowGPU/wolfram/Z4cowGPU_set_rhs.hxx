@@ -60,6 +60,8 @@ const auto &beta3 = gf_beta[2];
 grid.loop_int_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 
+const int ijk = GF3D2index(layout2, p.I).linear();
+
 const auto dW1 = fd_1st<1>(W, p.i, p.j, p.k, Dijk, invDxyz);
 const auto dW2 = fd_1st<2>(W, p.i, p.j, p.k, Dijk, invDxyz);
 const auto dW3 = fd_1st<3>(W, p.i, p.j, p.k, Dijk, invDxyz);
