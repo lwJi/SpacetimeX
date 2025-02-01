@@ -28,9 +28,11 @@ SetOutputFile[FileNameJoin[{Directory[], "derivsinline.hxx"}]];
 SetMainPrint[
   pr["#include <loop_device.hxx>"];
   pr[];
+  pr["#include <array>"];
+  pr["#include <cmath>"];
+  pr[];
 
   pr["namespace Z4cowGPU {"];
-  pr["using namespace Loop;"];
   pr[];
 
   pr["template <typename T>"];
@@ -39,27 +41,26 @@ SetMainPrint[
   pr["}"];
   pr[];
 
-
-  pr["template <int DIR, typename T>"];
+  pr["template <int DI, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-  pr["fd_1st(const GF3D2<const T> &gf, const PointDesc &p) {"];
-  pr["  constexpr int D = DIR - 1;"];
+  pr["fd_1st(const std::array<int, 3> &Dijk, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {"];
+  PrintIndexes3D[4, 1, "DI"];
   pr["  return"];
-  PrintFDExpression[4, 1, "D"];
+  PrintFDExpression[4, 1, "invDx"];
   pr["}"];
   pr[];
 
-  pr["template <int DIR1, int DIR2, typename T>"];
+  pr["template <int DI, int DJ, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-  pr["fd_2nd(const GF3D2<const T> &gf, const PointDesc &p) {"];
-  pr["  constexpr int D1 = DIR1 - 1;"];
-  pr["  constexpr int D2 = DIR2 - 1;"];
-  pr["  if constexpr (D1 == D2) {"];
+  pr["fd_2nd(const std::array<int, 3> &Dijk, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {"];
+  pr["  if constexpr (DI == DJ) {"];
+  PrintIndexes3D[4, 2, "DI"];
   pr["    return"];
-  PrintFDExpression[4, 2, "D1"];
+  PrintFDExpression[4, 2, "invDx"];
   pr["  } else {"];
+  PrintIndexes3DMix2nd[4, "DI", "DJ"];
   pr["    return"];
-  PrintFDExpressionMix2nd[4, "D1", "D2"];
+  PrintFDExpressionMix2nd[4, "invDx"];
   pr["  }"];
   pr["}"];
   pr[];
