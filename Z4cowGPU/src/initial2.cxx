@@ -23,10 +23,7 @@ extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
                                     1. / CCTK_DELTA_SPACE(1),
                                     1. / CCTK_DELTA_SPACE(2)};
 
-  const int di = 1;
-  const int dj = di * (cctk_ash[0]);
-  const int dk = dj * (cctk_ash[1]);
-  const array<int, 3> Dijk{di, dj, dk};
+  const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
   // Input grid functions
   const array<GF3D2<const CCTK_REAL>, 6> gf_gamt{gammatxx, gammatxy, gammatxz,

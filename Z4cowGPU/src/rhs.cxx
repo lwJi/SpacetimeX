@@ -42,8 +42,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
                                     1. / CCTK_DELTA_SPACE(1),
                                     1. / CCTK_DELTA_SPACE(2)};
 
-  const array<int, dim> indextype = {0, 0, 0};
-  const GF3D2layout layout2(cctkGH, indextype);
+  const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
   // Input grid functions
   const array<const CCTK_REAL *, 6> gf_gamt{gammatxx, gammatxy, gammatxz,

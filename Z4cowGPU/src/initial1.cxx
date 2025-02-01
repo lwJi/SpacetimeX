@@ -19,7 +19,9 @@ using namespace Arith;
 using namespace Loop;
 
 extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
-  DECLARE_CCTK_ARGUMENTSX_Z4cowGPU_Initial1;
+  DECLARE_CCTK_ARGUMENTS_Z4cowGPU_Initial1;
+
+  const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
   // Input grid functions
   const array<GF3D2<const CCTK_REAL>, 6> gf_ADMgam{gxx, gxy, gxz,
