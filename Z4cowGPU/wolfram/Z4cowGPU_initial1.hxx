@@ -43,7 +43,7 @@ noinline([&]() __attribute__((__flatten__, __hot__)) {
   grid.loop_int_device<0, 0, 0>(
     grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 
-const int ijk = GF3D2index(layout2, p.I).linear();
+const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto
 invdetgamma
