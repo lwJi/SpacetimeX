@@ -79,6 +79,8 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL cmuS = f_mu_S;
   const CCTK_REAL ceta = eta;
 
+  const Loop::GridDescBaseDevice grid(cctkGH);
+
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
 
   const double finish_time = gettime();
