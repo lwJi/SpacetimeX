@@ -52,7 +52,7 @@ SetMainPrint[
   pr["  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr[];
 
-  pr["const int ijk = GF3D2index(layout2, p.I).linear();"];
+  pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
   PrintInitializations[{Mode -> "Derivs1st"}, dEvolVarlist];
