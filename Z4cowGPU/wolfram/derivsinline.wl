@@ -43,8 +43,8 @@ SetMainPrint[
 
   pr["template <int DI, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-  pr["fd_1st(const T *gf, int i, int j, int k, const std::array<int, 3> &Dijk, const std::array<T, 3> &invDx) {"];
-  PrintIndexes3D[4, 1, "DI"];
+  pr["fd_1st(const T *gf, int i, int j, int k, const GF3D2layout &layout, const std::array<T, 3> &invDx) {"];
+  PrintIndexes3D[4, 1, "DI", "layout"];
   pr["  return"];
   PrintFDExpression[4, 1, "invDx"];
   pr["}"];
@@ -52,13 +52,13 @@ SetMainPrint[
 
   pr["template <int DI, int DJ, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-  pr["fd_2nd(const T *gf, int i, int j, int k, const std::array<int, 3> &Dijk, const std::array<T, 3> &invDx) {"];
+  pr["fd_2nd(const T *gf, int i, int j, int k, const GF3D2layout &layout, const std::array<T, 3> &invDx) {"];
   pr["  if constexpr (DI == DJ) {"];
-  PrintIndexes3D[4, 2, "DI"];
+  PrintIndexes3D[4, 2, "DI", "layout"];
   pr["    return"];
   PrintFDExpression[4, 2, "invDx"];
   pr["  } else {"];
-  PrintIndexes3DMix2nd[4, "DI", "DJ"];
+  PrintIndexes3DMix2nd[4, "DI", "DJ", "layout"];
   pr["    return"];
   PrintFDExpressionMix2nd[4, "invDx"];
   pr["  }"];
