@@ -18,7 +18,7 @@ CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st(const std::array<int, 3> &Dijk, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_1st(const T *gf, int i, int j, int k, const std::array<int, 3> &Dijk, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m2 = Index3DLinear(Dijk, i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
   const int m1 = Index3DLinear(Dijk, i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
@@ -30,7 +30,7 @@ fd_1st(const std::array<int, 3> &Dijk, const T *gf, int i, int j, int k, const s
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd(const std::array<int, 3> &Dijk, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_2nd(const T *gf, int i, int j, int k, const std::array<int, 3> &Dijk, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m2 = Index3DLinear(Dijk, i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));

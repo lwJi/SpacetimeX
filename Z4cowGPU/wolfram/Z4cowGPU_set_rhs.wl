@@ -11,7 +11,7 @@ SetPVerbose[False];
 
 SetPrintDate[False];
 
-SetGridPointIndex["[[pI]]"];
+SetGridPointIndex["[[ijk]]"];
 
 (*SetUseLetterForTensorComponet[True];*)
 
