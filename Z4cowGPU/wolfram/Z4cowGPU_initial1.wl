@@ -11,7 +11,7 @@ SetPVerbose[False];
 
 SetPrintDate[False];
 
-SetGridPointIndex["[[pI]]"];
+SetGridPointIndex["[[ijk]]"];
 
 (*SetUseLetterForTensorComponet[True];*)
 
@@ -52,6 +52,9 @@ SetMainPrint[
   pr["noinline([&]() __attribute__((__flatten__, __hot__)) {"];
   pr["  grid.loop_int_device<0, 0, 0>("];
   pr["    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
+  pr[];
+
+  pr["const int ijk = GF3D2index(layout2, p.I).linear();"];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, -2]];
