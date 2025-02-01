@@ -45,11 +45,6 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const array<int, dim> indextype = {0, 0, 0};
   const GF3D2layout layout2(cctkGH, indextype);
 
-  const int di = 1;
-  const int dj = di * (cctk_ash[0]);
-  const int dk = dj * (cctk_ash[1]);
-  const array<int, 3> Dijk{di, dj, dk};
-
   // Input grid functions
   const array<const CCTK_REAL *, 6> gf_gamt{gammatxx, gammatxy, gammatxz,
                                             gammatyy, gammatyz, gammatzz};
