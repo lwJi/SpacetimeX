@@ -42,6 +42,9 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
                                     1. / CCTK_DELTA_SPACE(1),
                                     1. / CCTK_DELTA_SPACE(2)};
 
+  const array<int, dim> indextype = {0, 0, 0};
+  const GF3D2layout layout2(cctkGH, indextype);
+
   const int di = 1;
   const int dj = di * (cctk_ash[0]);
   const int dk = dj * (cctk_ash[1]);
