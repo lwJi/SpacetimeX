@@ -2,7 +2,7 @@
 #include <cctk_Arguments.h>
 #include <cctk_Parameters.h>
 
-#define USE_GFINDEX 1
+#define USE_GFINDEX 0
 
 #include <derivs.hxx>
 #include <loop_device.hxx>

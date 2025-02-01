@@ -57,9 +57,8 @@ const auto &beta1 = gf_beta[0];
 const auto &beta2 = gf_beta[1];
 const auto &beta3 = gf_beta[2];
 
-noinline([&]() __attribute__((__flatten__, __hot__)) {
-  grid.loop_int_device<0, 0, 0>(
-    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
+grid.loop_int_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 
 const auto dW1 = fd_1st<1>(W, p);
 const auto dW2 = fd_1st<2>(W, p);
@@ -1822,7 +1821,6 @@ dbeta13*beta1(p.I) + dbeta23*beta2(p.I) - ceta*beta3(p.I) + dbeta33*beta3(p.I) +
 ;
 
 
-  });
 });
 
 #endif // #ifndef Z4COWGPU_SET_RHS_HXX

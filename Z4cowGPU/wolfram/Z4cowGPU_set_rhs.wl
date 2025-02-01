@@ -48,9 +48,8 @@ SetMainPrint[
   pr[];
 
   (* Loops *)
-  pr["noinline([&]() __attribute__((__flatten__, __hot__)) {"];
-  pr["  grid.loop_int_device<0, 0, 0>("];
-  pr["    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
+  pr["grid.loop_int_device<0, 0, 0>("];
+  pr["  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr[];
 
   PrintInitializations[{Mode -> "Derivs1st"}, dEvolVarlist];
@@ -66,7 +65,6 @@ SetMainPrint[
   PrintEquations[{Mode -> "Main"}, dtEvolVarlist];
   pr[];
 
-  pr["  });"];
   pr["});"];
 ];
 
