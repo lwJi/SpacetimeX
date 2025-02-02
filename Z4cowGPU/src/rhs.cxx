@@ -86,7 +86,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const double finish_time = gettime();
 
   total_rhs_time += finish_time - start_time;
-  CCTK_VINFO("Total RHS and loop time: %g sec", total_rhs_time);
+  CCTK_VINFO("RHS evaluation time: %g sec", total_rhs_time);
 }
 
 extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
