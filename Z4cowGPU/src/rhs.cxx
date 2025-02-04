@@ -25,7 +25,6 @@ double gettime() {
 }
 
 double total_rhs_time = 0;
-double total_rhs_loop_time = 0;
 
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
 
