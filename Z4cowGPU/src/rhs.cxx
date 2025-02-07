@@ -17,19 +17,7 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-double gettime() {
-  timeval tv;
-  gettimeofday(&tv, nullptr);
-  return static_cast<double>(tv.tv_sec) +
-         static_cast<double>(tv.tv_usec) / 1.0e6;
-}
-
-double total_rhs_time = 0;
-
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
-
-  const double start_time = gettime();
-
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
 
@@ -81,11 +69,6 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
-
-  const double finish_time = gettime();
-
-  total_rhs_time += finish_time - start_time;
-  CCTK_VINFO("RHS evaluation time: %g sec", total_rhs_time);
 }
 
 extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
