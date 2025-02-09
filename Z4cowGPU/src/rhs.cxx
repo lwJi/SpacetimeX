@@ -1,15 +1,9 @@
 #include <cctk.h>
 #include <cctk_Arguments.h>
 #include <cctk_Parameters.h>
-
-#include <derivs.hxx>
 #include <loop_device.hxx>
-#include <mat.hxx>
-#include <simd.hxx>
-#include <vec.hxx>
 
 #include <cmath>
-#include <sys/time.h>
 
 #include "../wolfram/derivsinline.hxx"
 
