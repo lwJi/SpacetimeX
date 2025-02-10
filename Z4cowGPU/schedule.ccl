@@ -184,27 +184,27 @@ SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup
   SYNC: betaG
 } "Synchronize Z4c variables"
 
-#if (calc_ADM_vars) {
-#  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
-#  {
-#    LANG: C
-#    READS: W(everywhere)
-#    READS: gamma_tilde(everywhere)
-#    READS: K_hat(everywhere)
-#    READS: A_tilde(everywhere)
-#    #READS: Gam_tilde(everywhere)
-#    READS: Theta(everywhere)
-#    READS: alphaG(everywhere)
-#    READS: betaG(everywhere)
-#    WRITES: ADMBaseX::metric(everywhere)
-#    WRITES: ADMBaseX::curv(everywhere)
-#    WRITES: ADMBaseX::lapse(everywhere)
-#    WRITES: ADMBaseX::shift(everywhere)
-#    #WRITES: ADMBaseX::dtlapse(everywhere)
-#    #WRITES: ADMBaseX::dtshift(everywhere)
-#  } "Convert Z4c to ADM variables"
-#}
-#
+if (calc_ADM_vars) {
+  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
+  {
+    LANG: C
+    READS: W(everywhere)
+    READS: gamma_tilde(everywhere)
+    READS: K_hat(everywhere)
+    READS: A_tilde(everywhere)
+    #READS: Gam_tilde(everywhere)
+    READS: Theta(everywhere)
+    READS: alphaG(everywhere)
+    READS: betaG(everywhere)
+    WRITES: ADMBaseX::metric(everywhere)
+    WRITES: ADMBaseX::curv(everywhere)
+    WRITES: ADMBaseX::lapse(everywhere)
+    WRITES: ADMBaseX::shift(everywhere)
+    #WRITES: ADMBaseX::dtlapse(everywhere)
+    #WRITES: ADMBaseX::dtshift(everywhere)
+  } "Convert Z4c to ADM variables"
+}
+
 #if (calc_constraints) {
 #  SCHEDULE Z4cowGPU_Constraints IN Z4cowGPU_AnalysisGroup
 #  {

@@ -2,11 +2,11 @@
 
 # Source files in this directory
 SRCS = \
+  adm.cxx \
   initial1.cxx \
   initial2.cxx \
   enforce.cxx	\
   rhs.cxx
-  #adm.cxx \
   #constraint.cxx \
   #initiallapse.cxx \
   #newradx.cxx \

@@ -3,9 +3,9 @@
 #include <cctk_Parameters.h>
 #include <loop_device.hxx>
 
-#include "../wolfram/derivsinline.hxx"
-
 #include <cmath>
+
+#include "../wolfram/derivsinline.hxx"
 
 namespace Z4cowGPU {
 using namespace Arith;
