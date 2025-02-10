@@ -128,6 +128,19 @@ ConstraintVarlist =
     {MtC[i], PrintAs -> "\!\(\*OverscriptBox[\(M\), \(~\)]\)"}
   ];
 
+(* For Enforce *)
+
+EnforceVarlist =
+  TempTensors[
+    {Wold[], PrintAs -> "\!\(\*SuperscriptBox[\(W\), \((old)\)]\)"},
+    {gamtold[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(\[Gamma]\), \(~\)], \((old)\)]\)"},
+    {exAtold[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(A\), \(~\)], \((old)\)]\)"},
+    {alphaold[], PrintAs -> "\!\(\*SuperscriptBox[\(\[Alpha]\), \((old)\)]\)"},
+    {trexAtold[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(A\), \(~\)], \((old)\)]\)"},
+    {invdetgamtold[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(\[Gamma]\), \(~\)], \((old)\)]\)"},
+    {Wfac[], PrintAs -> "\!\(\*SuperscriptBox[\(W\), \((fac)\)]\)"}
+  ];
+
 (************)
 
 (* Constant *)
@@ -145,3 +158,4 @@ DefConstantSymbol[cmuL, PrintAs -> "\!\(\*SubscriptBox[\(\[Mu]\), \(L\)]\)"];
 DefConstantSymbol[cmuS, PrintAs -> "\!\(\*SubscriptBox[\(\[Mu]\), \(S\)]\)"];
 
 DefConstantSymbol[ceta, PrintAs -> "\[Eta]"];
+
