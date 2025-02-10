@@ -65,8 +65,4 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
 }
 
-extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
-  // do nothing
-}
-
 } // namespace Z4cowGPU

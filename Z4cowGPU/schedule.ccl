@@ -171,19 +171,6 @@ SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
   SYNC: betaG
 } "Enforce algebraic Z4c constraints"
 
-SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup
-{
-  LANG: C
-  SYNC: W
-  SYNC: gamma_tilde
-  SYNC: K_hat
-  SYNC: A_tilde
-  SYNC: Gam_tilde
-  SYNC: Theta
-  SYNC: alphaG
-  SYNC: betaG
-} "Synchronize Z4c variables"
-
 if (calc_ADM_vars) {
   SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
   {
