@@ -20,12 +20,6 @@ const auto &ADMalpha = gf_ADMalpha;
 const auto &ADMbeta1 = gf_ADMbeta[0];
 const auto &ADMbeta2 = gf_ADMbeta[1];
 const auto &ADMbeta3 = gf_ADMbeta[2];
-
-grid.loop_all_device<0, 0, 0>(
-  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
-const int ijk = layout2.linear(p.i, p.j, p.k);
-
 const auto &gamt11 = gf_gamt[0];
 const auto &gamt12 = gf_gamt[1];
 const auto &gamt13 = gf_gamt[2];
@@ -43,6 +37,11 @@ const auto &alpha = gf_alpha;
 const auto &beta1 = gf_beta[0];
 const auto &beta2 = gf_beta[1];
 const auto &beta3 = gf_beta[2];
+
+noinline([&]() __attribute__((__flatten__, __hot__)) {
+grid.loop_all_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
+const int ijk = layout2.linear(p.i, p.j, p.k);
 
 ADMgam11[ijk]
 =
@@ -125,6 +124,7 @@ beta3[ijk]
 ;
 
 
+});
 });
 
 #endif // #ifndef Z4COWGPU_SET_ADM_HXX
