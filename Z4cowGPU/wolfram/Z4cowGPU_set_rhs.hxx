@@ -26,7 +26,6 @@ const auto &dtalpha = gf_dtalpha;
 const auto &dtbeta1 = gf_dtbeta[0];
 const auto &dtbeta2 = gf_dtbeta[1];
 const auto &dtbeta3 = gf_dtbeta[2];
-
 const auto &eTt1 = gf_eTt[0];
 const auto &eTt2 = gf_eTt[1];
 const auto &eTt3 = gf_eTt[2];
@@ -57,9 +56,9 @@ const auto &beta1 = gf_beta[0];
 const auto &beta2 = gf_beta[1];
 const auto &beta3 = gf_beta[2];
 
+noinline([&]() __attribute__((__flatten__, __hot__)) {
 grid.loop_int_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto dW1 = fd_1st_o4<1>(layout2, W, p.i, p.j, p.k, invDxyz);
@@ -1832,6 +1831,7 @@ dbeta13*beta1[ijk] + dbeta23*beta2[ijk] - ceta*beta3[ijk] +
 ;
 
 
+});
 });
 
 #endif // #ifndef Z4COWGPU_SET_RHS_HXX

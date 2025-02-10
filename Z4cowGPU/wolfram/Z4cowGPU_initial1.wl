@@ -51,7 +51,7 @@ Module[{Mat, invMat},
 SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_initial1.hxx"}]];
 
 SetMainPrint[
-  (* initail grid function names *)
+  (* Initailze grid function names *)
   PrintInitializations[{Mode -> "MainOut"},
                        Delete[EvolVarlist, {{1}, {5}, {-3}}]];
   PrintInitializations[{Mode -> "MainIn"}, ADMVarlist];
