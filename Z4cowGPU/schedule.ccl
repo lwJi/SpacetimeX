@@ -143,13 +143,13 @@ SCHEDULE Z4cowGPU_Initial2 IN Z4cowGPU_InitialGroup AFTER Z4cowGPU_Initial1
   WRITES: Gam_tilde(interior)
 } "Convert ADM to Z4c variables, part 2"
 
-#SCHEDULE Z4cowGPU_InitialLapse IN Z4cowGPU_InitialGroup AFTER Z4cowGPU_Initial2
-#{
-#  LANG: C
-#  READS: W(interior)
-#  WRITES: alphaG(interior)
-#} "Set initial lapse"
-#
+SCHEDULE Z4cowGPU_InitialLapse IN Z4cowGPU_InitialGroup AFTER Z4cowGPU_Initial2
+{
+  LANG: C
+  READS: W(interior)
+  WRITES: alphaG(interior)
+} "Set initial lapse"
+
 SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
 {
   LANG: C
