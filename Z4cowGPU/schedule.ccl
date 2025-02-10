@@ -205,27 +205,27 @@ if (calc_ADM_vars) {
   } "Convert Z4c to ADM variables"
 }
 
-#if (calc_constraints) {
-#  SCHEDULE Z4cowGPU_Constraints IN Z4cowGPU_AnalysisGroup
-#  {
-#    LANG: C
-#    READS: W(everywhere)
-#    READS: gamma_tilde(everywhere)
-#    READS: K_hat(everywhere)
-#    READS: A_tilde(everywhere)
-#    READS: Gam_tilde(everywhere)
-#    READS: Theta(everywhere)
-#    READS: alphaG(everywhere)
-#    READS: betaG(everywhere)
-#    READS: TmunuBaseX::eTtt(interior)
-#    READS: TmunuBaseX::eTti(interior)
-#    READS: TmunuBaseX::eTij(interior)
-#    WRITES: ZtC(interior)
-#    WRITES: HC(interior)
-#    WRITES: MtC(interior)
-#    #WRITES: allC(interior)
-#  } "Calculate Z4c Constraints"
-#}
+if (calc_constraints) {
+  SCHEDULE Z4cowGPU_Constraints IN Z4cowGPU_AnalysisGroup
+  {
+    LANG: C
+    READS: W(everywhere)
+    READS: gamma_tilde(everywhere)
+    READS: K_hat(everywhere)
+    READS: A_tilde(everywhere)
+    READS: Gam_tilde(everywhere)
+    READS: Theta(everywhere)
+    READS: alphaG(everywhere)
+    READS: betaG(everywhere)
+    READS: TmunuBaseX::eTtt(interior)
+    READS: TmunuBaseX::eTti(interior)
+    READS: TmunuBaseX::eTij(interior)
+    WRITES: ZtC(interior)
+    WRITES: HC(interior)
+    WRITES: MtC(interior)
+    #WRITES: allC(interior)
+  } "Calculate Z4c Constraints"
+}
 
 SCHEDULE Z4cowGPU_RHS IN Z4cowGPU_RHSGroup
 {
