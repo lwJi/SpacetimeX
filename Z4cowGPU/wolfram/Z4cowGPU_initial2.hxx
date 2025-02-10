@@ -7,7 +7,6 @@
 const auto &trGt1 = gf_trGt[0];
 const auto &trGt2 = gf_trGt[1];
 const auto &trGt3 = gf_trGt[2];
-
 const auto &gamt11 = gf_gamt[0];
 const auto &gamt12 = gf_gamt[1];
 const auto &gamt13 = gf_gamt[2];
@@ -16,9 +15,8 @@ const auto &gamt23 = gf_gamt[4];
 const auto &gamt33 = gf_gamt[5];
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
-  grid.loop_int_device<0, 0, 0>(
-    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
+grid.loop_int_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto dgamt111 = fd_1st_o4<1>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
@@ -225,7 +223,7 @@ Gt111*invgamt11*invgamt13 + 2*Gt112*invgamt12*invgamt13 +
 ;
 
 
-  });
+});
 });
 
 #endif // #ifndef Z4COWGPU_INITIAL2_HXX
