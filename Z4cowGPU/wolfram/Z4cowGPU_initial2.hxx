@@ -21,24 +21,24 @@ noinline([&]() __attribute__((__flatten__, __hot__)) {
 
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
-const auto dgamt111 = fd_1st<1>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt112 = fd_1st<1>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt113 = fd_1st<1>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt122 = fd_1st<1>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt123 = fd_1st<1>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt133 = fd_1st<1>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
-const auto dgamt211 = fd_1st<2>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt212 = fd_1st<2>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt213 = fd_1st<2>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt222 = fd_1st<2>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt223 = fd_1st<2>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt233 = fd_1st<2>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
-const auto dgamt311 = fd_1st<3>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt312 = fd_1st<3>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt313 = fd_1st<3>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt322 = fd_1st<3>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt323 = fd_1st<3>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt333 = fd_1st<3>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
+const auto dgamt111 = fd_1st_o4<1>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
+const auto dgamt112 = fd_1st_o4<1>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
+const auto dgamt113 = fd_1st_o4<1>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
+const auto dgamt122 = fd_1st_o4<1>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
+const auto dgamt123 = fd_1st_o4<1>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
+const auto dgamt133 = fd_1st_o4<1>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
+const auto dgamt211 = fd_1st_o4<2>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
+const auto dgamt212 = fd_1st_o4<2>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
+const auto dgamt213 = fd_1st_o4<2>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
+const auto dgamt222 = fd_1st_o4<2>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
+const auto dgamt223 = fd_1st_o4<2>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
+const auto dgamt233 = fd_1st_o4<2>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
+const auto dgamt311 = fd_1st_o4<3>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
+const auto dgamt312 = fd_1st_o4<3>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
+const auto dgamt313 = fd_1st_o4<3>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
+const auto dgamt322 = fd_1st_o4<3>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
+const auto dgamt323 = fd_1st_o4<3>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
+const auto dgamt333 = fd_1st_o4<3>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
 
 const auto
 invgamt11
