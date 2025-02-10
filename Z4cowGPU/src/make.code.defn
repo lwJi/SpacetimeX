@@ -4,12 +4,12 @@
 SRCS = \
   adm.cxx \
   constraint.cxx \
+  enforce.cxx	\
   initiallapse.cxx \
   initial1.cxx \
   initial2.cxx \
-  enforce.cxx	\
+  newradx.cxx \
   rhs.cxx
-  #newradx.cxx \
 
 # Subdirectories containing source files
 SUBDIRS =
