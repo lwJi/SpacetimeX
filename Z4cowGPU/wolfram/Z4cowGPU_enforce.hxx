@@ -4,7 +4,6 @@
 #ifndef Z4COWGPU_ENFORCE_HXX
 #define Z4COWGPU_ENFORCE_HXX
 
-const auto &W = gf_W;
 const auto &gamt11 = gf_gamt[0];
 const auto &gamt12 = gf_gamt[1];
 const auto &gamt13 = gf_gamt[2];
@@ -155,31 +154,37 @@ gamtold33*Power(Wfac,2)
 ;
 
 
+const auto
 invgamt11
 =
 -Power(gamt23[ijk],2) + gamt22[ijk]*gamt33[ijk]
 ;
 
+const auto
 invgamt12
 =
 gamt13[ijk]*gamt23[ijk] - gamt12[ijk]*gamt33[ijk]
 ;
 
+const auto
 invgamt13
 =
 -(gamt13[ijk]*gamt22[ijk]) + gamt12[ijk]*gamt23[ijk]
 ;
 
+const auto
 invgamt22
 =
 -Power(gamt13[ijk],2) + gamt11[ijk]*gamt33[ijk]
 ;
 
+const auto
 invgamt23
 =
 gamt12[ijk]*gamt13[ijk] - gamt11[ijk]*gamt23[ijk]
 ;
 
+const auto
 invgamt33
 =
 -Power(gamt12[ijk],2) + gamt11[ijk]*gamt22[ijk]

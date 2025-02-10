@@ -47,7 +47,7 @@ SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_enforce.hxx"}]];
 
 SetMainPrint[
   (* initail grid function names *)
-  PrintInitializations[{Mode -> "MainOut"}, Extract[EvolVarlist, {{1}, {2}, {4}, {-2}}]];
+  PrintInitializations[{Mode -> "MainOut"}, Extract[EvolVarlist, {{2}, {4}, {-2}}]];
   pr[];
 
   (* Loops *)
@@ -75,7 +75,7 @@ SetMainPrint[
   PrintEquations[{Mode -> "Main"}, Extract[EvolVarlist, {{2}}]];
   pr[];
 
-  PrintEquations[{Mode -> "Main"}, Extract[IntermediateVarlist, {{2}}]];
+  PrintEquations[{Mode -> "Temp"}, Extract[IntermediateVarlist, {{2}}]];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, Extract[EnforceVarlist, {{-3}}]];
