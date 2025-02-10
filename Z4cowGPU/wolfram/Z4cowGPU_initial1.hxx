@@ -21,7 +21,6 @@ const auto &alpha = gf_alpha;
 const auto &beta1 = gf_beta[0];
 const auto &beta2 = gf_beta[1];
 const auto &beta3 = gf_beta[2];
-
 const auto &ADMgam11 = gf_ADMgam[0];
 const auto &ADMgam12 = gf_ADMgam[1];
 const auto &ADMgam13 = gf_ADMgam[2];
@@ -40,9 +39,8 @@ const auto &ADMbeta2 = gf_ADMbeta[1];
 const auto &ADMbeta3 = gf_ADMbeta[2];
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
-  grid.loop_int_device<0, 0, 0>(
-    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
+grid.loop_int_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto
@@ -103,7 +101,6 @@ invgamma11*ADMK11[ijk] + 2*invgamma12*ADMK12[ijk] +
   2*invgamma13*ADMK13[ijk] + invgamma22*ADMK22[ijk] +
   2*invgamma23*ADMK23[ijk] + invgamma33*ADMK33[ijk]
 ;
-
 
 const auto tempW = cbrt(sqrt(invdetgamma));
 
@@ -203,7 +200,7 @@ ADMbeta3[ijk]
 ;
 
 
-  });
+});
 });
 
 #endif // #ifndef Z4COWGPU_INITIAL1_HXX

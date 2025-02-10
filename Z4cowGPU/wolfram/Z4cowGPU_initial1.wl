@@ -2,10 +2,13 @@
 
 (* Z4cowGPU_initial1.wl *)
 
-(* (c) Liwei Ji, 07/2024 *)
+(* (c) Liwei Ji, 02/2025 *)
 
-Needs["xAct`xCoba`", FileNameJoin[{Environment["GENERATO"], "src/Generato.wl"
-  }]]
+(******************)
+(* Configurations *)
+(******************)
+
+Needs["xAct`xCoba`", FileNameJoin[{Environment["GENERATO"], "src/Generato.wl"}]]
 
 SetPVerbose[False];
 
@@ -21,9 +24,10 @@ DefManifold[M3, 3, IndexRange[a, z]];
 
 DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 
-(* Derivatives *)
 
-(* Define Variables *)
+(**********************************)
+(* Define Variables and Equations *)
+(**********************************)
 
 <<wl/ADM_vars.wl
 
@@ -32,41 +36,42 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 <<wl/Z4cInADM_rhs.wl
 
 Module[{Mat, invMat},
-  Mat = Table[ADMgam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
+  Mat =
+    Table[ADMgam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
   invMat = Inverse[Mat] /. {1 / Det[Mat] -> invdetgamma};
   SetEQNDelayed[invdetgamma[], 1 / Det[Mat] // Simplify];
   SetEQNDelayed[invgamma[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify]
 ];
 
+
+(******************)
+(* Print to Files *)
+(******************)
+
 SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_initial1.hxx"}]];
 
 SetMainPrint[
   (* initail grid function names *)
-  PrintInitializations[{Mode -> "MainOut"}, Delete[EvolVarlist, {{1}, {5}, {-3}}]];
-  pr[];
-
+  PrintInitializations[{Mode -> "MainOut"},
+                       Delete[EvolVarlist, {{1}, {5}, {-3}}]];
   PrintInitializations[{Mode -> "MainIn"}, ADMVarlist];
   pr[];
 
   (* Loops *)
   pr["noinline([&]() __attribute__((__flatten__, __hot__)) {"];
-  pr["  grid.loop_int_device<0, 0, 0>("];
-  pr["    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
-  pr[];
-
+  pr["grid.loop_int_device<0, 0, 0>("];
+  pr["  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, -2]];
-  pr[];
-
   pr["const auto tempW = cbrt(sqrt(invdetgamma));"];
   pr[];
 
   PrintEquations[{Mode -> "Main"}, Drop[EvolVarlist, {5}]];
   pr[];
 
-  pr["  });"];
+  pr["});"];
   pr["});"];
 ];
 
