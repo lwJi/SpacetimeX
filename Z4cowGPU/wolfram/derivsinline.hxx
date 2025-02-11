@@ -274,6 +274,70 @@ fd_2_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::
   }
 }
 
+template <int DI, typename T>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+diss_4_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+  constexpr int D = DI - 1;
+  const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
+  const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
+  const int c0 = layout.linear(i, j, k);
+  const int p1 = layout.linear(i + (D == 0 ? 1 : 0), j + (D == 1 ? 1 : 0), k + (D == 2 ? 1 : 0));
+  const int p2 = layout.linear(i + (D == 0 ? 2 : 0), j + (D == 1 ? 2 : 0), k + (D == 2 ? 2 : 0));
+  return
+    invDx[D]*(6*gf[c0] - 4*gf[m1] + gf[m2] - 4*gf[p1] + gf[p2]);
+}
+
+template <int DI, typename T>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+diss_6_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+  constexpr int D = DI - 1;
+  const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
+  const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
+  const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
+  const int c0 = layout.linear(i, j, k);
+  const int p1 = layout.linear(i + (D == 0 ? 1 : 0), j + (D == 1 ? 1 : 0), k + (D == 2 ? 1 : 0));
+  const int p2 = layout.linear(i + (D == 0 ? 2 : 0), j + (D == 1 ? 2 : 0), k + (D == 2 ? 2 : 0));
+  const int p3 = layout.linear(i + (D == 0 ? 3 : 0), j + (D == 1 ? 3 : 0), k + (D == 2 ? 3 : 0));
+  return
+    invDx[D]*(-20*gf[c0] + 15*gf[m1] - 6*gf[m2] + gf[m3] + 15*gf[p1] - 6*gf[p2] + gf[p3]);
+}
+
+template <int DI, typename T>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+diss_8_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+  constexpr int D = DI - 1;
+  const int m4 = layout.linear(i + (D == 0 ? -4 : 0), j + (D == 1 ? -4 : 0), k + (D == 2 ? -4 : 0));
+  const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
+  const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
+  const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
+  const int c0 = layout.linear(i, j, k);
+  const int p1 = layout.linear(i + (D == 0 ? 1 : 0), j + (D == 1 ? 1 : 0), k + (D == 2 ? 1 : 0));
+  const int p2 = layout.linear(i + (D == 0 ? 2 : 0), j + (D == 1 ? 2 : 0), k + (D == 2 ? 2 : 0));
+  const int p3 = layout.linear(i + (D == 0 ? 3 : 0), j + (D == 1 ? 3 : 0), k + (D == 2 ? 3 : 0));
+  const int p4 = layout.linear(i + (D == 0 ? 4 : 0), j + (D == 1 ? 4 : 0), k + (D == 2 ? 4 : 0));
+  return
+    invDx[D]*(70*gf[c0] - 56*gf[m1] + 28*gf[m2] - 8*gf[m3] + gf[m4] - 56*gf[p1] + 28*gf[p2] - 8*gf[p3] + gf[p4]);
+}
+
+template <int DI, typename T>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
+diss_10_o10(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+  constexpr int D = DI - 1;
+  const int m5 = layout.linear(i + (D == 0 ? -5 : 0), j + (D == 1 ? -5 : 0), k + (D == 2 ? -5 : 0));
+  const int m4 = layout.linear(i + (D == 0 ? -4 : 0), j + (D == 1 ? -4 : 0), k + (D == 2 ? -4 : 0));
+  const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
+  const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
+  const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
+  const int c0 = layout.linear(i, j, k);
+  const int p1 = layout.linear(i + (D == 0 ? 1 : 0), j + (D == 1 ? 1 : 0), k + (D == 2 ? 1 : 0));
+  const int p2 = layout.linear(i + (D == 0 ? 2 : 0), j + (D == 1 ? 2 : 0), k + (D == 2 ? 2 : 0));
+  const int p3 = layout.linear(i + (D == 0 ? 3 : 0), j + (D == 1 ? 3 : 0), k + (D == 2 ? 3 : 0));
+  const int p4 = layout.linear(i + (D == 0 ? 4 : 0), j + (D == 1 ? 4 : 0), k + (D == 2 ? 4 : 0));
+  const int p5 = layout.linear(i + (D == 0 ? 5 : 0), j + (D == 1 ? 5 : 0), k + (D == 2 ? 5 : 0));
+  return
+    invDx[D]*(-252*gf[c0] + 210*gf[m1] - 120*gf[m2] + 45*gf[m3] - 10*gf[m4] + gf[m5] + 210*gf[p1] - 120*gf[p2] + 45*gf[p3] - 10*gf[p4] + gf[p5]);
+}
+
 } // namespace Z4cowGPU
 
 #endif // #ifndef DERIVSINLINE_HXX

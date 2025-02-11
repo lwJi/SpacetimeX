@@ -97,6 +97,25 @@ SetMainPrint[
     {aOrd, 2, 8, 2}
   ];
 
+  (********************************************)
+  (* Finite Difference Scheme for Dissipation *)
+  (********************************************)
+
+  Do[
+    pr["template <int DI, typename T>"];
+    pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
+    pr["diss_" <> ToString[aOrd] <>"_o" <> ToString[aOrd]
+               <> "(const GF3D2layout &layout, const T *gf, "
+               <> "int i, int j, int k, const std::array<T, 3> &invDx) {"];
+    PrintIndexes3D[aOrd, aOrd, "DI"];
+    pr["  return"];
+    PrintFDExpression[{ForDissipation -> True}, aOrd, aOrd, "invDx"];
+    pr["}"];
+    pr[]
+    ,
+    {aOrd, 4, 10, 2}
+  ];
+
   pr["} // namespace Z4cowGPU"];
 ];
 

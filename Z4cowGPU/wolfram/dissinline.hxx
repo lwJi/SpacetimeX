@@ -20,24 +20,24 @@ calc_diss(const GF3D2layout &layout, const T *gf, int i, int j, int k,
   constexpr int sign = diss_order % 4 == 0 ? -1 : +1;
   if constexpr (deriv_order == 2) {
     return sign / T(pown(2, deriv_order + 2)) *
-           (fd_4_o4<1>(layout, gf, i, j, k, invDx) +
-            fd_4_o4<2>(layout, gf, i, j, k, invDx) +
-            fd_4_o4<3>(layout, gf, i, j, k, invDx));
+           (diss_4_o4<1>(layout, gf, i, j, k, invDx) +
+            diss_4_o4<2>(layout, gf, i, j, k, invDx) +
+            diss_4_o4<3>(layout, gf, i, j, k, invDx));
   } else if constexpr (deriv_order == 4) {
     return sign / T(pown(2, deriv_order + 2)) *
-           (fd_6_o6<1>(layout, gf, i, j, k, invDx) +
-            fd_6_o6<2>(layout, gf, i, j, k, invDx) +
-            fd_6_o6<3>(layout, gf, i, j, k, invDx));
+           (diss_6_o6<1>(layout, gf, i, j, k, invDx) +
+            diss_6_o6<2>(layout, gf, i, j, k, invDx) +
+            diss_6_o6<3>(layout, gf, i, j, k, invDx));
   } else if constexpr (deriv_order == 6) {
     return sign / T(pown(2, deriv_order + 2)) *
-           (fd_8_o8<1>(layout, gf, i, j, k, invDx) +
-            fd_8_o8<2>(layout, gf, i, j, k, invDx) +
-            fd_8_o8<3>(layout, gf, i, j, k, invDx));
+           (diss_8_o8<1>(layout, gf, i, j, k, invDx) +
+            diss_8_o8<2>(layout, gf, i, j, k, invDx) +
+            diss_8_o8<3>(layout, gf, i, j, k, invDx));
   } else if constexpr (deriv_order == 8) {
     return sign / T(pown(2, deriv_order + 2)) *
-           (fd_10_o10<1>(layout, gf, i, j, k, invDx) +
-            fd_10_o10<2>(layout, gf, i, j, k, invDx) +
-            fd_10_o10<3>(layout, gf, i, j, k, invDx));
+           (diss_10_o10<1>(layout, gf, i, j, k, invDx) +
+            diss_10_o10<2>(layout, gf, i, j, k, invDx) +
+            diss_10_o10<3>(layout, gf, i, j, k, invDx));
   } else {
     assert(0);
   }
