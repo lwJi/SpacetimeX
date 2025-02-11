@@ -19,9 +19,8 @@ const auto &exAt33 = gf_exAt[5];
 const auto &alpha = gf_alpha;
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
-  grid.loop_int_device<0, 0, 0>(
-    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
+grid.loop_int_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto
@@ -108,10 +107,8 @@ alphaold
 alpha[ijk]
 ;
 
-
 W[ijk] = fmax(cWfloor, Wold);
 alpha[ijk] = fmax(calphafloor, alphaold);
-
 const auto
 invdetgamtold
 =
@@ -119,7 +116,6 @@ invdetgamtold
     gamtold11*Power(gamtold23,2) - Power(gamtold12,2)*gamtold33 +
     gamtold11*gamtold22*gamtold33)
 ;
-
 
 const auto Wfac = cbrt(sqrt(invdetgamtold));
 
@@ -190,7 +186,6 @@ invgamt33
 -Power(gamt12[ijk],2) + gamt11[ijk]*gamt22[ijk]
 ;
 
-
 const auto
 trexAtold
 =
@@ -230,7 +225,7 @@ exAtold33 - (trexAtold*gamt33[ijk])/3.
 ;
 
 
-  });
+});
 });
 
 #endif // #ifndef Z4COWGPU_ENFORCE_HXX

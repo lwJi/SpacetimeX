@@ -39,7 +39,7 @@ Module[{Mat, invMat},
   Mat =
     Table[gamt[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
   invMat = Inverse[Mat] /. {1 / Det[Mat] -> 1}; (* det(gamt) = 1 enforced *)
-  (*SetEQNDelayed[detinvgamt[], 1 / Det[Mat] // Simplify];*)
+  (*SetEQNDelayed[invdetgamt[], 1 / Det[Mat] // Simplify];*)
   SetEQNDelayed[invgamt[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify]
 ];
 
