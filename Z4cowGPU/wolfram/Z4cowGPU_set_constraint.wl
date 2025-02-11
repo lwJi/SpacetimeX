@@ -62,9 +62,9 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
-  PrintInitializations[{Mode -> "Derivs1st", AccuracyOrder -> 4},
+  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1, AccuracyOrder -> 4},
                        Drop[dEvolVarlist, -2]];
-  PrintInitializations[{Mode -> "Derivs2nd", AccuracyOrder -> 4},
+  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 2, AccuracyOrder -> 4},
                        Drop[ddEvolVarlist, -2]];
   pr[];
 

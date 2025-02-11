@@ -19,7 +19,7 @@ CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, int y) {
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_1_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
   const int p1 = layout.linear(i + (D == 0 ? 1 : 0), j + (D == 1 ? 1 : 0), k + (D == 2 ? 1 : 0));
@@ -29,7 +29,7 @@ fd_1st_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_1_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
   const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
@@ -41,7 +41,7 @@ fd_1st_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_1_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
   const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
@@ -55,7 +55,7 @@ fd_1st_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_1st_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_1_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   constexpr int D = DI - 1;
   const int m4 = layout.linear(i + (D == 0 ? -4 : 0), j + (D == 1 ? -4 : 0), k + (D == 2 ? -4 : 0));
   const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
@@ -71,7 +71,7 @@ fd_1st_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_2_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m1 = layout.linear(i + (D == 0 ? -1 : 0), j + (D == 1 ? -1 : 0), k + (D == 2 ? -1 : 0));
@@ -93,7 +93,7 @@ fd_2nd_o2(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_2_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m2 = layout.linear(i + (D == 0 ? -2 : 0), j + (D == 1 ? -2 : 0), k + (D == 2 ? -2 : 0));
@@ -129,7 +129,7 @@ fd_2nd_o4(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_2_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m3 = layout.linear(i + (D == 0 ? -3 : 0), j + (D == 1 ? -3 : 0), k + (D == 2 ? -3 : 0));
@@ -187,7 +187,7 @@ fd_2nd_o6(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std
 
 template <int DI, int DJ, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-fd_2nd_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
+fd_2_o8(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {
   if constexpr (DI == DJ) {
   constexpr int D = DI - 1;
   const int m4 = layout.linear(i + (D == 0 ? -4 : 0), j + (D == 1 ? -4 : 0), k + (D == 2 ? -4 : 0));

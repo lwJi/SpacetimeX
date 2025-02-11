@@ -48,7 +48,7 @@ SetMainPrint[
   Do[
     pr["template <int DI, typename T>"];
     pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-    pr["fd_1st_o" <> ToString[aOrd]
+    pr["fd_1_o" <> ToString[aOrd]
                   <> "(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {"];
     PrintIndexes3D[aOrd, 1, "DI"];
     pr["  return"];
@@ -66,7 +66,7 @@ SetMainPrint[
   Do[
     pr["template <int DI, int DJ, typename T>"];
     pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-    pr["fd_2nd_o" <> ToString[aOrd]
+    pr["fd_2_o" <> ToString[aOrd]
                   <> "(const GF3D2layout &layout, const T *gf, int i, int j, int k, const std::array<T, 3> &invDx) {"];
     pr["  if constexpr (DI == DJ) {"];
     PrintIndexes3D[aOrd, 2, "DI"];
