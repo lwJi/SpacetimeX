@@ -10,7 +10,6 @@ const auto &ZtC3 = gf_ZtC[2];
 const auto &MtC1 = gf_MtC[0];
 const auto &MtC2 = gf_MtC[1];
 const auto &MtC3 = gf_MtC[2];
-
 const auto &eTt1 = gf_eTt[0];
 const auto &eTt2 = gf_eTt[1];
 const auto &eTt3 = gf_eTt[2];
@@ -41,9 +40,9 @@ const auto &beta1 = gf_beta[0];
 const auto &beta2 = gf_beta[1];
 const auto &beta3 = gf_beta[2];
 
-  grid.loop_int_device<0, 0, 0>(
-    grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
-
+noinline([&]() __attribute__((__flatten__, __hot__)) {
+grid.loop_int_device<0, 0, 0>(
+  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
 const auto dW1 = fd_1st_o4<1>(layout2, W, p.i, p.j, p.k, invDxyz);
@@ -1139,6 +1138,7 @@ MtC3[ijk]
 ;
 
 
+});
 });
 
 #endif // #ifndef Z4COWGPU_SET_CONSTRAINT_HXX
