@@ -77,23 +77,23 @@ SetMainPrint[
   pr[];
 
   (* invdetgamtold *)
-  PrintEquations[{Mode -> "Temp"}, Extract[EnforceVarlist, {{-2}}]];
+  PrintEquations[{Mode -> "Temp"}, Take[EnforceVarlist, {-3}]];
 
   pr["const auto Wfac = cbrt(sqrt(invdetgamtold));"];
   pr[];
 
   (* gamt *)
-  PrintEquations[{Mode -> "Main"}, Extract[EvolVarlist, {{2}}]];
+  PrintEquations[{Mode -> "Main"}, Take[EvolVarlist, {2}]];
   pr[];
 
   (* invgamt *)
-  PrintEquations[{Mode -> "Temp"}, Extract[IntermediateVarlist, {{2}}]];
+  PrintEquations[{Mode -> "Temp"}, Take[IntermediateVarlist, {2}]];
   (* trexAtold *)
-  PrintEquations[{Mode -> "Temp"}, Extract[EnforceVarlist, {{-3}}]];
+  PrintEquations[{Mode -> "Temp"}, Take[EnforceVarlist, {-1}]];
   pr[];
 
   (* exAt *)
-  PrintEquations[{Mode -> "Main"}, Extract[EvolVarlist, {{4}}]];
+  PrintEquations[{Mode -> "Main"}, Take[EvolVarlist, {4}]];
   pr[];
 
   pr["});"];
