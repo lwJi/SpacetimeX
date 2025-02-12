@@ -14,16 +14,6 @@ SetPVerbose[False];
 
 SetPrintDate[False];
 
-SetGridPointIndex["[[ijk]]"];
-
-(*SetUseLetterForTensorComponet[True];*)
-
-SetTempVariableType["auto"];
-
-DefManifold[M3, 3, IndexRange[a, z]];
-
-DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
-
 
 (******************)
 (* Print to Files *)
