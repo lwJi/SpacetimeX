@@ -48,6 +48,11 @@ extern "C" void Z4cowGPU_Constraints(CCTK_ARGUMENTS) {
   // parameters
   const CCTK_REAL cpi = M_PI;
 
+  // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
+
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_set_constraint.hxx"

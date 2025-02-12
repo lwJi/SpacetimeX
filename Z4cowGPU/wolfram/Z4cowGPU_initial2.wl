@@ -68,7 +68,7 @@ SetMainPrint[
   pr[];
 
   (* dgamt *)
-  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1, AccuracyOrder -> 4},
+  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1},
                        Take[dEvolVarlist, {2}]];
   pr[];
 

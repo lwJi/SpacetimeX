@@ -64,6 +64,10 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL cmuS = f_mu_S;
   const CCTK_REAL ceta = eta;
 
+  // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
+
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 

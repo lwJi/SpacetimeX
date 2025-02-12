@@ -26,6 +26,10 @@ extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
   // Output grid functions
   const array<CCTK_REAL *, 3> gf_trGt{Gamtx, Gamty, Gamtz};
 
+  // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_initial2.hxx"

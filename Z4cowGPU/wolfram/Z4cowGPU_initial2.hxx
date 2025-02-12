@@ -19,24 +19,24 @@ grid.loop_int_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
-const auto dgamt111 = fd_1_o4<1>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt112 = fd_1_o4<1>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt113 = fd_1_o4<1>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt122 = fd_1_o4<1>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt123 = fd_1_o4<1>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt133 = fd_1_o4<1>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
-const auto dgamt211 = fd_1_o4<2>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt212 = fd_1_o4<2>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt213 = fd_1_o4<2>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt222 = fd_1_o4<2>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt223 = fd_1_o4<2>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt233 = fd_1_o4<2>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
-const auto dgamt311 = fd_1_o4<3>(layout2, gamt11, p.i, p.j, p.k, invDxyz);
-const auto dgamt312 = fd_1_o4<3>(layout2, gamt12, p.i, p.j, p.k, invDxyz);
-const auto dgamt313 = fd_1_o4<3>(layout2, gamt13, p.i, p.j, p.k, invDxyz);
-const auto dgamt322 = fd_1_o4<3>(layout2, gamt22, p.i, p.j, p.k, invDxyz);
-const auto dgamt323 = fd_1_o4<3>(layout2, gamt23, p.i, p.j, p.k, invDxyz);
-const auto dgamt333 = fd_1_o4<3>(layout2, gamt33, p.i, p.j, p.k, invDxyz);
+const auto dgamt111 = calcderivs1_1(gamt11, p.i, p.j, p.k);
+const auto dgamt112 = calcderivs1_1(gamt12, p.i, p.j, p.k);
+const auto dgamt113 = calcderivs1_1(gamt13, p.i, p.j, p.k);
+const auto dgamt122 = calcderivs1_1(gamt22, p.i, p.j, p.k);
+const auto dgamt123 = calcderivs1_1(gamt23, p.i, p.j, p.k);
+const auto dgamt133 = calcderivs1_1(gamt33, p.i, p.j, p.k);
+const auto dgamt211 = calcderivs1_2(gamt11, p.i, p.j, p.k);
+const auto dgamt212 = calcderivs1_2(gamt12, p.i, p.j, p.k);
+const auto dgamt213 = calcderivs1_2(gamt13, p.i, p.j, p.k);
+const auto dgamt222 = calcderivs1_2(gamt22, p.i, p.j, p.k);
+const auto dgamt223 = calcderivs1_2(gamt23, p.i, p.j, p.k);
+const auto dgamt233 = calcderivs1_2(gamt33, p.i, p.j, p.k);
+const auto dgamt311 = calcderivs1_3(gamt11, p.i, p.j, p.k);
+const auto dgamt312 = calcderivs1_3(gamt12, p.i, p.j, p.k);
+const auto dgamt313 = calcderivs1_3(gamt13, p.i, p.j, p.k);
+const auto dgamt322 = calcderivs1_3(gamt22, p.i, p.j, p.k);
+const auto dgamt323 = calcderivs1_3(gamt23, p.i, p.j, p.k);
+const auto dgamt333 = calcderivs1_3(gamt33, p.i, p.j, p.k);
 
 const auto
 invgamt11
