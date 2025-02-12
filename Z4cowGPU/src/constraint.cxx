@@ -5,8 +5,8 @@
 
 #include <cmath>
 
-#include "../wolfram/powerinline.hxx"
 #include "../wolfram/derivsinline.hxx"
+#include "../wolfram/powerinline.hxx"
 
 namespace Z4cowGPU {
 using namespace Arith;

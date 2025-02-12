@@ -3,6 +3,7 @@
 #include <loop_device.hxx>
 
 #include "../wolfram/derivsinline.hxx"
+#include "../wolfram/powerinline.hxx"
 
 namespace Z4cowGPU {
 using namespace Arith;
