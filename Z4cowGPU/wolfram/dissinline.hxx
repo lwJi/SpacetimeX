@@ -1,3 +1,6 @@
+/* dissinline.hxx */
+/* Produced with Generato */
+
 #ifndef DISSINLINE_HXX
 #define DISSINLINE_HXX
 
@@ -46,3 +49,5 @@ calc_diss(const GF3D2layout &layout, const T *gf, int i, int j, int k,
 } // namespace Z4cowGPU
 
 #endif // #ifndef DISSINLINE_HXX
+
+/* dissinline.hxx */
