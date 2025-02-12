@@ -9,14 +9,10 @@
 #include <array>
 #include <cmath>
 
+#include "powerinline.hxx"
+
 namespace Z4cowGPU {
 using namespace Loop;
-
-template <typename T>
-CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T
-Power(T x, int y) {
-  return (y == 2) ? Arith::pow2(x) : Arith::pown(x, y);
-}
 
 template <int DI, typename T>
 CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T

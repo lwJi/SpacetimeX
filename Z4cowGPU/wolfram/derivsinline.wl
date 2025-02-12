@@ -37,20 +37,11 @@ SetMainPrint[
   pr["#include <array>"];
   pr["#include <cmath>"];
   pr[];
+  pr["#include \"powerinline.hxx\""];
+  pr[];
 
   pr["namespace Z4cowGPU {"];
   pr["using namespace Loop;"];
-  pr[];
-
-  (********************)
-  (* utility function *)
-  (********************)
-
-  pr["template <typename T>"];
-  pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
-  pr["Power(T x, int y) {"];
-  pr["  return (y == 2) ? Arith::pow2(x) : Arith::pown(x, y);"];
-  pr["}"];
   pr[];
 
   (****************************************)
