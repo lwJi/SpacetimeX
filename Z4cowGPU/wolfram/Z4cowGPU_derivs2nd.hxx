@@ -5,7 +5,7 @@
 #define Z4COWGPU_DERIVS2ND_HXX
 
 const auto calcderivs2_11 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {
@@ -30,7 +30,7 @@ default:
 };
 
 const auto calcderivs2_12 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {
@@ -55,7 +55,7 @@ default:
 };
 
 const auto calcderivs2_13 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {
@@ -80,7 +80,7 @@ default:
 };
 
 const auto calcderivs2_22 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {
@@ -105,7 +105,7 @@ default:
 };
 
 const auto calcderivs2_23 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {
@@ -130,7 +130,7 @@ default:
 };
 
 const auto calcderivs2_33 =
-    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
+    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)
         CCTK_ATTRIBUTE_ALWAYS_INLINE {
 switch (deriv_order) {
 case 2: {

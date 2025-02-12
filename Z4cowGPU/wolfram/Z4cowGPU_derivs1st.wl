@@ -24,7 +24,7 @@ SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_derivs1st.hxx"}]];
 SetMainPrint[
   Do[
     pr["const auto calcderivs1_" <> ToString[iDir] <> " ="];
-    pr["    [&] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)"];
+    pr["    [=] CCTK_DEVICE(const CCTK_REAL *gf_, int i, int j, int k)"];
     pr["        CCTK_ATTRIBUTE_ALWAYS_INLINE {"];
     pr["switch (deriv_order) {"];
     Do[
