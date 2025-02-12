@@ -9,7 +9,8 @@
 
 namespace Z4cowGPU {
 
-template <typename T, typename U> inline T Power(T x, U y) {
+template <typename T, typename U>
+CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T Power(T x, U y) {
   // If y is an integer, use exponentiation by squaring
   if constexpr (std::is_integral<U>::value) {
     if (y < 0) {
