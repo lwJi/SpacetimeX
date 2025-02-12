@@ -17,7 +17,7 @@ EnforceVarlist =
     {exAtold[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(A\), \(~\)], \((old)\)]\)"},
     {alphaold[], PrintAs -> "\!\(\*SuperscriptBox[\(\[Alpha]\), \((old)\)]\)"},
     {trexAtold[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(A\), \(~\)], \((old)\)]\)"},
-    {invdetgamtold[], PrintAs -> "\!\(\*SuperscriptBox[OverscriptBox[\(\[Gamma]\), \(~\)], \((old)\)]\)"},
+    {invdetgamtold[], PrintAs -> "1/\!\(\*SuperscriptBox[OverscriptBox[\(\[Gamma]\), \(~\)], \((old)\)]\)"},
     {Wfac[], PrintAs -> "\!\(\*SuperscriptBox[\(W\), \((fac)\)]\)"}
   ];
 
