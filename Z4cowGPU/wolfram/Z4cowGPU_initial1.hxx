@@ -89,17 +89,17 @@ invdetgamma*(-Power(ADMgam12[ijk],2) + ADMgam11[ijk]*ADMgam22[ijk])
 ;
 
 const auto
-tempTheta
-=
-0
-;
-
-const auto
 trexK
 =
 invgamma11*ADMK11[ijk] + 2*invgamma12*ADMK12[ijk] +
   2*invgamma13*ADMK13[ijk] + invgamma22*ADMK22[ijk] +
   2*invgamma23*ADMK23[ijk] + invgamma33*ADMK33[ijk]
+;
+
+const auto
+tempTheta
+=
+0
 ;
 
 const auto tempW = cbrt(sqrt(invdetgamma));

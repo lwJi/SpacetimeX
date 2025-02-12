@@ -33,6 +33,8 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 
 <<wl/Z4c_vars.wl
 
+<<wl/Z4cInADM_vars.wl
+
 <<wl/Z4cInADM_rhs.wl
 
 Module[{Mat, invMat},
@@ -64,10 +66,13 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
-  PrintEquations[{Mode -> "Temp"}, Drop[ADMTempVarlist, -2]];
+  (* invdetgamma, invgamma, trexK, tempTheta *)
+  PrintEquations[{Mode -> "Temp"}, Drop[Z4cInADMTempVarlist, -1]];
+
   pr["const auto tempW = cbrt(sqrt(invdetgamma));"];
   pr[];
 
+  (* W, gamt, exKh, exAt, Theta, alpha, beta *)
   PrintEquations[{Mode -> "Main"}, Drop[EvolVarlist, {5}]];
   pr[];
 

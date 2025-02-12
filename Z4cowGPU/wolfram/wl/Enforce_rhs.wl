@@ -2,9 +2,13 @@
 
 (* Enforce_rhs.wl *)
 
-(* (c) Liwei Ji, 07/2024 *)
+(* (c) Liwei Ji, 02/2025 *)
 
-(* set old variables *)
+(***************************)
+
+(* Temporary Old Variables *)
+
+(***************************)
 
 SetEQN[Wold[], W[]];
 
@@ -14,7 +18,11 @@ SetEQN[exAtold[i_, j_], exAt[i, j]];
 
 SetEQN[alphaold[], alpha[]];
 
-(* enforce algebric constraints *)
+(********************************)
+
+(* Enforce Algebric Constraints *)
+
+(********************************)
 
 SetEQN[gamt[i_, j_], Wfac[] ^ 2 gamtold[i, j]];
 

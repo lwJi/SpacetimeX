@@ -33,6 +33,10 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 
 <<wl/Z4c_vars.wl
 
+<<wl/Z4c_rhs.wl
+
+<<wl/Z4cInADM_vars.wl
+
 <<wl/Z4cInADM_rhs.wl
 
 Module[{Mat, invMat},
@@ -63,14 +67,16 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
+  (* dgamt *)
   PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1, AccuracyOrder -> 4},
                        Take[dEvolVarlist, {2}]];
   pr[];
 
-  PrintEquations[{Mode -> "Temp"}, Take[IntermediateVarlist, {2}]];
-  PrintEquations[{Mode -> "Temp"}, Take[ADMTempVarlist, {-2}]];
+  (* invgamt, GtDDD *)
+  PrintEquations[{Mode -> "Temp"}, Extract[IntermediateVarlist, {{2}, {5}}]];
   pr[];
 
+  (* trGt *)
   PrintEquations[{Mode -> "Main"}, Take[EvolVarlist, {5}]];
   pr[];
 

@@ -75,109 +75,109 @@ invgamt33
 ;
 
 const auto
-Gt111
+GtDDD111
 =
 dgamt111/2.
 ;
 
 const auto
-Gt112
+GtDDD112
 =
 dgamt211/2.
 ;
 
 const auto
-Gt113
+GtDDD113
 =
 dgamt311/2.
 ;
 
 const auto
-Gt122
+GtDDD122
 =
 -0.5*dgamt122 + dgamt212
 ;
 
 const auto
-Gt123
+GtDDD123
 =
 (-dgamt123 + dgamt213 + dgamt312)/2.
 ;
 
 const auto
-Gt133
+GtDDD133
 =
 -0.5*dgamt133 + dgamt313
 ;
 
 const auto
-Gt211
+GtDDD211
 =
 dgamt112 - dgamt211/2.
 ;
 
 const auto
-Gt212
+GtDDD212
 =
 dgamt122/2.
 ;
 
 const auto
-Gt213
+GtDDD213
 =
 (dgamt123 - dgamt213 + dgamt312)/2.
 ;
 
 const auto
-Gt222
+GtDDD222
 =
 dgamt222/2.
 ;
 
 const auto
-Gt223
+GtDDD223
 =
 dgamt322/2.
 ;
 
 const auto
-Gt233
+GtDDD233
 =
 -0.5*dgamt233 + dgamt323
 ;
 
 const auto
-Gt311
+GtDDD311
 =
 dgamt113 - dgamt311/2.
 ;
 
 const auto
-Gt312
+GtDDD312
 =
 (dgamt123 + dgamt213 - dgamt312)/2.
 ;
 
 const auto
-Gt313
+GtDDD313
 =
 dgamt133/2.
 ;
 
 const auto
-Gt322
+GtDDD322
 =
 dgamt223 - dgamt322/2.
 ;
 
 const auto
-Gt323
+GtDDD323
 =
 dgamt233/2.
 ;
 
 const auto
-Gt333
+GtDDD333
 =
 dgamt333/2.
 ;
@@ -185,41 +185,41 @@ dgamt333/2.
 
 trGt1[ijk]
 =
-Gt111*Power(invgamt11,2) + 2*Gt112*invgamt11*invgamt12 +
-  Gt211*invgamt11*invgamt12 + 2*Gt212*Power(invgamt12,2) +
-  2*Gt113*invgamt11*invgamt13 + Gt311*invgamt11*invgamt13 +
-  2*Gt213*invgamt12*invgamt13 + 2*Gt312*invgamt12*invgamt13 +
-  2*Gt313*Power(invgamt13,2) + Gt122*invgamt11*invgamt22 +
-  Gt222*invgamt12*invgamt22 + Gt322*invgamt13*invgamt22 +
-  2*Gt123*invgamt11*invgamt23 + 2*Gt223*invgamt12*invgamt23 +
-  2*Gt323*invgamt13*invgamt23 + Gt133*invgamt11*invgamt33 +
-  Gt233*invgamt12*invgamt33 + Gt333*invgamt13*invgamt33
+GtDDD111*Power(invgamt11,2) + 2*GtDDD112*invgamt11*invgamt12 +
+  GtDDD211*invgamt11*invgamt12 + 2*GtDDD212*Power(invgamt12,2) +
+  2*GtDDD113*invgamt11*invgamt13 + GtDDD311*invgamt11*invgamt13 +
+  2*GtDDD213*invgamt12*invgamt13 + 2*GtDDD312*invgamt12*invgamt13 +
+  2*GtDDD313*Power(invgamt13,2) + GtDDD122*invgamt11*invgamt22 +
+  GtDDD222*invgamt12*invgamt22 + GtDDD322*invgamt13*invgamt22 +
+  2*GtDDD123*invgamt11*invgamt23 + 2*GtDDD223*invgamt12*invgamt23 +
+  2*GtDDD323*invgamt13*invgamt23 + GtDDD133*invgamt11*invgamt33 +
+  GtDDD233*invgamt12*invgamt33 + GtDDD333*invgamt13*invgamt33
 ;
 
 trGt2[ijk]
 =
-Gt111*invgamt11*invgamt12 + 2*Gt112*Power(invgamt12,2) +
-  2*Gt113*invgamt12*invgamt13 + Gt211*invgamt11*invgamt22 +
-  Gt122*invgamt12*invgamt22 + 2*Gt212*invgamt12*invgamt22 +
-  2*Gt213*invgamt13*invgamt22 + Gt222*Power(invgamt22,2) +
-  Gt311*invgamt11*invgamt23 + 2*Gt123*invgamt12*invgamt23 +
-  2*Gt312*invgamt12*invgamt23 + 2*Gt313*invgamt13*invgamt23 +
-  2*Gt223*invgamt22*invgamt23 + Gt322*invgamt22*invgamt23 +
-  2*Gt323*Power(invgamt23,2) + Gt133*invgamt12*invgamt33 +
-  Gt233*invgamt22*invgamt33 + Gt333*invgamt23*invgamt33
+GtDDD111*invgamt11*invgamt12 + 2*GtDDD112*Power(invgamt12,2) +
+  2*GtDDD113*invgamt12*invgamt13 + GtDDD211*invgamt11*invgamt22 +
+  GtDDD122*invgamt12*invgamt22 + 2*GtDDD212*invgamt12*invgamt22 +
+  2*GtDDD213*invgamt13*invgamt22 + GtDDD222*Power(invgamt22,2) +
+  GtDDD311*invgamt11*invgamt23 + 2*GtDDD123*invgamt12*invgamt23 +
+  2*GtDDD312*invgamt12*invgamt23 + 2*GtDDD313*invgamt13*invgamt23 +
+  2*GtDDD223*invgamt22*invgamt23 + GtDDD322*invgamt22*invgamt23 +
+  2*GtDDD323*Power(invgamt23,2) + GtDDD133*invgamt12*invgamt33 +
+  GtDDD233*invgamt22*invgamt33 + GtDDD333*invgamt23*invgamt33
 ;
 
 trGt3[ijk]
 =
-Gt111*invgamt11*invgamt13 + 2*Gt112*invgamt12*invgamt13 +
-  2*Gt113*Power(invgamt13,2) + Gt122*invgamt13*invgamt22 +
-  Gt211*invgamt11*invgamt23 + 2*Gt212*invgamt12*invgamt23 +
-  2*Gt123*invgamt13*invgamt23 + 2*Gt213*invgamt13*invgamt23 +
-  Gt222*invgamt22*invgamt23 + 2*Gt223*Power(invgamt23,2) +
-  Gt311*invgamt11*invgamt33 + 2*Gt312*invgamt12*invgamt33 +
-  Gt133*invgamt13*invgamt33 + 2*Gt313*invgamt13*invgamt33 +
-  Gt322*invgamt22*invgamt33 + Gt233*invgamt23*invgamt33 +
-  2*Gt323*invgamt23*invgamt33 + Gt333*Power(invgamt33,2)
+GtDDD111*invgamt11*invgamt13 + 2*GtDDD112*invgamt12*invgamt13 +
+  2*GtDDD113*Power(invgamt13,2) + GtDDD122*invgamt13*invgamt22 +
+  GtDDD211*invgamt11*invgamt23 + 2*GtDDD212*invgamt12*invgamt23 +
+  2*GtDDD123*invgamt13*invgamt23 + 2*GtDDD213*invgamt13*invgamt23 +
+  GtDDD222*invgamt22*invgamt23 + 2*GtDDD223*Power(invgamt23,2) +
+  GtDDD311*invgamt11*invgamt33 + 2*GtDDD312*invgamt12*invgamt33 +
+  GtDDD133*invgamt13*invgamt33 + 2*GtDDD313*invgamt13*invgamt33 +
+  GtDDD322*invgamt22*invgamt33 + GtDDD233*invgamt23*invgamt33 +
+  2*GtDDD323*invgamt23*invgamt33 + GtDDD333*Power(invgamt33,2)
 ;
 
 

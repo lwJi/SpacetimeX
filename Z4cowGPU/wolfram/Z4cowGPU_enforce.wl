@@ -29,9 +29,9 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 (* Define Variables and Equations *)
 (**********************************)
 
-<<wl/ADM_vars.wl
-
 <<wl/Z4c_vars.wl
+
+<<wl/Enforce_vars.wl
 
 <<wl/Enforce_rhs.wl
 
@@ -69,20 +69,30 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
+  (* Wold, gamtold, exAtold, alphaold *)
   PrintEquations[{Mode -> "Temp"}, Drop[EnforceVarlist, -3]];
+
   pr["W[ijk] = fmax(cWfloor, Wold);"];
   pr["alpha[ijk] = fmax(calphafloor, alphaold);"];
+  pr[];
+
+  (* invdetgamtold *)
   PrintEquations[{Mode -> "Temp"}, Extract[EnforceVarlist, {{-2}}]];
+
   pr["const auto Wfac = cbrt(sqrt(invdetgamtold));"];
   pr[];
 
+  (* gamt *)
   PrintEquations[{Mode -> "Main"}, Extract[EvolVarlist, {{2}}]];
   pr[];
 
+  (* invgamt *)
   PrintEquations[{Mode -> "Temp"}, Extract[IntermediateVarlist, {{2}}]];
+  (* trexAtold *)
   PrintEquations[{Mode -> "Temp"}, Extract[EnforceVarlist, {{-3}}]];
   pr[];
 
+  (* exAt *)
   PrintEquations[{Mode -> "Main"}, Extract[EvolVarlist, {{4}}]];
   pr[];
 

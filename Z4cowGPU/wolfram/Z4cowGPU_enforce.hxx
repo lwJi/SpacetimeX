@@ -109,6 +109,7 @@ alpha[ijk]
 
 W[ijk] = fmax(cWfloor, Wold);
 alpha[ijk] = fmax(calphafloor, alphaold);
+
 const auto
 invdetgamtold
 =
