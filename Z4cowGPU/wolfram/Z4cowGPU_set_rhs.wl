@@ -49,7 +49,7 @@ Module[{Mat, invMat},
 SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_set_rhs.hxx"}]];
 
 SetMainPrint[
-  (* Initailze grid function names *)
+  (* Initialize grid function names *)
   PrintInitializations[{Mode -> "MainOut"}, dtEvolVarlist];
   PrintInitializations[{Mode -> "MainIn"}, Drop[TmunuVarlist, 1]];
   PrintInitializations[{Mode -> "MainIn"}, Delete[EvolVarlist, {{1}, {-3}}]];

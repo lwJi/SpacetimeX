@@ -43,7 +43,7 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_set_ADM.hxx"}]];
 
 SetMainPrint[
-  (* Initailze grid function names *)
+  (* Initialize grid function names *)
   PrintInitializations[{Mode -> "MainOut"}, ADMVarlist];
   PrintInitializations[{Mode -> "MainIn"},
                        Delete[EvolVarlist, {{1}, {5}, {-3}}]];

@@ -57,7 +57,7 @@ Module[{Mat, invMat},
 SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_enforce.hxx"}]];
 
 SetMainPrint[
-  (* Initailze grid function names *)
+  (* Initialize grid function names *)
   PrintInitializations[{Mode -> "MainOut"},
                        Extract[EvolVarlist, {{2}, {4}, {-2}}]];
   pr[];
