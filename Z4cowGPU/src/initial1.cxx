@@ -29,6 +29,7 @@ extern "C" void Z4cowGPU_Initial1(CCTK_ARGUMENTS) {
   CCTK_REAL *gf_alpha = alphaG;
   const array<CCTK_REAL *, 3> gf_beta{betaGx, betaGy, betaGz};
 
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_initial1.hxx"

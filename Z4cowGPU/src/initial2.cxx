@@ -2,6 +2,8 @@
 #include <cctk_Arguments.h>
 #include <loop_device.hxx>
 
+#include <cmath>
+
 #include "../wolfram/derivsinline.hxx"
 #include "../wolfram/powerinline.hxx"
 

@@ -31,6 +31,7 @@ extern "C" void Z4cowGPU_ADM(CCTK_ARGUMENTS) {
   CCTK_REAL *gf_ADMalpha = alp;
   const array<CCTK_REAL *, 3> gf_ADMbeta{betax, betay, betaz};
 
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_set_ADM.hxx"

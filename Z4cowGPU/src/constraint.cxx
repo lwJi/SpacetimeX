@@ -45,7 +45,7 @@ extern "C" void Z4cowGPU_Constraints(CCTK_ARGUMENTS) {
   // CCTK_REAL *gf_HC = HC;
   const array<CCTK_REAL *, 3> gf_MtC{MtCx, MtCy, MtCz};
 
-  // parameters
+  // Parameters
   const CCTK_REAL cpi = M_PI;
 
   // Derivs Lambdas

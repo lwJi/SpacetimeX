@@ -23,10 +23,11 @@ extern "C" void Z4cowGPU_Enforce(CCTK_ARGUMENTS) {
   const array<CCTK_REAL *, 6> gf_exAt{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
   CCTK_REAL *gf_alpha = alphaG;
 
-  // parameters
+  // Parameters
   const CCTK_REAL cWfloor = W_floor;
   const CCTK_REAL calphafloor = alphaG_floor;
 
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_enforce.hxx"
