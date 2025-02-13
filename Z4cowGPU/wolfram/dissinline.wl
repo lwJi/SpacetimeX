@@ -29,12 +29,10 @@ SetMainPrint[
   pr[];
   pr["#include \"derivsinline.hxx\""];
   pr[];
-
   pr["namespace Z4cowGPU {"];
   pr["using namespace Arith;"];
   pr["using namespace Loop;"];
   pr[];
-
   pr["template <int deriv_order, typename T>"];
   pr["CCTK_DEVICE CCTK_HOST CCTK_ATTRIBUTE_ALWAYS_INLINE inline T"];
   pr["calc_diss(const GF3D2layout &layout, const T *gf, int i, int j, int k,"];
