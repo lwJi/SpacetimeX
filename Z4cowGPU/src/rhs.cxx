@@ -1,35 +1,19 @@
 #include <cctk.h>
 #include <cctk_Arguments.h>
 #include <cctk_Parameters.h>
-
-#include <derivs.hxx>
 #include <loop_device.hxx>
-#include <mat.hxx>
-#include <simd.hxx>
-#include <vec.hxx>
 
 #include <cmath>
-#include <sys/time.h>
 
 #include "../wolfram/derivsinline.hxx"
+#include "../wolfram/dissinline.hxx"
+#include "../wolfram/powerinline.hxx"
 
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-double gettime() {
-  timeval tv;
-  gettimeofday(&tv, nullptr);
-  return static_cast<double>(tv.tv_sec) +
-         static_cast<double>(tv.tv_usec) / 1.0e6;
-}
-
-double total_rhs_time = 0;
-
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
-
-  const double start_time = gettime();
-
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
 
@@ -44,11 +28,13 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
   // Input grid functions
+  const CCTK_REAL *gf_W = W;
   const array<const CCTK_REAL *, 6> gf_gamt{gammatxx, gammatxy, gammatxz,
                                             gammatyy, gammatyz, gammatzz};
   const CCTK_REAL *gf_exKh = Kh;
   const array<const CCTK_REAL *, 6> gf_exAt{Atxx, Atxy, Atxz, Atyy, Atyz, Atzz};
   const array<const CCTK_REAL *, 3> gf_trGt{Gamtx, Gamty, Gamtz};
+  const CCTK_REAL *gf_Theta = Theta;
   const CCTK_REAL *gf_alpha = alphaG;
   const array<const CCTK_REAL *, 3> gf_beta{betaGx, betaGy, betaGz};
 
@@ -70,7 +56,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   CCTK_REAL *gf_dtalpha = alphaG_rhs;
   const array<CCTK_REAL *, 3> gf_dtbeta{betaGx_rhs, betaGy_rhs, betaGz_rhs};
 
-  // parameters
+  // Parameters
   const CCTK_REAL cpi = M_PI;
   const CCTK_REAL ckappa1 = kappa1;
   const CCTK_REAL ckappa2 = kappa2;
@@ -78,18 +64,31 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL cmuS = f_mu_S;
   const CCTK_REAL ceta = eta;
 
+  // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
+
+  // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
 
-  const double finish_time = gettime();
+  // Dissipation
+#include "../wolfram/Z4cowGPU_applydiss.hxx"
 
-  total_rhs_time += finish_time - start_time;
-  CCTK_VINFO("RHS evaluation time: %g sec", total_rhs_time);
-}
-
-extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
-  // do nothing
+  applydiss(gf_W, gf_dtW);
+  for (int a = 0; a < 6; ++a)
+    applydiss(gf_gamt[a], gf_dtgamt[a]);
+  applydiss(gf_exKh, gf_dtexKh);
+  for (int a = 0; a < 6; ++a)
+    applydiss(gf_exAt[a], gf_dtexAt[a]);
+  for (int a = 0; a < 3; ++a)
+    applydiss(gf_trGt[a], gf_dttrGt[a]);
+  if (!set_Theta_zero)
+    applydiss(gf_Theta, gf_dtTheta);
+  applydiss(gf_alpha, gf_dtalpha);
+  for (int a = 0; a < 3; ++a)
+    applydiss(gf_beta[a], gf_dtbeta[a]);
 }
 
 } // namespace Z4cowGPU
