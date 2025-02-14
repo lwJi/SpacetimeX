@@ -61,6 +61,8 @@ grid.loop_int_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
+const CCTK_REAL ceta = calceta(p.x, p.y, p.z);
+
 const auto dW1 = calcderivs1_1(W, p.i, p.j, p.k);
 const auto dW2 = calcderivs1_2(W, p.i, p.j, p.k);
 const auto dW3 = calcderivs1_3(W, p.i, p.j, p.k);
