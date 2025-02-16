@@ -100,4 +100,8 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     applydiss(gf_beta[a], gf_dtbeta[a]);
 }
 
+extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
+  // do nothing
+}
+
 } // namespace Z4cowGPU
