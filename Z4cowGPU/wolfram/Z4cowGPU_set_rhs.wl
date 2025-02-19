@@ -62,6 +62,9 @@ SetMainPrint[
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
   pr[];
 
+  pr["const CCTK_REAL ceta = calceta(p.x, p.y, p.z);"];
+  pr[];
+
   PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1},
                        dEvolVarlist];
   PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 2},

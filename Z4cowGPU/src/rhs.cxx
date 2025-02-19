@@ -62,7 +62,16 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const CCTK_REAL ckappa2 = kappa2;
   const CCTK_REAL cmuL = f_mu_L;
   const CCTK_REAL cmuS = f_mu_S;
-  const CCTK_REAL ceta = eta;
+  // const CCTK_REAL ceta = eta;
+  const auto calceta =
+      [=] CCTK_DEVICE(const CCTK_REAL x, const CCTK_REAL y, const CCTK_REAL z)
+          CCTK_ATTRIBUTE_ALWAYS_INLINE {
+            const CCTK_REAL r2 = x * x + y * y + z * z;
+            const CCTK_REAL r4 = r2 * r2;
+            const CCTK_REAL is4 =
+                1.0 / (veta_width * veta_width * veta_width * veta_width);
+            return (veta_central - veta_outer) * exp(-r4 * is4) + veta_outer;
+          };
 
   // Derivs Lambdas
 #include "../wolfram/Z4cowGPU_derivs1st.hxx"
@@ -89,6 +98,10 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   applydiss(gf_alpha, gf_dtalpha);
   for (int a = 0; a < 3; ++a)
     applydiss(gf_beta[a], gf_dtbeta[a]);
+}
+
+extern "C" void Z4cowGPU_Sync(CCTK_ARGUMENTS) {
+  // do nothing
 }
 
 } // namespace Z4cowGPU

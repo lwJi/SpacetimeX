@@ -68,6 +68,19 @@ if(use_subcycling_wip) {
   STORAGE: Theta_k4
   STORAGE: alphaG_k4
   STORAGE: betaG_k4
+
+  SCHEDULE Z4cowGPU_Enforce IN ODESolvers_PostSubStep
+  {
+    LANG: C
+    READS: W(interior)
+    READS: gamma_tilde(interior)
+    READS: A_tilde(interior)
+    READS: alphaG(interior)
+    WRITES: W(interior)
+    WRITES: gamma_tilde(interior)
+    WRITES: A_tilde(interior)
+    WRITES: alphaG(interior)
+  } "Enforce algebraic Z4c constraints"
 }
 
 
@@ -148,6 +161,7 @@ SCHEDULE Z4cowGPU_InitialLapse IN Z4cowGPU_InitialGroup AFTER Z4cowGPU_Initial2
   LANG: C
   READS: W(interior)
   WRITES: alphaG(interior)
+  SYNC: alphaG
 } "Set initial lapse"
 
 SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
@@ -161,6 +175,12 @@ SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
   WRITES: gamma_tilde(interior)
   WRITES: A_tilde(interior)
   WRITES: alphaG(interior)
+} "Enforce algebraic Z4c constraints"
+
+SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
+{
+  LANG: C
+  OPTIONS: global
   SYNC: W
   SYNC: gamma_tilde
   SYNC: K_hat
@@ -169,10 +189,10 @@ SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
   SYNC: Theta
   SYNC: alphaG
   SYNC: betaG
-} "Enforce algebraic Z4c constraints"
+} "Synchronize"
 
 if (calc_ADM_vars) {
-  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
+  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Sync
   {
     LANG: C
     READS: W(everywhere)
