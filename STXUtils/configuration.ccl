@@ -1,0 +1,7 @@
+# Configuration definition for thorn STXUtils
+
+REQUIRES Loop
+
+PROVIDES STXUtils
+{
+}
