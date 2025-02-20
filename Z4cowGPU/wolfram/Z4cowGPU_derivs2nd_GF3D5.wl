@@ -1,6 +1,6 @@
 (* ::Package:: *)
 
-(* Z4cowGPU_derivs1st_GF3D5.wl *)
+(* Z4cowGPU_derivs2nd_GF3D5.wl *)
 
 (* (c) Liwei Ji, 02/2025 *)
 
@@ -19,13 +19,14 @@ SetPrintDate[False];
 (* Print to Files *)
 (******************)
 
-SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_derivs1st_GF3D5.hxx"}]];
+SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_derivs2nd_GF3D5.hxx"}]];
 
 SetMainPrint[
-  pr["const auto calcderivs = [&] (const GF3D5<CCTK_REAL> &gf,"];
-  pr["                             const array<GF3D5<CCTK_REAL>, 3> &dgf,"];
-  pr["                             const CCTK_REAL *gf_)"];
-  pr["                            CCTK_ATTRIBUTE_NOINLINE {"];
+  pr["const auto calcderivs2 = [&] (const GF3D5<CCTK_REAL> &gf,"];
+  pr["                              const array<GF3D5<CCTK_REAL>, 3> &dgf,"];
+  pr["                              const array<GF3D5<CCTK_REAL>, 6> &ddgf,"];
+  pr["                              const CCTK_REAL *gf_)"];
+  pr["                             CCTK_ATTRIBUTE_NOINLINE {"];
   pr["switch (deriv_order) {"];
   Do[
     pr["case " <> ToString[aOrd] <> ": {"];
@@ -41,6 +42,18 @@ SetMainPrint[
                                          <> "<2>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
     pr["      dgf[2].ptr[ijk5] = fd_1_o" <> ToString[aOrd]
                                          <> "<3>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[0].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<1, 1>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[1].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<1, 2>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[2].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<1, 3>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[3].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<2, 2>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[4].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<2, 3>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
+    pr["      ddgf[5].ptr[ijk5] = fd_2_o" <> ToString[aOrd]
+                                          <> "<3, 3>(layout2, gf_, p.i, p.j, p.k, invDxyz);"];
     pr["    });"];
     pr["  break;"];
     pr["}"]

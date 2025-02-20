@@ -4,8 +4,9 @@
 #ifndef Z4COWGPU_DERIVS1ST_GF3D5_HXX
 #define Z4COWGPU_DERIVS1ST_GF3D5_HXX
 
-const auto calcderivs = [&] (const CCTK_REAL *gf_, const GF3D5<CCTK_REAL> &gf,
-                             const array<GF3D5<CCTK_REAL>, dim> &dgf)
+const auto calcderivs = [&] (const GF3D5<CCTK_REAL> &gf,
+                             const array<GF3D5<CCTK_REAL>, 3> &dgf,
+                             const CCTK_REAL *gf_)
                             CCTK_ATTRIBUTE_NOINLINE {
 switch (deriv_order) {
 case 2: {
