@@ -5,6 +5,7 @@
 
 #include <cmath>
 
+#include "../wolfram/derivsGF3D5.hxx"
 #include "../wolfram/derivsinline.hxx"
 #include "../wolfram/dissinline.hxx"
 #include "../wolfram/powerinline.hxx"
@@ -154,6 +155,27 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
       CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
                   ntmps, itmp);
     itmp = -1;
+
+    // Define derivs lambdas
+    const auto calcderivs1st = [&](const auto &gf, const auto &dgf,
+                                   const auto &gf_) {
+      calc_derivs1st<0, 0, 0>(grid, layout5, gf, dgf, layout2, gf_, invDxyz,
+                              deriv_order);
+    };
+    // const auto calcderivs2 = [&](const auto &gf, const auto &dgf,
+    //                              const auto &ddgf, const auto &gf0) {
+    //   Derivs::calc_derivs2<0, 0, 0>(gf, dgf, ddgf, layout5, grid, gf0, dx,
+    //                                 deriv_order);
+    // };
+
+    // calcderivs2(tl_W, tl_dW, tl_ddW, gf_W);
+    // calcderivs2(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
+    calcderivs1st(tl_exKh, tl_dexKh, gf_exKh);
+    calcderivs1st(tl_exAt, tl_dexAt, gf_exAt);
+    calcderivs1st(tl_trGt, tl_dtrGt, gf_trGt);
+    calcderivs1st(tl_Theta, tl_dTheta, gf_Theta);
+    // calcderivs2(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
+    // calcderivs2(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
   }
 
   // Dissipation
