@@ -162,20 +162,20 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
       calc_derivs1st<0, 0, 0>(grid, layout5, gf, dgf, layout2, gf_, invDxyz,
                               deriv_order);
     };
-    // const auto calcderivs2 = [&](const auto &gf, const auto &dgf,
-    //                              const auto &ddgf, const auto &gf0) {
-    //   Derivs::calc_derivs2<0, 0, 0>(gf, dgf, ddgf, layout5, grid, gf0, dx,
-    //                                 deriv_order);
-    // };
+    const auto calcderivs2nd = [&](const auto &gf, const auto &dgf,
+                                   const auto &ddgf, const auto &gf_) {
+      calc_derivs2nd<0, 0, 0>(grid, layout5, gf, dgf, ddgf, layout2, gf_,
+                              invDxyz, deriv_order);
+    };
 
-    // calcderivs2(tl_W, tl_dW, tl_ddW, gf_W);
-    // calcderivs2(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
+    calcderivs2nd(tl_W, tl_dW, tl_ddW, gf_W);
+    calcderivs2nd(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
     calcderivs1st(tl_exKh, tl_dexKh, gf_exKh);
     calcderivs1st(tl_exAt, tl_dexAt, gf_exAt);
     calcderivs1st(tl_trGt, tl_dtrGt, gf_trGt);
     calcderivs1st(tl_Theta, tl_dTheta, gf_Theta);
-    // calcderivs2(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
-    // calcderivs2(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
+    calcderivs2nd(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
+    calcderivs2nd(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
   }
 
   // Dissipation
