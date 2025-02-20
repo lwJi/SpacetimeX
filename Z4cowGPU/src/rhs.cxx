@@ -176,6 +176,8 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     calcderivs1st(tl_Theta, tl_dTheta, gf_Theta);
     calcderivs2nd(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
     calcderivs2nd(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
+
+#include "../wolfram/Z4cowGPU_set_rhs_GF3D5.hxx"
   }
 
   // Dissipation
