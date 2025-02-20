@@ -13,6 +13,14 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
+template <typename T, size_t N, typename F>
+std::array<T, N> make_array(F &&lambda) {
+  // Helper to expand the lambda into an array
+  return [&]<size_t... Is>(std::index_sequence<Is...>) {
+    return std::array<T, N>{lambda(Is)...};
+  }(std::make_index_sequence<N>{});
+}
+
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
@@ -73,14 +81,80 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
             return (veta_central - veta_outer) * exp(-r4 * is4) + veta_outer;
           };
 
-  // Derivs Lambdas
-#include "../wolfram/Z4cowGPU_derivs1st.hxx"
-#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
-
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
+  if (calc_derivs_live) {
+
+    // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
+
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
+
+  } else {
+
+    // Tile variables for derivatives and so on
+    vect<int, dim> imin, imax;
+    GridDescBase(cctkGH).box_int<0, 0, 0>(
+        {cctk_nghostzones[0], cctk_nghostzones[1], cctk_nghostzones[2]}, imin,
+        imax);
+    const GF3D5layout layout5(imin, imax);
+
+    const int ntmps = 154;
+    GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
+    int itmp = 0;
+
+    const auto make_vec = [&](const auto &f) {
+      return make_array<std::invoke_result_t<decltype(f)>, 3>(
+          [&](int) { return f(); });
+    };
+    const auto make_smat = [&](const auto &f) {
+      return make_array<std::invoke_result_t<decltype(f)>, 6>(
+          [&](int) { return f(); });
+    };
+
+    const auto make_gf = [&]() { return GF3D5<CCTK_REAL>(tmps(itmp++)); };
+    const auto make_vec_gf = [&]() { return make_vec(make_gf); };
+    const auto make_smat_gf = [&]() { return make_smat(make_gf); };
+    const auto make_vec_vec_gf = [&]() { return make_vec(make_vec_gf); };
+    const auto make_vec_smat_gf = [&]() { return make_vec(make_smat_gf); };
+    const auto make_smat_vec_gf = [&]() { return make_smat(make_vec_gf); };
+    const auto make_smat_smat_gf = [&]() { return make_smat(make_smat_gf); };
+
+    const GF3D5<CCTK_REAL> tl_W(make_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 6> tl_ddW(make_smat_gf());
+
+    const array<GF3D5<CCTK_REAL>, 6> tl_gamt(make_smat_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dgamt(make_smat_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 6>, 6> tl_ddgamt(make_smat_smat_gf());
+
+    const GF3D5<CCTK_REAL> tl_exKh(make_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dexKh(make_vec_gf());
+
+    const array<GF3D5<CCTK_REAL>, 6> tl_exAt(make_smat_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dexAt(make_smat_vec_gf());
+
+    const array<GF3D5<CCTK_REAL>, 3> tl_trGt(make_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(make_vec_vec_gf());
+
+    const GF3D5<CCTK_REAL> tl_Theta(make_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dTheta(make_vec_gf());
+
+    const GF3D5<CCTK_REAL> tl_alpha(make_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dalpha(make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 6> tl_ddalpha(make_smat_gf());
+
+    const array<GF3D5<CCTK_REAL>, 3> tl_beta(make_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(make_vec_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(make_vec_smat_gf());
+
+    if (itmp != ntmps)
+      CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
+                  ntmps, itmp);
+    itmp = -1;
+  }
 
   // Dissipation
 #include "../wolfram/Z4cowGPU_applydiss.hxx"
