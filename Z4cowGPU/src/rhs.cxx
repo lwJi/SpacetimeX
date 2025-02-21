@@ -102,7 +102,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
         imax);
     const GF3D5layout layout5(imin, imax);
 
-    const int ntmps = 154;
+    const int ntmps = 132;
     GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
     int itmp = 0;
 
@@ -123,31 +123,25 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     const auto make_smat_vec_gf = [&]() { return make_smat(make_vec_gf); };
     const auto make_smat_smat_gf = [&]() { return make_smat(make_smat_gf); };
 
-    const GF3D5<CCTK_REAL> tl_W(make_gf());
+    // const GF3D5<CCTK_REAL> tl_W(make_gf());
+    // const array<GF3D5<CCTK_REAL>, 6> tl_gamt(make_smat_gf());
+    // const GF3D5<CCTK_REAL> tl_exKh(make_gf());
+    // const array<GF3D5<CCTK_REAL>, 6> tl_exAt(make_smat_gf());
+    // const array<GF3D5<CCTK_REAL>, 3> tl_trGt(make_vec_gf());
+    // const GF3D5<CCTK_REAL> tl_Theta(make_gf());
+    // const GF3D5<CCTK_REAL> tl_alpha(make_gf());
+    // const array<GF3D5<CCTK_REAL>, 3> tl_beta(make_vec_gf());
+
     const array<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
     const array<GF3D5<CCTK_REAL>, 6> tl_ddW(make_smat_gf());
-
-    const array<GF3D5<CCTK_REAL>, 6> tl_gamt(make_smat_gf());
     const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dgamt(make_smat_vec_gf());
     const array<array<GF3D5<CCTK_REAL>, 6>, 6> tl_ddgamt(make_smat_smat_gf());
-
-    const GF3D5<CCTK_REAL> tl_exKh(make_gf());
     const array<GF3D5<CCTK_REAL>, 3> tl_dexKh(make_vec_gf());
-
-    const array<GF3D5<CCTK_REAL>, 6> tl_exAt(make_smat_gf());
     const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dexAt(make_smat_vec_gf());
-
-    const array<GF3D5<CCTK_REAL>, 3> tl_trGt(make_vec_gf());
     const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(make_vec_vec_gf());
-
-    const GF3D5<CCTK_REAL> tl_Theta(make_gf());
     const array<GF3D5<CCTK_REAL>, 3> tl_dTheta(make_vec_gf());
-
-    const GF3D5<CCTK_REAL> tl_alpha(make_gf());
     const array<GF3D5<CCTK_REAL>, 3> tl_dalpha(make_vec_gf());
     const array<GF3D5<CCTK_REAL>, 6> tl_ddalpha(make_smat_gf());
-
-    const array<GF3D5<CCTK_REAL>, 3> tl_beta(make_vec_gf());
     const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(make_vec_vec_gf());
     const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(make_vec_smat_gf());
 
@@ -157,25 +151,24 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     itmp = -1;
 
     // Define derivs lambdas
-    const auto calcderivs1st = [&](const auto &gf, const auto &dgf,
-                                   const auto &gf_) {
-      calc_derivs1st<0, 0, 0>(grid, layout5, gf, dgf, layout2, gf_, invDxyz,
+    const auto calcderivs1st = [&](const auto &dgf, const auto &gf_) {
+      calc_derivs1st<0, 0, 0>(grid, layout5, dgf, layout2, gf_, invDxyz,
                               deriv_order);
     };
-    const auto calcderivs2nd = [&](const auto &gf, const auto &dgf,
-                                   const auto &ddgf, const auto &gf_) {
-      calc_derivs2nd<0, 0, 0>(grid, layout5, gf, dgf, ddgf, layout2, gf_,
-                              invDxyz, deriv_order);
+    const auto calcderivs2nd = [&](const auto &dgf, const auto &ddgf,
+                                   const auto &gf_) {
+      calc_derivs2nd<0, 0, 0>(grid, layout5, dgf, ddgf, layout2, gf_, invDxyz,
+                              deriv_order);
     };
 
-    calcderivs2nd(tl_W, tl_dW, tl_ddW, gf_W);
-    calcderivs2nd(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
-    calcderivs1st(tl_exKh, tl_dexKh, gf_exKh);
-    calcderivs1st(tl_exAt, tl_dexAt, gf_exAt);
-    calcderivs1st(tl_trGt, tl_dtrGt, gf_trGt);
-    calcderivs1st(tl_Theta, tl_dTheta, gf_Theta);
-    calcderivs2nd(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
-    calcderivs2nd(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
+    calcderivs2nd(tl_dW, tl_ddW, gf_W);
+    calcderivs2nd(tl_dgamt, tl_ddgamt, gf_gamt);
+    calcderivs1st(tl_dexKh, gf_exKh);
+    calcderivs1st(tl_dexAt, gf_exAt);
+    calcderivs1st(tl_dtrGt, gf_trGt);
+    calcderivs1st(tl_dTheta, gf_Theta);
+    calcderivs2nd(tl_dalpha, tl_ddalpha, gf_alpha);
+    calcderivs2nd(tl_dbeta, tl_ddbeta, gf_beta);
 
 #include "../wolfram/Z4cowGPU_set_rhs_GF3D5.hxx"
   }
