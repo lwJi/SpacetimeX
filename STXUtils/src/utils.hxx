@@ -69,7 +69,7 @@ public:
 
   // Constructor to initialize the lambdas
   GF3D5Factory(const Loop::GF3D5layout &layout5, int ntmps, int &itmp)
-      : tmps_(layout5, ntmps), itmp_ref_(itmp), max_tmps_(ntmps) {
+      : tmps_(layout5, ntmps), itmp_ref_(itmp) {
     make_gf = [this]() noexcept { return create_gf(); };
     make_vec_gf = [this]() noexcept { return create_vec(make_gf); };
     make_smat_gf = [this]() noexcept { return create_smat(make_gf); };
@@ -83,11 +83,9 @@ private:
   // Private members
   Loop::GF3D5vector<T> tmps_;
   int &itmp_ref_; // Reference to the external temporary index
-  const int max_tmps_;
 
   // Generates a single grid function
   [[nodiscard]] GFType create_gf() const noexcept {
-    assert(itmp_ref_ < max_tmps_ && "Temporary index exceeds allocated pool");
     return GFType(tmps_(itmp_ref_++));
   }
 
