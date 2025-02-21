@@ -33,13 +33,13 @@ template <typename T> struct GF3D5Factory {
   // Constructor to initialize the lambdas
   GF3D5Factory(const Loop::GF3D5layout &layout5, int ntmps, int &itmp)
       : tmps(layout5, ntmps), itmp_ref(itmp) {
-    make_gf = [this]() { return create_gf(); };
-    make_vec_gf = [this]() { return create_vec(make_gf); };
-    make_smat_gf = [this]() { return create_smat(make_gf); };
-    make_vec_vec_gf = [this]() { return create_vec(make_vec_gf); };
-    make_vec_smat_gf = [this]() { return create_vec(make_smat_gf); };
-    make_smat_vec_gf = [this]() { return create_smat(make_vec_gf); };
-    make_smat_smat_gf = [this]() { return create_smat(make_smat_gf); };
+    make_gf = [this]() noexcept { return create_gf(); };
+    make_vec_gf = [this]() noexcept { return create_vec(make_gf); };
+    make_smat_gf = [this]() noexcept { return create_smat(make_gf); };
+    make_vec_vec_gf = [this]() noexcept { return create_vec(make_vec_gf); };
+    make_vec_smat_gf = [this]() noexcept { return create_vec(make_smat_gf); };
+    make_smat_vec_gf = [this]() noexcept { return create_smat(make_vec_gf); };
+    make_smat_smat_gf = [this]() noexcept { return create_smat(make_smat_gf); };
   }
 
 private:
@@ -52,21 +52,23 @@ private:
 
   // Helper functions for generating vectors and symmetric matrices
   template <typename Func> auto create_vec(const Func &f) const noexcept {
-    return make_array<std::invoke_result_t<Func>, 3>([&](int) { return f(); });
+    return make_array<std::invoke_result_t<Func>, 3>(
+        [&](int /*unused*/) { return std::invoke(f); });
   }
 
   template <typename Func> auto create_smat(const Func &f) const noexcept {
-    return make_array<std::invoke_result_t<Func>, 6>([&](int) { return f(); });
+    return make_array<std::invoke_result_t<Func>, 6>(
+        [&](int /*unused*/) { return std::invoke(f); });
   }
 };
 
 template <int CI, int CJ, int CK>
 inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
-  const std::array<int, Loop::dim> nghostzones = {cctkGH->cctk_nghostzones[0],
-                                                  cctkGH->cctk_nghostzones[1],
-                                                  cctkGH->cctk_nghostzones[2]};
   Arith::vect<int, Loop::dim> imin, imax;
-  Loop::GridDescBase(cctkGH).box_int<CI, CJ, CK>(nghostzones, imin, imax);
+  Loop::GridDescBase(cctkGH).box_int<CI, CJ, CK>({cctkGH->cctk_nghostzones[0],
+                                                  cctkGH->cctk_nghostzones[1],
+                                                  cctkGH->cctk_nghostzones[2]},
+                                                 imin, imax);
   return Loop::GF3D5layout(imin, imax);
 }
 
