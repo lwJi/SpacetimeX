@@ -51,7 +51,7 @@ SetMainPrint[
   pr["  switch (deriv_order) {"];
   Do[
     pr["  case " <> ToString[aOrd] <> ": {"];
-    pr["    grid.loop_int_device<0, 0, 0>("];
+    pr["    grid.loop_int_device<CI, CJ, CK>("];
     pr["      grid.nghostzones,"];
     pr["      [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {"];
     pr["        const int ijk2 = layout2.linear(p.i, p.j, p.k);"];
@@ -73,7 +73,7 @@ SetMainPrint[
   pr["  assert(0);"];
   pr["}"];
   pr["}"];
-  pr[]
+  pr[];
 
   pr["template <int CI, int CJ, int CK, typename T>"];
   pr["CCTK_ATTRIBUTE_NOINLINE void"];
@@ -89,7 +89,7 @@ SetMainPrint[
   pr["    calc_derivs1st<CI, CJ, CK>(grid, layout5, gf[a], dgf[a], layout2, gf_[a],"];
   pr["                               invDxyz, deriv_order);"];
   pr["}"];
-  pr[]
+  pr[];
 
   pr["template <int CI, int CJ, int CK, typename T>"];
   pr["CCTK_ATTRIBUTE_NOINLINE void"];
@@ -105,8 +105,8 @@ SetMainPrint[
   pr["    calc_derivs1st<CI, CJ, CK>(grid, layout5, gf[a], dgf[a], layout2, gf_[a],"];
   pr["                               invDxyz, deriv_order);"];
   pr["}"];
-  pr[]
-  pr[]
+  pr[];
+  pr[];
 
 
   (*****************************************)
@@ -127,7 +127,7 @@ SetMainPrint[
   pr["  switch (deriv_order) {"];
   Do[
     pr["  case " <> ToString[aOrd] <> ": {"];
-    pr["    grid.loop_int_device<0, 0, 0>("];
+    pr["    grid.loop_int_device<CI, CJ, CK>("];
     pr["      grid.nghostzones,"];
     pr["      [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {"];
     pr["        const int ijk2 = layout2.linear(p.i, p.j, p.k);"];
@@ -161,7 +161,7 @@ SetMainPrint[
   pr["  assert(0);"];
   pr["}"];
   pr["}"];
-  pr[]
+  pr[];
 
   pr["template <int CI, int CJ, int CK, typename T>"];
   pr["CCTK_ATTRIBUTE_NOINLINE void"];
@@ -178,7 +178,7 @@ SetMainPrint[
   pr["    calc_derivs2nd<CI, CJ, CK>(grid, layout5, gf[a], dgf[a], ddgf[a],"];
   pr["                               layout2, gf_[a], invDxyz, deriv_order);"];
   pr["}"];
-  pr[]
+  pr[];
 
   pr["template <int CI, int CJ, int CK, typename T>"];
   pr["CCTK_ATTRIBUTE_NOINLINE void"];
@@ -195,7 +195,56 @@ SetMainPrint[
   pr["    calc_derivs2nd<CI, CJ, CK>(grid, layout5, gf[a], dgf[a], ddgf[a],"];
   pr["                               layout2, gf_[a], invDxyz, deriv_order);"];
   pr["}"];
-  pr[]
+  pr[];
+  pr[];
+
+
+  (*****************)
+  (* Copy to GF3D5 *)
+  (*****************)
+
+  pr["template <int CI, int CJ, int CK, typename T>"];
+  pr["CCTK_ATTRIBUTE_NOINLINE void"];
+  pr["calc_copy(const GridDescBaseDevice &grid,"];
+  pr["          const GF3D5layout &layout5,"];
+  pr["          const GF3D5<T> &gf,"];
+  pr["          const GF3D2layout &layout2,"];
+  pr["          const T *gf_) {"];
+  pr["  grid.loop_int_device<CI, CJ, CK>("];
+  pr["    grid.nghostzones,"];
+  pr["    [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {"];
+  pr["      const int ijk2 = layout2.linear(p.i, p.j, p.k);"];
+  pr["      const int ijk5 = layout5.linear(p.i, p.j, p.k);"];
+  pr["      gf.ptr[ijk5] = gf_[ijk2];"];
+  pr["    });"];
+  pr["}"];
+  pr[];
+
+  pr["template <int CI, int CJ, int CK, typename T>"];
+  pr["CCTK_ATTRIBUTE_NOINLINE void"];
+  pr["calc_copy(const GridDescBaseDevice &grid,"];
+  pr["          const GF3D5layout &layout5,"];
+  pr["          const array<GF3D5<T>, 3> &gf,"];
+  pr["          const GF3D2layout &layout2,"];
+  pr["          const array<const T *, 3> &gf_) {"];
+  pr["  for (int a = 0; a < 3; ++a)"];
+  pr["    calc_copy<CI, CJ, CK>(grid, layout5, gf[a], layout2, gf_[a]);"];
+  pr["}"];
+  pr[];
+
+  pr["template <int CI, int CJ, int CK, typename T>"];
+  pr["CCTK_ATTRIBUTE_NOINLINE void"];
+  pr["calc_copy(const GridDescBaseDevice &grid,"];
+  pr["          const GF3D5layout &layout5,"];
+  pr["          const array<GF3D5<T>, 6> &gf,"];
+  pr["          const GF3D2layout &layout2,"];
+  pr["          const array<const T *, 6> &gf_) {"];
+  pr["  for (int a = 0; a < 6; ++a)"];
+  pr["    calc_copy<CI, CJ, CK>(grid, layout5, gf[a], layout2, gf_[a]);"];
+  pr["}"];
+  pr[];
+  pr[];
+
 
   pr["} // namespace Z4cowGPU"];
 ];

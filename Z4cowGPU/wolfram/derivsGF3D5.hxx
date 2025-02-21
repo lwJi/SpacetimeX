@@ -27,7 +27,7 @@ calc_derivs1st(const GridDescBaseDevice &grid,
                const int deriv_order) {
   switch (deriv_order) {
   case 2: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -40,7 +40,7 @@ calc_derivs1st(const GridDescBaseDevice &grid,
     break;
   }
   case 4: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -53,7 +53,7 @@ calc_derivs1st(const GridDescBaseDevice &grid,
     break;
   }
   case 6: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -66,7 +66,7 @@ calc_derivs1st(const GridDescBaseDevice &grid,
     break;
   }
   case 8: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -127,7 +127,7 @@ calc_derivs2nd(const GridDescBaseDevice &grid,
                const int deriv_order) {
   switch (deriv_order) {
   case 2: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -146,7 +146,7 @@ calc_derivs2nd(const GridDescBaseDevice &grid,
     break;
   }
   case 4: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -165,7 +165,7 @@ calc_derivs2nd(const GridDescBaseDevice &grid,
     break;
   }
   case 6: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -184,7 +184,7 @@ calc_derivs2nd(const GridDescBaseDevice &grid,
     break;
   }
   case 8: {
-    grid.loop_int_device<0, 0, 0>(
+    grid.loop_int_device<CI, CJ, CK>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
         const int ijk2 = layout2.linear(p.i, p.j, p.k);
@@ -238,6 +238,46 @@ calc_derivs2nd(const GridDescBaseDevice &grid,
     calc_derivs2nd<CI, CJ, CK>(grid, layout5, gf[a], dgf[a], ddgf[a],
                                layout2, gf_[a], invDxyz, deriv_order);
 }
+
+
+template <int CI, int CJ, int CK, typename T>
+CCTK_ATTRIBUTE_NOINLINE void
+calc_copy(const GridDescBaseDevice &grid,
+          const GF3D5layout &layout5,
+          const GF3D5<T> &gf,
+          const GF3D2layout &layout2,
+          const T *gf_) {
+  grid.loop_int_device<CI, CJ, CK>(
+    grid.nghostzones,
+    [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
+      const int ijk2 = layout2.linear(p.i, p.j, p.k);
+      const int ijk5 = layout5.linear(p.i, p.j, p.k);
+      gf.ptr[ijk5] = gf_[ijk2];
+    });
+}
+
+template <int CI, int CJ, int CK, typename T>
+CCTK_ATTRIBUTE_NOINLINE void
+calc_copy(const GridDescBaseDevice &grid,
+          const GF3D5layout &layout5,
+          const array<GF3D5<T>, 3> &gf,
+          const GF3D2layout &layout2,
+          const array<const T *, 3> &gf_) {
+  for (int a = 0; a < 3; ++a)
+    calc_copy<CI, CJ, CK>(grid, layout5, gf[a], layout2, gf_[a]);
+}
+
+template <int CI, int CJ, int CK, typename T>
+CCTK_ATTRIBUTE_NOINLINE void
+calc_copy(const GridDescBaseDevice &grid,
+          const GF3D5layout &layout5,
+          const array<GF3D5<T>, 6> &gf,
+          const GF3D2layout &layout2,
+          const array<const T *, 6> &gf_) {
+  for (int a = 0; a < 6; ++a)
+    calc_copy<CI, CJ, CK>(grid, layout5, gf[a], layout2, gf_[a]);
+}
+
 
 } // namespace Z4cowGPU
 
