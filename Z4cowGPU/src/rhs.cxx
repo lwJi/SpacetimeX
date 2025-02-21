@@ -48,7 +48,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const array<const CCTK_REAL *, 3> gf_beta{betaGx, betaGy, betaGz};
 
   // More input grid functions
-  // const GF3D2<const CCTK_REAL> &gf_eTtt = eTtt;
+  const CCTK_REAL *gf_eTtt = eTtt;
   const array<const CCTK_REAL *, 3> gf_eTt{eTtx, eTty, eTtz};
   const array<const CCTK_REAL *, 6> gf_eT{eTxx, eTxy, eTxz, eTyy, eTyz, eTzz};
 
@@ -102,7 +102,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
         imax);
     const GF3D5layout layout5(imin, imax);
 
-    const int ntmps = 154;
+    const int ntmps = 164;
     GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
     int itmp = 0;
 
@@ -151,6 +151,10 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(make_vec_vec_gf());
     const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(make_vec_smat_gf());
 
+    const GF3D5<CCTK_REAL> tl_eTtt(make_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_eTt(make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 6> tl_eT(make_smat_gf());
+
     if (itmp != ntmps)
       CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
                   ntmps, itmp);
@@ -167,6 +171,9 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
       calc_derivs2nd<0, 0, 0>(grid, layout5, gf, dgf, ddgf, layout2, gf_,
                               invDxyz, deriv_order);
     };
+    const auto calccopy = [&](const auto &gf, const auto &gf_) {
+      calc_copy<0, 0, 0>(grid, layout5, gf, layout2, gf_);
+    };
 
     calcderivs2nd(tl_W, tl_dW, tl_ddW, gf_W);
     calcderivs2nd(tl_gamt, tl_dgamt, tl_ddgamt, gf_gamt);
@@ -176,6 +183,10 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
     calcderivs1st(tl_Theta, tl_dTheta, gf_Theta);
     calcderivs2nd(tl_alpha, tl_dalpha, tl_ddalpha, gf_alpha);
     calcderivs2nd(tl_beta, tl_dbeta, tl_ddbeta, gf_beta);
+
+    calccopy(tl_eTtt, gf_eTtt);
+    calccopy(tl_eTt, gf_eTt);
+    calccopy(tl_eT, gf_eT);
 
 #include "../wolfram/Z4cowGPU_set_rhs_GF3D5.hxx"
   }
