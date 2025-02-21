@@ -15,20 +15,6 @@ namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
 
-template <typename T, size_t N, typename F>
-constexpr std::array<T, N> make_array(F &&lambda) {
-  // Static assertion to ensure N isn't unreasonably large
-  static_assert(N <= 1024, "Array size too large for practical use");
-
-  // Helper function to reduce template instantiation depth
-  auto expand = [&lambda]<size_t... Is>(std::index_sequence<Is...>) noexcept(
-                    noexcept(std::array<T, N>{lambda(Is)...})) {
-    return std::array<T, N>{lambda(Is)...};
-  };
-
-  return expand(std::make_index_sequence<N>{});
-}
-
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_RHS;
   DECLARE_CCTK_PARAMETERS;
