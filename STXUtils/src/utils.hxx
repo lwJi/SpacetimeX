@@ -6,18 +6,35 @@
 
 namespace STXUtils {
 
+//// Generic utility to create std::array with a callable (C++20 compatible)
+// template <typename T, size_t N, typename F>
+// constexpr std::array<T, N> make_array(F &&lambda) {
+//   static_assert(N <= 1024, "Array size too large for practical use");
+//
+//   auto expand = [&lambda]<size_t... Is>(std::index_sequence<Is...>) noexcept(
+//                     noexcept(std::array<T, N>{lambda(Is)...})) {
+//     return std::array<T, N>{lambda(Is)...};
+//   };
+//
+//   return expand(std::make_index_sequence<N>{});
+// }
+
+// Generic utility to create std::array with a callable (C++17 compatible)
+template <typename T, size_t N, typename F, size_t... Is>
+constexpr std::array<T, N>
+expand_helper(F &&lambda, std::index_sequence<Is...>) noexcept(
+    noexcept(std::array<T, N>{lambda(Is)...})) {
+  return std::array<T, N>{lambda(Is)...};
+}
+
 template <typename T, size_t N, typename F>
 constexpr std::array<T, N> make_array(F &&lambda) {
   static_assert(N <= 1024, "Array size too large for practical use");
-
-  auto expand = [&lambda]<size_t... Is>(std::index_sequence<Is...>) noexcept(
-                    noexcept(std::array<T, N>{lambda(Is)...})) {
-    return std::array<T, N>{lambda(Is)...};
-  };
-
-  return expand(std::make_index_sequence<N>{});
+  return expand_helper<T, N>(std::forward<F>(lambda),
+                             std::make_index_sequence<N>{});
 }
 
+// Get GF3D5layout
 template <int CI, int CJ, int CK>
 inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
   Arith::vect<int, Loop::dim> imin, imax;
@@ -28,6 +45,7 @@ inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
   return Loop::GF3D5layout(imin, imax);
 }
 
+// GF3D5Factory Class
 template <typename T> class GF3D5Factory {
 public:
   using GFType = Loop::GF3D5<T>;
