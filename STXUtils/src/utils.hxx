@@ -22,16 +22,16 @@ namespace STXUtils {
 // Generic utility to create std::array with a callable (C++17 compatible)
 template <typename T, size_t N, typename F, size_t... Is>
 constexpr std::array<T, N>
-expand_helper(F &&lambda, std::index_sequence<Is...>) noexcept(
-    noexcept(std::array<T, N>{lambda(Is)...})) {
-  return std::array<T, N>{lambda(Is)...};
+make_array_impl(F &&lambda, std::index_sequence<Is...>) noexcept(
+    noexcept(std::array<T, N>{{lambda(Is)...}})) {
+  return {{lambda(Is)...}};
 }
 
 template <typename T, size_t N, typename F>
-constexpr std::array<T, N> make_array(F &&lambda) {
+constexpr std::array<T, N> make_array(F &&lambda) noexcept(
+    noexcept(make_array_impl<T, N>(lambda, std::make_index_sequence<N>{}))) {
   static_assert(N <= 1024, "Array size too large for practical use");
-  return expand_helper<T, N>(std::forward<F>(lambda),
-                             std::make_index_sequence<N>{});
+  return make_array_impl<T, N>(lambda, std::make_index_sequence<N>{});
 }
 
 // GF3D5Factory Class
