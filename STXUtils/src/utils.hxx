@@ -3,25 +3,32 @@
 
 #include <functional>
 #include <loop_device.hxx>
-#include <mat.hxx>
-#include <vec.hxx>
 
 namespace STXUtils {
-using namespace Arith;
+
+template <typename T, size_t N, typename F>
+constexpr std::array<T, N> make_array(F &&lambda) {
+  static_assert(N <= 1024, "Array size too large for practical use");
+
+  auto expand = [&lambda]<size_t... Is>(std::index_sequence<Is...>) noexcept(
+                    noexcept(std::array<T, N>{lambda(Is)...})) {
+    return std::array<T, N>{lambda(Is)...};
+  };
+
+  return expand(std::make_index_sequence<N>{});
+}
 
 template <typename T> struct GF3D5Factory {
   using GFType = Loop::GF3D5<T>;
 
   // Public function pointers for generated functions
   std::function<GFType()> make_gf;
-  std::function<vec<GFType, 3>()> make_vec_gf;
-  std::function<smat<GFType, 3>()> make_smat_gf;
-  std::function<vec<vec<GFType, 3>, 3>()> make_vec_vec_gf;
-  std::function<vec<smat<GFType, 3>, 3>()> make_vec_smat_gf;
-  std::function<smat<vec<GFType, 3>, 3>()> make_smat_vec_gf;
-  std::function<smat<smat<GFType, 3>, 3>()> make_smat_smat_gf;
-  std::function<vec<smat<vec<GFType, 3>, 3>, 3>()> make_vec_smat_vec_gf;
-  std::function<vec<vec<vec<GFType, 3>, 3>, 3>()> make_vec_vec_vec_gf;
+  std::function<std::array<GFType, 3>()> make_vec_gf;
+  std::function<std::array<GFType, 6>()> make_smat_gf;
+  std::function<std::array<std::array<GFType, 3>, 3>()> make_vec_vec_gf;
+  std::function<std::array<std::array<GFType, 6>, 3>()> make_vec_smat_gf;
+  std::function<std::array<std::array<GFType, 3>, 6>()> make_smat_vec_gf;
+  std::function<std::array<std::array<GFType, 6>, 6>()> make_smat_smat_gf;
 
   // Constructor to initialize the lambdas
   GF3D5Factory(const Loop::GF3D5layout &layout5, int ntmps, int &itmp)
@@ -33,8 +40,6 @@ template <typename T> struct GF3D5Factory {
     make_vec_smat_gf = [this]() { return create_vec(make_smat_gf); };
     make_smat_vec_gf = [this]() { return create_smat(make_vec_gf); };
     make_smat_smat_gf = [this]() { return create_smat(make_smat_gf); };
-    make_vec_smat_vec_gf = [this]() { return create_vec(make_smat_vec_gf); };
-    make_vec_vec_vec_gf = [this]() { return create_vec(make_vec_vec_gf); };
   }
 
 private:
@@ -43,26 +48,24 @@ private:
   int &itmp_ref; // Reference to the external temporary index
 
   // Generates a single grid function
-  GFType create_gf() const { return GFType(tmps(itmp_ref++)); }
+  GFType create_gf() const noexcept { return GFType(tmps(itmp_ref++)); }
 
   // Helper functions for generating vectors and symmetric matrices
-  template <typename Func> auto create_vec(const Func &f) const {
-    using ReturnType = typename std::invoke_result_t<Func>;
-    return vec<ReturnType, 3>([&](int) { return f(); });
+  template <typename Func> auto create_vec(const Func &f) const noexcept {
+    return make_array<std::invoke_result_t<Func>, 3>([&](int) { return f(); });
   }
 
-  template <typename Func> auto create_smat(const Func &f) const {
-    using ReturnType = typename std::invoke_result_t<Func>;
-    return smat<ReturnType, 3>([&](int, int) { return f(); });
+  template <typename Func> auto create_smat(const Func &f) const noexcept {
+    return make_array<std::invoke_result_t<Func>, 6>([&](int) { return f(); });
   }
 };
 
 template <int CI, int CJ, int CK>
 inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
-  const array<int, Loop::dim> nghostzones = {cctkGH->cctk_nghostzones[0],
-                                             cctkGH->cctk_nghostzones[1],
-                                             cctkGH->cctk_nghostzones[2]};
-  vect<int, Loop::dim> imin, imax;
+  const std::array<int, Loop::dim> nghostzones = {cctkGH->cctk_nghostzones[0],
+                                                  cctkGH->cctk_nghostzones[1],
+                                                  cctkGH->cctk_nghostzones[2]};
+  Arith::vect<int, Loop::dim> imin, imax;
   Loop::GridDescBase(cctkGH).box_int<CI, CJ, CK>(nghostzones, imin, imax);
   return Loop::GF3D5layout(imin, imax);
 }

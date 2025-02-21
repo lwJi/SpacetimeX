@@ -2,6 +2,7 @@
 #include <cctk_Arguments.h>
 #include <cctk_Parameters.h>
 #include <loop_device.hxx>
+#include <stx_utils.hxx>
 
 #include <cmath>
 
@@ -15,11 +16,17 @@ using namespace Arith;
 using namespace Loop;
 
 template <typename T, size_t N, typename F>
-std::array<T, N> make_array(F &&lambda) {
-  // Helper to expand the lambda into an array
-  return [&]<size_t... Is>(std::index_sequence<Is...>) {
+constexpr std::array<T, N> make_array(F &&lambda) {
+  // Static assertion to ensure N isn't unreasonably large
+  static_assert(N <= 1024, "Array size too large for practical use");
+
+  // Helper function to reduce template instantiation depth
+  auto expand = [&lambda]<size_t... Is>(std::index_sequence<Is...>) noexcept(
+                    noexcept(std::array<T, N>{lambda(Is)...})) {
     return std::array<T, N>{lambda(Is)...};
-  }(std::make_index_sequence<N>{});
+  };
+
+  return expand(std::make_index_sequence<N>{});
 }
 
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
@@ -96,54 +103,26 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   } else {
 
     // Tile variables for derivatives and so on
-    vect<int, dim> imin, imax;
-    GridDescBase(cctkGH).box_int<0, 0, 0>(
-        {cctk_nghostzones[0], cctk_nghostzones[1], cctk_nghostzones[2]}, imin,
-        imax);
-    const GF3D5layout layout5(imin, imax);
+    const GF3D5layout layout5 = STXUtils::get_GF3D5layout<0, 0, 0>(cctkGH);
 
     const int ntmps = 132;
-    GF3D5vector<CCTK_REAL> tmps(layout5, ntmps);
     int itmp = 0;
+    STXUtils::GF3D5Factory<CCTK_REAL> fct(layout5, ntmps, itmp);
 
-    const auto make_vec = [&](const auto &f) {
-      return make_array<std::invoke_result_t<decltype(f)>, 3>(
-          [&](int) { return f(); });
-    };
-    const auto make_smat = [&](const auto &f) {
-      return make_array<std::invoke_result_t<decltype(f)>, 6>(
-          [&](int) { return f(); });
-    };
-
-    const auto make_gf = [&]() { return GF3D5<CCTK_REAL>(tmps(itmp++)); };
-    const auto make_vec_gf = [&]() { return make_vec(make_gf); };
-    const auto make_smat_gf = [&]() { return make_smat(make_gf); };
-    const auto make_vec_vec_gf = [&]() { return make_vec(make_vec_gf); };
-    const auto make_vec_smat_gf = [&]() { return make_vec(make_smat_gf); };
-    const auto make_smat_vec_gf = [&]() { return make_smat(make_vec_gf); };
-    const auto make_smat_smat_gf = [&]() { return make_smat(make_smat_gf); };
-
-    // const GF3D5<CCTK_REAL> tl_W(make_gf());
-    // const array<GF3D5<CCTK_REAL>, 6> tl_gamt(make_smat_gf());
-    // const GF3D5<CCTK_REAL> tl_exKh(make_gf());
-    // const array<GF3D5<CCTK_REAL>, 6> tl_exAt(make_smat_gf());
-    // const array<GF3D5<CCTK_REAL>, 3> tl_trGt(make_vec_gf());
-    // const GF3D5<CCTK_REAL> tl_Theta(make_gf());
-    // const GF3D5<CCTK_REAL> tl_alpha(make_gf());
-    // const array<GF3D5<CCTK_REAL>, 3> tl_beta(make_vec_gf());
-
-    const array<GF3D5<CCTK_REAL>, 3> tl_dW(make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 6> tl_ddW(make_smat_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dgamt(make_smat_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 6>, 6> tl_ddgamt(make_smat_smat_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dexKh(make_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dexAt(make_smat_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(make_vec_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dTheta(make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dalpha(make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 6> tl_ddalpha(make_smat_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(make_vec_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(make_vec_smat_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dW(fct.make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 6> tl_ddW(fct.make_smat_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dgamt(fct.make_smat_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 6>, 6> tl_ddgamt(
+        fct.make_smat_smat_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dexKh(fct.make_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dexAt(fct.make_smat_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(fct.make_vec_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dTheta(fct.make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 3> tl_dalpha(fct.make_vec_gf());
+    const array<GF3D5<CCTK_REAL>, 6> tl_ddalpha(fct.make_smat_gf());
+    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(fct.make_vec_vec_gf());
+    const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(
+        fct.make_vec_smat_gf());
 
     if (itmp != ntmps)
       CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
