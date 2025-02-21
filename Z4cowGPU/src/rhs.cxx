@@ -89,26 +89,23 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   } else {
 
     // Tile variables for derivatives and so on
-    const GF3D5layout layout5 = STXUtils::get_GF3D5layout<0, 0, 0>(cctkGH);
-
     const int ntmps = 132;
     int itmp = 0;
+    const GF3D5layout layout5 = STXUtils::get_GF3D5layout<0, 0, 0>(cctkGH);
     STXUtils::GF3D5Factory<CCTK_REAL> fct(layout5, ntmps, itmp);
 
-    const array<GF3D5<CCTK_REAL>, 3> tl_dW(fct.make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 6> tl_ddW(fct.make_smat_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dgamt(fct.make_smat_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 6>, 6> tl_ddgamt(
-        fct.make_smat_smat_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dexKh(fct.make_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 6> tl_dexAt(fct.make_smat_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dtrGt(fct.make_vec_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dTheta(fct.make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 3> tl_dalpha(fct.make_vec_gf());
-    const array<GF3D5<CCTK_REAL>, 6> tl_ddalpha(fct.make_smat_gf());
-    const array<array<GF3D5<CCTK_REAL>, 3>, 3> tl_dbeta(fct.make_vec_vec_gf());
-    const array<array<GF3D5<CCTK_REAL>, 6>, 3> tl_ddbeta(
-        fct.make_vec_smat_gf());
+    const auto tl_dW = fct.make_vec_gf();
+    const auto tl_ddW = fct.make_smat_gf();
+    const auto tl_dgamt = fct.make_smat_vec_gf();
+    const auto tl_ddgamt = fct.make_smat_smat_gf();
+    const auto tl_dexKh = fct.make_vec_gf();
+    const auto tl_dexAt = fct.make_smat_vec_gf();
+    const auto tl_dtrGt = fct.make_vec_vec_gf();
+    const auto tl_dTheta = fct.make_vec_gf();
+    const auto tl_dalpha = fct.make_vec_gf();
+    const auto tl_ddalpha = fct.make_smat_gf();
+    const auto tl_dbeta = fct.make_vec_vec_gf();
+    const auto tl_ddbeta = fct.make_vec_smat_gf();
 
     if (itmp != ntmps)
       CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
