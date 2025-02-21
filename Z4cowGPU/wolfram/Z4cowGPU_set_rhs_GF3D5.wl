@@ -16,6 +16,8 @@ SetPrintDate[False];
 
 SetGridPointIndex["[[ijk]]"];
 
+SetTilePointIndex["[[ijk5]]"];
+
 (*SetUseLetterForTensorComponet[True];*)
 
 SetTempVariableType["auto"];
@@ -29,7 +31,7 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 (* Define Variables and Equations *)
 (**********************************)
 
-<<wl/Z4c_vars.wl
+<<wl/Z4c_vars_GF3D5.wl
 
 <<wl/Z4c_rhs.wl
 
@@ -54,6 +56,14 @@ SetMainPrint[
   PrintInitializations[{Mode -> "MainIn"}, Drop[TmunuVarlist, 1]];
   PrintInitializations[{Mode -> "MainIn"}, Delete[EvolVarlist, {{1}, {-3}}]];
   pr[];
+  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1,
+                        StorageType -> "Tile", TensorType -> "Vect"},
+                       dEvolVarlist];
+  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 2,
+                        StorageType -> "Tile", TensorType -> "Smat"},
+                       ddEvolVarlist];
+  pr[];
+
 
   (* Loops *)
   pr["noinline([&]() __attribute__((__flatten__, __hot__)) {"];
@@ -64,14 +74,6 @@ SetMainPrint[
   pr[];
 
   pr["const CCTK_REAL ceta = calceta(p.x, p.y, p.z);"];
-  pr[];
-
-  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1,
-                        StorageType -> "Tile", TensorType -> "Vect"},
-                       dEvolVarlist];
-  PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 2,
-                        StorageType -> "Tile", TensorType -> "Smat"},
-                       ddEvolVarlist];
   pr[];
 
   PrintEquations[{Mode -> "Temp"}, IntermediateVarlist];
