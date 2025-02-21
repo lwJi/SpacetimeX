@@ -14,7 +14,7 @@ SetPVerbose[False];
 
 SetPrintDate[False];
 
-SetGridPointIndex[""];
+SetGridPointIndex["[[ijk]]"];
 
 (*SetUseLetterForTensorComponet[True];*)
 
@@ -51,6 +51,8 @@ SetOutputFile[FileNameJoin[{Directory[], "Z4cowGPU_set_rhs_GF3D5.hxx"}]];
 SetMainPrint[
   (* Initialize grid function names *)
   PrintInitializations[{Mode -> "MainOut"}, dtEvolVarlist];
+  PrintInitializations[{Mode -> "MainIn"}, Drop[TmunuVarlist, 1]];
+  PrintInitializations[{Mode -> "MainIn"}, Delete[EvolVarlist, {{1}, {-3}}]];
   pr[];
 
   (* Loops *)
@@ -62,10 +64,6 @@ SetMainPrint[
   pr[];
 
   pr["const CCTK_REAL ceta = calceta(p.x, p.y, p.z);"];
-  pr[];
-
-  PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile"}, EvolVarlist];
-  PrintInitializations[{Mode -> "MainIn", StorageType -> "Tile"}, TmunuVarlist];
   pr[];
 
   PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1,
