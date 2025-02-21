@@ -37,8 +37,10 @@ SetMainPrint[
       ,
       {aOrd, 2, 8, 2}
     ];
-    pr["default:"];
+    pr["default: {"];
     pr["  assert(0);"];
+    pr["  return 0.;"];
+    pr["}"];
     pr["}"];
     pr["};"];
     pr[]
