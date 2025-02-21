@@ -34,17 +34,6 @@ constexpr std::array<T, N> make_array(F &&lambda) {
                              std::make_index_sequence<N>{});
 }
 
-// Get GF3D5layout
-template <int CI, int CJ, int CK>
-inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
-  Arith::vect<int, Loop::dim> imin, imax;
-  Loop::GridDescBase(cctkGH).box_int<CI, CJ, CK>({cctkGH->cctk_nghostzones[0],
-                                                  cctkGH->cctk_nghostzones[1],
-                                                  cctkGH->cctk_nghostzones[2]},
-                                                 imin, imax);
-  return Loop::GF3D5layout(imin, imax);
-}
-
 // GF3D5Factory Class
 template <typename T> class GF3D5Factory {
 public:
@@ -102,6 +91,17 @@ private:
         [&](size_t /*unused*/) { return std::invoke(f); });
   }
 };
+
+// Get GF3D5layout
+template <int CI, int CJ, int CK>
+inline Loop::GF3D5layout get_GF3D5layout(const cGH *restrict const cctkGH) {
+  Arith::vect<int, Loop::dim> imin, imax;
+  Loop::GridDescBase(cctkGH).box_int<CI, CJ, CK>({cctkGH->cctk_nghostzones[0],
+                                                  cctkGH->cctk_nghostzones[1],
+                                                  cctkGH->cctk_nghostzones[2]},
+                                                 imin, imax);
+  return Loop::GF3D5layout(imin, imax);
+}
 
 } // namespace STXUtils
 
