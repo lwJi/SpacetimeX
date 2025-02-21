@@ -18,21 +18,30 @@ constexpr std::array<T, N> make_array(F &&lambda) {
   return expand(std::make_index_sequence<N>{});
 }
 
-template <typename T> struct GF3D5Factory {
+template <typename T> class GF3D5Factory {
+public:
   using GFType = Loop::GF3D5<T>;
+
+  // Type aliases for clarity
+  using VecGF = std::array<GFType, 3>;
+  using SmatGF = std::array<GFType, 6>;
+  using VecVecGF = std::array<VecGF, 3>;
+  using VecSmatGF = std::array<SmatGF, 3>;
+  using SmatVecGF = std::array<VecGF, 6>;
+  using SmatSmatGF = std::array<SmatGF, 6>;
 
   // Public function pointers for generated functions
   std::function<GFType()> make_gf;
-  std::function<std::array<GFType, 3>()> make_vec_gf;
-  std::function<std::array<GFType, 6>()> make_smat_gf;
-  std::function<std::array<std::array<GFType, 3>, 3>()> make_vec_vec_gf;
-  std::function<std::array<std::array<GFType, 6>, 3>()> make_vec_smat_gf;
-  std::function<std::array<std::array<GFType, 3>, 6>()> make_smat_vec_gf;
-  std::function<std::array<std::array<GFType, 6>, 6>()> make_smat_smat_gf;
+  std::function<VecGF()> make_vec_gf;
+  std::function<SmatGF()> make_smat_gf;
+  std::function<VecVecGF()> make_vec_vec_gf;
+  std::function<VecSmatGF()> make_vec_smat_gf;
+  std::function<SmatVecGF()> make_smat_vec_gf;
+  std::function<SmatSmatGF()> make_smat_smat_gf;
 
   // Constructor to initialize the lambdas
   GF3D5Factory(const Loop::GF3D5layout &layout5, int ntmps, int &itmp)
-      : tmps(layout5, ntmps), itmp_ref(itmp) {
+      : tmps_(layout5, ntmps), itmp_ref_(itmp), max_tmps_(ntmps) {
     make_gf = [this]() noexcept { return create_gf(); };
     make_vec_gf = [this]() noexcept { return create_vec(make_gf); };
     make_smat_gf = [this]() noexcept { return create_smat(make_gf); };
@@ -44,21 +53,27 @@ template <typename T> struct GF3D5Factory {
 
 private:
   // Private members
-  Loop::GF3D5vector<T> tmps;
-  int &itmp_ref; // Reference to the external temporary index
+  Loop::GF3D5vector<T> tmps_;
+  int &itmp_ref_; // Reference to the external temporary index
+  const int max_tmps_;
 
   // Generates a single grid function
-  GFType create_gf() const noexcept { return GFType(tmps(itmp_ref++)); }
-
-  // Helper functions for generating vectors and symmetric matrices
-  template <typename Func> auto create_vec(const Func &f) const noexcept {
-    return make_array<std::invoke_result_t<Func>, 3>(
-        [&](int /*unused*/) { return std::invoke(f); });
+  [[nodiscard]] GFType create_gf() const noexcept {
+    assert(itmp_ref_ < max_tmps_ && "Temporary index exceeds allocated pool");
+    return GFType(tmps_(itmp_ref_++));
   }
 
-  template <typename Func> auto create_smat(const Func &f) const noexcept {
+  // Helper functions for generating vectors and symmetric matrices
+  template <typename Func>
+  [[nodiscard]] auto create_vec(const Func &f) const noexcept {
+    return make_array<std::invoke_result_t<Func>, 3>(
+        [&](size_t /*unused*/) { return std::invoke(f); });
+  }
+
+  template <typename Func>
+  [[nodiscard]] auto create_smat(const Func &f) const noexcept {
     return make_array<std::invoke_result_t<Func>, 6>(
-        [&](int /*unused*/) { return std::invoke(f); });
+        [&](size_t /*unused*/) { return std::invoke(f); });
   }
 };
 
