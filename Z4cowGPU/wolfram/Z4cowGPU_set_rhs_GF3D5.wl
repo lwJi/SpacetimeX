@@ -31,7 +31,7 @@ DefChart[cart, M3, {1, 2, 3}, {X[], Y[], Z[]}, ChartColor -> Blue];
 (* Define Variables and Equations *)
 (**********************************)
 
-<<wl/Z4c_vars_GF3D5.wl
+<<wl/Z4c_vars.wl
 
 <<wl/Z4c_rhs.wl
 
