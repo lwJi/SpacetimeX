@@ -24,8 +24,10 @@ case 8: {
   return fd_1_o8<1>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -49,8 +51,10 @@ case 8: {
   return fd_1_o8<2>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -74,8 +78,10 @@ case 8: {
   return fd_1_o8<3>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 

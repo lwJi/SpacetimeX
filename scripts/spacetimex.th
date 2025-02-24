@@ -171,7 +171,7 @@ CarpetX/TmunuBaseX
 SpacetimeX/AHFinderX
 SpacetimeX/BrillLindquist
 SpacetimeX/Cowling
-SpacetimeX/Multipole
+#SpacetimeX/Multipole
 SpacetimeX/NewRadX
 SpacetimeX/TestNewRadX
 SpacetimeX/Punctures
@@ -179,9 +179,10 @@ SpacetimeX/PunctureTracker
 SpacetimeX/SphericalHarmonics
 SpacetimeX/SphericalSurface
 SpacetimeX/StaticTrumpet
+SpacetimeX/STXUtils
 SpacetimeX/TwoPuncturesX
 SpacetimeX/Weyl
-SpacetimeX/WeylScal4
-SpacetimeX/Z4c
-SpacetimeX/Z4cow
+#SpacetimeX/WeylScal4
+#SpacetimeX/Z4c
+#SpacetimeX/Z4cow
 SpacetimeX/Z4cowGPU

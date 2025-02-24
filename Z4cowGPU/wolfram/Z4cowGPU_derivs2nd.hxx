@@ -24,8 +24,10 @@ case 8: {
   return fd_2_o8<1, 1>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -49,8 +51,10 @@ case 8: {
   return fd_2_o8<1, 2>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -74,8 +78,10 @@ case 8: {
   return fd_2_o8<1, 3>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -99,8 +105,10 @@ case 8: {
   return fd_2_o8<2, 2>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -124,8 +132,10 @@ case 8: {
   return fd_2_o8<2, 3>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 
@@ -149,8 +159,10 @@ case 8: {
   return fd_2_o8<3, 3>(layout2, gf_, i, j, k, invDxyz);
   break;
 }
-default:
+default: {
   assert(0);
+  return 0.;
+}
 }
 };
 

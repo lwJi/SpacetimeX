@@ -17,6 +17,8 @@ USES INCLUDE HEADER: vect.hxx
 USES INCLUDE HEADER: derivs.hxx
 USES INCLUDE HEADER: newradx.hxx
 
+USES INCLUDE HEADER: stx_utils.hxx
+
 
 CCTK_INT FUNCTION GetCallFunctionCount()
 REQUIRES FUNCTION GetCallFunctionCount

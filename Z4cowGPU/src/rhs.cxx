@@ -2,9 +2,11 @@
 #include <cctk_Arguments.h>
 #include <cctk_Parameters.h>
 #include <loop_device.hxx>
+#include <stx_utils.hxx>
 
 #include <cmath>
 
+#include "../wolfram/derivsGF3D5.hxx"
 #include "../wolfram/derivsinline.hxx"
 #include "../wolfram/dissinline.hxx"
 #include "../wolfram/powerinline.hxx"
@@ -39,7 +41,7 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   const array<const CCTK_REAL *, 3> gf_beta{betaGx, betaGy, betaGz};
 
   // More input grid functions
-  // const GF3D2<const CCTK_REAL> &gf_eTtt = eTtt;
+  // const CCTK_REAL *gf_eTtt = eTtt;
   const array<const CCTK_REAL *, 3> gf_eTt{eTtx, eTty, eTtz};
   const array<const CCTK_REAL *, 6> gf_eT{eTxx, eTxy, eTxz, eTyy, eTyz, eTzz};
 
@@ -73,14 +75,65 @@ extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
             return (veta_central - veta_outer) * exp(-r4 * is4) + veta_outer;
           };
 
-  // Derivs Lambdas
-#include "../wolfram/Z4cowGPU_derivs1st.hxx"
-#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
-
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
 
+  if (calc_derivs_live) {
+
+    // Derivs Lambdas
+#include "../wolfram/Z4cowGPU_derivs1st.hxx"
+#include "../wolfram/Z4cowGPU_derivs2nd.hxx"
+
 #include "../wolfram/Z4cowGPU_set_rhs.hxx"
+
+  } else {
+
+    // Tile variables for derivatives and so on
+    const int ntmps = 132;
+    int itmp = 0;
+    const GF3D5layout layout5 = STXUtils::get_GF3D5layout<0, 0, 0>(cctkGH);
+    STXUtils::GF3D5Factory<CCTK_REAL> fct(layout5, ntmps, itmp);
+
+    const auto tl_dW = fct.make_vec_gf();
+    const auto tl_ddW = fct.make_smat_gf();
+    const auto tl_dgamt = fct.make_smat_vec_gf();
+    const auto tl_ddgamt = fct.make_smat_smat_gf();
+    const auto tl_dexKh = fct.make_vec_gf();
+    const auto tl_dexAt = fct.make_smat_vec_gf();
+    const auto tl_dtrGt = fct.make_vec_vec_gf();
+    const auto tl_dTheta = fct.make_vec_gf();
+    const auto tl_dalpha = fct.make_vec_gf();
+    const auto tl_ddalpha = fct.make_smat_gf();
+    const auto tl_dbeta = fct.make_vec_vec_gf();
+    const auto tl_ddbeta = fct.make_vec_smat_gf();
+
+    if (itmp != ntmps)
+      CCTK_VERROR("Wrong number of temporary variables: ntmps=%d itmp=%d",
+                  ntmps, itmp);
+    itmp = -1;
+
+    // Define derivs lambdas
+    const auto calcderivs1st = [&](const auto &dgf, const auto &gf_) {
+      calc_derivs1st<0, 0, 0>(grid, layout5, dgf, layout2, gf_, invDxyz,
+                              deriv_order);
+    };
+    const auto calcderivs2nd = [&](const auto &dgf, const auto &ddgf,
+                                   const auto &gf_) {
+      calc_derivs2nd<0, 0, 0>(grid, layout5, dgf, ddgf, layout2, gf_, invDxyz,
+                              deriv_order);
+    };
+
+    calcderivs2nd(tl_dW, tl_ddW, gf_W);
+    calcderivs2nd(tl_dgamt, tl_ddgamt, gf_gamt);
+    calcderivs1st(tl_dexKh, gf_exKh);
+    calcderivs1st(tl_dexAt, gf_exAt);
+    calcderivs1st(tl_dtrGt, gf_trGt);
+    calcderivs1st(tl_dTheta, gf_Theta);
+    calcderivs2nd(tl_dalpha, tl_ddalpha, gf_alpha);
+    calcderivs2nd(tl_dbeta, tl_ddbeta, gf_beta);
+
+#include "../wolfram/Z4cowGPU_set_rhs_GF3D5.hxx"
+  }
 
   // Dissipation
 #include "../wolfram/Z4cowGPU_applydiss.hxx"

@@ -87,6 +87,10 @@ CCTK_INT deriv_order "Order of spatial finite differencing" STEERABLE=never
   8 :: "Eighth order finite difference"
 } 4
 
+BOOLEAN calc_derivs_live "Calculate FD derivstives on the fly instead of storing to temporary variables"
+{
+} yes
+
 KEYWORD boundary_conditions "boundary conditions"{
   "NewRadX" :: "radiative boundary conditions using NewRadX"
   "CarpetX" :: "use CarpetX default boundary conditions"
