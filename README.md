@@ -4,6 +4,6 @@
 For the matter evolution thorns, please checkout [AsterX](https://github.com/jaykalinani/AsterX).
 
 * [![GitHub
-  CI](https://github.com/EinsteinToolkit/SpacetimeX/workflows/CI/badge.svg)](https://github.com/EinsteinToolkit/SpacetimeX/actions)
+  CI](https://github.com/EinsteinToolkit/SpacetimeX/workflows/CI/badge.svg)](https://github.com/lwJi/SpacetimeX/actions)
 
 ## Overview
