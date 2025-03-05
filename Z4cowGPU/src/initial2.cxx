@@ -4,12 +4,13 @@
 
 #include <cmath>
 
-#include "../wolfram/derivsinline.hxx"
-#include "../wolfram/powerinline.hxx"
+#include <stx_derivsinline.hxx>
+#include <stx_powerinline.hxx>
 
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
+using namespace STXUtils;
 
 extern "C" void Z4cowGPU_Initial2(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_Initial2;

@@ -6,14 +6,15 @@
 
 #include <cmath>
 
-#include "../wolfram/derivsGF3D5.hxx"
-#include "../wolfram/derivsinline.hxx"
-#include "../wolfram/dissinline.hxx"
-#include "../wolfram/powerinline.hxx"
+#include <stx_derivsGF3D5.hxx>
+#include <stx_derivsinline.hxx>
+#include <stx_dissinline.hxx>
+#include <stx_powerinline.hxx>
 
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
+using namespace STXUtils;
 
 extern "C" void Z4cowGPU_RHS(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_RHS;
