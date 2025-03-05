@@ -12,6 +12,9 @@ USES INCLUDE HEADER: stx_derivsinline.hxx
 USES INCLUDE HEADER: stx_dissinline.hxx
 USES INCLUDE HEADER: stx_powerinline.hxx
 
+
+
+
 CCTK_REAL chi TYPE=gf CENTERING={VVV} "Test grid function"
 
 CCTK_REAL dchi TYPE=gf CENTERING={VVV} TAGS='checkpoint="no"'
