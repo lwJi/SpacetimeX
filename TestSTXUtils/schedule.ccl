@@ -14,8 +14,7 @@ SCHEDULE TestSTXUtils_Set AT initial
 {
   LANG: C
   WRITES: chi(interior)
-  WRITES: beta(interior)
-  SYNC: chi beta
+  SYNC: chi
 } "Set up test data"
 
 SCHEDULE TestSTXUtils_Sync AT postregrid
@@ -25,18 +24,24 @@ SCHEDULE TestSTXUtils_Sync AT postregrid
   SYNC: chi
 } "Synchronize"
 
-SCHEDULE TestSTXUtils_CalcSTXUtils AT poststep
+SCHEDULE TestSTXUtils_CalcDerivs AT poststep
 {
   LANG: C
-  READS: chi(everywhere) beta(interior)
-  WRITES: dchi(interior) ddchi(interior) chi_diss(interior) chi_upwind(interior)
-  SYNC: dchi ddchi chi_diss chi_upwind
+  READS: chi(everywhere)
+  WRITES: dchi(interior)
+  WRITES: ddchi(interior)
+  WRITES: chi_diss(interior)
+  SYNC: dchi ddchi chi_diss
 } "Calculate derivs"
 
-SCHEDULE TestSTXUtils_CalcError AT poststep AFTER TestSTXUtils_CalcSTXUtils
+SCHEDULE TestSTXUtils_CalcError AT poststep AFTER TestSTXUtils_CalcDerivs
 {
   LANG: C
-  READS: dchi(interior) ddchi(interior) chi_diss(interior) chi_upwind(interior)
-  WRITES: dchi_error(interior) ddchi_error(interior) chi_diss_error(interior) chi_upwind_error(interior)
-  SYNC: dchi_error ddchi_error chi_diss_error chi_upwind_error
+  READS: dchi(interior)
+  READS: ddchi(interior)
+  READS: chi_diss(interior)
+  WRITES: dchi_error(interior)
+  WRITES: ddchi_error(interior)
+  WRITES: chi_diss_error(interior)
+  SYNC: dchi_error ddchi_error chi_diss_error
 } "Calculate derivs error"
