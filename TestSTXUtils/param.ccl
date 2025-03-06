@@ -23,7 +23,22 @@ CCTK_REAL kxy "par for polynomial"
   *:* :: ""
 } 0.0
 
+CCTK_REAL kxz "par for polynomial"
+{
+  *:* :: ""
+} 0.0
+
+CCTK_REAL kyy "par for polynomial"
+{
+  *:* :: ""
+} 0.0
+
 CCTK_REAL kyz "par for polynomial"
+{
+  *:* :: ""
+} 0.0
+
+CCTK_REAL kzz "par for polynomial"
 {
   *:* :: ""
 } 0.0

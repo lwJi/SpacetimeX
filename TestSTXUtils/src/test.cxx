@@ -16,14 +16,19 @@ using namespace Loop;
 using namespace STXUtils;
 
 template <typename T>
-constexpr T poly(const T kxx, const T kxy, const T kyz, const T x, const T y,
-                 const T z) {
-  return kxx * x * x + kxy * x * y + kyz * y * z;
+constexpr T poly(const T kxx, const T kxy, const T kxz, const T kyy,
+                 const T kyz, const T kzz, const T x, const T y, const T z) {
+  const T cosx = cos(x);
+  const T siny = sin(y);
+  const T sinz = sin(z);
+  return kxx * cosx * cosx + kxy * cosx * siny + kxz * cosx * sinz +
+         kyy * siny * siny + kyz * siny * sinz + kzz * sinz * sinz;
 }
 
 template <typename T>
-constexpr void poly_derivs(const T kxx, const T kxy, const T kyz, const T x,
-                           const T y, const T z, std::array<T, 3> &du,
+constexpr void poly_derivs(const T kxx, const T kxy, const T kxz, const T kyy,
+                           const T kyz, const T kzz, const T x, const T y,
+                           const T z, std::array<T, 3> &du,
                            std::array<T, 6> &ddu) {
   using std::sin, std::cos, std::sqrt;
   const T sinx = sin(x);
@@ -32,26 +37,31 @@ constexpr void poly_derivs(const T kxx, const T kxy, const T kyz, const T x,
   const T cosx = cos(x);
   const T cosy = cos(y);
   const T cosz = cos(z);
-  du[0] = -2 * kxx * cosx * sinx - kxy * sinx * siny;
-  du[1] = kxy * cosx * cosy + kyz * cosy * sinz;
-  du[2] = kyz * cosz * siny;
-  ddu[0] = -2 * kxx * cosx * cosx + 2 * kxx * sinx * sinx - kxy * cosx * siny;
+  du[0] = -2 * kxx * cosx * sinx - kxy * sinx * siny - kxz * sinx * sinz;
+  du[1] = kxy * cosx * cosy + 2 * kyy * cosy * siny + kyz * cosy * sinz;
+  du[2] = kxz * cosx * cosz + kyz * cosz * siny + 2 * kzz * cosz * sinz;
+  ddu[0] = -2 * kxx * cosx * cosx + 2 * kxx * sinx * sinx - kxy * cosx * siny -
+           kxz * cosx * sinz;
   ddu[1] = -kxy * cosy * sinx;
-  ddu[2] = 0.0;
-  ddu[3] = -kxy * cosx * siny - kyz * siny * sinz;
+  ddu[2] = -kxz * cosz * sinx;
+  ddu[3] = -kxy * cosx * siny + 2 * kyy * (cosy * cosy - siny * siny) -
+           kyz * siny * sinz;
   ddu[4] = kyz * cosy * cosz;
-  ddu[5] = -kyz * siny * sinz;
+  ddu[5] = -kxz * cosx * sinz - kyz * siny * sinz +
+           2 * kzz * (cosz * cosz - sinz * sinz);
 }
 
 template <typename T>
-constexpr T poly_diss(const T kxx, const T kxy, const T kyz, const T x,
-                      const T y, const T z, const int diss_order,
-                      const Arith::vect<T, dim> &dx) {
+constexpr T poly_diss(const T kxx, const T kxy, const T kxz, const T kyy,
+                      const T kyz, const T kzz, const T x, const T y, const T z,
+                      const int diss_order, const Arith::vect<T, dim> &dx) {
   using std::sin, std::cos, std::fabs;
   const T sinx = sin(x);
   const T siny = sin(y);
   const T sinz = sin(z);
   const T cosx = cos(x);
+  const T cosy = cos(y);
+  const T cosz = cos(z);
   int coeff = 0;
 
   switch (diss_order) {
@@ -73,11 +83,15 @@ constexpr T poly_diss(const T kxx, const T kxy, const T kyz, const T x,
 
   const int abc = fabs(coeff);
   const int sig = (abc == coeff) ? 1 : -1;
-  return sig * ((abc * kxx * cosx * cosx - abc * kxx * sinx * sinx +
-                 kxy * cosx * siny) /
+  return sig * ((abc * kxx * (cosx * cosx - sinx * sinx) + kxy * cosx * siny +
+                 kxz * cosx * sinz) /
                     dx[0] +
-                (kxy * cosx * siny + kyz * siny * sinz) / dx[1] +
-                (kyz * siny * sinz) / dx[2]);
+                (-abc * kyy * (cosy * cosy - siny * siny) + kxy * cosx * siny +
+                 kyz * siny * sinz) /
+                    dx[1] +
+                (-abc * kzz * (cosz * cosz - sinz * sinz) + kxz * cosx * sinz +
+                 kyz * siny * sinz) /
+                    dx[2]);
 }
 
 extern "C" void TestSTXUtils_SetError(CCTK_ARGUMENTS) {
@@ -102,7 +116,10 @@ extern "C" void TestSTXUtils_Set(CCTK_ARGUMENTS) {
   grid.loop_int_device<0, 0, 0>(
       grid.nghostzones,
       [=] CCTK_DEVICE(const PointDesc &p) CCTK_ATTRIBUTE_ALWAYS_INLINE {
-        chi(p.I) = poly(kxx, kxy, kyz, cos(p.x), sin(p.y), sin(p.z));
+        const auto x0 = p.x + 0.1;
+        const auto y0 = p.y + 0.1;
+        const auto z0 = p.z + 0.1;
+        chi(p.I) = poly(kxx, kxy, kxz, kyy, kyz, kzz, x0, y0, z0);
       });
 }
 
@@ -242,10 +259,14 @@ extern "C" void TestSTXUtils_CalcError(CCTK_ARGUMENTS) {
 
   grid.loop_int_device<0, 0, 0>(
       grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
+        const auto x0 = p.x + 0.1;
+        const auto y0 = p.y + 0.1;
+        const auto z0 = p.z + 0.1;
+
         // errors in derivs
         std::array<CCTK_REAL, 3> dchi;
         std::array<CCTK_REAL, 6> ddchi;
-        poly_derivs(kxx, kxy, kyz, p.x, p.y, p.z, dchi, ddchi);
+        poly_derivs(kxx, kxy, kxz, kyy, kyz, kzz, x0, y0, z0, dchi, ddchi);
 
         dxchi_error(p.I) = dxchi(p.I) - dchi[0];
         dychi_error(p.I) = dychi(p.I) - dchi[1];
@@ -259,10 +280,9 @@ extern "C" void TestSTXUtils_CalcError(CCTK_ARGUMENTS) {
 
         // errors in diss
         const int diss_order = deriv_order + 2;
-
         const CCTK_REAL diss =
             Power(-1, diss_order / 2 - 1) / Power(2, diss_order) *
-            poly_diss(kxx, kxy, kyz, p.x, p.y, p.z, diss_order, dx);
+            poly_diss(kxx, kxy, kxz, kyy, kyz, kzz, x0, y0, z0, diss_order, dx);
         chi_diss_error(p.I) = diss - chi_diss(p.I);
       });
 }
