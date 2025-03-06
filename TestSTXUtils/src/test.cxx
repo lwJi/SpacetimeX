@@ -9,6 +9,7 @@
 #include <stx_derivsGF3D5.hxx>
 #include <stx_dissinline.hxx>
 #include <stx_powerinline.hxx>
+#include <stx_utils.hxx>
 
 namespace TestSTXUtils {
 using namespace Loop;
@@ -131,12 +132,14 @@ extern "C" void TestSTXUtils_CalcDerivs(CCTK_ARGUMENTS) {
   int ivar = 0;
   const GF3D5layout layout5 = get_GF3D5layout<0, 0, 0>(cctkGH);
   GF3D5Factory<CCTK_REAL> fct(layout5, nvars, ivar);
-  const auto t5_dchi = fct.make_vec_gf();
-  const auto t5_ddchi = fct.make_smat_gf();
+  const auto tl_dchi = fct.make_vec_gf();
+  const auto tl_ddchi = fct.make_smat_gf();
   if (ivar != nvars)
     CCTK_VERROR("Wrong number of temporary variables: nvars=%d ivar=%d", nvars,
                 ivar);
   ivar = -1;
+
+  const GridDescBaseDevice grid(cctkGH);
 
   // Define derivs lambdas
   const auto calcderivs2nd = [&](const auto &dgf, const auto &ddgf,
@@ -146,8 +149,6 @@ extern "C" void TestSTXUtils_CalcDerivs(CCTK_ARGUMENTS) {
   };
 
   calcderivs2nd(tl_dchi, tl_ddchi, gf_chi);
-
-  const GridDescBaseDevice grid(cctkGH);
 
   grid.loop_int_device<0, 0, 0>(
       grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
@@ -179,7 +180,7 @@ extern "C" void TestSTXUtils_CalcDiss(CCTK_ARGUMENTS) {
 
   const GF3D2layout layout2(cctkGH, {0, 0, 0});
 
-  const CCTK_REAL *gf_chi = chi;
+  const GridDescBaseDevice grid(cctkGH);
 
   const int diss_order = deriv_order + 2;
 

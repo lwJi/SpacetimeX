@@ -30,9 +30,16 @@ SCHEDULE TestSTXUtils_CalcDerivs AT poststep
   READS: chi(everywhere)
   WRITES: dchi(interior)
   WRITES: ddchi(interior)
-  WRITES: chi_diss(interior)
-  SYNC: dchi ddchi chi_diss
+  SYNC: dchi ddchi
 } "Calculate derivs"
+
+SCHEDULE TestSTXUtils_CalcDiss AT poststep AFTER TestSTXUtils_CalcDerivs
+{
+  LANG: C
+  READS: chi(everywhere)
+  WRITES: chi_diss(interior)
+  SYNC: chi_diss
+} "Calculate diss"
 
 SCHEDULE TestSTXUtils_CalcError AT poststep AFTER TestSTXUtils_CalcDerivs
 {
