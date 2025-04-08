@@ -11,7 +11,7 @@
 
 #include "derivsinline.hxx"
 
-namespace Z4cowGPU {
+namespace STXUtils {
 using namespace Loop;
 using namespace std;
 
@@ -257,7 +257,7 @@ calc_copy(const GridDescBaseDevice &grid,
 }
 
 
-} // namespace Z4cowGPU
+} // namespace STXUtils
 
 #endif // #ifndef DERIVSGF3D5_HXX
 

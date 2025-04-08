@@ -7,7 +7,7 @@
 #include <cmath>
 #include <type_traits>
 
-namespace Z4cowGPU {
+namespace STXUtils {
 
 template <typename T, typename U>
 CCTK_DEVICE CCTK_HOST constexpr T Power(T x, U y) {
@@ -31,6 +31,6 @@ CCTK_DEVICE CCTK_HOST constexpr T Power(T x, U y) {
   }
 }
 
-} // namespace Z4cowGPU
+} // namespace STXUtils
 
 #endif // #ifndef POWERINLINE_HXX

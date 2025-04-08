@@ -1,0 +1,3 @@
+# Configuration definitions for thorn TestSTXUtils
+
+REQUIRES Loop STXUtils

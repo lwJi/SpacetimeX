@@ -30,7 +30,7 @@ SetMainPrint[
   pr["#include \"powerinline.hxx\""];
   pr[];
 
-  pr["namespace Z4cowGPU {"];
+  pr["namespace STXUtils {"];
   pr["using namespace Loop;"];
   pr[];
 
@@ -97,7 +97,7 @@ SetMainPrint[
     {aOrd, 4, 10, 2}
   ];
 
-  pr["} // namespace Z4cowGPU"];
+  pr["} // namespace STXUtils"];
 ];
 
 Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXGPU.wl"}]];

@@ -11,7 +11,7 @@
 
 #include "powerinline.hxx"
 
-namespace Z4cowGPU {
+namespace STXUtils {
 using namespace Loop;
 
 template <int DI, typename T>
@@ -334,7 +334,7 @@ diss_10_o10(const GF3D2layout &layout, const T *gf, int i, int j, int k, const s
     invDx[D]*(-252*gf[c0] + 210*gf[m1] - 120*gf[m2] + 45*gf[m3] - 10*gf[m4] + gf[m5] + 210*gf[p1] - 120*gf[p2] + 45*gf[p3] - 10*gf[p4] + gf[p5]);
 }
 
-} // namespace Z4cowGPU
+} // namespace STXUtils
 
 #endif // #ifndef DERIVSINLINE_HXX
 

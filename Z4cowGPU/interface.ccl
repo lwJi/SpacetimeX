@@ -18,6 +18,10 @@ USES INCLUDE HEADER: derivs.hxx
 USES INCLUDE HEADER: newradx.hxx
 
 USES INCLUDE HEADER: stx_utils.hxx
+USES INCLUDE HEADER: stx_derivsGF3D5.hxx
+USES INCLUDE HEADER: stx_derivsinline.hxx
+USES INCLUDE HEADER: stx_dissinline.hxx
+USES INCLUDE HEADER: stx_powerinline.hxx
 
 
 CCTK_INT FUNCTION GetCallFunctionCount()

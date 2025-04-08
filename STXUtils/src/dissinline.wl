@@ -29,7 +29,7 @@ SetMainPrint[
   pr[];
   pr["#include \"derivsinline.hxx\""];
   pr[];
-  pr["namespace Z4cowGPU {"];
+  pr["namespace STXUtils {"];
   pr["using namespace Arith;"];
   pr["using namespace Loop;"];
   pr[];
@@ -58,7 +58,7 @@ SetMainPrint[
   pr["}"];
   pr[];
 
-  pr["} // namespace Z4cowGPU"];
+  pr["} // namespace STXUtils"];
 ];
 
 Import[FileNameJoin[{Environment["GENERATO"], "codes/CarpetXGPU.wl"}]];

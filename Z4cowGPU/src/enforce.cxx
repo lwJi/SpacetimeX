@@ -5,11 +5,12 @@
 
 #include <cmath>
 
-#include "../wolfram/powerinline.hxx"
+#include <stx_powerinline.hxx>
 
 namespace Z4cowGPU {
 using namespace Arith;
 using namespace Loop;
+using namespace STXUtils;
 
 extern "C" void Z4cowGPU_Enforce(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_Z4cowGPU_Enforce;

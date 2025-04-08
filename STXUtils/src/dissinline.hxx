@@ -11,7 +11,7 @@
 
 #include "derivsinline.hxx"
 
-namespace Z4cowGPU {
+namespace STXUtils {
 using namespace Arith;
 using namespace Loop;
 
@@ -46,7 +46,7 @@ calc_diss(const GF3D2layout &layout, const T *gf, int i, int j, int k,
   }
 }
 
-} // namespace Z4cowGPU
+} // namespace STXUtils
 
 #endif // #ifndef DISSINLINE_HXX
 
