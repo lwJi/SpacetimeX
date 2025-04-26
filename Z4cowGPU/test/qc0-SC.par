@@ -65,7 +65,6 @@ BoxInBox::radius_1 = [ -1.0, 10.0 ]
 
 ODESolvers::verbose = no
 ODESolvers::method = "RK4"
-ODESolvers::interprocess_ghost_sync_during_substep = yes
 
 ADMBaseX::initial_data  = "TwoPunctures"
 ADMBaseX::initial_lapse = "TwoPunctures-averaged"
