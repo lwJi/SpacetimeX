@@ -69,7 +69,7 @@ if(use_subcycling_wip) {
   STORAGE: alphaG_k4
   STORAGE: betaG_k4
 
-  SCHEDULE Z4cowGPU_Enforce IN ODESolvers_PostSubStep
+  SCHEDULE Z4cowGPU_Enforce IN ODESolvers_PostSubStepBeforeSync
   {
     LANG: C
     READS: W(interior)
