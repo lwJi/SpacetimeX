@@ -72,15 +72,36 @@ if(use_subcycling_wip) {
   SCHEDULE Z4cowGPU_Enforce IN ODESolvers_PostSubStep
   {
     LANG: C
-    READS: W(interior)
-    READS: gamma_tilde(interior)
-    READS: A_tilde(interior)
-    READS: alphaG(interior)
-    WRITES: W(interior)
-    WRITES: gamma_tilde(interior)
-    WRITES: A_tilde(interior)
-    WRITES: alphaG(interior)
+    READS: W(everywhere)
+    READS: gamma_tilde(everywhere)
+    READS: A_tilde(everywhere)
+    READS: alphaG(everywhere)
+    WRITES: W(everywhere)
+    WRITES: gamma_tilde(everywhere)
+    WRITES: A_tilde(everywhere)
+    WRITES: alphaG(everywhere)
   } "Enforce algebraic Z4c constraints"
+
+  if (calc_ADM_vars) {
+    SCHEDULE Z4cowGPU_ADM IN ODESolvers_PostSubStep AFTER Z4cowGPU_Enforce
+    {
+      LANG: C
+      READS: W(everywhere)
+      READS: gamma_tilde(everywhere)
+      READS: K_hat(everywhere)
+      READS: A_tilde(everywhere)
+      #READS: Gam_tilde(everywhere)
+      READS: Theta(everywhere)
+      READS: alphaG(everywhere)
+      READS: betaG(everywhere)
+      WRITES: ADMBaseX::metric(everywhere)
+      WRITES: ADMBaseX::curv(everywhere)
+      WRITES: ADMBaseX::lapse(everywhere)
+      WRITES: ADMBaseX::shift(everywhere)
+      #WRITES: ADMBaseX::dtlapse(everywhere)
+      #WRITES: ADMBaseX::dtshift(everywhere)
+    } "Convert Z4c to ADM variables"
+  }
 }
 
 
@@ -164,20 +185,7 @@ SCHEDULE Z4cowGPU_InitialLapse IN Z4cowGPU_InitialGroup AFTER Z4cowGPU_Initial2
   SYNC: alphaG
 } "Set initial lapse"
 
-SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup
-{
-  LANG: C
-  READS: W(interior)
-  READS: gamma_tilde(interior)
-  READS: A_tilde(interior)
-  READS: alphaG(interior)
-  WRITES: W(interior)
-  WRITES: gamma_tilde(interior)
-  WRITES: A_tilde(interior)
-  WRITES: alphaG(interior)
-} "Enforce algebraic Z4c constraints"
-
-SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
+SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup
 {
   LANG: C
   OPTIONS: global
@@ -191,8 +199,21 @@ SCHEDULE Z4cowGPU_Sync IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
   SYNC: betaG
 } "Synchronize"
 
+SCHEDULE Z4cowGPU_Enforce IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Sync
+{
+  LANG: C
+  READS: W(everywhere)
+  READS: gamma_tilde(everywhere)
+  READS: A_tilde(everywhere)
+  READS: alphaG(everywhere)
+  WRITES: W(everywhere)
+  WRITES: gamma_tilde(everywhere)
+  WRITES: A_tilde(everywhere)
+  WRITES: alphaG(everywhere)
+} "Enforce algebraic Z4c constraints"
+
 if (calc_ADM_vars) {
-  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Sync
+  SCHEDULE Z4cowGPU_ADM IN Z4cowGPU_PostStepGroup AFTER Z4cowGPU_Enforce
   {
     LANG: C
     READS: W(everywhere)

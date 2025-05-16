@@ -19,7 +19,7 @@ const auto &exAt33 = gf_exAt[5];
 const auto &alpha = gf_alpha;
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
-grid.loop_int_device<0, 0, 0>(
+grid.loop_all_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
