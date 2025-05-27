@@ -10,11 +10,17 @@
 
 (********************************)
 
-SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + GamDDD[m, j, l] exK[k, -m] - GamDDD[m, j, k] exK[l, -m]];
+SetEQN[DexK[k_, i_, j_], dexK[k, i, j] - Gam[l, k, i] exK[-l, j] - Gam[l, k, j] exK[-l, i]];
+
+(*
+SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + Gam[m, j, l] exK[k, -m] - Gam[m, j, k] exK[l, -m]];
 
 SetEQN[perpRnn[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
+*)
 
-SetEQN[E[i_, j_], perpRnn[i, j]];
+SetEQN[E[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
+
+SetEQN[B[i_, j_], gam[i, -m] epsilongam[m, k, l] DexK[-k, -l, j]];
 
 (**********)
 

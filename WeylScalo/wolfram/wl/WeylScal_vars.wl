@@ -45,7 +45,8 @@ IntermediateVarlist =
     {tr1dGam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*SuperscriptBox[\(\[CapitalGamma]\), \((tr1)\)]\)"},
     {tr2dGam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*SuperscriptBox[\(\[CapitalGamma]\), \((tr2)\)]\)"},
     {Ricc[-i, -j], Symmetric[{-i, -j}], PrintAs -> "R"},
-    {trexK[], PrintAs -> "K"}
+    {trexK[], PrintAs -> "K"},
+    {DexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "DK"}
   ];
 
 GaussCodazziVarlist =
