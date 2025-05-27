@@ -10,7 +10,7 @@
 
 (********************************)
 
-SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + Gam[m, j, l] exK[k, -m] - Gam[m, j, k] exK[l, -m]];
+SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + GamDDD[m, j, l] exK[k, -m] - GamDDD[m, j, k] exK[l, -m]];
 
 SetEQN[perpRnn[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
 
@@ -58,7 +58,7 @@ SetEQNDelayed[
   ]
 ];
 
-SetEQNDelayed[wvec[i_], detgam[] ^ (1/2) invgam[i, j] KroneckerDelta[j[[1]], k[[1]], l[[1]]] uvec[k] vvec[l]];
+SetEQNDelayed[wvec[i_], invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]];
 
 (* Gram-Schmidt orthonormalization *)
 
@@ -86,9 +86,9 @@ SetEQN[Wvec[i_], Wtmp[i] / (innerWW[]) ^ (1/2)];
 
 (* The tetrad vectors *)
 
-SetEQN[nvec[i_], oosqrt2 (-beta[i] / alpha - Vvec[i])];
+SetEQN[nvec[i_], oosqrt2 (-beta[i] / alpha[] - Vvec[i])];
 
-SetEQN[lvec[i_], oosqrt2 (-beta[i] / alpha + Vvec[i])];
+SetEQN[lvec[i_], oosqrt2 (-beta[i] / alpha[] + Vvec[i])];
 
 SetEQN[mbmbReal[i_, j_], (Wvec[i] Wvec[j] - Uvec[i] Uvec[j]) / 2];
 
