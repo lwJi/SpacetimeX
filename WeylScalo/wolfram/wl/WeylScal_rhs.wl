@@ -4,13 +4,19 @@
 
 (* (c) Liwei Ji, 05/2025 *)
 
+(****************)
+
+(* Intermediate *)
+
+(****************)
+
+SetEQN[DexK[k_, i_, j_], dexK[k, i, j] - Gam[l, k, i] exK[-l, j] - Gam[l, k, j] exK[-l, i]];
+
 (********************************)
 
 (* From Gauss-Codazzi equations *)
 
 (********************************)
-
-SetEQN[DexK[k_, i_, j_], dexK[k, i, j] - Gam[l, k, i] exK[-l, j] - Gam[l, k, j] exK[-l, i]];
 
 (*
 SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + Gam[m, j, l] exK[k, -m] - Gam[m, j, k] exK[l, -m]];
@@ -18,9 +24,15 @@ SetEQN[perpRn[j_, k_, l_], dexK[k, j, l] - dexK[l, j, k] + Gam[m, j, l] exK[k, -
 SetEQN[perpRnn[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
 *)
 
-SetEQN[E[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
+(********************************)
 
-SetEQN[B[i_, j_], gam[i, -m] epsilongam[m, k, l] DexK[-k, -l, j]];
+(* E and B parts of Weyl tensor *)
+
+(********************************)
+
+SetEQNDelayed[Epart[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
+
+SetEQNDelayed[Bpart[i_, j_], gam[i, -m] epsilongam[m, k, l] DexK[-k, -l, j]]; (* here we use delayed version to prevent contracting gam and epsilongam *)
 
 (**********)
 
@@ -96,6 +108,6 @@ SetEQN[nvec[i_], oosqrt2 (-beta[i] / alpha[] - Vvec[i])];
 
 SetEQN[lvec[i_], oosqrt2 (-beta[i] / alpha[] + Vvec[i])];
 
-SetEQN[mbmbReal[i_, j_], (Wvec[i] Wvec[j] - Uvec[i] Uvec[j]) / 2];
+SetEQN[mbmbreal[i_, j_], (Wvec[i] Wvec[j] - Uvec[i] Uvec[j]) / 2];
 
-SetEQN[mbmbImag[i_, j_], -(Uvec[i] Wvec[j] + Wvec[i] Uvec[j]) / 2];
+SetEQN[mbmbimag[i_, j_], -(Uvec[i] Wvec[j] + Wvec[i] Uvec[j]) / 2];

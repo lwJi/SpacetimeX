@@ -74,8 +74,8 @@ TetradVarlist =
     (* tetrad vectors *)
     {nvec[i], PrintAs -> "n"},
     {lvec[i], PrintAs -> "l"},
-    {mbmbReal[i, j], Symmetric[{i, j}], PrintAs -> "r\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"},
-    {mbmbImag[i, j], Symmetric[{i, j}], PrintAs -> "i\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"}
+    {mbmbreal[i, j], Symmetric[{i, j}], PrintAs -> "r\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"},
+    {mbmbimag[i, j], Symmetric[{i, j}], PrintAs -> "i\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"}
   ];
 
 (************)
