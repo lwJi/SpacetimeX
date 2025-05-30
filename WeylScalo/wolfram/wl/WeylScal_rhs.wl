@@ -10,6 +10,14 @@
 
 (****************)
 
+SetEQN[GamDDD[k_, i_, j_], 1/2 (dgam[i, j, k] + dgam[j, k, i] - dgam[k, i, j])];
+
+SetEQN[Gam[k_, i_, j_], invgam[k, l] GamDDD[-l, i, j]];
+
+SetEQN[Ricc[i_, j_], invgam[k, l] (1/2 (-ddgam[-k, -l, i, j] - ddgam[i, j, -k, -l] + ddgam[i, -k, j, -l] + ddgam[j, -k, i, -l]) + Gam[m, i, -k] GamDDD[-m, j, -l] - Gam[m, i, j] GamDDD[-m, -k, -l])];
+
+SetEQN[trexK[], invgam[k, l] exK[-k, -l]];
+
 SetEQN[DexK[k_, i_, j_], dexK[k, i, j] - Gam[l, k, i] exK[-l, j] - Gam[l, k, j] exK[-l, i]];
 
 (********************************)
@@ -76,7 +84,7 @@ SetEQNDelayed[
   ]
 ];
 
-SetEQNDelayed[wvec[i_], invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]];
+SetEQN[wvec[i_], invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]];
 
 (* Gram-Schmidt orthonormalization *)
 
