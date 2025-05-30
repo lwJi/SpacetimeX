@@ -50,7 +50,7 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
 #include "../wolfram/WeylScalo_derivs1st.hxx"
 #include "../wolfram/WeylScalo_derivs2nd.hxx"
 
-#include "../wolfram/WeylScalo_set_rhs.hxx"
+#include "../wolfram/WeylScalo_set_Psi4.hxx"
 }
 
 extern "C" void WeylScalo_Sync(CCTK_ARGUMENTS) {
