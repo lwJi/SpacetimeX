@@ -12,6 +12,12 @@ const auto &exK13 = gf_exK[2];
 const auto &exK22 = gf_exK[3];
 const auto &exK23 = gf_exK[4];
 const auto &exK33 = gf_exK[5];
+const auto &gam11 = gf_gam[0];
+const auto &gam12 = gf_gam[1];
+const auto &gam13 = gf_gam[2];
+const auto &gam22 = gf_gam[3];
+const auto &gam23 = gf_gam[4];
+const auto &gam33 = gf_gam[5];
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
 grid.loop_int_device<0, 0, 0>(
@@ -94,8 +100,9 @@ const auto ddgam3333 = calcderivs2_33(gam33, p.i, p.j, p.k);
 const auto
 detgam
 =
--(Power(gam13,2)*gam22) + 2*gam12*gam13*gam23 - gam11*Power(gam23,2) -
-  Power(gam12,2)*gam33 + gam11*gam22*gam33
+-(Power(gam13[ijk],2)*gam22[ijk]) + 2*gam12[ijk]*gam13[ijk]*gam23[ijk] -
+  Power(gam12[ijk],2)*gam33[ijk] +
+  gam11[ijk]*(-Power(gam23[ijk],2) + gam22[ijk]*gam33[ijk])
 ;
 
 const auto
@@ -119,37 +126,37 @@ sqrtdetinvgam
 const auto
 invgam11
 =
-detinvgam*(-Power(gam23,2) + gam22*gam33)
+detinvgam*(-Power(gam23[ijk],2) + gam22[ijk]*gam33[ijk])
 ;
 
 const auto
 invgam12
 =
-detinvgam*(gam13*gam23 - gam12*gam33)
+detinvgam*(gam13[ijk]*gam23[ijk] - gam12[ijk]*gam33[ijk])
 ;
 
 const auto
 invgam13
 =
-detinvgam*(-(gam13*gam22) + gam12*gam23)
+detinvgam*(-(gam13[ijk]*gam22[ijk]) + gam12[ijk]*gam23[ijk])
 ;
 
 const auto
 invgam22
 =
-detinvgam*(-Power(gam13,2) + gam11*gam33)
+detinvgam*(-Power(gam13[ijk],2) + gam11[ijk]*gam33[ijk])
 ;
 
 const auto
 invgam23
 =
-detinvgam*(gam12*gam13 - gam11*gam23)
+detinvgam*(gam12[ijk]*gam13[ijk] - gam11[ijk]*gam23[ijk])
 ;
 
 const auto
 invgam33
 =
-detinvgam*(-Power(gam12,2) + gam11*gam22)
+detinvgam*(-Power(gam12[ijk],2) + gam11[ijk]*gam22[ijk])
 ;
 
 const auto
@@ -705,43 +712,43 @@ Ricc33 - invgam11*Power(exK13[ijk],2) - invgam22*Power(exK23[ijk],2) +
 const auto
 Bpart11
 =
-(DexK213*gam11 - DexK312*gam11 - DexK113*gam12 + DexK311*gam12 +
-    DexK112*gam13 - DexK211*gam13)*sqrtdetinvgam
+sqrtdetinvgam*((DexK213 - DexK312)*gam11[ijk] +
+    (-DexK113 + DexK311)*gam12[ijk] + (DexK112 - DexK211)*gam13[ijk])
 ;
 
 const auto
 Bpart12
 =
-(DexK223*gam11 - DexK322*gam11 - DexK123*gam12 + DexK312*gam12 +
-    DexK122*gam13 - DexK212*gam13)*sqrtdetinvgam
+sqrtdetinvgam*((DexK223 - DexK322)*gam11[ijk] +
+    (-DexK123 + DexK312)*gam12[ijk] + (DexK122 - DexK212)*gam13[ijk])
 ;
 
 const auto
 Bpart13
 =
-(DexK233*gam11 - DexK323*gam11 - DexK133*gam12 + DexK313*gam12 +
-    DexK123*gam13 - DexK213*gam13)*sqrtdetinvgam
+sqrtdetinvgam*((DexK233 - DexK323)*gam11[ijk] +
+    (-DexK133 + DexK313)*gam12[ijk] + (DexK123 - DexK213)*gam13[ijk])
 ;
 
 const auto
 Bpart22
 =
-(DexK223*gam12 - DexK322*gam12 - DexK123*gam22 + DexK312*gam22 +
-    DexK122*gam23 - DexK212*gam23)*sqrtdetinvgam
+sqrtdetinvgam*((DexK223 - DexK322)*gam12[ijk] +
+    (-DexK123 + DexK312)*gam22[ijk] + (DexK122 - DexK212)*gam23[ijk])
 ;
 
 const auto
 Bpart23
 =
-(DexK233*gam12 - DexK323*gam12 - DexK133*gam22 + DexK313*gam22 +
-    DexK123*gam23 - DexK213*gam23)*sqrtdetinvgam
+sqrtdetinvgam*((DexK233 - DexK323)*gam12[ijk] +
+    (-DexK133 + DexK313)*gam22[ijk] + (DexK123 - DexK213)*gam23[ijk])
 ;
 
 const auto
 Bpart33
 =
-(DexK233*gam13 - DexK323*gam13 - DexK133*gam23 + DexK313*gam23 +
-    DexK123*gam33 - DexK213*gam33)*sqrtdetinvgam
+sqrtdetinvgam*((DexK233 - DexK323)*gam13[ijk] +
+    (-DexK133 + DexK313)*gam23[ijk] + (DexK123 - DexK213)*gam33[ijk])
 ;
 
 
@@ -808,8 +815,9 @@ sqrtdetgam*(-(invgam33*uvec2*vvec1) + invgam23*uvec3*vvec1 +
 const auto
 inneruu
 =
-gam11*Power(uvec1,2) + 2*gam12*uvec1*uvec2 + gam22*Power(uvec2,2) +
-  2*gam13*uvec1*uvec3 + 2*gam23*uvec2*uvec3 + gam33*Power(uvec3,2)
+Power(uvec1,2)*gam11[ijk] + 2*uvec1*uvec2*gam12[ijk] +
+  2*uvec1*uvec3*gam13[ijk] + Power(uvec2,2)*gam22[ijk] +
+  2*uvec2*uvec3*gam23[ijk] + Power(uvec3,2)*gam33[ijk]
 ;
 
 const auto
@@ -833,9 +841,9 @@ uvec3/Sqrt(inneruu)
 const auto
 innerUv
 =
-gam11*Uvec1*vvec1 + gam12*Uvec2*vvec1 + gam13*Uvec3*vvec1 +
-  gam12*Uvec1*vvec2 + gam22*Uvec2*vvec2 + gam23*Uvec3*vvec2 +
-  gam13*Uvec1*vvec3 + gam23*Uvec2*vvec3 + gam33*Uvec3*vvec3
+Uvec1*vvec1*gam11[ijk] + (Uvec2*vvec1 + Uvec1*vvec2)*gam12[ijk] +
+  Uvec3*vvec1*gam13[ijk] + Uvec1*vvec3*gam13[ijk] + Uvec2*vvec2*gam22[ijk] +
+  Uvec3*vvec2*gam23[ijk] + Uvec2*vvec3*gam23[ijk] + Uvec3*vvec3*gam33[ijk]
 ;
 
 const auto
@@ -859,8 +867,9 @@ Vtmp3
 const auto
 innerVV
 =
-gam11*Power(Vtmp1,2) + 2*gam12*Vtmp1*Vtmp2 + gam22*Power(Vtmp2,2) +
-  2*gam13*Vtmp1*Vtmp3 + 2*gam23*Vtmp2*Vtmp3 + gam33*Power(Vtmp3,2)
+Power(Vtmp1,2)*gam11[ijk] + 2*Vtmp1*Vtmp2*gam12[ijk] +
+  2*Vtmp1*Vtmp3*gam13[ijk] + Power(Vtmp2,2)*gam22[ijk] +
+  2*Vtmp2*Vtmp3*gam23[ijk] + Power(Vtmp3,2)*gam33[ijk]
 ;
 
 const auto
@@ -884,17 +893,17 @@ Vtmp3/Sqrt(innerVV)
 const auto
 innerUw
 =
-gam11*Uvec1*wvec1 + gam12*Uvec2*wvec1 + gam13*Uvec3*wvec1 +
-  gam12*Uvec1*wvec2 + gam22*Uvec2*wvec2 + gam23*Uvec3*wvec2 +
-  gam13*Uvec1*wvec3 + gam23*Uvec2*wvec3 + gam33*Uvec3*wvec3
+Uvec1*wvec1*gam11[ijk] + (Uvec2*wvec1 + Uvec1*wvec2)*gam12[ijk] +
+  Uvec3*wvec1*gam13[ijk] + Uvec1*wvec3*gam13[ijk] + Uvec2*wvec2*gam22[ijk] +
+  Uvec3*wvec2*gam23[ijk] + Uvec2*wvec3*gam23[ijk] + Uvec3*wvec3*gam33[ijk]
 ;
 
 const auto
 innerVw
 =
-gam11*Vvec1*wvec1 + gam12*Vvec2*wvec1 + gam13*Vvec3*wvec1 +
-  gam12*Vvec1*wvec2 + gam22*Vvec2*wvec2 + gam23*Vvec3*wvec2 +
-  gam13*Vvec1*wvec3 + gam23*Vvec2*wvec3 + gam33*Vvec3*wvec3
+Vvec1*wvec1*gam11[ijk] + (Vvec2*wvec1 + Vvec1*wvec2)*gam12[ijk] +
+  Vvec3*wvec1*gam13[ijk] + Vvec1*wvec3*gam13[ijk] + Vvec2*wvec2*gam22[ijk] +
+  Vvec3*wvec2*gam23[ijk] + Vvec2*wvec3*gam23[ijk] + Vvec3*wvec3*gam33[ijk]
 ;
 
 const auto
@@ -918,8 +927,9 @@ Wtmp3
 const auto
 innerWW
 =
-gam11*Power(Wtmp1,2) + 2*gam12*Wtmp1*Wtmp2 + gam22*Power(Wtmp2,2) +
-  2*gam13*Wtmp1*Wtmp3 + 2*gam23*Wtmp2*Wtmp3 + gam33*Power(Wtmp3,2)
+Power(Wtmp1,2)*gam11[ijk] + 2*Wtmp1*Wtmp2*gam12[ijk] +
+  2*Wtmp1*Wtmp3*gam13[ijk] + Power(Wtmp2,2)*gam22[ijk] +
+  2*Wtmp2*Wtmp3*gam23[ijk] + Power(Wtmp3,2)*gam33[ijk]
 ;
 
 const auto

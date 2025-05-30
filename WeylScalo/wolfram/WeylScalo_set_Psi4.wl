@@ -28,9 +28,9 @@ DefMetric[1, gam[-i, -j], cd, SymbolOfCovD -> {"|", "D"}, PrintAs -> "\[Gamma]"]
 
 MetricInBasis[gam, -cart,
   {
-    {gam11, gam12, gam13},
-    {gam12, gam22, gam23},
-    {gam13, gam23, gam33}
+    {gam11[[ijk]], gam12[[ijk]], gam13[[ijk]]},
+    {gam12[[ijk]], gam22[[ijk]], gam23[[ijk]]},
+    {gam13[[ijk]], gam23[[ijk]], gam33[[ijk]]}
   }];
 
 
@@ -63,6 +63,12 @@ SetMainPrint[
   (* Initialize grid function names *)
   PrintInitializations[{Mode -> "MainOut"}, Psi4Varlist];
   PrintInitializations[{Mode -> "MainIn"}, ADMVarlist];
+  pr["const auto &gam11 = gf_gam[0];"];
+  pr["const auto &gam12 = gf_gam[1];"];
+  pr["const auto &gam13 = gf_gam[2];"];
+  pr["const auto &gam22 = gf_gam[3];"];
+  pr["const auto &gam23 = gf_gam[4];"];
+  pr["const auto &gam33 = gf_gam[5];"];
   pr[];
 
   (* Loops *)
