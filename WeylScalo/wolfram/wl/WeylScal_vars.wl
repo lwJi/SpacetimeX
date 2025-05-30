@@ -50,8 +50,9 @@ Psi4Varlist =
 IntermediateVarlist =
   TempTensors[
     {detgam[], PrintAs -> "\[Gamma]"},
-    {sqrtdetgam[], PrintAs -> "\!\(\*SqrtBox[\(\[Gamma]\)]\)"},
     {detinvgam[], PrintAs -> "1/\[Gamma]"},
+    {sqrtdetgam[], PrintAs -> "\!\(\*SqrtBox[\(\[Gamma]\)]\)"},
+    {sqrtdetinvgam[], PrintAs -> "1/\!\(\*SqrtBox[\(\[Gamma]\)]\)"},
     {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
     {GamDDD [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]"},
     {Gam     [k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]"},

@@ -40,7 +40,7 @@ SetEQN[perpRnn[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] i
 
 SetEQNDelayed[Epart[i_, j_], Ricc[i, j] + trexK[] exK[i, j] - exK[i, -k] exK[j, -l] invgam[k, l]];
 
-SetEQNDelayed[Bpart[i_, j_], gam[i, -m] epsilongam[m, k, l] DexK[-k, -l, j]]; (* here we use delayed version to prevent contracting gam and epsilongam *)
+SetEQNDelayed[Bpart[i_, j_], (gam[i, -m] epsilongam[m, k, l] DexK[-k, -l, j] /. epsilonToetaUp[gam, GetDefaultChart[]]) /. {1 / Sqrt[Detgamcart[]] -> sqrtdetinvgam[]}]; (* here we use delayed version to prevent contracting gam and epsilongam *)
 
 (**********)
 
@@ -84,7 +84,7 @@ SetEQNDelayed[
   ]
 ];
 
-SetEQN[wvec[i_], invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]];
+SetEQN[wvec[i_], (invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]) /. epsilonToetaDown[gam, GetDefaultChart[]] /. {Sqrt[Detgamcart[]] -> sqrtdetgam[]}];
 
 (* Gram-Schmidt orthonormalization *)
 
