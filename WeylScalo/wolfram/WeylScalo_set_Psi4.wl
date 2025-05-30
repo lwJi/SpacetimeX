@@ -28,9 +28,9 @@ DefMetric[1, gam[-i, -j], cd, SymbolOfCovD -> {"|", "D"}, PrintAs -> "\[Gamma]"]
 
 MetricInBasis[gam, -cart,
   {
-    {g11, g12, g13},
-    {g12, g22, g23},
-    {g13, g23, g33}
+    {gam11, gam12, gam13},
+    {gam12, gam22, gam23},
+    {gam13, gam23, gam33}
   }];
 
 

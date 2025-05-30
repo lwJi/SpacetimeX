@@ -17,13 +17,13 @@ ADMVarlist =
   ];
 
 dADMVarlist =
-  GridTensors[
+  TileTensors[
     {dgam[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\[Gamma]"},
     {dexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]K"}
   ];
 
 ddADMVarlist =
-  GridTensors[
+  TileTensors[
     {ddgam[-k, -l, -i, -j], GenSet[Cycles[{1, 2}], Cycles[{3, 4}]], PrintAs -> "\[PartialD]\[PartialD]\[Gamma]"}
   ];
 
