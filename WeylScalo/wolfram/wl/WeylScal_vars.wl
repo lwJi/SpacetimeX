@@ -49,16 +49,17 @@ Psi4Varlist =
 
 IntermediateVarlist =
   TempTensors[
-    {detinvgam[], PrintAs -> "1/\[Gamma]"},
+    {detgam[], PrintAs -> "\[Gamma]"},
     {sqrtdetgam[], PrintAs -> "\!\(\*SqrtBox[\(\[Gamma]\)]\)"},
+    {detinvgam[], PrintAs -> "1/\[Gamma]"},
     {invgam[i, j], Symmetric[{i, j}], PrintAs -> "\[Gamma]"},
     {GamDDD [-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]"},
     {Gam     [k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]"},
-    {tr1dGam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*SuperscriptBox[\(\[CapitalGamma]\), \((tr1)\)]\)"},
-    {tr2dGam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[PartialD]\!\(\*SuperscriptBox[\(\[CapitalGamma]\), \((tr2)\)]\)"},
     {Ricc[-i, -j], Symmetric[{-i, -j}], PrintAs -> "R"},
     {trexK[], PrintAs -> "K"},
-    {DexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "DK"}
+    {DexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "DK"},
+    {Epart[-i, -j], Symmetric[{-i, -j}], PrintAs -> "E"},
+    {Bpart[-i, -j], Symmetric[{-i, -j}], PrintAs -> "B"}
   ];
 
 GaussCodazziVarlist =
