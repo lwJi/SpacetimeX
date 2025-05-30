@@ -16,6 +16,10 @@ using namespace Arith;
 using namespace Loop;
 using namespace STXUtils;
 
+CCTK_DEVICE CCTK_HOST constexpr CCTK_REAL Sqrt(CCTK_REAL x) {
+  return std::sqrt(x);
+}
+
 extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_WeylScalo_calc_psi4;
   DECLARE_CCTK_PARAMETERS;
