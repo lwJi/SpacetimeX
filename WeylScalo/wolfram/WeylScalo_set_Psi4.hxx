@@ -12,10 +12,6 @@ const auto &exK13 = gf_exK[2];
 const auto &exK22 = gf_exK[3];
 const auto &exK23 = gf_exK[4];
 const auto &exK33 = gf_exK[5];
-const auto &alpha = gf_alpha;
-const auto &beta1 = gf_beta[0];
-const auto &beta2 = gf_beta[1];
-const auto &beta3 = gf_beta[2];
 
 noinline([&]() __attribute__((__flatten__, __hot__)) {
 grid.loop_int_device<0, 0, 0>(

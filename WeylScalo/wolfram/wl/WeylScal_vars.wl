@@ -13,9 +13,7 @@
 ADMVarlist =
   GridTensors[
     (*{gam[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Gamma]"},*)
-    {exK[-i, -j], Symmetric[{-i, -j}], PrintAs -> "K"},
-    {alpha[], PrintAs -> "\[Alpha]"},
-    {beta[i], PrintAs -> "\[Beta]"}
+    {exK[-i, -j], Symmetric[{-i, -j}], PrintAs -> "K"}
   ];
 
 dADMVarlist =
