@@ -33,6 +33,10 @@ MetricInBasis[gam, -cart,
     {gam13[[ijk]], gam23[[ijk]], gam33[[ijk]]}
   }];
 
+ComponentValue[X[], coX];
+ComponentValue[Y[], coY];
+ComponentValue[Z[], coZ];
+
 
 (**********************************)
 (* Define Variables and Equations *)
@@ -76,6 +80,10 @@ SetMainPrint[
   pr["grid.loop_int_device<0, 0, 0>("];
   pr["  grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {"];
   pr["const int ijk = layout2.linear(p.i, p.j, p.k);"];
+  pr[];
+  pr["const auto coX = p.x;"];
+  pr["const auto coY = p.y;"];
+  pr["const auto coZ = p.z;"];
   pr[];
 
   PrintInitializations[{Mode -> "Derivs", DerivsOrder -> 1},

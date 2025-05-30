@@ -24,6 +24,10 @@ grid.loop_int_device<0, 0, 0>(
   grid.nghostzones, [=] ARITH_DEVICE(const PointDesc &p) ARITH_INLINE {
 const int ijk = layout2.linear(p.i, p.j, p.k);
 
+const auto coX = p.x;
+const auto coY = p.y;
+const auto coZ = p.z;
+
 const auto dgam111 = calcderivs1_1(gam11, p.i, p.j, p.k);
 const auto dgam112 = calcderivs1_1(gam12, p.i, p.j, p.k);
 const auto dgam113 = calcderivs1_1(gam13, p.i, p.j, p.k);
@@ -755,13 +759,13 @@ sqrtdetinvgam*((DexK233 - DexK323)*gam13[ijk] +
 const auto
 uvec1
 =
--Y()
+-coY
 ;
 
 const auto
 uvec2
 =
-X()
+coX
 ;
 
 const auto
@@ -773,19 +777,19 @@ uvec3
 const auto
 vvec1
 =
-X()
+coX
 ;
 
 const auto
 vvec2
 =
-Y()
+coY
 ;
 
 const auto
 vvec3
 =
-Z()
+coZ
 ;
 
 const auto
