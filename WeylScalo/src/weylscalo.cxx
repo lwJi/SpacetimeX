@@ -39,8 +39,8 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
   const array<const CCTK_REAL *, 6> gf_exK{kxx, kxy, kxz, kyy, kyz, kzz};
 
   // Output grid functions
-  const CCTK_REAL *gf_Psi4real = Psi4r;
-  const CCTK_REAL *gf_Psi4imag = Psi4i;
+  CCTK_REAL *gf_Psi4real = Psi4r;
+  CCTK_REAL *gf_Psi4imag = Psi4i;
 
   // Parameters
   // const CCTK_REAL oosqrt2 = 1.0 / sqrt(2);
