@@ -86,8 +86,6 @@ TetradVarlist =
     {innerWW[], PrintAs -> "W\[CenterDot]W"},
     {Wvec[i], PrintAs -> "W"},
     (* tetrad vectors *)
-    {nvec[i], PrintAs -> "n"},
-    {lvec[i], PrintAs -> "l"},
     {mbmbreal[i, j], Symmetric[{i, j}], PrintAs -> "r\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"},
     {mbmbimag[i, j], Symmetric[{i, j}], PrintAs -> "i\!\(\*OverscriptBox[\(m\), \(_\)]\)\!\(\*OverscriptBox[\(m\), \(_\)]\)"}
   ];

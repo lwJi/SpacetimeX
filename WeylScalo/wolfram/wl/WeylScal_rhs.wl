@@ -112,10 +112,6 @@ SetEQN[Wvec[i_], Wtmp[i] / (innerWW[]) ^ (1/2)];
 
 (* The tetrad vectors *)
 
-SetEQN[nvec[i_], oosqrt2 (-beta[i] / alpha[] - Vvec[i])];
-
-SetEQN[lvec[i_], oosqrt2 (-beta[i] / alpha[] + Vvec[i])];
-
 SetEQN[mbmbreal[i_, j_], (Wvec[i] Wvec[j] - Uvec[i] Uvec[j]) / 2];
 
 SetEQN[mbmbimag[i_, j_], -(Uvec[i] Wvec[j] + Wvec[i] Uvec[j]) / 2];

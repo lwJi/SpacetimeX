@@ -960,42 +960,6 @@ Wtmp3/Sqrt(innerWW)
 ;
 
 const auto
-nvec1
-=
--((oosqrt2*(Vvec1*alpha[ijk] + beta1[ijk]))/alpha[ijk])
-;
-
-const auto
-nvec2
-=
--((oosqrt2*(Vvec2*alpha[ijk] + beta2[ijk]))/alpha[ijk])
-;
-
-const auto
-nvec3
-=
--((oosqrt2*(Vvec3*alpha[ijk] + beta3[ijk]))/alpha[ijk])
-;
-
-const auto
-lvec1
-=
-oosqrt2*(Vvec1 - beta1[ijk]/alpha[ijk])
-;
-
-const auto
-lvec2
-=
-oosqrt2*(Vvec2 - beta2[ijk]/alpha[ijk])
-;
-
-const auto
-lvec3
-=
-oosqrt2*(Vvec3 - beta3[ijk]/alpha[ijk])
-;
-
-const auto
 mbmbreal11
 =
 (-Power(Uvec1,2) + Power(Wvec1,2))/2.
