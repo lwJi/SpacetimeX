@@ -41,7 +41,7 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
   const CCTK_REAL *gf_Psi4imag = Psi4i;
 
   // Parameters
-  const CCTK_REAL oosqrt2 = 0.70710678118654752440;
+  const CCTK_REAL oosqrt2 = 1.0 / sqrt(2);
 
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
