@@ -119,3 +119,9 @@ SetEQN[lvec[i_], oosqrt2 (-beta[i] / alpha[] + Vvec[i])];
 SetEQN[mbmbreal[i_, j_], (Wvec[i] Wvec[j] - Uvec[i] Uvec[j]) / 2];
 
 SetEQN[mbmbimag[i_, j_], -(Uvec[i] Wvec[j] + Wvec[i] Uvec[j]) / 2];
+
+(* Psi4 *)
+
+SetEQN[Psi4real[], Epart[-i, -j] mbmbreal[i, j] + Bpart[-i, -j] mbmbimag[i, j]];
+
+SetEQN[Psi4imag[], Epart[-i, -j] mbmbimag[i, j] - Bpart[-i, -j] mbmbreal[i, j]];

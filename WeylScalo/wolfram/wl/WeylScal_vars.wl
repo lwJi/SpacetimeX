@@ -29,6 +29,18 @@ ddADMVarlist =
     {ddgam[-k, -l, -i, -j], GenSet[Cycles[{1, 2}], Cycles[{3, 4}]], PrintAs -> "\[PartialD]\[PartialD]\[Gamma]"}
   ];
 
+(********************)
+
+(* Output Variables *)
+
+(********************)
+
+Psi4Varlist =
+  GridTensors[
+    {Psi4real[], PrintAs -> "\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalPsi]\), \(4\)], \((r)\)]\)"},
+    {Psi4imag[], PrintAs -> "\!\(\*SuperscriptBox[SubscriptBox[\(\[CapitalPsi]\), \(4\)], \((i)\)]\)"}
+  ];
+
 (**************************)
 
 (* Intermediate Variables *)
