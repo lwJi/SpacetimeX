@@ -32,16 +32,14 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
 
   // Input grid functions
   const array<const CCTK_REAL *, 6> gf_gam{gxx, gxy, gxz, gyy, gyz, gzz};
-  const array<const CCTk_REAL *, 6> gf_exk{kxx, kxy, kxz, kyy, kyz, kzz};
-  const CCTK_REAL *gf_alpha = alp;
-  const array<const CCTK_REAL *, 3> gf_beta{betaGx, betaGy, betaGz};
+  const array<const CCTK_REAL *, 6> gf_exK{kxx, kxy, kxz, kyy, kyz, kzz};
 
   // Output grid functions
   const CCTK_REAL *gf_Psi4real = Psi4r;
   const CCTK_REAL *gf_Psi4imag = Psi4i;
 
   // Parameters
-  const CCTK_REAL oosqrt2 = 1.0 / sqrt(2);
+  // const CCTK_REAL oosqrt2 = 1.0 / sqrt(2);
 
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
