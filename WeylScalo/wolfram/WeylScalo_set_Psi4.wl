@@ -94,6 +94,8 @@ SetMainPrint[
 
   PrintEquations[{Mode -> "Temp"}, IntermediateVarlist];
   pr[];
+  PrintEquations[{Mode -> "Temp"}, EBVarlist];
+  pr[];
   PrintEquations[{Mode -> "Temp"}, TetradVarlist];
   pr[];
   PrintEquations[{Mode -> "Main"}, Psi4Varlist];

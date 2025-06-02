@@ -56,13 +56,20 @@ IntermediateVarlist =
     {Gam     [k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "\[CapitalGamma]"},
     {Ricc[-i, -j], Symmetric[{-i, -j}], PrintAs -> "R"},
     {trexK[], PrintAs -> "K"},
-    {DexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "DK"},
+    {DexK[-k, -i, -j], Symmetric[{-i, -j}], PrintAs -> "DK"}
+  ];
+
+EBVarlist =
+  TempTensors[
     {Epart[-i, -j], Symmetric[{-i, -j}], PrintAs -> "E"},
     {Bpart[-i, -j], Symmetric[{-i, -j}], PrintAs -> "B"}
   ];
 
 GaussCodazziVarlist =
   TempTensors[
+    {Rsca[], PrintAs -> "R"},
+    {Riem[-i, -j, -k, -l], GenSet[-Cycles[{1, 2}],-Cycles[{3, 4}]], PrintAs -> "R"},
+    {perpR[-i, -j, -k, -l], GenSet[-Cycles[{1, 2}],-Cycles[{3, 4}]], PrintAs -> "\[Perpendicular]R"},
     {perpRn[-j, -k, -l], Antisymmetric[{-k, -l}], PrintAs -> "\[Perpendicular]Rn"},
     {perpRnn[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Perpendicular]Rnn"}
   ];
