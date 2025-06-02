@@ -4,6 +4,22 @@
 
 (* (c) Liwei Ji, 05/2025 *)
 
+(***********)
+
+(* Metrics *)
+
+(***********)
+
+Module[{Mat, invMat},
+  Mat = Table[gam[{ii, -GetDefaultChart[]}, {jj, -GetDefaultChart[]}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
+  invMat = Inverse[Mat] /. {1 / Det[Mat] -> detinvgam};
+  SetEQNDelayed[detgam[], Det[Mat] // Simplify];
+  SetEQNDelayed[detinvgam[], 1 / detgam[]];
+  SetEQNDelayed[sqrtdetgam[], (detgam[]) ^ (1/2)];
+  SetEQNDelayed[sqrtdetinvgam[], 1 / sqrtdetgam[]];
+  SetEQNDelayed[invgam[i_, j_], invMat[[i[[1]], j[[1]]]] // Simplify]
+];
+
 (****************)
 
 (* Intermediate *)
@@ -28,9 +44,7 @@ SetEQN[DexK[k_, i_, j_], dexK[k, i, j] - Gam[l, k, i] exK[-l, j] - Gam[l, k, j] 
 
 SetEQN[Rsca[], invgam[k, l] Ricc[-k, -l]];
 
-SetEQN[Riem[i_, j_, k_, l_],
-  gam[i, k] Ricc[j, l] + gam[j, l] Ricc[i, k] - 1/2 Rsca[] gam[i, k] gam[j, l] -
-  gam[i, l] Ricc[j, k] - gam[j, k] Ricc[i, l] + 1/2 Rsca[] gam[i, l] gam[j, k]];
+SetEQN[Riem[i_, j_, k_, l_], gam[i, k] Ricc[j, l] + gam[j, l] Ricc[i, k] - 1/2 Rsca[] gam[i, k] gam[j, l] - gam[i, l] Ricc[j, k] - gam[j, k] Ricc[i, l] + 1/2 Rsca[] gam[i, l] gam[j, k]];
 
 SetEQN[perpR[i_, j_, k_, l_], Riem[i, j, k, l] + exK[i, k] exK[j, l] - exK[i, l] exK[j, k]];
 
@@ -129,7 +143,7 @@ SetEQN[Psi4real[], Epart[-i, -j] mbmbreal[i, j] + Bpart[-i, -j] mbmbimag[i, j]];
 SetEQN[Psi4imag[], Epart[-i, -j] mbmbimag[i, j] - Bpart[-i, -j] mbmbreal[i, j]];
 
 (* Psi4 using Gauss-Codazzi *)
+
 SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4real[], (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbreal[j, l] / 2];
 
 SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4imag[], (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbimag[j, l] / 2];
-

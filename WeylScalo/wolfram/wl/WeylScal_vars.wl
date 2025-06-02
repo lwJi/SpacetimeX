@@ -70,8 +70,8 @@ GaussCodazziVarlist =
     {Rsca[], PrintAs -> "R"},
     {Riem[-i, -j, -k, -l], GenSet[-Cycles[{1, 2}],-Cycles[{3, 4}]], PrintAs -> "R"},
     {perpR[-i, -j, -k, -l], GenSet[-Cycles[{1, 2}],-Cycles[{3, 4}]], PrintAs -> "\[Perpendicular]R"},
-    {perpRn[-j, -k, -l], Antisymmetric[{-k, -l}], PrintAs -> "\[Perpendicular]Rn"},
-    {perpRnn[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Perpendicular]Rnn"}
+    {perpRn[-j, -k, -l], Antisymmetric[{-k, -l}], PrintAs -> "\[Perpendicular]\!\(\*SubscriptBox[\(R\), \(n\)]\)"},
+    {perpRnn[-i, -j], Symmetric[{-i, -j}], PrintAs -> "\[Perpendicular]\!\(\*SubscriptBox[\(R\), \(nn\)]\)"}
   ];
 
 TetradVarlist = 
