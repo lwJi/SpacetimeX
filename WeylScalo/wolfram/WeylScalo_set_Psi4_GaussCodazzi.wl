@@ -46,12 +46,6 @@ ComponentValue[Z[], coZ];
 
 <<wl/WeylScal_rhs.wl
 
-SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4real[],
-  (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbreal[j, l] / 2];
-
-SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4imag[],
-  (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbimag[j, l] / 2];
-
 Module[{Mat, invMat},
   Mat = Table[gam[{ii, -cart}, {jj, -cart}] // ToValues, {ii, 1, 3}, {jj, 1, 3}];
   invMat = Inverse[Mat] /. {1 / Det[Mat] -> detinvgam};

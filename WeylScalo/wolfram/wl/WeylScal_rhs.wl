@@ -127,3 +127,9 @@ SetEQN[mbmbimag[i_, j_], -(Uvec[i] Wvec[j] + Wvec[i] Uvec[j]) / 2];
 SetEQN[Psi4real[], Epart[-i, -j] mbmbreal[i, j] + Bpart[-i, -j] mbmbimag[i, j]];
 
 SetEQN[Psi4imag[], Epart[-i, -j] mbmbimag[i, j] - Bpart[-i, -j] mbmbreal[i, j]];
+
+(* Psi4 using Gauss-Codazzi *)
+SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4real[], (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbreal[j, l] / 2];
+
+SetEQN[{SuffixName -> "GaussCodazzi"}, Psi4imag[], (perpR[-i, -j, -k, -l] Vvec[i] Vvec[k] - 2 perpRn[-j, -k, -l] Vvec[k] + perpRnn[-j, -l]) mbmbimag[j, l] / 2];
+
