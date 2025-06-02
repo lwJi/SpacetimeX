@@ -52,7 +52,11 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
 #include "../wolfram/WeylScalo_derivs1st.hxx"
 #include "../wolfram/WeylScalo_derivs2nd.hxx"
 
+  if(elecmag_weyl) {
 #include "../wolfram/WeylScalo_set_Psi4.hxx"
+  } else {
+#include "../wolfram/WeylScalo_set_Psi4_GaussCodazzi.hxx"
+  }
 }
 
 extern "C" void WeylScalo_Sync(CCTK_ARGUMENTS) {

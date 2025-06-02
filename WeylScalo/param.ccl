@@ -12,3 +12,6 @@ BOOLEAN calc_derivs_live "Calculate FD derivstives on the fly instead of storing
 {
 } yes
 
+BOOLEAN elecmag_weyl "Calculate the Weyl scalars via the electric and magnetic tensors?"
+{
+} yes
