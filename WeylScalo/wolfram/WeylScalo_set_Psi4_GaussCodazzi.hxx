@@ -954,11 +954,17 @@ sqrtdetgam*(-(invgam33*uvec2*vvec1) + invgam23*uvec3*vvec1 +
 ;
 
 const auto
-inneruu
+inneruutmp
 =
 Power(uvec1,2)*gam11[ijk] + 2*uvec1*uvec2*gam12[ijk] +
   2*uvec1*uvec3*gam13[ijk] + Power(uvec2,2)*gam22[ijk] +
   2*uvec2*uvec3*gam23[ijk] + Power(uvec3,2)*gam33[ijk]
+;
+
+const auto
+inneruu
+=
+Max(inneruutmp,ncutoff)
 ;
 
 const auto
@@ -1006,11 +1012,17 @@ Vtmp3
 ;
 
 const auto
-innerVV
+innerVVtmp
 =
 Power(Vtmp1,2)*gam11[ijk] + 2*Vtmp1*Vtmp2*gam12[ijk] +
   2*Vtmp1*Vtmp3*gam13[ijk] + Power(Vtmp2,2)*gam22[ijk] +
   2*Vtmp2*Vtmp3*gam23[ijk] + Power(Vtmp3,2)*gam33[ijk]
+;
+
+const auto
+innerVV
+=
+Max(innerVVtmp,ncutoff)
 ;
 
 const auto
@@ -1066,11 +1078,17 @@ Wtmp3
 ;
 
 const auto
-innerWW
+innerWWtmp
 =
 Power(Wtmp1,2)*gam11[ijk] + 2*Wtmp1*Wtmp2*gam12[ijk] +
   2*Wtmp1*Wtmp3*gam13[ijk] + Power(Wtmp2,2)*gam22[ijk] +
   2*Wtmp2*Wtmp3*gam23[ijk] + Power(Wtmp3,2)*gam33[ijk]
+;
+
+const auto
+innerWW
+=
+Max(innerWWtmp,ncutoff)
 ;
 
 const auto
