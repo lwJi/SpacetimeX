@@ -108,7 +108,9 @@ SetEQN[wvec[i_], (invgam[i, j] epsilongam[-j, -k, -l] uvec[k] vvec[l]) /. epsilo
 
 (* Gram-Schmidt orthonormalization *)
 
-SetEQN[inneruu[], gam[-k, -l] uvec[k] uvec[l]];
+SetEQN[inneruutmp[], gam[-k, -l] uvec[k] uvec[l]];
+
+SetEQN[inneruu[], Max[ncutoff, inneruutmp[]]];
 
 SetEQN[Uvec[i_], uvec[i] / (inneruu[]) ^ (1/2)];
 
@@ -116,7 +118,9 @@ SetEQN[innerUv[], gam[-k, -l] Uvec[k] vvec[l]];
 
 SetEQN[Vtmp[i_], vvec[i] - innerUv[] Uvec[i]];
 
-SetEQN[innerVV[], gam[-k, -l] Vtmp[k] Vtmp[l]];
+SetEQN[innerVVtmp[], gam[-k, -l] Vtmp[k] Vtmp[l]];
+
+SetEQN[innerVV[], Max[ncutoff, innerVVtmp[]]];
 
 SetEQN[Vvec[i_], Vtmp[i] / (innerVV[]) ^ (1/2)];
 
@@ -126,7 +130,9 @@ SetEQN[innerVw[], gam[-k, -l] Vvec[k] wvec[l]];
 
 SetEQN[Wtmp[i_], wvec[i] - innerUw[] Uvec[i] - innerVw[] Vvec[i]];
 
-SetEQN[innerWW[], gam[-k, -l] Wtmp[k] Wtmp[l]];
+SetEQN[innerWWtmp[], gam[-k, -l] Wtmp[k] Wtmp[l]];
+
+SetEQN[innerWW[], Max[ncutoff, innerWWtmp[]]];
 
 SetEQN[Wvec[i_], Wtmp[i] / (innerWW[]) ^ (1/2)];
 

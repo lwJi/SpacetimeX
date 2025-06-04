@@ -79,15 +79,18 @@ TetradVarlist =
     {uvec[i], PrintAs -> "u"},
     {vvec[i], PrintAs -> "v"},
     {wvec[i], PrintAs -> "w"},
+    {inneruutmp[], PrintAs -> "u\[CenterDot]u"},
     {inneruu[], PrintAs -> "u\[CenterDot]u"},
     {Uvec[i], PrintAs -> "U"},
     {innerUv[], PrintAs -> "U\[CenterDot]v"},
     {Vtmp[i]},
+    {innerVVtmp[], PrintAs -> "V\[CenterDot]V"},
     {innerVV[], PrintAs -> "V\[CenterDot]V"},
     {Vvec[i], PrintAs -> "V"},
     {innerUw[], PrintAs -> "U\[CenterDot]w"},
     {innerVw[], PrintAs -> "V\[CenterDot]w"},
     {Wtmp[i]},
+    {innerWWtmp[], PrintAs -> "W\[CenterDot]W"},
     {innerWW[], PrintAs -> "W\[CenterDot]W"},
     {Wvec[i], PrintAs -> "W"},
     (* tetrad vectors *)
@@ -102,3 +105,5 @@ TetradVarlist =
 (************)
 
 DefConstantSymbol[oosqrt2, PrintAs -> "1/\!\(\*SqrtBox[\(2\)]\)"];
+
+DefConstantSymbol[ncutoff, PrintAs -> "\!\(\*SuperscriptBox[\(v\), \(cut\)]\)"];

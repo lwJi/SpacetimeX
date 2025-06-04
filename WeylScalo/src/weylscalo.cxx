@@ -20,6 +20,10 @@ CCTK_DEVICE CCTK_HOST constexpr CCTK_REAL Sqrt(CCTK_REAL x) {
   return std::sqrt(x);
 }
 
+CCTK_DEVICE CCTK_HOST constexpr CCTK_REAL Max(CCTK_REAL x, CCTK_REAL y) {
+  return std::max(x, y);
+}
+
 extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
   DECLARE_CCTK_ARGUMENTS_WeylScalo_calc_psi4;
   DECLARE_CCTK_PARAMETERS;
@@ -44,6 +48,7 @@ extern "C" void WeylScalo_calc_psi4(CCTK_ARGUMENTS) {
 
   // Parameters
   // const CCTK_REAL oosqrt2 = 1.0 / sqrt(2);
+  constexpr CCTK_REAL ncutoff = 1e-16;
 
   // Loop
   const Loop::GridDescBaseDevice grid(cctkGH);
