@@ -106,4 +106,4 @@ TetradVarlist =
 
 DefConstantSymbol[oosqrt2, PrintAs -> "1/\!\(\*SqrtBox[\(2\)]\)"];
 
-DefConstantSymbol[ncutoff, PrintAs -> "\!\(\*SuperscriptBox[\(v\), \(cut\)]\)"];
+DefConstantSymbol[ncutoff, PrintAs -> "\!\(\*SuperscriptBox[\(n\), \(cut\)]\)"];
