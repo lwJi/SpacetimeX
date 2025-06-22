@@ -155,6 +155,7 @@ extern "C" void Multipole_Finalize(CCTK_ARGUMENTS) {
       stream.close();
     }
   }
+  file_streams.clear(); // Explicitly clear the map
 }
 
 // This is the main scheduling file.  Because we are completely local here
