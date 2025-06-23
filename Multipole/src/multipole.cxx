@@ -72,11 +72,11 @@ static void outputModes(CCTK_ARGUMENTS, const VariableParse vars[],
           }
         }
       }
+    }
 
-      for (auto &[name, stream] : file_streams) {
-        if (stream.is_open()) {
-          stream.flush();
-        }
+    for (auto &[name, stream] : file_streams) {
+      if (stream.is_open()) {
+        stream.flush();
       }
     }
   }
