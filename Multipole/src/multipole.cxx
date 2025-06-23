@@ -72,6 +72,12 @@ static void outputModes(CCTK_ARGUMENTS, const VariableParse vars[],
           }
         }
       }
+
+      for (auto &[name, stream] : file_streams) {
+        if (stream.is_open()) {
+          stream.flush();
+        }
+      }
     }
   }
   if (output_hdf5 && CCTK_MyProc(cctkGH) == 0) {
