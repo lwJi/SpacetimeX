@@ -184,7 +184,7 @@ SpacetimeX/NewRadX
 SpacetimeX/TestNewRadX
 #SpacetimeX/Punctures
 SpacetimeX/PunctureTracker
-SpacetimeX/SphericalHarmonics
+#SpacetimeX/SphericalHarmonics
 SpacetimeX/SphericalSurface
 #SpacetimeX/StaticTrumpet
 SpacetimeX/TwoPuncturesX
