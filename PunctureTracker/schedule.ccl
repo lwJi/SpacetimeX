@@ -1,4 +1,7 @@
 # Schedule definitions for thorn PunctureTracker
+STORAGE: pt_loc
+STORAGE: pt_vel
+STORAGE: BoxInBox::positions
 
 SCHEDULE PunctureTracker_Init AT initial
 {
