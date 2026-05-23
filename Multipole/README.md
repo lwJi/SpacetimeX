@@ -22,7 +22,7 @@ so works with mesh-refinement and multi-patch.
 
 ## Related thorns
 
-* WeylScal4 can be used to compute the Weyl scalars, which can then be
+* WeylScalo can be used to compute the Weyl scalars, which can then be
   decomposed into modes on coordinate spheres by Multipole.
 
 ## Publications

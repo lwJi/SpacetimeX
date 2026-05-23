@@ -234,17 +234,17 @@ interpolator (e.g. AEILocalInterp).
 
 \subsection{Examples}
 
-To use this thorn with WeylScal4 to compute modes of the complex
+To use this thorn with WeylScalo to compute modes of the complex
 $\Psi_4$ variable, one could use the following example:
 
 \begin{verbatim}
-ActiveThorns = ".... WeylScal4 CarpetInterp AEILocalInterp Multipole"
+ActiveThorns = ".... WeylScalo CarpetInterp AEILocalInterp Multipole"
 
 Multipole::nradii    = 3
 Multipole::radius[0] = 10
 Multipole::radius[1] = 20
 Multipole::radius[2] = 30
-Multipole::variables = "WeylScal4::Psi4r{sw=-2 cmplx='WeylScal4::Psi4i'}"
+Multipole::variables = "WeylScalo::Psi4r{sw=-2 cmplx='WeylScalo::Psi4i'}"
 Multipole::l_mode    = 4
 Multipole::m_mode    = 4
 \end{verbatim}

@@ -17,7 +17,7 @@ ActiveThorns = "
     ODESolvers
     TmunuBaseX
     TwoPuncturesX
-    WeylScal4
+    WeylScalo
     Z4c
 "
 
@@ -108,8 +108,11 @@ Z4c::alphaG_floor = 1.0e-8
 Z4c::epsdiss = 0.32
 Z4c::boundary_conditions = "NewRadX"
 
+WeylScalo::calc_derivs_live = no
+WeylScalo::elecmag_weyl     = no
+
 Multipole::radius[0] = 5.0
-Multipole::variables = "WeylScal4::Psi4r{sw=-2 cmplx='WeylScal4::Psi4i' name='Psi4'}"
+Multipole::variables = "WeylScalo::Psi4r{sw=-2 cmplx='WeylScalo::Psi4i' name='Psi4'}"
 Multipole::l_max = 4
 Multipole::verbose = "yes"
 Multipole::interpolator_pars = "order=3"
