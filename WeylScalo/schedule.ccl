@@ -1,7 +1,7 @@
 # File produced by Kranc
 
-STORAGE: Psi4r_group
-STORAGE: Psi4i_group
+STORAGE: Psi4r_group[timelevels]
+STORAGE: Psi4i_group[timelevels]
 
 SCHEDULE GROUP WeylScalo_calc_psi4_group AT postinitial
 {

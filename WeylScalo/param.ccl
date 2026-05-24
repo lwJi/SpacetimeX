@@ -15,3 +15,11 @@ BOOLEAN calc_derivs_live "Calculate FD derivstives on the fly instead of storing
 BOOLEAN elecmag_weyl "Calculate the Weyl scalars via the electric and magnetic tensors?"
 {
 } yes
+
+RESTRICTED:
+
+CCTK_INT timelevels "Number of time levels for the state" STEERABLE=recover
+{
+  0:3 :: ""
+} 1
+
