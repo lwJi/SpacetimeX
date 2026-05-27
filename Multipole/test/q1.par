@@ -31,7 +31,7 @@ Cactus::cctk_final_time = $final_time
 # Cactus::max_runtime = 30   # minutes
 Cactus::max_runtime = 23*60+30   # minutes
 
-#CarpetX::use_subcycling_wip = yes
+#CarpetX::use_subcycling = yes
 #CarpetX::restrict_during_sync = no
 
 CarpetX::verbose = no
