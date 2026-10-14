@@ -15,7 +15,9 @@ on:
   # Pull requests, including those from forks. Those never trigger `push` in
   # this repository, so this is their only source of CI.
   pull_request:
-  # Allow running this workflow manually from the Actions tab
+  # Allow running this workflow manually from the Actions tab, or with
+  # `gh workflow run ci.yml --ref <branch>`. Only a manual run or a push builds
+  # the full matrix (see `strategy` below).
   workflow_dispatch:
 
 # Supersede an in-flight run when a newer commit arrives for the same branch.
@@ -37,15 +39,33 @@ concurrency:
 jobs:
   # This workflow contains a single job
   download-build-test:
+    # Pull requests build four configurations: the one that runs the testsuite,
+    # a cpu debug build to compile the code behind CCTK_DEBUG, one CUDA build to
+    # catch nvcc-only errors, and the ROCm build to catch hipcc-only errors.
+    # Pushes, which happen only to the long-lived branches, and manual runs
+    # build all five. A push to `dev` thus saves a ccache entry for every
+    # configuration, which every run may read.
+    #
+    # The full list has no rocm debug (uses too much memory?), and no real32
+    # configurations, for which there are no option lists.
+    #
+    # The block scalar folds into one line, so the value is a single `${{ }}`
+    # expression and evaluates to an array rather than a string.
     strategy:
       matrix:
-        accelerator: [cpu, cuda, rocm]
-        real-precision: [real64]
-        mode: [debug, optimize]
-        exclude:
-          - {accelerator: rocm, real-precision: real32}
-          - {accelerator: rocm, mode: debug} # uses too much memory?
-          - {real-precision: real32, mode: optimize}
+        include: >-
+          ${{ fromJSON(github.event_name == 'pull_request' && '[
+          {"accelerator": "cpu", "real-precision": "real64", "mode": "debug"},
+          {"accelerator": "cpu", "real-precision": "real64", "mode": "optimize"},
+          {"accelerator": "cuda", "real-precision": "real64", "mode": "debug"},
+          {"accelerator": "rocm", "real-precision": "real64", "mode": "optimize"}
+          ]' || '[
+          {"accelerator": "cpu", "real-precision": "real64", "mode": "debug"},
+          {"accelerator": "cpu", "real-precision": "real64", "mode": "optimize"},
+          {"accelerator": "cuda", "real-precision": "real64", "mode": "debug"},
+          {"accelerator": "cuda", "real-precision": "real64", "mode": "optimize"},
+          {"accelerator": "rocm", "real-precision": "real64", "mode": "optimize"}
+          ]') }}
     env:
       ACCELERATOR: ${{matrix.accelerator}}
       REAL_PRECISION: ${{matrix.real-precision}}
