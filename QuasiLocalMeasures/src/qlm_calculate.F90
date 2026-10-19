@@ -105,10 +105,14 @@ subroutine qlm_calculate (CCTK_ARGUMENTS)
         else if (CCTK_EQUALS(killing_vector_method, "eigenvector")) then
            call qlm_killing_transport (CCTK_PASS_FTOF, hn)
            if (qlm_calc_error(hn) /= 0) goto 9999
-           call qlm_killing_normalise (CCTK_PASS_FTOF, hn)
+           if (qlm_have_killing_vector(hn) /= 0) then
+              call qlm_killing_normalise (CCTK_PASS_FTOF, hn)
+           end if
         else if (CCTK_EQUALS(killing_vector_method, "gradient")) then
            call qlm_killing_gradient (CCTK_PASS_FTOF, hn)
-           call qlm_killing_normalise (CCTK_PASS_FTOF, hn)
+           if (qlm_have_killing_vector(hn) /= 0) then
+              call qlm_killing_normalise (CCTK_PASS_FTOF, hn)
+           end if
         else
            call CCTK_WARN (0, "internal error")
         end if
