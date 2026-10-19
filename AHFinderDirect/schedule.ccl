@@ -52,6 +52,14 @@ schedule AHFinderDirect_recover at CCTK_POST_RECOVER_VARIABLES
     READS: AHFinderDirect::ah_flags, ah_origin, ah_radius
    } "import horizon data from Cactus variables"
 
+schedule AHFinderDirect_import_mask at CCTK_POST_RECOVER_VARIABLES \
+   before AHFinderDirect_find_horizons
+   {
+   lang: C
+   WRITES: AHFinderDirect::ahmask(everywhere)
+   options: local
+   } "import the excision mask"
+
 #
 # find horizons
 #
@@ -348,14 +356,6 @@ if (run_at_CCTK_POSTPOSTINITIAL != 0)
   }
 if (run_at_CCTK_POST_RECOVER_VARIABLES != 0)
   {
-  schedule AHFinderDirect_import_mask at CCTK_POST_RECOVER_VARIABLES \
-     before AHFinderDirect_find_horizons
-     {
-     lang: C
-     WRITES: AHFinderDirect::ahmask(everywhere)
-     options: local
-     } "import the excision mask"
-
   schedule AHFinderDirect_store at CCTK_POST_RECOVER_VARIABLES \
      after AHFinderDirect_find_horizons \
      before SphericalSurface_HasBeenSet
