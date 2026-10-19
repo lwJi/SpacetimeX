@@ -26,6 +26,9 @@ subroutine qlm_calculate (CCTK_ARGUMENTS)
   logical   :: did_allocate
   
   did_allocate = .false.
+
+  if (calculate_every <= 0) return
+  if (mod(cctk_iteration, calculate_every) /= 0) return
   
   num_procs = CCTK_nProcs (cctkGH)
   my_proc   = CCTK_MyProc (cctkGH)

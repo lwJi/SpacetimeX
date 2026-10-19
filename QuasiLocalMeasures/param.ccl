@@ -15,6 +15,12 @@ INT num_surfaces "Number of surfaces"
   0:100 :: ""
 } 1
 
+INT calculate_every "How often to calculate quasi-local measures" STEERABLE=always
+{
+  0   :: "disable QLM calculations"
+  1:* :: "calculate every so many iterations"
+} 1
+
 
 
 INT surface_index[100] "Spherical surface that contains the surface shape"
