@@ -153,6 +153,7 @@ CCTK_FNAME(qlm_broadcast) (CCTK_POINTER_TO_CONST * restrict const cctkGH_)
     bcast (cctkGH, "QuasiLocalMeasures::qlm_shapes"               , hn, root);
     bcast (cctkGH, "QuasiLocalMeasures::qlm_shapes_p"             , hn, root);
     bcast (cctkGH, "QuasiLocalMeasures::qlm_coordinates"          , hn, root);
+    bcast (cctkGH, "QuasiLocalMeasures::qlm_coordinates_p"        , hn, root);
     bcast (cctkGH, "QuasiLocalMeasures::qlm_tetrad_l"             , hn, root);
     bcast (cctkGH, "QuasiLocalMeasures::qlm_tetrad_n"             , hn, root);
     bcast (cctkGH, "QuasiLocalMeasures::qlm_tetrad_m"             , hn, root);
