@@ -52,6 +52,29 @@ schedule AHFinderDirect_recover at CCTK_POST_RECOVER_VARIABLES
     READS: AHFinderDirect::ah_flags, ah_origin, ah_radius
    } "import horizon data from Cactus variables"
 
+schedule AHFinderDirect_restore_recovered_surfaces at CCTK_CPINITIAL \
+   after AHFinderDirect_resolve_horizons_on_recovery
+   {
+   lang: C
+   options: global
+   } "restore recovered apparent horizons into SphericalSurface"
+
+if (resolve_horizons_on_recovery != 0)
+  {
+  schedule AHFinderDirect_mark_recovery at CCTK_RECOVER_VARIABLES
+     {
+     lang: C
+     options: global
+     } "mark apparent horizons for re-solving after recovery"
+
+  schedule AHFinderDirect_resolve_horizons_on_recovery at CCTK_CPINITIAL \
+     before AHFinderDirect_restore_recovered_surfaces
+     {
+     lang: C
+     options: global
+     } "re-solve apparent horizons once after recovery"
+  }
+
 schedule AHFinderDirect_import_mask at CCTK_POST_RECOVER_VARIABLES \
    before AHFinderDirect_find_horizons
    {
