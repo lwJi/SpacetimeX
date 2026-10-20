@@ -13,10 +13,9 @@ subroutine qlm_calculate (CCTK_ARGUMENTS)
   DECLARE_CCTK_FUNCTIONS
   DECLARE_CCTK_PARAMETERS
   
-  integer   :: num_procs, my_proc
-  integer   :: num_qlm_procs
-  integer   :: pass
-  integer   :: h0, hn
+  integer   :: my_proc
+  integer   :: hn
+  integer, parameter :: qlm_root_proc = 0
   
   character :: msg*1000
   character :: slabel*2, ilabel*8
@@ -24,74 +23,74 @@ subroutine qlm_calculate (CCTK_ARGUMENTS)
   integer   :: nchars
  
   logical   :: did_allocate
+  logical   :: already_calculated
+  logical   :: do_surface
+  logical   :: owns_surface
   
   did_allocate = .false.
+  
+  my_proc   = CCTK_MyProc (cctkGH)
 
   if (calculate_every <= 0) return
-  if (mod(cctk_iteration, calculate_every) /= 0) return
-  
-  num_procs = CCTK_nProcs (cctkGH)
-  my_proc   = CCTK_MyProc (cctkGH)
-  num_qlm_procs = num_procs
-  if (CCTK_EQUALS(interpolator, "CarpetX")) then
-     ! CarpetX cannot accept points from ranks without a local level-0 box.
-     num_qlm_procs = 1
-  end if
-  do pass = 1, (num_surfaces + num_qlm_procs - 1) / num_qlm_procs
-     
-     ! Calculate the range of horizons for this pass
-     h0 = (pass - 1) * num_qlm_procs + 1
-     
-     ! This processor's horizon
-     hn = h0 + my_proc
-     
-     ! If there is nothing to do for this processor, set hn to zero
-     if (my_proc >= num_qlm_procs) hn = 0
-     if (hn > num_surfaces) hn = 0
-    
-     ! start calculations already? 
-     if (hn > 0) then
-        if (cctk_time < begin_qlm_calculations_after(hn)) hn = 0
+
+  if (mod(cctk_iteration, calculate_every) /= 0) then
+     if (my_proc == qlm_root_proc .and. veryverbose/=0) then
+        write (msg, '("Skipping quasi-local quantities at iteration ",i8)') cctk_iteration
+        call CCTK_INFO (msg)
      end if
+     return
+  end if
+
+  already_calculated = num_surfaces > 0
+  do hn = 1, num_surfaces
+     already_calculated = already_calculated .and. &
+          qlm_iteration(hn) == cctk_iteration .and. qlm_calc_error(hn) == 0
+  end do
+  if (already_calculated) return
+
+  if (num_surfaces > 0) then
+     call allocate_variables (int(maxntheta), int(maxnphi))
+     did_allocate = .true.
+  end if
+
+  do hn = 1, num_surfaces
+
+     owns_surface = my_proc == qlm_root_proc
+     do_surface = .true.
+
+     ! start calculations already? 
+     if (cctk_time < begin_qlm_calculations_after(hn)) do_surface = .false.
      
-     if (verbose/=0 .or. veryverbose/=0) then
-        if (hn > 0) then
-           write (msg, '("Calculating quasi-local quantities for surface ",i4)') hn-1
+     if (owns_surface .and. (verbose/=0 .or. veryverbose/=0)) then
+        if (do_surface) then
+           write (msg, '("Calculating quasi-local quantities for surface ",i4)') hn - 1
         else
-           write (msg, '("Performing dummy calculation")')
+           write (msg, '("Skipping quasi-local quantities for surface ",i4)') hn - 1
         end if
         call CCTK_INFO (msg)
      end if
      
-     if (hn > 0) then
+     if (owns_surface .and. do_surface) then
         if (surface_index(hn) == -1 .and. CCTK_EQUALS(surface_name(hn), "")) then
            qlm_calc_error(hn) = 1
            qlm_have_valid_data(hn) = 0
            qlm_have_killing_vector(hn) = 0
-           hn = 0
+           do_surface = .false.
         end if
      end if
      
-     if (hn > 0) then
+     if (owns_surface .and. do_surface) then
         call qlm_import_surface (CCTK_PASS_FTOF, hn)
-        if (qlm_calc_error(hn) /= 0) hn = 0
+        if (qlm_calc_error(hn) /= 0) do_surface = .false.
      endif
      
-     if (hn > 0) then
+     if (owns_surface .and. do_surface) then
         call qlm_set_coordinates (CCTK_PASS_FTOF, hn)
      end if
      
-     if (hn > 0) then
-        if (.not. did_allocate) then
-           ! allocate 2D arrays
-           call allocate_variables (int(maxntheta), int(maxnphi))
-           did_allocate = .true.
-        end if
-     end if
-
-     call qlm_interpolate (CCTK_PASS_FTOF, hn)
+     call qlm_interpolate (CCTK_PASS_FTOF, hn, owns_surface .and. do_surface)
      
-     if (hn > 0) then
+     if (owns_surface .and. do_surface) then
         if (qlm_calc_error(hn) /= 0) goto 9999
         
         call qlm_calc_tetrad (CCTK_PASS_FTOF, hn)
