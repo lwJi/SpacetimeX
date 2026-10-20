@@ -217,6 +217,7 @@ if (run_at_CCTK_POSTSTEP != 0)
 
   schedule AHFinderDirect_store at CCTK_POSTSTEP \
      after AHFinderDirect_find_horizons \
+     after SphericalSurface_Set \
      before SphericalSurface_HasBeenSet
      {
      lang: C
