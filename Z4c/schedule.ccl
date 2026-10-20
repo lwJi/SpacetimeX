@@ -57,7 +57,11 @@ SCHEDULE GROUP Z4c_PostStepGroup2 AT postregrid AFTER (TmunuBaseX_SetTmunuVars, 
 
 
 
-SCHEDULE GROUP Z4c_AnalysisGroup AT analysis
+SCHEDULE GROUP Z4c_AnalysisGroup AT postinitial
+{
+} "Analyse Z4c variables"
+
+SCHEDULE GROUP Z4c_AnalysisGroup AT evol AFTER (ODESolvers_Solve, ODESolvers_Solve_Subcycling)
 {
 } "Analyse Z4c variables"
 
@@ -176,6 +180,8 @@ if (calc_ADM_vars) {
     WRITES: ADMBaseX::dtlapse(everywhere)
     WRITES: ADMBaseX::shift(everywhere)
     WRITES: ADMBaseX::dtshift(everywhere)
+    SYNC: ADMBaseX::dtlapse
+    SYNC: ADMBaseX::dtshift
   } "Convert Z4c to ADM variables"
 }
 
@@ -224,10 +230,10 @@ if (calc_constraints) {
     WRITES: HC(interior)
     WRITES: MtC(interior)
     WRITES: allC(interior)
-    # SYNC: ZtC
-    # SYNC: HC
-    # SYNC: MtC
-    # SYNC: allC
+    SYNC: ZtC
+    SYNC: HC
+    SYNC: MtC
+    SYNC: allC
   } "Calculate Z4c constraints"
 }
 

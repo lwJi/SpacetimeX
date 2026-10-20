@@ -196,5 +196,28 @@ for (int hn = 1; hn <= N_horizons; ++ hn)
 }
 
 //******************************************************************************
+// Re-publish checkpointed AH shapes in SphericalSurface.
+extern "C"
+  void AHFinderDirect_restore_recovered_surfaces(CCTK_ARGUMENTS)
+{
+DECLARE_CCTK_ARGUMENTS_AHFinderDirect_restore_recovered_surfaces
+DECLARE_CCTK_PARAMETERS
+
+for (int hn = 1; hn <= N_horizons; ++hn) {
+  const int sn = sf_IdFromName(which_surface_to_store_info[hn],
+                               which_surface_to_store_info_by_name[hn]);
+  if (sn == -1)
+    continue;
+  if (sn < 0 || sn >= nsurfaces)
+    CCTK_VWarn(FATAL_ERROR, __LINE__, __FILE__, CCTK_THORNSTRING,
+               "AHFinderDirect_restore_recovered_surfaces(): invalid surface "
+               "number %d for horizon number %d", sn, hn);
+  const struct BH_diagnostics& diagnostics =
+      state.AH_data_array[hn]->BH_diagnostics;
+  diagnostics.store(cctkGH, hn, sn, true);
+}
+}
+
+//******************************************************************************
 
 	  }	// namespace AHFinderDirect

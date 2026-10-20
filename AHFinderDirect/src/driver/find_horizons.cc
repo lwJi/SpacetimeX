@@ -59,6 +59,9 @@ namespace AHFinderDirect
 //
 extern struct state state;
 
+static bool force_horizon_search_on_this_call = false;
+static bool recovery_pending = false;
+
 //******************************************************************************
 
 //
@@ -166,7 +169,8 @@ for (int hn = 1; hn <= state.my_hs->N_horizons(); ++ hn)
                              ? true
                              : cctk_time <= my_dont_find_after_time)
                          && my_find_every > 0
-                         && cctk_iteration % my_find_every == 0
+                         && (force_horizon_search_on_this_call ||
+                             cctk_iteration % my_find_every == 0)
                          && ! disable_horizon[hn];
   struct AH_data& AH_data = *state.AH_data_array[hn];
   AH_data.search_flag = find_this;
@@ -550,6 +554,29 @@ if (active_flag)
 			 hn, print_msg_flag);
 }
 	  }
+
+//******************************************************************************
+
+extern "C"
+  void AHFinderDirect_mark_recovery(CCTK_ARGUMENTS)
+{
+DECLARE_CCTK_ARGUMENTS_AHFinderDirect_mark_recovery
+recovery_pending = true;
+}
+
+//******************************************************************************
+
+extern "C"
+  void AHFinderDirect_resolve_horizons_on_recovery(CCTK_ARGUMENTS)
+{
+DECLARE_CCTK_ARGUMENTS_AHFinderDirect_resolve_horizons_on_recovery
+if (!recovery_pending)
+  return;
+recovery_pending = false;
+force_horizon_search_on_this_call = true;
+AHFinderDirect_find_horizons(CCTK_PASS_CTOC);
+force_horizon_search_on_this_call = false;
+}
 
 //******************************************************************************
 
