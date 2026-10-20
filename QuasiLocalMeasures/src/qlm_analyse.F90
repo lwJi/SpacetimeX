@@ -360,7 +360,7 @@ subroutine qlm_analyse (CCTK_ARGUMENTS, hn)
         end do
         qlm_adm_energy(hn) = qlm_adm_energy(hn) &
              & + adm_energy / (16*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         
         ! ADM momentum
         ! P_adm^i = (1/8 pi) int_S(r) [K^i_j - K delta^i_j] n^j r^2 dOmega
@@ -377,13 +377,13 @@ subroutine qlm_analyse (CCTK_ARGUMENTS, hn)
         end do
         qlm_adm_momentum_x(hn) = qlm_adm_momentum_x(hn) &
              & + adm_mom(1) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         qlm_adm_momentum_y(hn) = qlm_adm_momentum_y(hn) &
              & + adm_mom(2) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         qlm_adm_momentum_z(hn) = qlm_adm_momentum_z(hn) &
              & + adm_mom(3) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         
         ! ADM angular momentum
         ! J_adm^i = (1/8 pi) int_S(r)
@@ -405,13 +405,13 @@ subroutine qlm_analyse (CCTK_ARGUMENTS, hn)
         end do
         qlm_adm_angular_momentum_x(hn) = qlm_adm_angular_momentum_x(hn) &
              & + adm_amom(1) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         qlm_adm_angular_momentum_y(hn) = qlm_adm_angular_momentum_y(hn) &
              & + adm_amom(2) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
         qlm_adm_angular_momentum_z(hn) = qlm_adm_angular_momentum_z(hn) &
              & + adm_amom(3) / (8*pi) &
-             &   * sqrt(dtq) * qlm_delta_theta(hn) * qlm_delta_phi(hn)
+             &   * sqrt(dtq) * weights(i)
 
         ! Weinberg pseudotensor quantities
         ! Weinberg, chapter 7.6, pp. 165 ff, eqns. (7.6.22) - (7.6.24):
