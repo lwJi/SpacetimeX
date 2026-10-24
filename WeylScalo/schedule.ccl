@@ -11,7 +11,7 @@ SCHEDULE GROUP WeylScalo_calc_psi4_group AT evol AFTER (ODESolvers_Solve, ODESol
 {
 } "WeylScalo_psi4_calc_4th_group"
 
-SCHEDULE WeylScalo_sync_psi4 AT post_recover_variables
+SCHEDULE WeylScalo_Sync AT post_recover_variables
 {
   LANG: C
   OPTIONS: global

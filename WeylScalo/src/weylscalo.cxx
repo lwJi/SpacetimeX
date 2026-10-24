@@ -108,6 +108,4 @@ extern "C" void WeylScalo_Sync(CCTK_ARGUMENTS) {
   // do nothing
 }
 
-extern "C" void WeylScalo_sync_psi4(CCTK_ARGUMENTS) {}
-
 } // namespace WeylScalo
