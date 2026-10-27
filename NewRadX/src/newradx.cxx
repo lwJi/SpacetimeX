@@ -88,8 +88,8 @@ void NewRadX_Apply(const cGH *restrict const cctkGH,
                    const CCTK_REAL v0, const CCTK_REAL radpower) {
   DECLARE_CCTK_ARGUMENTS;
 
-  const auto symmetries =
-      CarpetX::symmetries(CarpetX::level_t{cctk_patch, cctk_level});
+  const auto symmetries = CarpetX::symmetries(
+      CarpetX::level_t{CarpetX::patch_t{cctk_patch}, cctk_level});
   const vect<vect<bool, Loop::dim>, 2> is_sym_bnd{
       {symmetries[0][0] != CarpetX::symmetry_t::none,
        symmetries[0][1] != CarpetX::symmetry_t::none,
@@ -211,8 +211,8 @@ void NewRadX_Apply(const cGH *restrict const cctkGH,
   DECLARE_CCTK_ARGUMENTS;
   DECLARE_CCTK_PARAMETERS;
 
-  const auto symmetries =
-      CarpetX::symmetries(CarpetX::level_t{cctk_patch, cctk_level});
+  const auto symmetries = CarpetX::symmetries(
+      CarpetX::level_t{CarpetX::patch_t{cctk_patch}, cctk_level});
   const vect<vect<bool, Loop::dim>, 2> is_sym_bnd{
       {symmetries[0][0] != CarpetX::symmetry_t::none,
        symmetries[0][1] != CarpetX::symmetry_t::none,
